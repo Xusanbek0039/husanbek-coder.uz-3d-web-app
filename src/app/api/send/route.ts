@@ -6,9 +6,9 @@ import { z } from "zod";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const Email = z.object({
-  fullName: z.string().min(2, "Full name is invalid!"),
-  email: z.string().email({ message: "Email is invalid!" }),
-  message: z.string().min(10, "Message is too short!"),
+  fullName: z.string().min(2, "To'liq ism noto'g'ri!"),
+  email: z.string().email({ message: "Elektron pochta manzili yaroqsiz!" }),
+  message: z.string().min(10, "Xabar juda qisqa!"),
 });
 export async function POST(req: Request) {
   try {
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     const { data: resendData, error: resendError } = await resend.emails.send({
       from: "Porfolio <onboarding@resend.dev>",
       to: [config.email],
-      subject: "Contact me from portfolio",
+      subject: "Portfeldan men bilan bog'laning",
       react: EmailTemplate({
         fullName: zodData.fullName,
         email: zodData.email,

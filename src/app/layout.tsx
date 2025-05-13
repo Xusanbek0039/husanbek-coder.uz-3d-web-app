@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         url: config.ogImg,
         width: 800,
         height: 600,
-        alt: "Portfolio preview",
+        alt: "Portfolio ko'rish",
       },
     ],
     type: "website",

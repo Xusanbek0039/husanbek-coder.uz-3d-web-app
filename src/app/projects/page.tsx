@@ -80,7 +80,7 @@ function Page() {
   return (
     <>
       <div className="container mx-auto md:px-[50px] xl:px-[150px] text-zinc-300 h-full">
-        <h1 className="text-4xl mt-[100px] mb-[50px]">Projects</h1>
+        <h1 className="text-4xl mt-[100px] mb-[50px]">Loyihalar</h1>
         <ul className="grid  md:grid-cols-2 lg:grid-cols-3 gap-10 place-content-around ">
           {PROJECTS.map((project) => (
             <li
@@ -100,7 +100,7 @@ function Page() {
                     easing: "cubic-bezier(0.25, 1, 0.5, 1)",
                     arrows: false,
                   }}
-                  aria-label="My Favorite Images"
+                  aria-label="Mening sevimli rasmlarim"
                 >
                   {project.images.map((image) => (
                     <SplideSlide key={image}>

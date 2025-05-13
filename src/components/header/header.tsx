@@ -68,10 +68,10 @@ const Header = ({ loader }: HeaderProps) => {
               variants={opacity}
               animate={!isActive ? "open" : "closed"}
             >
-              Menu
+              Menyu
             </motion.p>
             <motion.p variants={opacity} animate={isActive ? "open" : "closed"}>
-              Close
+              Yopish
             </motion.p>
           </div>
           <div

@@ -296,11 +296,9 @@ function Page() {
 🚀 Har doim o‘sishga intiluvchi, yangiliklarga ochiq va zamonaviy texnologiyalarni chuqur o‘rganishga qiziqaman.
             </p>
             <p className="mb-10">
-              When I&apos;m not coding, you can find me [Your
-              Interests/Hobbies], exploring new technologies, or sipping coffee
-              while brainstorming my next project.
+            Kod yozmayotgan vaqtlarimda meni dasturlash bo‘yicha yangi g‘oyalarni o‘rganayotgan, sport bilan shug‘ullanayotgan yoki kompyuter o‘yinlarida dam olayotgan holatda topishingiz mumkin. Shuningdek, zamonaviy texnologiyalarni o‘rganish va navbatdagi loyihamni rejalashtirish meni ilhomlantiradi.
             </p>
-            <h1 className="text-3xl mb-10 lg:md-20">Stuff I use</h1>
+            <h1 className="text-3xl mb-10 lg:md-20">Men foydalanadigan narsalar</h1>
             <div className="mb-5">
               {!toolsLoaded ? (
                 <p className="h-[100px]"></p>

@@ -14,7 +14,7 @@ export default function Footer() {
           exit="exit"
         >
           {/* space */}
-          <span>Inspired by:</span> Studio Lumio
+          <span>Dasturchi:</span> Husan Suyunov
         </motion.li>
       </ul>
       <ul>
@@ -25,7 +25,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          <span>Typography:</span> Inter
+          <span>Tipografiya:</span> Inter
         </motion.li>
       </ul>
       <ul>
@@ -36,7 +36,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          <span>Images:</span> Unsplash
+          <span>Rasmlar:</span> Unsplash
         </motion.li>
       </ul>
       <ul>
@@ -56,7 +56,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          Newsletter
+          Axborot byulleteni
         </motion.li>
       </ul>
     </div>

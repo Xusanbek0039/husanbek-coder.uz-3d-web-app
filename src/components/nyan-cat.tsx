@@ -94,7 +94,7 @@ const AnimatedDiv = ({
       <img
         src="/assets/nyan-cat.gif"
         className={cn("fixed z-10 h-40 w-auto")}
-        alt="Nyan Cat"
+        alt="Bu mushuk"
       />
     </motion.div>
   );
