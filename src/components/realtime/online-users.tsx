@@ -90,7 +90,7 @@ const OnlineUsers = () => {
         >
           <TabsList className="w-full h-8">
             <TabsTrigger className="w-1/2 h-full" value="users">
-              Users
+              Foydalanuvchilar
             </TabsTrigger>
             <TabsTrigger className="w-1/2 h-full" value="chat">
               Chat
