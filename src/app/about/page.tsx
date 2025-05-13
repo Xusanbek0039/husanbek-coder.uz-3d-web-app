@@ -61,7 +61,7 @@ const CONTACT_LINKS = [
   },
   {
     name: "GitHub",
-    href: "https://github.com/Abhiz2411",
+    href: "https://github.com/xusanbek0039",
     content: "/naresh-khatri",
     icon: <FaGithub height={"50px"} />,
   },
@@ -70,158 +70,158 @@ const CONTACT_LINKS = [
 const TOOLS = [
   {
     name: "JavaScript",
-    content: "JavaScript is a high-level, interpreted programming language",
+    content: "JavaScript - bu yuqori darajadagi, talqin qilingan dasturlash tili",
     icon: <SiJavascript size={"50px"} color={"#f0db4f"} />,
     color: "#f0db4f",
   },
   {
     name: "TypeScript",
-    content: "TypeScript is a superset of JavaScript that compiles to plain JS",
+    content: "TypeScript oddiy JS ga kompilyatsiya qilingan JavaScript-ning yuqori to'plamidir",
     icon: <SiTypescript size={"50px"} color={"#007acc"} />,
     color: "#007acc",
   },
   {
     name: "HTML",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaHtml5 size={"50px"} color="#e34c26" />,
     color: "#e34c26",
   },
   {
     name: "CSS",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaCss3 size={"50px"} color="#563d7c" />,
     color: "#563d7c",
   },
   {
     name: "Nodejs",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaNodeJs size={"50px"} color="#6cc24a" />,
     color: "#6cc24a",
   },
   {
     name: "React.js",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaReact size={"50px"} color="#61dafb" />,
     color: "#61dafb",
   },
   {
     name: "Docker",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaDocker size={"50px"} color="#2496ed" />,
     color: "#2496ed",
   },
   {
     name: "NginX",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <DiNginx size={"50px"} color="#008000" />,
     color: "#008000",
   },
   {
     name: "Vue.js",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaVuejs size={"50px"} color="#41b883" />,
     color: "#41b883",
   },
   {
     name: "Express.js",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <SiExpress size={"50px"} color="#fff" />,
     color: "#000000",
   },
   {
     name: "PostgreSQL",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <DiPostgresql size={"50px"} color="#336791" />,
     color: "#336791",
   },
   {
     name: "MongoDB",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <DiMongodb size={"50px"} color="#4db33d" />,
     color: "#4db33d",
   },
   {
     name: "Tailwind CSS",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <RiTailwindCssFill size={"50px"} color="#06b6d4" />,
     color: "#06b6d4",
   },
   {
     name: "Firebase",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <RiFirebaseFill size={"50px"} color="#FFCA28" />,
     color: "#FFCA28",
   },
   {
     name: "Git",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaGit size={"50px"} color="#f05032" />,
     color: "#f05032",
   },
   {
     name: "GitHub",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaGithub size={"50px"} color="#fff" />,
     color: "#000000",
   },
   {
     name: "VS Code",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <SiVisualstudiocode size={"50px"} color="#007acc" />,
     color: "#007acc",
   },
   {
     name: "VIM",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <DiVim size={"50px"} color="#fff" />,
     color: "#000000",
   },
   {
     name: "Prettier",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <SiPrettier size={"50px"} color="#f7b93c" />,
     color: "#f7b93c",
   },
   {
     name: "NPM",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <DiNpm size={"50px"} color="#CB3837" />,
     color: "#CB3837",
   },
   {
     name: "Yarn",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaYarn size={"50px"} color="#2C8EBB" />,
     color: "#2C8EBB",
   },
   {
     name: "Vercel",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <SiVercel size={"50px"} color="#fff" />,
     color: "#000000",
   },
   {
     name: "Linux",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaLinux size={"50px"} color="#fff" />,
     color: "#000000",
   },
   {
     name: "Kubuntu",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     // give me correct color for  kubuntu
     icon: <SiKubuntu size={"50px"} color="#0077C4" />,
     color: "#000000",
   },
   {
     name: "Terminal",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <TbTerminal2 size={"50px"} color="#fff" />,
     color: "#000000",
   },
   {
     name: "AWS",
-    content: "Next.js is a React framework for production",
+    content: "Next.js ishlab chiqarish uchun React ramka hisoblanadi",
     icon: <FaAws size={"50px"} color="#3f51b5" />,
     color: "#000000",
   },
@@ -251,9 +251,9 @@ function Page() {
                 />
               </div>
               <div className="flex flex-col gap-3 lg:items-center ml-10 md:ml-20 lg:ml-0">
-                <p className="text-center text-xl">Naresh Khatri</p>
+                <p className="text-center text-xl">Husan Suyunov</p>
                 <div className="text-xs bg-zinc-700 w-fit px-3 py-1 rounded-full">
-                  Web Developer
+                  Full Stack Python Developer
                 </div>
               </div>
             </div>
@@ -285,12 +285,15 @@ function Page() {
             className="p-10 border-[.5px] rounded-md border-zinc-600"
             style={{ backdropFilter: "blur(2px)" }}
           >
-            <h1 className="text-3xl mb-10 lg:md-20">About me</h1>
+            <h1 className="text-3xl mb-10 lg:md-20">Men haqimda</h1>
             <p className="mb-10 text-roboto">
-              Hey there! I&apos;m Abhijit, a Comp. Sci. Engineer with 1.5 year experience in Devlopment, DevOps and 
-              Database management with hands-on experience in deploying & automating workflows, and 
-              collaborating with foreign clients. Strong analytical skills,effective communication,
-              and a team-oriented approach to driving process improvements and delivering results.
+            🙋‍♂️ Salom! Men Husan Suyunov — Full Stack Python dasturchisiman. Dasturlash, veb-ishlanmalar, backend va frontend texnologiyalari yo‘nalishida tajribaga egaman. 1.5 yillik amaliy tajribam davomida turli loyihalarda qatnashib, foydalanuvchiga qulay va zamonaviy yechimlar ishlab chiqdim.
+
+⚙️ Python, JavaScript, HTML/CSS, Django, REST API, hamda SQL va NoSQL ma’lumotlar bazalari bilan samarali ishlash ko‘nikmalariga egaman. CI/CD, Docker kabi DevOps vositalaridan foydalangan holda loyihalarni avtomatlashtirish va ishlab chiqarishga joriy etishda faol qatnashganman.
+
+🌍 Xorijiy mijozlar bilan masofaviy hamkorlik qilish tajribam bor. Jamoa bilan ishlash, samarali muloqot qilish va murakkab muammolarga hal qiluvchi yondashuv orqali natijaga erishishga intilaman.
+
+🚀 Har doim o‘sishga intiluvchi, yangiliklarga ochiq va zamonaviy texnologiyalarni chuqur o‘rganishga qiziqaman.
             </p>
             <p className="mb-10">
               When I&apos;m not coding, you can find me [Your
