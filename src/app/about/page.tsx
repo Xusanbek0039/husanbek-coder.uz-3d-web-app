@@ -14,6 +14,7 @@ import {
   FaNodeJs,
   FaPhone,
   FaReact,
+  FaTelegram,
   FaVuejs,
   FaYarn,
 } from "react-icons/fa6";
@@ -55,9 +56,9 @@ const CONTACT_LINKS = [
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/zende-abhijit/",
+    href: "https://t.me/husanbek_coder",
     content: "/zende-abhijit",
-    icon: <FaLinkedin height={"50px"} />,
+    icon: <FaTelegram height={"50px"} />,
   },
   {
     name: "GitHub",
@@ -76,7 +77,7 @@ const TOOLS = [
   },
   {
     name: "TypeScript",
-    content: "TypeScript oddiy JS ga kompilyatsiya qilingan JavaScript-ning yuqori to'plamidir",
+    content: "TypeScript oddiy JS ga kompilyatsiya qilingan JavaScript-ning yuqori to&aposplamidir",
     icon: <SiTypescript size={"50px"} color={"#007acc"} />,
     color: "#007acc",
   },

@@ -17,8 +17,7 @@ function Page() {
             <label
               htmlFor="email"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Email manzilingiz
+            >Email manzilingiz
             </label>
             <input
               type="email"
@@ -39,7 +38,7 @@ function Page() {
               type="text"
               id="subject"
               className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-              placeholder="Let me know how I can help you"
+              placeholder="Sizga qanday yordam berishimni menga xabar bering"
               required
             />
           </div>
@@ -54,7 +53,7 @@ function Page() {
               id="message"
               rows={6}
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              placeholder="Leave a comment..."
+              placeholder="Fikr qoldiring..."
             ></textarea>
           </div>
           <button
