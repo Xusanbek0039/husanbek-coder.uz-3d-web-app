@@ -32,7 +32,7 @@ const ContactSection = () => {
           <CardHeader>
             <CardTitle className="text-4xl">Bog&aposlanish</CardTitle>
             <CardDescription>
-              Please contact me directly at{" "}
+            Iltimos, men bilan bevosita elektron pochta orqali bog&aposlaning {" "}
               <a
                 target="_blank"
                 href={`mailto:${config.email}`}
@@ -40,7 +40,7 @@ const ContactSection = () => {
               >
                 {config.email.replace(/@/g, "(at)")}
               </a>{" "}
-              or drop your info here.
+              yoki ma&aposlumotingizni shu yerga qoldiring.
             </CardDescription>
           </CardHeader>
           <CardContent>
