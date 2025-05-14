@@ -16,12 +16,12 @@ const SkillsSection = () => {
                 "dark:bg-gradient-to-b dark:from-white/80 dark:to-white/20 dark:bg-opacity-50 "
               )}
             >
-              SKILLS
+              Texlagiyalarim
             </h2>
           </BoxReveal>
         </Link>
         <p className="mx-auto mt-4 line-clamp-4 max-w-3xl font-normal text-base text-center text-neutral-300">
-          (hint: press a key)
+          (Kerakli texnaloyiga ustiga bosing!)
         </p>
       </div>
     </section>
