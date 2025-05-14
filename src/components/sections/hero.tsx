@@ -64,8 +64,9 @@ const HeroSection = () => {
                       side="top"
                       className="dark:bg-white dark:text-black"
                     >
-                      Mening shiorim: Har bir qadam, katta orzularni ro'yobga chiqarishning boshlanishi. Sen kuchlisan, sening yo'lingda hech narsa to'xtata olmaydi va sen albatta hammasiga erishasan.
+                      Mening shiorim: Har bir qadam, katta orzularni ro&#39;yobga chiqarishning boshlanishi. Sen kuchlisan, sening yo&#39;lingda hech narsa to&#39;xtata olmaydi va sen albatta hammasiga erishasan.
                     </TooltipContent>
+
                   </Tooltip>
                 </BlurIn>
                 {/* <div className="md:block hidden bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 w-screen h-px animate-fade-right animate-glow" /> */}
@@ -91,7 +92,7 @@ const HeroSection = () => {
                   <BoxReveal delay={2} width="100%" >
                     <Button className="flex items-center gap-2 w-full">
                       <File size={24} />
-                      <p>Resume CV ko'rish</p>
+                      <p>Resume CV ko&#39;rish</p>
                     </Button>
                   </BoxReveal>
                 </Link>
@@ -108,7 +109,7 @@ const HeroSection = () => {
                       </Link>
                     </TooltipTrigger>
                     <TooltipContent side="bottom">
-                      <p>Xabarlar bo'limi</p>
+                      <p>Xabarlar bo&#39;limi</p>
                     </TooltipContent>
                   </Tooltip>
                   <Link
