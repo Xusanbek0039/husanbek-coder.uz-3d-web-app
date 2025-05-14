@@ -30,7 +30,7 @@ const config = {
     "AIOps",
     "Azure",
   ],
-  author: "Husanbek Suyunov",
+  author: "Husan Suyunov",
   email: "itpark0071@gmail.com",
   site: "https://husanbek-coder.uz",
 
