@@ -16,7 +16,7 @@ const SkillsSection = () => {
                 "dark:bg-gradient-to-b dark:from-white/80 dark:to-white/20 dark:bg-opacity-50 "
               )}
             >
-              Texlagiyalarim
+              Texnalogiyalarim
             </h2>
           </BoxReveal>
         </Link>

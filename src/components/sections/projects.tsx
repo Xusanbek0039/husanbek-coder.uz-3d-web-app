@@ -26,7 +26,7 @@ const ProjectsSection = () => {
             "dark:bg-gradient-to-b dark:from-white/80 dark:to-white/20 dark:bg-opacity-50 mb-32"
           )}
         >
-          Projects
+          Loyihalarim
         </h2>
       </Link>
       <div className="grid grid-cols-1 md:grid-cols-3">
@@ -71,11 +71,11 @@ const Modall = ({ project }: { project: Project }) => {
           </SmoothScroll>
           <ModalFooter className="gap-4">
             <button className="px-2 py-1 bg-gray-200 text-black dark:bg-black dark:border-black dark:text-white border border-gray-300 rounded-md text-sm w-28">
-              Cancel
+              Orqaga
             </button>
             <Link href={project.live} target="_blank">
               <button className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28">
-                Visit
+              Tashrif buyuring
               </button>
             </Link>
           </ModalFooter>
