@@ -64,7 +64,7 @@ const HeroSection = () => {
                       side="top"
                       className="dark:bg-white dark:text-black"
                     >
-                      theres something waiting for you in devtools
+                      Mening shiorim: Har bir qadam, katta orzularni ro&aposyobga chiqarishning boshlanishi. Sen kuchlisan, sening yo&aposlingda hech narsa to&aposxtata olmaydi va sen albatta hammasiga erishasan.
                     </TooltipContent>
                   </Tooltip>
                 </BlurIn>
@@ -76,14 +76,14 @@ const HeroSection = () => {
                       "cursor-default font-display sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
-                    DevOps Enthusiast
+                    Full-Stack Python Dasturchi
                   </p>
                 </BlurIn>
               </div>
               <div className="mt-8 md:ml-2 flex flex-col gap-3">
                 <Link
                   href={
-                    "https://drive.google.com/file/d/1vjtWfqYGMIMK_rlBnmDEpKco9MiEaQss/view"
+                    "https://drive.google.com/file/d/1l44iD5tWhVf4ueStIHsipZPGjdpRfdND/view?usp=sharing"
                   }
                   target="_blank"
                   className="flex-1"
@@ -91,7 +91,7 @@ const HeroSection = () => {
                   <BoxReveal delay={2} width="100%" >
                     <Button className="flex items-center gap-2 w-full">
                       <File size={24} />
-                      <p>Resume</p>
+                      <p>Resume CV ko'rish</p>
                     </Button>
                   </BoxReveal>
                 </Link>
