@@ -38,7 +38,7 @@ const HeroSection = () => {
                       "cursor-default font-display sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
-                    Hi, I am
+                    Assalamu alaykum wa rahmatullahi wa barakatuhu (السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ)
                     <br className="md:hidden" />
                   </p>
                 </BlurIn>
