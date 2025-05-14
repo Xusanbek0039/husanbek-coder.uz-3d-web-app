@@ -1,6 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { DiMongodb, DiNginx, DiNpm, DiPostgresql, DiVim } from "react-icons/di";
+import Image from "next/image"; // ✅ next/image import qilindi
+import {
+  DiMongodb,
+  DiNginx,
+  DiNpm,
+  DiPostgresql,
+  DiVim,
+} from "react-icons/di";
 import {
   FaAws,
   FaCss3,
@@ -33,12 +40,10 @@ import {
   SiVercel,
   SiVisualstudiocode,
 } from "react-icons/si";
-import { VscCode } from "react-icons/vsc";
-
+import { TbTerminal2 } from "react-icons/tb";
 // @ts-ignore
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-import { TbTerminal2 } from "react-icons/tb";
 
 const CONTACT_LINKS = [
   {
@@ -55,13 +60,13 @@ const CONTACT_LINKS = [
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/zende-abhijit/",
+    href: "https://www.linkedin.com/in/zende-abhijit/ ",
     content: "/zende-abhijit",
     icon: <FaLinkedin height={"50px"} />,
   },
   {
     name: "GitHub",
-    href: "https://github.com/Abhiz2411",
+    href: "https://github.com/Abhiz2411 ",
     content: "/naresh-khatri",
     icon: <FaGithub height={"50px"} />,
   },
@@ -209,7 +214,6 @@ const TOOLS = [
   {
     name: "Kubuntu",
     content: "Next.js is a React framework for production",
-    // give me correct color for  kubuntu
     icon: <SiKubuntu size={"50px"} color="#0077C4" />,
     color: "#000000",
   },
@@ -229,9 +233,11 @@ const TOOLS = [
 
 function Page() {
   const [toolsLoaded, setToolsLoaded] = useState(false);
+
   useEffect(() => {
     setToolsLoaded(true);
   }, []);
+
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[200px] text-zinc-300 pt-20 pb-20">
       <div className="flex flex-col lg:flex-row gap-5">
@@ -244,14 +250,17 @@ function Page() {
           >
             <div className="flex flex-row lg:flex-col items-center">
               <div className="flex justify-center items-center lg:w-full lg:aspect-square bg-zinc-800 rounded-xl lg:mb-5">
-                <img
-                  className="rounded-full p-4 lg:p-10 w-[100px] md:w-[150px] lg:w-[200px] aspect-square  bg-zinc-800"
+                {/* ✅ img o'rniga next/image */}
+                <Image
+                  className="rounded-full p-4 lg:p-10 w-[100px] md:w-[150px] lg:w-[200px] aspect-square bg-zinc-800"
                   alt="me"
                   src="/assets/me.jpg"
+                  width={200}
+                  height={200}
                 />
               </div>
               <div className="flex flex-col gap-3 lg:items-center ml-10 md:ml-20 lg:ml-0">
-                <p className="text-center text-xl">Naresh Khatri</p>
+                <p className="text-center text-xl">Husan Suyunov</p>
                 <div className="text-xs bg-zinc-700 w-fit px-3 py-1 rounded-full">
                   Web Developer
                 </div>
@@ -330,34 +339,6 @@ function Page() {
                 </Splide>
               )}
             </div>
-            {/* <div className="">
-              <Splide
-                options={{
-                  type: "loop",
-                  interval: 2000,
-                  autoplay: true,
-                  pagination: false,
-                  speed: 3000,
-                  perPage: 5,
-                  perMove: 1,
-                  rewind: true,
-                  easing: "cubic-bezier(0.25, 1, 0.5, 1)",
-                  arrows: false,
-                }}
-                aria-label="My Favorite Images"
-              >
-                {TOOLS.map((tool) => (
-                  <SplideSlide key={tool.name}>
-                    <div
-                      key={tool.name}
-                      className="w-fit p-2 border-[.5px] border-zinc-600 rounded-md"
-                    >
-                      {tool.icon}
-                    </div>
-                  </SplideSlide>
-                ))}
-              </Splide>
-            </div> */}
           </div>
         </main>
       </div>
