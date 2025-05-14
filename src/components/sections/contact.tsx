@@ -24,15 +24,15 @@ const ContactSection = () => {
           )}
         >
           MEN BILAN <br />
-          BOG&aposLANISH
+          BOG'LANISH
         </h2>
       </Link>
       <div className="grid grid-cols-1 md:grid-cols-2 z-[9999]">
         <Card className="min-w-7xl bg-white/70 dark:bg-black/70 backdrop-blur-sm rounded-xl mt-10 md:mt-20">
           <CardHeader>
-            <CardTitle className="text-4xl">Bog&aposlanish</CardTitle>
+            <CardTitle className="text-4xl">Bog'lanish</CardTitle>
             <CardDescription>
-            Iltimos, men bilan bevosita elektron pochta orqali bog&aposlaning {" "}
+            Iltimos, men bilan bevosita elektron pochta orqali bog'laning {" "}
               <a
                 target="_blank"
                 href={`mailto:${config.email}`}
@@ -40,7 +40,7 @@ const ContactSection = () => {
               >
                 {config.email.replace(/@/g, "(at)")}
               </a>{" "}
-              yoki ma&aposlumotingizni shu yerga qoldiring.
+              yoki ma'lumotingizni shu yerga qoldiring.
             </CardDescription>
           </CardHeader>
           <CardContent>

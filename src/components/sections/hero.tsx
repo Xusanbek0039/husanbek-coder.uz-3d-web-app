@@ -11,7 +11,7 @@ import {
 import { usePreloader } from "../preloader";
 import { BlurIn, BoxReveal } from "../reveal-animations";
 import ScrollDownIcon from "../scroll-down-icon";
-import { SiGithub, SiLinkedin } from "react-icons/si";
+import { SiGithub, SiLinkedin, SiTelegram, SiYoutube } from "react-icons/si";
 import { config } from "@/data/config";
 
 const HeroSection = () => {
@@ -64,7 +64,7 @@ const HeroSection = () => {
                       side="top"
                       className="dark:bg-white dark:text-black"
                     >
-                      Mening shiorim: Har bir qadam, katta orzularni ro&aposyobga chiqarishning boshlanishi. Sen kuchlisan, sening yo&aposlingda hech narsa to&aposxtata olmaydi va sen albatta hammasiga erishasan.
+                      Mening shiorim: Har bir qadam, katta orzularni ro'yobga chiqarishning boshlanishi. Sen kuchlisan, sening yo'lingda hech narsa to'xtata olmaydi va sen albatta hammasiga erishasan.
                     </TooltipContent>
                   </Tooltip>
                 </BlurIn>
@@ -103,14 +103,22 @@ const HeroSection = () => {
                           variant={"outline"}
                           className="block w-full overflow-hidden"
                         >
-                          Hire Me
+                          Xabar qoldirish
                         </Button>
                       </Link>
                     </TooltipTrigger>
                     <TooltipContent side="bottom">
-                      <p>pls 🥹 🙏</p>
+                      <p>Xabarlar bo'limi</p>
                     </TooltipContent>
                   </Tooltip>
+                  <Link
+                    href={config.social.youtube}
+                    target="_blank"
+                  >
+                    <Button variant={"outline"}>
+                      <SiYoutube size={24} />
+                    </Button>
+                  </Link>
                   <Link
                     href={config.social.github}
                     target="_blank"
@@ -120,11 +128,11 @@ const HeroSection = () => {
                     </Button>
                   </Link>
                   <Link
-                    href={config.social.linkedin}
+                    href={config.social.telegram}
                     target="_blank"
                   >
                     <Button variant={"outline"}>
-                      <SiLinkedin size={24} />
+                      <SiTelegram size={24} />
                     </Button>
                   </Link>
                 </div>

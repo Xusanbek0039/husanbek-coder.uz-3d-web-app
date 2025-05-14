@@ -38,11 +38,13 @@ const config = {
     return this.site + "/assets/seo/og-image.png";
   },
   social: {
-    twitter: "https://x.com/_Abhi_Speaks/",
-    linkedin: "https://www.linkedin.com/in/zende-abhijit/",
-    instagram: "https://www.instagram.com/_.celestial_abhi._/",
-    facebook: "https://www.facebook.com/profile.php?id=100010029821759",
-    github: "https://github.com/Abhiz2411/",
+    twitter: "https://x.com/xusanbek0039/",
+    linkedin: "https://www.linkedin.com/in/it_creative/",
+    instagram: "https://www.instagram.com/husanbek_coder/",
+    facebook: "https://www.facebook.com/",
+    github: "https://github.com/xusanbek0039/",
+    youtube:"hhtps://youtube.com/@IT_Creative",
+    telegram:"https://t.me/husanbek_coder",
   },
 };
 export { config };
