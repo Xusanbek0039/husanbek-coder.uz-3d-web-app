@@ -457,10 +457,10 @@ using use = useUsing("use")`,
 export const themeDisclaimers = {
   light: [
     "Diqqat! Yorug' rejim ko'zga zarari ko'proq!",
-    "Caution: Light mode ahead! Please don't try this at home.",
-    "Only trained professionals can handle this much brightness. Proceed with sunglasses!",
-    "Brace yourself! Light mode is about to make everything shine brighter than your future.",
-    "Flipping the switch to light mode... Are you sure your eyes are ready for this?",
+    "Diqqat: yorug'lik rejimi oldinda! Iltimos, buni uyda sinab ko'rmang.",
+    "Bunday yorqinlikni faqat malakali mutaxassislar boshqarishi mumkin. Quyosh ko'zoynaklari bilan davom eting!",
+    "O'zingizni tuting! Yorug'lik rejimi sizning kelajagingizdan ko'ra hamma narsani yorqinroq qiladi.",
+    "Kalitni yorug'lik rejimiga o'tkazish... Ko'zlaringiz bunga tayyor ekanligiga ishonchingiz komilmi?",
   ],
   dark: [
     "Light mode? I thought you went insane... but welcome back to the dark side!",
