@@ -2,6 +2,7 @@ import { Link } from "@/types";
 
 const links: Link[] = [
   {
+<<<<<<< HEAD
     title:     'Bosh_saxifa',
     href:      '/',
     thumbnail: '/assets/nav-link-previews/landing.png'
@@ -9,6 +10,15 @@ const links: Link[] = [
   {
     title:     'Men_haqimda',
     href:      '/#about',
+=======
+    title: 'Bosh_saxifa',
+    href: '/',
+    thumbnail: '/assets/nav-link-previews/landing.png'
+  },
+  {
+    title: 'Men_haqimda',
+    href: '/#about',
+>>>>>>> d2608516ec973f7a0e022e6ce103e5b392a6785b
     thumbnail: '/assets/nav-link-previews/about.png'
   },
   {
