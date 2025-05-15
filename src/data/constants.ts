@@ -456,7 +456,7 @@ using use = useUsing("use")`,
 
 export const themeDisclaimers = {
   light: [
-    "Warning: Light mode emits a gazillion lumens of pure radiance!",
+    "Diqqat! Yorug' rejim ko'zga zarari ko'proq!",
     "Caution: Light mode ahead! Please don't try this at home.",
     "Only trained professionals can handle this much brightness. Proceed with sunglasses!",
     "Brace yourself! Light mode is about to make everything shine brighter than your future.",
