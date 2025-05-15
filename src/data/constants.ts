@@ -463,11 +463,11 @@ export const themeDisclaimers = {
     "Kalitni yorug'lik rejimiga o'tkazish... Ko'zlaringiz bunga tayyor ekanligiga ishonchingiz komilmi?",
   ],
   dark: [
-    "Light mode? I thought you went insane... but welcome back to the dark side!",
-    "Switching to dark mode... How was life on the bright side?",
-    "Dark mode activated! Thanks you from the bottom of my heart, and my eyes too.",
-    "Welcome back to the shadows. How was life out there in the light?",
-    "Dark mode on! Finally, someone who understands true sophistication.",
+    "Yorug'lik rejimi? Men sizni aqldan ozgan deb o'yladim... lekin qorong'u tomonga qayting!",
+    "Qorong'i rejimga o'tish... Yorqin tomonda hayot qanday kechdi?",
+    "Qorong'i rejim faollashtirildi! Sizga chin qalbimdan rahmat.",
+    "Yana soyalarga xush kelibsiz. U erda yorug'likda hayot qanday edi?",
+    "Qorong'i rejim yoqilgan! Nihoyat, haqiqiy nafosatni tushunadigan kishi.",
   ],
 };
 
