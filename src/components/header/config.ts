@@ -2,12 +2,12 @@ import { Link } from "@/types";
 
 const links: Link[] = [
   {
-    title: 'Bosh saxifa',
+    title: 'Bosh_saxifa',
     href: '/',
     thumbnail: '/assets/nav-link-previews/landing.png'
   },
   {
-    title: 'Men haqimda',
+    title: 'Men_haqimda',
     href: '/#about',
     thumbnail: '/assets/nav-link-previews/about.png'
   },
