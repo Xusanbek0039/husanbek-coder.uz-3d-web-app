@@ -65,7 +65,7 @@ const ContactForm = () => {
     <form className="min-w-7xl mx-auto sm:mt-4" onSubmit={handleSubmit}>
       <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
         <LabelInputContainer>
-          <Label htmlFor="fullname">To&aposliq ism familiya</Label>
+          <Label htmlFor="fullname">To&#39;liq ism familiya</Label>
           <Input
             id="fullname"
             placeholder="Ismingiz"
@@ -90,14 +90,14 @@ const ContactForm = () => {
       <div className="grid w-full gap-1.5 mb-4">
         <Label htmlFor="content">Xabaringiz</Label>
         <Textarea
-          placeholder="Loyihangiz haqida gapirib bering,"
+          placeholder="Kamida 30 imlodan iborat xabar yozing hamda fikringizni to'liq bayon ettiring iltimos!"
           id="content"
           required
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
         <p className="text-sm text-muted-foreground">
-          Sizning loyigangiz sir saqlanadi. Albatta suxbat sir saqlanadi!
+          Xabar mutlaqo sir saqlanadi va 3-shaxsga xech qanday ruxsat berilmaydi!!!
         </p>
       </div>
       <Button
