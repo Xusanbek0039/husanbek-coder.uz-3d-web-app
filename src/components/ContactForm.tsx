@@ -37,7 +37,7 @@ const ContactForm = () => {
       if (data.error) throw new Error(data.error);
       toast({
         title: "Raxmat!",
-        description: "Men sizga imkon qadar tezroq bog&#39;lanaman.",
+        description: "Men sizga imkon qadar tezroq bog'lanaman.",
         variant: "default",
         className: cn("top-0 mx-auto flex fixed md:top-4 md:right-4"),
       });
