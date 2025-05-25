@@ -15,6 +15,10 @@ import { config } from "@/data/config";
 import SocketContextProvider from "@/contexts/socketio";
 import RemoteCursors from "@/components/realtime/remote-cursors";
 
+
+
+
+
 export const metadata: Metadata = {
   title: config.title,
   description: config.description.long,
