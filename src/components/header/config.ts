@@ -9,7 +9,7 @@ const links: (Link & { icon: string })[] = [
   },
   {
     title: 'Men_haqimda',
-    href: '/#about',
+    href: '/about',
     thumbnail: '/assets/nav-link-previews/about.png',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.657 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`
   },
@@ -21,7 +21,7 @@ const links: (Link & { icon: string })[] = [
   },
   {
     title: 'Loyihalar',
-    href: '/#projects',
+    href: '/projects',
     thumbnail: '/assets/nav-link-previews/projects.png',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" /></svg>`
   },

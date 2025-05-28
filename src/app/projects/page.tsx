@@ -11,67 +11,57 @@ import "@splidejs/react-splide/css";
 const PROJECTS = [
   {
     id: 1,
-    name: "AI Dockerfile optimizer",
-    description: `AI-Docker-file-optimizer helps optimize Dockerfiles for smaller, more efficient images. 
-            Simply paste your Dockerfile, and the app analyzes it for best practices and size 
-            optimization tips. It then provides a refactored, optimized version of the Dockerfile. 
-            Deployed on Vercel, it ensures fast and easy access to Dockerfile optimization..`,
-    link: "https://ai-docker-file-optimizer.netlify.app/",
+    name: "IT Park Zomin tuman filiali LMS",
+    description: `O'quv bo'limini online qilish uchun LMS loyiha API ma'lumotlari ochiq!`,
+    link: "https://itclms.uz",
     images: [
-      "/assets/projects-screenshots/aidockerfileoptimizer/1.png",
-      "/assets/projects-screenshots/aidockerfileoptimizer/2.png",
-      "/assets/projects-screenshots/aidockerfileoptimizer/3.png",
+      "/assets/projects-screenshots/itclms/1.png",
+      "/assets/projects-screenshots/itclms/2.png",
+      "/assets/projects-screenshots/itclms/3.png",
+      "/assets/projects-screenshots/itclms/4.png",
+      "/assets/projects-screenshots/itclms/5.png"
     ],
   },
   {
     id: 2,
-    name: "financeme",
-    description: `This project demonstrates the deployment of a DevOps pipeline for a global banking and
-            financial services provider, FinanceMe. The company transitioned from a monolithic 
-            architecture to a microservice-based architecture to handle increased traffic and 
-            scaling challenges. The project involves automating infrastructure provisioning, build 
-            and deployment processes, and continuous monitoring using modern DevOps tools and 
-            AWS services.?`,
+    name: "Online do'kon CRM goodever.uz",
+    description: `Online do'kon loyihasi. Zakazga yasab berilgan!`,
     link: "https://github.com/Abhiz2411/FinanceMe-Devops-Project-01",
     images: [
-      "/assets/projects-screenshots/financeme/1.png",
-      "/assets/projects-screenshots/financeme/2.png",
-      "/assets/projects-screenshots/financeme/3.png",
-      "/assets/projects-screenshots/financeme/4.png",
-      "/assets/projects-screenshots/financeme/5.png",
-      "/assets/projects-screenshots/financeme/6.png",
-      "/assets/projects-screenshots/financeme/7.png",
-      "/assets/projects-screenshots/financeme/8.png",
-      "/assets/projects-screenshots/financeme/9.png",
-      "/assets/projects-screenshots/financeme/10.png"
+      "/assets/projects-screenshots/goodever/1.png",
+      "/assets/projects-screenshots/goodever/2.png",
+      "/assets/projects-screenshots/goodever/3.png",
+      "/assets/projects-screenshots/goodever/4.png",
+      "/assets/projects-screenshots/goodever/5.png",
+      "/assets/projects-screenshots/goodever/6.png",
+      "/assets/projects-screenshots/goodever/7.png",
+      "/assets/projects-screenshots/goodever/8.png"
     ],
   },
   {
     id: 3,
-    name: "Portfolio",
-    description: `Welcome to my digital playground, where creativity meets code in the
-            dopest way possible.`,
-    link: "https://www.abhijitzende.com/",
+    name: "Husan Suyunov Portfolio Web SiTE",
+    description: `Portfolio ko'rsatish uchun ishlab chiqilgan loyiha.`,
+    link: "https://www.goodever.uz/",
     images: [
-      "/assets/projects-screenshots/myportfolio/landing.png",
-      "/assets/projects-screenshots/myportfolio/navbar.png",
-      "/assets/projects-screenshots/myportfolio/projects.png",
-      "/assets/projects-screenshots/myportfolio/project.png",
+      "/assets/projects-screenshots/portfolio/landing.png",
+      "/assets/projects-screenshots/portfolio/blog.png",
+      "/assets/projects-screenshots/portfolio/projects.png",
+      "/assets/projects-screenshots/portfolio/about.png",
     ],
   },
   {
     id: 4,
-    name: "Smart Parking Assistant",
-    description: `Transform parking with the Smart Parking Assistant, an IoT marvel powered by Arduino 
-            and IR sensors to detect and recommend the best spots in real-time. Enjoy a sleek GUI 
-            that visualizes availability and an intelligent system for quick, optimal decisions. 
-            Built to adapt with customizable hardware and Python-powered software for seamless 
-            integration. Say goodbye to parking woes and hello to smarter space utilization!`,
-    link: "https://github.com/Abhiz2411/smart-parking-assistant",
+    name: "Shoira portfolio",
+    description: `Doimiy klent uchun shoira-blog.uz sayt. Backend NodeJS api orqali ishledi.`,
+    link: "https://shoira-blog.uz",
     images: [
-      "/assets/projects-screenshots/smartparkingassitant/01.jpeg",
-      "/assets/projects-screenshots/smartparkingassitant/03.jpeg",
-      "/assets/projects-screenshots/smartparkingassitant/04.jpeg",
+      "/assets/projects-screenshots/shoira/1.png",
+      "/assets/projects-screenshots/shoira/2.png",
+      "/assets/projects-screenshots/shoira/3.png",
+      "/assets/projects-screenshots/shoira/4.png",
+      "/assets/projects-screenshots/shoira/5.png"
+
 
     ],
   },

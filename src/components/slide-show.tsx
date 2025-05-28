@@ -55,7 +55,7 @@ const SlideShow = ({ images }: { images: string[] }) => {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                     >
-                      Click to zoom
+                      Kattalashtirish uchun bosing
                     </motion.div>
                   )}
                 </AnimatePresence>
