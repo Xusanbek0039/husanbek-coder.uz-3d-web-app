@@ -770,32 +770,34 @@ const projects: Project[] = [
 
   // +
   { // 01. AI Docker file optimizer project
-    id: "aidockerfileoptimizer",
-    category: "AI and DevOps",
-    title: "AI Dockerfile Optimizer",
-    src: "/assets/projects-screenshots/aidockerfileoptimizer/2.png",
+    id: "LMS",
+    category: "DjangoDRF LMS, CRM, API",
+    title: "IT Park Zomin tuman filiali LMS",
+    src: "/assets/projects-screenshots/itclms/1.png",
     screenshots: ["1.png", "2.png", "3.png"],
-    live: "https://ai-docker-file-optimizer.netlify.app/",
-    github:"https://github.com/Abhiz2411/AI-Docker-file-optimizer",
+    live: "https://itclms.uz/",
+    github:"https://github.com/Xusanbek0039/ITC-LMS-API",
     skills: {
       frontend: [PROJECT_SKILLS.js, PROJECT_SKILLS.next, PROJECT_SKILLS.tailwind, PROJECT_SKILLS.vite],
-      backend: [PROJECT_SKILLS.openai,PROJECT_SKILLS.netlify],
+      backend: [PROJECT_SKILLS.openai,PROJECT_SKILLS.netlify,PROJECT_SKILLS.python],
     },
     get content() {
       return (
         <div>
           <TypographyP className="font-mono ">
-            AI-Docker-file-optimizer helps optimize Dockerfiles for smaller, more efficient images. 
-            Simply paste your Dockerfile, and the app analyzes it for best practices and size 
-            optimization tips. It then provides a refactored, optimized version of the Dockerfile. 
-            Deployed on Vercel, it ensures fast and easy access to Dockerfile optimization.
+          🔧 API imkoniyatlari: 👥 Foydalanuvchilarni ro‘yxatdan o‘tkazish va avtorizatsiya qilish 📚 Kurslar va darslar (lessons) bilan ishlash 📝 Testlar va topshiriqlar (assignments)ni boshqarish 📊 Baholash tizimi (grades, progress) 🔒 JWT yoki Token orqali xavfsiz autentifikatsiya 🧑‍🏫 O‘qituvchi va talabalar rollari 📆 Kalendar va jadval integra
+
+
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/aidockerfileoptimizer/1.png`,
-              `${BASE_PATH}/aidockerfileoptimizer/2.png`,
-              `${BASE_PATH}/aidockerfileoptimizer/3.png`,
+              `${BASE_PATH}/itclms/1.png`,
+              `${BASE_PATH}/itclms/2.png`,
+              `${BASE_PATH}/itclms/3.png`,
+              `${BASE_PATH}/itclms/4.png`,
+              `${BASE_PATH}/itclms/5.png`,
+
             ]}
           />
         </div>
@@ -803,11 +805,11 @@ const projects: Project[] = [
     },
   },
   { // 02. FinanceMe project
-    id: "financeme",
-    category: "DevOps in Banking and Finance",
-    title: "FinanceMe: Complete DevOps Capstone Project",
-    src: "/assets/projects-screenshots/financeme/1.png",
-    screenshots: ["/assets/projects-screenshots/financeme/1.png"],
+    id: "Goodever",
+    category: "Online magazin CRM",
+    title: "Sotuv bo'limini online qilish",
+    src: "/assets/projects-screenshots/goodever/1.png",
+    screenshots: ["/assets/projects-screenshots/goodever/1.png"],
     skills: {
       frontend: [
         PROJECT_SKILLS.html,
@@ -821,76 +823,79 @@ const projects: Project[] = [
         PROJECT_SKILLS.postgres,
       ],
     },
-    live: "https://github.com/Abhiz2411/FinanceMe-Devops-Project-01",
-    github: "https://github.com/Abhiz2411/FinanceMe-Devops-Project-01",
+    live: "https://goodever.uz",
+    github: "https://github.com/Xusanbek0039/goodever.uz",
     get content() {
       return (
         <div>
           <TypographyP className="font-mono text-2xl text-center">
-            FinanceMe: Complete DevOps Capstone Project
+            Goodever.uz | Online do'kon
           </TypographyP>
           <TypographyP className="font-mono ">
-            This project demonstrates the deployment of a DevOps pipeline for a global banking and
-            financial services provider, FinanceMe. The company transitioned from a monolithic 
-            architecture to a microservice-based architecture to handle increased traffic and 
-            scaling challenges. The project involves automating infrastructure provisioning, build 
-            and deployment processes, and continuous monitoring using modern DevOps tools and 
-            AWS services.?
+          Goodever.uz — bu O‘zbekistondagi HORECA (mehmonxona, restoran, kafe), qurilish mollari, uy va ofis uchun zarur tovarlarni onlayn xarid qilish imkonini beruvchi zamonaviy internet-do‘kon.
+
+          Asosiy imkoniyatlar
+Tovarlar bo‘yicha to‘liq katalog
+Qidiruv va filtr orqali saralash
+Xarid savatchasi va buyurtma qilish tizimi
+Foydalanuvchi ro‘yxatdan o‘tishi va kirishi
+Mahsulotlarga sharh qoldirish (review)
+Admin panel orqali tovarlar va buyurtmalarni boshqarish
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
-          <TypographyH3 className="my-4 mt-8">Architecture </TypographyH3>
+          <TypographyH3 className="my-4 mt-8">Texnologiyalar </TypographyH3>
           <p className="font-mono mb-2">
-            The project is divided into three main phases:
-            1.Automating Infrastructure Provisioning
-            2.Build and Deployment Automation
-            3.Continuous Monitoring
+          Loyiha Full Stack texnologiyalar yordamida ishlab chiqilgan:
+
+Frontend: React.js / Next.js
+Backend: Node.js + Express
+Ma'lumotlar bazasi: MongoDB / PostgreSQL
+Autentifikatsiya: JWT
+Admin panel: mahsulotlarni boshqarish, buyurtmalarni ko‘rish
+Responsive dizayn: barcha qurilmalar uchun moslashuvchan
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/financeme/1.png`,
-              `${BASE_PATH}/financeme/2.png`,
+              `${BASE_PATH}/goodever/1.png`,
+              `${BASE_PATH}/goodever/2.png`,
             ]}
           />
-          <TypographyH3 className="my-4 mt-8">Automating Infrastructure Provisioning</TypographyH3>
+          <TypographyH3 className="my-4 mt-8">🔑 Asosiy imkoniyatlar
+          </TypographyH3>
           <p className="font-mono mb-2">
-          Terraform is used to create 4 AWS EC2 instances:
-            Jenkins Master Node (for CI/CD pipeline management)
-            Build Server (for application and Docker image builds)
-            Production Server (for deploying Dockerized applications)
-            Monitoring Server (for continuous monitoring of Build and Prod servers)
+          Tovarlar bo‘yicha to‘liq katalog
+Qidiruv va filtr orqali saralash
+Xarid savatchasi va buyurtma qilish tizimi
+Foydalanuvchi ro‘yxatdan o‘tishi va kirishi
+Mahsulotlarga sharh qoldirish (review)
+Admin panel orqali tovarlar va buyurtmalarni boshqarish
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/financeme/4_A.png`,
-              `${BASE_PATH}/financeme/4.png`,
+              `${BASE_PATH}/goodever/3.png`,
+              `${BASE_PATH}/goodever/4.png`,
             ]}
           />
-          <TypographyH3 className="my-4 mt-8">Build and Deployment Automation</TypographyH3>
+          <TypographyH3 className="my-4 mt-8">📦 Maqsad
+          </TypographyH3>
 
           <p className="font-mono mb-2">
-          Jenkins is configured for a CI/CD pipeline:
-            Jenkins Master Node is responsible for pipeline orchestration.
-            Build Server is configured as a Jenkins Slave Node to handle application builds and Docker image creation.
-            Ansible is used for automating deployment to the Prod server, where the application is deployed using an Ansible client-server model.
+          Goodever.uz — HORECA va qurilish sohasidagi mahsulotlarni tez va qulay tarzda xaridorlarga yetkazib berishni maqsad qilgan. Sayt foydalanuvchilarga qulay interfeys, tezkor xizmat va ishonchli onlayn savdo tajribasini taqdim etadi.
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/financeme/5.png`,
-              `${BASE_PATH}/financeme/6.png`,
-              `${BASE_PATH}/financeme/7.png`,
+              `${BASE_PATH}/goodever/5.png`,
+              `${BASE_PATH}/goodever/6.png`,
+              `${BASE_PATH}/goodever/7.png`,
             ]}
           />
-          <TypographyH3 className="my-4 mt-8">Continuous Monitoring </TypographyH3>
+          <TypographyH3 className="my-4 mt-8">Kuzatuv hamda statistika </TypographyH3>
           <p className="font-mono mb-2">
-          Prometheus and Grafana are used for real-time monitoring:
-            Node Exporter is installed on both Build and Prod servers to collect server metrics (CPU, Disk Space, Memory Utilization).
-            Grafana Dashboard is created to visualize these metrics for continuous monitoring.
+Mijoz Google Console Claud hizmat ko'rsatish markaziga ulangan shu panel orqali saytdagi nazoratni ko'rishlari mumkin!
           </p>
           <SlideShow images={[
-                `${BASE_PATH}/financeme/3.png`,
-                `${BASE_PATH}/financeme/8.png`,
-                `${BASE_PATH}/financeme/9.png`,
-                `${BASE_PATH}/financeme/10.png`,
+                `${BASE_PATH}/goodever/8.png`,
+
             ]} />
         </div>
       );
@@ -899,11 +904,11 @@ const projects: Project[] = [
   { // 03. Portfolio project
     id: "portfolio",
     category: "Portfolio",
-    title: "My Portfolio",
-    src: "/assets/projects-screenshots/myportfolio/landing.png",
-    screenshots: ["assets/projects-screenshots/myportfolio/landing.png"],
-    live: "https://www.abhijitzende.com/",
-    github:"https://github.com/Abhiz2411/3D-interactive-portfolio",
+    title: "Mening portfolio saytim",
+    src: "/assets/projects-screenshots/portfolio/landing.png",
+    screenshots: ["assets/projects-screenshots/portfolio/landing.png"],
+    live: "https://husanbek-coder.uz/",
+    github:"https://github.com/Xusanbek0039/husanbek-coder.uz-3d-web-app",
     skills: {
       frontend: [
         PROJECT_SKILLS.ts,
@@ -920,56 +925,52 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono ">
-            Welcome to my digital playground, where creativity meets code in the
-            dopest way possible.
+Mening portfolio web saytimga xush kelibsiz
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <TypographyH3 className="my-4 mt-8">
-            Beautiful 3D Objects{" "}
+            Loyihada 3D modeldan foydalanilgan{" "}
           </TypographyH3>
           <p className="font-mono mb-2">
-            Did you see that 3D keyboard modal? Yeah! I made that. That
-            interactive keyboard is being rendered in 3D on a webpage 🤯, and
-            pressing each keycap reveals a skill in a goofy way. It&apos;s like
-            typing, but make it art.
+          🔑 Asosiy xususiyatlar: 🎮 3D Interfeys — foydalanuvchini o‘ziga tortadigan WebGL/Three.js asosidagi sahifalar. 💼 Portfolio bo‘limi — bajarilgan ishlar, loyihalar va texnik ko‘nikmalarni ko‘rsatish. 🌙 Dark/Light rejimi — foydalanuvchi qulayligi uchun vizual rejimlarni almashtirish. 🌍 Ko‘p tilli qo‘llab-quvvatlash — o‘zbek va rus tillarida int
+
+
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/myportfolio/landing.png`,
+              `${BASE_PATH}/portfolio/landing.png`,
               `${BASE_PATH}/portfolio/skills.png`,
             ]}
           />
-          <TypographyH3 className="my-4 ">Space Theme</TypographyH3>
+          <TypographyH3 className="my-4 ">2- xil rejimda tuzilgan</TypographyH3>
           <p className="font-mono mb-2">
-            Dark background + floating particles = out-of-this-world cool.
+            Sayt tungi hamda ertalabgi rejimlarda yaratilgan!
           </p>
-          <SlideShow images={[`${BASE_PATH}/myportfolio/navbar.png`]} />
-          <TypographyH3 className="my-4 mt-8">Projects</TypographyH3>
+          <SlideShow images={[`${BASE_PATH}/portfolio/navbar.png`]} />
+          <TypographyH3 className="my-4 mt-8">Loyihalarim</TypographyH3>
 
           <p className="font-mono mb-2">
-            My top personal and freelance projects — no filler, all killer.
-          </p>
+Saytda siz men haqimda barcha ma'lumotlarni olishingiz mumkin!          </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/myportfolio/projects.png`,
-              `${BASE_PATH}/myportfolio/project.png`,
+              `${BASE_PATH}/portfolio/projects.png`,
+              `${BASE_PATH}/portfolio/project.png`,
             ]}
           />
           <p className="font-mono mb-2 mt-8 text-center">
-            This site&apos;s not just a portfolio — it&apos;s a whole vibe.
-          </p>
+Barcha huquqlar himoyalangan!          </p>
         </div>
       );
     },
   },
   { // 04. Smart parking assitant
-    id: "smartparkingassitant",
-    category: "IoT",
-    title: "Smart Parking Assistant",
-    src: "/assets/projects-screenshots/smartparkingassitant/01.jpeg",
+    id: "portfolio",
+    category: "Portfolio",
+    title: "Shoira portfolio web sayt",
+    src: "/assets/projects-screenshots/shoira/1.png",
     screenshots: ["01.jpeg", "03.png"],
-    live: "https://github.com/Abhiz2411/smart-parking-assistant",
-    github:"https://github.com/Abhiz2411/smart-parking-assistant",
+    live: "https://shoira-blog.uz",
+    github:"https://github.com/xusanbek0039/shoira-blog,uz",
     skills: {
       frontend: [PROJECT_SKILLS.python],
       backend: [PROJECT_SKILLS.cplusplus, PROJECT_SKILLS.arduino],
@@ -978,18 +979,16 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono ">
-            Transform parking with the Smart Parking Assistant, an IoT marvel powered by Arduino 
-            and IR sensors to detect and recommend the best spots in real-time. Enjoy a sleek GUI 
-            that visualizes availability and an intelligent system for quick, optimal decisions. 
-            Built to adapt with customizable hardware and Python-powered software for seamless 
-            integration. Say goodbye to parking woes and hello to smarter space utilization!
+          shoira-blog.uz — bu zamonaviy, xavfsiz va interaktiv blog platformasi bo‘lib, foydalanuvchilarga o‘z maqolalarini yozish, ularni tahrirlash va boshqalar bilan bo‘lishish imkonini beradi. Sayt to‘liq mobilga mos, 3 tilda ishlaydi (O‘zbek, Rus, Ingliz), va foydalanuvchi qulayligi uchun Dark / Light rejim bilan jihozlangan.
+
+
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/smartparkingassitant/01.jpeg`,
-              `${BASE_PATH}/smartparkingassitant/03.png`,
-              `${BASE_PATH}/smartparkingassitant/04.jpg`,
+              `${BASE_PATH}/shoira/1.png`,
+              `${BASE_PATH}/shoira/3.png`,
+              `${BASE_PATH}/shoira/4.png`,
             ]}
           />
         </div>
