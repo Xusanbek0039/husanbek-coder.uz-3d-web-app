@@ -996,13 +996,13 @@ Barcha huquqlar himoyalangan!          </p>
     },
   },
   { // 05. Smart Job Tracker project
-    id: "smartjobtracker",
-    category: "Full stack",
-    title: "Smart Job Tracker",
-    src: "/assets/projects-screenshots/smartjobtracker/02.png",
+    id: "telegrambot",
+    category: "OpenAI API",
+    title: "ChatGPT Telegram BOT",
+    src: "/assets/projects-screenshots/telegram-bot/02.png",
     screenshots: ["01.png", "02.png", "03.png","04.png","05.png","06.png","07.png"],
-    live: "https://job-tracker-application-eight.vercel.app/",
-    github:"https://github.com/Abhiz2411/Job-tracker-application",
+    live: "https://t.me/chatgpt_avtobot",
+    github:"https://github.com/xusanbek0039/husanbek-coder.uz-3d-web-app",
     skills: {
       frontend: [PROJECT_SKILLS.js, PROJECT_SKILLS.next, PROJECT_SKILLS.tailwind, PROJECT_SKILLS.vite],
       backend: [PROJECT_SKILLS.firebase],
@@ -1011,22 +1011,18 @@ Barcha huquqlar himoyalangan!          </p>
       return (
         <div>
           <TypographyP className="font-mono ">
-            Track your job applications effortlessly with a sleek, dark-themed app that lets you 
-            manage, filter, and visualize your job search. Organize your applications with a 
-            Kanban board, monitor progress through status updates, and store everything securely. 
-            Enjoy seamless access across devices with a responsive design and email reminders for 
-            interviews. A smarter, more intuitive way to stay on top of your job hunt!
+Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda OpenAI dan API mavjud bo'lsa loyihadan foydalanishingiz mumkin. Biz uchun shunchaki minnatdorchilik bilrishingizni o'zi yetarli!
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/smartjobtracker/01.png`,
-              `${BASE_PATH}/smartjobtracker/02.png`,
-              `${BASE_PATH}/smartjobtracker/03.png`,
-              `${BASE_PATH}/smartjobtracker/04.png`,
-              `${BASE_PATH}/smartjobtracker/05.png`,
-              `${BASE_PATH}/smartjobtracker/06.png`,
-              `${BASE_PATH}/smartjobtracker/07.png`,
+              `${BASE_PATH}/telegram-bot/01.png`,
+              `${BASE_PATH}/telegram-bot/02.png`,
+              `${BASE_PATH}/telegram-bot/03.png`,
+              `${BASE_PATH}/telegram-bot/04.png`,
+              `${BASE_PATH}/telegram-bot/05.png`,
+              `${BASE_PATH}/telegram-bot/06.png`,
+              `${BASE_PATH}/telegram-bot/07.png`,
             ]}
           />
         </div>
@@ -1034,9 +1030,9 @@ Barcha huquqlar himoyalangan!          </p>
     },
   },
   { // 06. Savinder Puri portfolio project
-    id: "savinderpurisportfolio",
-    category: "Web Development",
-    title: "Savinder Puri Portfolio",
+    id: "instavideosave",
+    category: "Instagram API",
+    title: "Instagram Video Upload",
     src: "/assets/projects-screenshots/savinderpuriportfolio/01.png",
     screenshots: ["01.png", "02.png", "03.png","04.png","05.png"],
     live: "https://savinder-puri.vercel.app/",
