@@ -33,7 +33,7 @@ export enum SkillNames {
   EXPRESS = "express",  // 
   MONGODB = "mongodb",  //
   GITHUB = "github",   //
-  PYTHON = "python",  //
+  PRETTIER = "prettier",  //
   NPM = "npm",       //
   FIREBASE = "firebase",  //
   WORDPRESS = "wordpress",  //
@@ -162,13 +162,13 @@ export const SKILLS: Record<SkillNames, Skill> = {
     color: "#000000",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
   },
-  [SkillNames.PYTHON]: {
+  [SkillNames.PRETTIER]: {
     id: 15,
-    name: "python",
-    label: "Python",
-    shortDescription: "Backend uchun menga eng maquli! ✨",
+    name: "prettier",
+    label: "Prettier",
+    shortDescription: "Kodlaringizni chiroyli qilib tartiblaydi! ✨",
     color: "#f7b93a",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prettier/prettier-original.svg",
   },
   [SkillNames.NPM]: {
     id: 16,
@@ -243,6 +243,7 @@ export const SKILLS: Record<SkillNames, Skill> = {
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
   },
 };
+
 
 
 // +
