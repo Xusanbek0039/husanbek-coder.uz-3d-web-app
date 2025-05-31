@@ -1033,10 +1033,10 @@ Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda 
     id: "instavideosave",
     category: "Instagram API",
     title: "Instagram Video Upload",
-    src: "/assets/projects-screenshots/savinderpuriportfolio/01.png",
+    src: "/assets/projects-screenshots/instagram-bot/01.png",
     screenshots: ["01.png", "02.png", "03.png","04.png","05.png"],
-    live: "https://savinder-puri.vercel.app/",
-    github:"https://github.com/Abhiz2411/savinder-puri",
+    live: "https://t.me/insta_videobot",
+    github:"https://github.com/Xusanbek0039/instagram-video-bot",
     skills: {
       frontend: [PROJECT_SKILLS.js, PROJECT_SKILLS.next, PROJECT_SKILLS.tailwind, PROJECT_SKILLS.vite],
       backend: [],
@@ -1045,20 +1045,16 @@ Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda 
       return (
         <div>
           <TypographyP className="font-mono ">
-            Step into the digital world of Savinder Puri, the beloved DevOps guru and Spiritual 
-            Alchemist, with this responsive portfolio website. 🌐✨ Explore his inspiring journey, 
-            milestones, and life-changing services blending tech and spirituality. Built with 
-            modern tools like React and TypeScript, it’s a heartfelt tribute to a mentor who 
-            transforms lives. 💻🕊️ Crafted with ❤️ by Abhijit Zende! 🚀
+Ushbu loyiha portfolio uchun tuzib chiqilgan ochiq kodli API bilan ishlaydigan loyiha. Shu sabablama kodlardan siz ham foydalanishingiz mumkin!
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/savinderpuriportfolio/01.png`,
-              `${BASE_PATH}/savinderpuriportfolio/02.png`,
-              `${BASE_PATH}/savinderpuriportfolio/03.png`,
-              `${BASE_PATH}/savinderpuriportfolio/04.png`,
-              `${BASE_PATH}/savinderpuriportfolio/05.png`,
+              `${BASE_PATH}/instagram-bot/01.png`,
+              `${BASE_PATH}/instagram-bot/02.png`,
+              `${BASE_PATH}/instagram-bot/03.png`,
+              `${BASE_PATH}/instagram-bot/04.png`,
+              `${BASE_PATH}/instagram-bot/05.png`,
             ]}
           />
         </div>
