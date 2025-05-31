@@ -3,6 +3,7 @@ import SlideShow from "@/components/slide-show";
 import { Button } from "@/components/ui/button";
 import { TypographyH3, TypographyP } from "@/components/ui/typography";
 import { ArrowDownUpIcon, ArrowUpRight, ExternalLink, Link2, MoveUpRight } from "lucide-react";
+import next from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
@@ -49,7 +50,7 @@ const ProjectsLinks = ({ live, repo }: { live: string; repo?: string }) => {
         href={live}
       >
         <Button variant={"default"} size={"sm"}>
-          Visit Website
+          Tashrif buyurish
           <ArrowUpRight className="ml-3 w-5 h-5" />
         </Button>
       </Link>
@@ -972,8 +973,8 @@ Barcha huquqlar himoyalangan!          </p>
     live: "https://shoira-blog.uz",
     github:"https://github.com/xusanbek0039/shoira-blog,uz",
     skills: {
-      frontend: [PROJECT_SKILLS.python],
-      backend: [PROJECT_SKILLS.cplusplus, PROJECT_SKILLS.arduino],
+      frontend: [PROJECT_SKILLS.python,PROJECT_SKILLS.js],
+      backend: [PROJECT_SKILLS.python, PROJECT_SKILLS.html, PROJECT_SKILLS.js, PROJECT_SKILLS.mongo],
     },
     get content() {
       return (
@@ -1004,8 +1005,8 @@ Barcha huquqlar himoyalangan!          </p>
     live: "https://t.me/chatgpt_avtobot",
     github:"https://github.com/xusanbek0039/husanbek-coder.uz-3d-web-app",
     skills: {
-      frontend: [PROJECT_SKILLS.js, PROJECT_SKILLS.next, PROJECT_SKILLS.tailwind, PROJECT_SKILLS.vite],
-      backend: [PROJECT_SKILLS.firebase],
+      frontend: [],
+      backend: [PROJECT_SKILLS.python, PROJECT_SKILLS.html, PROJECT_SKILLS.js, PROJECT_SKILLS.mongo],
     },
     get content() {
       return (
@@ -1038,8 +1039,8 @@ Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda 
     live: "https://t.me/insta_videobot",
     github:"https://github.com/Xusanbek0039/instagram-video-bot",
     skills: {
-      frontend: [PROJECT_SKILLS.js, PROJECT_SKILLS.next, PROJECT_SKILLS.tailwind, PROJECT_SKILLS.vite],
-      backend: [],
+      frontend: [],
+      backend: [PROJECT_SKILLS.python, PROJECT_SKILLS.html, PROJECT_SKILLS.js, PROJECT_SKILLS.mongo],
     },
     get content() {
       return (
