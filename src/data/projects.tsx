@@ -807,7 +807,7 @@ const projects: Project[] = [
   { // 02. FinanceMe project
     id: "Goodever",
     category: "Online magazin CRM",
-    title: "Sotuv bo'limini online qilish",
+    title: "Sotuv bo&#39;limini online qilish",
     src: "/assets/projects-screenshots/goodever/1.png",
     screenshots: ["/assets/projects-screenshots/goodever/1.png"],
     skills: {
@@ -829,7 +829,7 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono text-2xl text-center">
-            Goodever.uz | Online do'kon
+            Goodever.uz | Online do&#39;kon
           </TypographyP>
           <TypographyP className="font-mono ">
           Goodever.uz — bu O‘zbekistondagi HORECA (mehmonxona, restoran, kafe), qurilish mollari, uy va ofis uchun zarur tovarlarni onlayn xarid qilish imkonini beruvchi zamonaviy internet-do‘kon.
@@ -849,7 +849,7 @@ Admin panel orqali tovarlar va buyurtmalarni boshqarish
 
 Frontend: React.js / Next.js
 Backend: Node.js + Express
-Ma'lumotlar bazasi: MongoDB / PostgreSQL
+Ma&#39;lumotlar bazasi: MongoDB / PostgreSQL
 Autentifikatsiya: JWT
 Admin panel: mahsulotlarni boshqarish, buyurtmalarni ko‘rish
 Responsive dizayn: barcha qurilmalar uchun moslashuvchan
@@ -891,7 +891,7 @@ Admin panel orqali tovarlar va buyurtmalarni boshqarish
           />
           <TypographyH3 className="my-4 mt-8">Kuzatuv hamda statistika </TypographyH3>
           <p className="font-mono mb-2">
-Mijoz Google Console Claud hizmat ko'rsatish markaziga ulangan shu panel orqali saytdagi nazoratni ko'rishlari mumkin!
+Mijoz Google Console Claud hizmat ko&#39;rsatish markaziga ulangan shu panel orqali saytdagi nazoratni ko&#39;rishlari mumkin!
           </p>
           <SlideShow images={[
                 `${BASE_PATH}/goodever/8.png`,
@@ -950,7 +950,7 @@ Mening portfolio web saytimga xush kelibsiz
           <TypographyH3 className="my-4 mt-8">Loyihalarim</TypographyH3>
 
           <p className="font-mono mb-2">
-Saytda siz men haqimda barcha ma'lumotlarni olishingiz mumkin!          </p>
+Saytda siz men haqimda barcha ma&#39;lumotlarni olishingiz mumkin!          </p>
           <SlideShow
             images={[
               `${BASE_PATH}/portfolio/projects.png`,
@@ -1011,7 +1011,7 @@ Barcha huquqlar himoyalangan!          </p>
       return (
         <div>
           <TypographyP className="font-mono ">
-Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda OpenAI dan API mavjud bo'lsa loyihadan foydalanishingiz mumkin. Biz uchun shunchaki minnatdorchilik bilrishingizni o'zi yetarli!
+Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda OpenAI dan API mavjud bo&#39;lsa loyihadan foydalanishingiz mumkin. Biz uchun shunchaki minnatdorchilik bilrishingizni o&#39;zi yetarli!
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
