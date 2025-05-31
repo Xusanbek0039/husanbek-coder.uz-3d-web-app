@@ -435,20 +435,20 @@ const projects: Project[] = [
   //       <div>
   //         <TypographyP className="font-mono ">
   //           CouponLuxury is your go-to destination for snagging the best deals
-  //           without lifting a finger. Whether you&apos;re hunting for the latest
+  //           without lifting a finger. Whether you`re hunting for the latest
   //           discounts or trying to save a buck at your favorite stores,
-  //           CouponLuxury&apos;s got you covered.
+  //           CouponLuxury`s got you covered.
   //         </TypographyP>
   //         <ProjectsLinks live={this.live} repo={this.github} />
   //         <p className="font-mono mb-2 mt-4">
-  //           As soon as you land, boom! You&apos;re greeted with the freshest
-  //           coupons and top-tier deals that&apos;ll make your wallet happy.
+  //           As soon as you land, boom! You`re greeted with the freshest
+  //           coupons and top-tier deals that`ll make your wallet happy.
   //         </p>
   //         <SlideShow images={[`${BASE_PATH}/couponluxury/landing.png`]} />
   //         <TypographyH3 className="my-4 ">Stores</TypographyH3>
   //         <p className="font-mono mb-2">
   //           Dive into a comprehensive list of stores, each packed with exclusive
-  //           deals and discounts. It&apos;s like having a VIP pass to every sale
+  //           deals and discounts. It`s like having a VIP pass to every sale
   //           in town.
   //         </p>
   //         <SlideShow
@@ -460,7 +460,7 @@ const projects: Project[] = [
   //         <TypographyH3 className="my-4 mt-8">Categories</TypographyH3>
 
   //         <p className="font-mono mb-2">
-  //           Whatever you&apos;re into—fashion, tech, food—you&apos;ll find it
+  //           Whatever you`re into—fashion, tech, food—you`ll find it
   //           neatly organized here. No more endless scrolling; just pick a
   //           category and get the best offers instantly.
   //         </p>
@@ -469,7 +469,7 @@ const projects: Project[] = [
   //         <p className="font-mono mb-2">
   //           Powered by Vue.js, this bad boy allows us to keep the content
   //           dynamic and up-to-date. From flash sales to limited-time offers, my
-  //           CMS ensures everything&apos;s live and relevant.
+  //           CMS ensures everything`s live and relevant.
   //         </p>
   //         <SlideShow
   //           images={[
@@ -478,12 +478,12 @@ const projects: Project[] = [
   //           ]}
   //         />
   //         <p className="font-mono mb-2 mt-5">
-  //           Plus, I&apos;ve sprinkled in some extra magic like personalized
+  //           Plus, I`ve sprinkled in some extra magic like personalized
   //           deal recommendations, user-friendly search features, and a sleek,
   //           responsive design that works like a charm on any device.
   //         </p>
   //         <p className="font-mono mb-2">
-  //           CouponLuxury isn&apos;t just a website; it&apos;s your personal deal-hunting
+  //           CouponLuxury isn`t just a website; it`s your personal deal-hunting
   //           assistant, ensuring you never miss out on a bargain!
   //         </p>
   //         {/* <TypographyP className="my-4 mt-8">
@@ -522,7 +522,7 @@ const projects: Project[] = [
   //           The Booking Desk is your ultimate travel consultation hub, designed
   //           to turn your wanderlust dreams into reality. With a focus on smooth
   //           and visually captivating animations, navigating the site feels like
-  //           a breeze—it&apos;s almost as if the destinations are calling you.
+  //           a breeze—it`s almost as if the destinations are calling you.
   //         </TypographyP>
   //         <ProjectsLinks live={this.live} repo={this.github} />
   //         <p className="font-mono mb-2 mt-8">
@@ -533,7 +533,7 @@ const projects: Project[] = [
   //         <TypographyH3 className="my-4 mt-8">Blogs</TypographyH3>
   //         <p className="font-mono mb-2">
   //           Dive into the curated articles written by travel experts. Whether
-  //           you&apos;re looking for hidden gems or travel hacks, our blog section has
+  //           you`re looking for hidden gems or travel hacks, our blog section has
   //           you covered.
   //         </p>
   //         <SlideShow
@@ -545,7 +545,7 @@ const projects: Project[] = [
   //         <TypographyH3 className="my-4 mt-8">Sanity CMS</TypographyH3>
 
   //         <p className="font-mono mb-2">
-  //           Keeping everything fresh and up-to-date, I&apos;ve integrated Sanity CMS
+  //           Keeping everything fresh and up-to-date, I`ve integrated Sanity CMS
   //           to manage all the content with ease, ensuring you always get the
   //           latest and greatest information.
   //         </p>
@@ -556,10 +556,10 @@ const projects: Project[] = [
   //           ]}
   //         />
   //         <p className="font-mono mb-2 my-8">
-  //           With a stunning 100% score on Lighthouse, The Booking Desk isn&apos;t
-  //           just beautiful—it&apos;s built to perform. Whether you&apos;re planning your
+  //           With a stunning 100% score on Lighthouse, The Booking Desk isn`t
+  //           just beautiful—it`s built to perform. Whether you`re planning your
   //           next adventure or just daydreaming, our site delivers a top-notch
-  //           experience that&apos;s both informative and enjoyable.
+  //           experience that`s both informative and enjoyable.
   //         </p>
   //       </div>
   //     );
@@ -599,7 +599,7 @@ const projects: Project[] = [
   //         <p className="font-mono mb-2">
   //           Did you see that 3D keyboard modal? Yeah! I made that. That
   //           interactive keyboard is being rendered in 3D on a webpage 🤯, and
-  //           pressing each keycap reveals a skill in a goofy way. It&apos;s like
+  //           pressing each keycap reveals a skill in a goofy way. It`s like
   //           typing, but make it art.
   //         </p>
   //         <SlideShow
@@ -625,7 +625,7 @@ const projects: Project[] = [
   //           ]}
   //         />
   //         <p className="font-mono mb-2 mt-8 text-center">
-  //           This site&apos;s not just a portfolio — it&apos;s a whole vibe.
+  //           This site`s not just a portfolio — it`s a whole vibe.
   //         </p>
   //       </div>
   //     );
@@ -648,8 +648,8 @@ const projects: Project[] = [
   //       <div>
   //         <TypographyP className="font-mono ">
   //           Ghostchat is your go-to spot for sending anonymous messages without
-  //           leaving a trace. Powered by Supabase, it&apos;s all about keeping things
-  //           low-key and secure. Whether you&apos;re sharing secrets, giving feedback,
+  //           leaving a trace. Powered by Supabase, it`s all about keeping things
+  //           low-key and secure. Whether you`re sharing secrets, giving feedback,
   //           or just having some fun, Ghostchat ensures your identity stays
   //           hidden, while your voice is heard. Say what you want, without the
   //           worry.
@@ -691,7 +691,7 @@ const projects: Project[] = [
   //           and enhance the experience of accessing academic results. It served
   //           as a powerful proxy between the JNTUA university results website and
   //           its users, offering a range of features that made result analysis
-  //           faster and more efficient. Here&apos;s what made it stand out:
+  //           faster and more efficient. Here`s what made it stand out:
   //         </TypographyP>
   //         <ProjectsLinks live={this.live} repo={this.github} />
   //         <SlideShow images={[`${BASE_PATH}/jra/1.png`]} />
@@ -808,7 +808,7 @@ const projects: Project[] = [
   { // 02. FinanceMe project
     id: "Goodever",
     category: "Online magazin CRM",
-    title: "Sotuv bo&#39;limini online qilish",
+    title: "Sotuv bo`limini online qilish",
     src: "/assets/projects-screenshots/goodever/1.png",
     screenshots: ["/assets/projects-screenshots/goodever/1.png"],
     skills: {
@@ -830,7 +830,7 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono text-2xl text-center">
-            Goodever.uz | Online do&#39;kon
+            Goodever.uz | Online do`kon
           </TypographyP>
           <TypographyP className="font-mono ">
           Goodever.uz — bu O‘zbekistondagi HORECA (mehmonxona, restoran, kafe), qurilish mollari, uy va ofis uchun zarur tovarlarni onlayn xarid qilish imkonini beruvchi zamonaviy internet-do‘kon.
@@ -850,7 +850,7 @@ Admin panel orqali tovarlar va buyurtmalarni boshqarish
 
 Frontend: React.js / Next.js
 Backend: Node.js + Express
-Ma&#39;lumotlar bazasi: MongoDB / PostgreSQL
+Ma`lumotlar bazasi: MongoDB / PostgreSQL
 Autentifikatsiya: JWT
 Admin panel: mahsulotlarni boshqarish, buyurtmalarni ko‘rish
 Responsive dizayn: barcha qurilmalar uchun moslashuvchan
@@ -892,7 +892,7 @@ Admin panel orqali tovarlar va buyurtmalarni boshqarish
           />
           <TypographyH3 className="my-4 mt-8">Kuzatuv hamda statistika </TypographyH3>
           <p className="font-mono mb-2">
-Mijoz Google Console Claud hizmat ko&#39;rsatish markaziga ulangan shu panel orqali saytdagi nazoratni ko&#39;rishlari mumkin!
+Mijoz Google Console Claud hizmat ko`rsatish markaziga ulangan shu panel orqali saytdagi nazoratni ko`rishlari mumkin!
           </p>
           <SlideShow images={[
                 `${BASE_PATH}/goodever/8.png`,
@@ -951,7 +951,7 @@ Mening portfolio web saytimga xush kelibsiz
           <TypographyH3 className="my-4 mt-8">Loyihalarim</TypographyH3>
 
           <p className="font-mono mb-2">
-Saytda siz men haqimda barcha ma&#39;lumotlarni olishingiz mumkin!          </p>
+Saytda siz men haqimda barcha ma`lumotlarni olishingiz mumkin!          </p>
           <SlideShow
             images={[
               `${BASE_PATH}/portfolio/projects.png`,
@@ -1012,7 +1012,7 @@ Barcha huquqlar himoyalangan!          </p>
       return (
         <div>
           <TypographyP className="font-mono ">
-Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda OpenAI dan API mavjud bo&#39;lsa loyihadan foydalanishingiz mumkin. Biz uchun shunchaki minnatdorchilik bilrishingizni o&#39;zi yetarli!
+Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda OpenAI dan API mavjud bo`lsa loyihadan foydalanishingiz mumkin. Biz uchun shunchaki minnatdorchilik bilrishingizni o`zi yetarli!
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
