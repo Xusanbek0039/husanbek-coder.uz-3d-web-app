@@ -61,13 +61,13 @@ const CONTACT_LINKS = [
   {
     name: "LinkedIn",
     href: "https://www.linkedin.com/in/xusanbek0039/ ",
-    content: "/zende-abhijit",
+    content: "Husanbek",
     icon: <FaLinkedin height={"50px"} />,
   },
   {
     name: "GitHub",
     href: "https://github.com/xusanbek0039 ",
-    content: "/naresh-khatri",
+    content: "Husanbek GITHUB",
     icon: <FaGithub height={"50px"} />,
   },
 ];
