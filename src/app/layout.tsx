@@ -15,10 +15,6 @@ import { config } from "@/data/config";
 import SocketContextProvider from "@/contexts/socketio";
 import RemoteCursors from "@/components/realtime/remote-cursors";
 
-
-
-
-
 export const metadata: Metadata = {
   title: config.title,
   description: config.description.long,
@@ -48,6 +44,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "/favicon.ico", // <-- favicon shu yerda qo‘shildi
+  },
 };
 
 const archivoBlack = Archivo_Black({
@@ -61,14 +60,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={[archivoBlack.className].join(" ")}>
+    <html lang="uz" className={archivoBlack.className}>
       <head>
         <Script
           defer
           src={process.env.UMAMI_DOMAIN}
           data-website-id={process.env.UMAMI_SITE_ID}
-        ></Script>
-        {/* <Analytics /> */}
+        />
       </head>
       <body>
         <ThemeProvider
