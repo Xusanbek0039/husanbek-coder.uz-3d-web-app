@@ -5,15 +5,17 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 
+
+
 const app = express();
-app.use(cors()); // CORS muammolarini hal qiladi
+app.use(cors());
 
 const server = http.createServer(app);
 
-// Socket.IO ulanish
+
 const io = new Server(server, {
   cors: {
-    origin: "*", // frontend domenini yozish mumkin
+    origin: "*", 
     methods: ["GET", "POST"]
   }
 });

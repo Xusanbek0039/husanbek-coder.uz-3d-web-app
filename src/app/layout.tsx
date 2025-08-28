@@ -59,6 +59,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+
   return (
     <html lang="uz" className={archivoBlack.className}>
       <head>
@@ -96,3 +98,7 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+
+
