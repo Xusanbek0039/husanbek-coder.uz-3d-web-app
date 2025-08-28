@@ -171,7 +171,7 @@ function App() {
 
         {/* Subtitle */}
         <p className="mt-6 text-gray-400 font-mono text-sm">
-          ERROR: The page you're looking for has been lost in the matrix...
+          ERROR: The page you&apos;re looking for has been lost in the matrix...
         </p>
       </div>
 
