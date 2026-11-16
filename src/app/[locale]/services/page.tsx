@@ -6,6 +6,7 @@ import { getServices, getProcess, getFaq, getBudgets } from "@/data/services";
 import projects from "@/data/projects";
 import { localizeProject } from "@/data/projects-i18n";
 import OrderForm from "@/components/OrderForm";
+import OrderServiceButton from "@/components/order-service-button";
 import { Link } from "@/i18n/navigation";
 import { alternatesFor } from "@/i18n/helpers";
 
@@ -88,13 +89,12 @@ async function Page({ params: { locale }, searchParams }: Props) {
               )}
               <div className="mt-auto pt-6 flex items-center justify-between gap-3">
                 <span className="text-sm text-zinc-400">{s.price}</span>
-                <Link
-                  href={{ pathname: "/services", query: { service: s.id }, hash: "buyurtma" }}
-                  scroll={false}
+                <OrderServiceButton
+                  serviceId={s.id}
                   className="inline-flex items-center gap-1 text-sm px-3 py-1.5 rounded-md border-[.5px] border-zinc-600 hover:border-zinc-400 transition-colors"
                 >
                   {t("orderBtn")} <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                </OrderServiceButton>
               </div>
             </Card>
           </li>

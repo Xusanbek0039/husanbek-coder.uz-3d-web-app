@@ -94,7 +94,17 @@
     "successDesc": "I'll get back to you as soon as possible.",
     "errorTitle": "Error",
     "errorDesc": "Something went wrong! Please check the fields.",
-    "rateLimited": "Too many requests. Please try again a bit later."
+    "rateLimited": "Too many requests. Please try again a bit later.",
+    "errors": {
+      "fullName": "Please enter your name (at least 2 letters).",
+      "email": "The email address is invalid.",
+      "message": "The message is too short — at least 10 characters.",
+      "contact": "Enter a phone, Telegram or email (at least 5 characters).",
+      "service": "Please choose a service.",
+      "budget": "Invalid budget.",
+      "network": "No internet connection. Please try again.",
+      "server": "Couldn't send the message. Please write to me on Telegram: @husanbek_coder"
+    }
   },
   "orderForm": {
     "name": "Your name",

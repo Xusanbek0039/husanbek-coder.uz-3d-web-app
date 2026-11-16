@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
 import { useTranslations } from "next-intl";
+import { sendForm } from "@/lib/send-form";
 
 const ContactForm = () => {
   const [fullName, setFullName] = React.useState("");
@@ -18,27 +19,17 @@ const ContactForm = () => {
 
   const { toast } = useToast();
   const t = useTranslations("contactForm");
+  const tErr = useTranslations("contactForm.errors");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("/api/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          type: "contact",
-          fullName,
-          email,
-          message,
-          website,
-        }),
-      });
-      if (res.status === 429) throw new Error(t("rateLimited"));
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || data.error) throw new Error(t("errorDesc"));
+      await sendForm(
+        { type: "contact", fullName, email, message, website },
+        (k) => tErr(k as never),
+        t("rateLimited")
+      );
       toast({
         title: t("successTitle"),
         description: t("successDesc"),
@@ -71,6 +62,8 @@ const ContactForm = () => {
             placeholder={t("namePh")}
             type="text"
             required
+            minLength={2}
+            maxLength={100}
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
           />
@@ -103,6 +96,8 @@ const ContactForm = () => {
           placeholder={t("messagePh")}
           id="content"
           required
+          minLength={10}
+          maxLength={4000}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />

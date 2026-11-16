@@ -94,7 +94,17 @@
     "successDesc": "Men siz bilan imkon qadar tezroq bog'lanaman.",
     "errorTitle": "Xatolik",
     "errorDesc": "Nimadir xato ketdi! Maydonlarni tekshiring iltimos.",
-    "rateLimited": "Juda ko'p so'rov. Birozdan keyin qayta urinib ko'ring."
+    "rateLimited": "Juda ko'p so'rov. Birozdan keyin qayta urinib ko'ring.",
+    "errors": {
+      "fullName": "Ismingizni kiriting (kamida 2 ta harf).",
+      "email": "Email manzil noto'g'ri.",
+      "message": "Xabar juda qisqa — kamida 10 ta belgi yozing.",
+      "contact": "Telefon, Telegram yoki email kiriting (kamida 5 ta belgi).",
+      "service": "Xizmat turini tanlang.",
+      "budget": "Byudjet noto'g'ri.",
+      "network": "Internet bilan bog'lanib bo'lmadi. Qayta urinib ko'ring.",
+      "server": "Xabarni yuborib bo'lmadi. Iltimos, Telegram orqali yozing: @husanbek_coder"
+    }
   },
   "orderForm": {
     "name": "Ismingiz",

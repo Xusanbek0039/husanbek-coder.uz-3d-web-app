@@ -8,6 +8,8 @@ import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+import { sendForm } from "@/lib/send-form";
+import { ORDER_SELECT_EVENT } from "./order-service-button";
 
 type Props = {
   services: { id: string; title: string }[];
@@ -36,11 +38,23 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
   const { toast } = useToast();
   const t = useTranslations("orderForm");
   const tc = useTranslations("contactForm");
+  const tErr = useTranslations("contactForm.errors");
 
   React.useEffect(() => {
     const title = services.find((s) => s.id === defaultService)?.title;
     if (title) setForm((f) => ({ ...f, service: title }));
   }, [defaultService, services]);
+
+  // Xizmat kartasidagi "Buyurtma berish" tugmasi bosilganda xizmatni tanlash
+  React.useEffect(() => {
+    const onSelect = (e: Event) => {
+      const id = (e as CustomEvent<string>).detail;
+      const title = services.find((s) => s.id === id)?.title;
+      if (title) setForm((f) => ({ ...f, service: title }));
+    };
+    window.addEventListener(ORDER_SELECT_EVENT, onSelect);
+    return () => window.removeEventListener(ORDER_SELECT_EVENT, onSelect);
+  }, [services]);
 
   const set =
     (key: keyof typeof form) =>
@@ -51,14 +65,7 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "order", ...form }),
-      });
-      if (res.status === 429) throw new Error(tc("rateLimited"));
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || data.error) throw new Error(tc("errorDesc"));
+      await sendForm({ type: "order", ...form }, (k) => tErr(k as never), tc("rateLimited"));
       toast({
         title: t("successTitle"),
         description: t("successDesc"),
@@ -85,6 +92,8 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
             id="order-name"
             placeholder={t("namePh")}
             required
+            minLength={2}
+            maxLength={100}
             value={form.fullName}
             onChange={set("fullName")}
           />
@@ -95,6 +104,8 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
             id="order-contact"
             placeholder={t("contactPh")}
             required
+            minLength={5}
+            maxLength={200}
             value={form.contact}
             onChange={set("contact")}
           />
@@ -147,6 +158,8 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
           id="order-message"
           placeholder={t("messagePh")}
           required
+          minLength={10}
+          maxLength={4000}
           rows={5}
           value={form.message}
           onChange={set("message")}

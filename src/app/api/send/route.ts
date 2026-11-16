@@ -122,7 +122,9 @@ export async function POST(req: Request) {
       body?.type === "order" ? OrderSchema.safeParse(body) : ContactSchema.safeParse(body);
     if (!parsed.success) {
       const issues = parsed.error.issues.map((issue) => issue.message);
-      return NextResponse.json({ error: issues }, { status: 400 });
+      // fields — klient xatoni foydalanuvchi tilida ko'rsatishi uchun (fullName, email, message, ...)
+      const fields = Array.from(new Set(parsed.error.issues.map((issue) => String(issue.path[0]))));
+      return NextResponse.json({ error: issues, fields }, { status: 400 });
     }
     const data = parsed.data;
 
