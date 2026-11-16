@@ -8,6 +8,9 @@ export const routing = defineRouting({
   defaultLocale: "uz",
   // o'zbekcha URL'lar o'zgarmaydi (/about), boshqalar prefiks bilan (/ru/about, /en/about)
   localePrefix: "as-needed",
+  // Til faqat URL bilan belgilanadi. Aks holda NEXT_LOCALE cookie yoki brauzer tili
+  // prefikssiz (o'zbekcha) sahifalarni /ru yoki /en ga qayta yo'naltirib yuboradi.
+  localeDetection: false,
 });
 
 export const localeNames: Record<Locale, string> = {

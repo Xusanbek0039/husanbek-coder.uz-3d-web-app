@@ -1,7 +1,8 @@
 "use client";
 import React, { useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Languages } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { LocaleFlag } from "./flags";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing, localeNames, type Locale } from "@/i18n/routing";
 import {
@@ -32,14 +33,15 @@ export default function LanguageSwitcher({ className }: { className?: string }) 
       <DropdownMenuTrigger
         aria-label={t("language")}
         className={cn(
-          "flex items-center gap-1.5 h-8 px-2 mr-4 rounded-md text-xs uppercase",
+          "flex items-center gap-1.5 h-8 px-2 mr-4 rounded-md",
           "hover:bg-accent focus:outline-none disabled:opacity-50",
           className
         )}
         disabled={isPending}
       >
-        <Languages className="w-4 h-4" />
-        {locale}
+        <LocaleFlag locale={locale} />
+        <span className="sr-only">{localeNames[locale]}</span>
+        <ChevronDown className="w-3 h-3 opacity-60" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="z-[99999]">
         {routing.locales.map((l) => (
@@ -48,7 +50,7 @@ export default function LanguageSwitcher({ className }: { className?: string }) 
             onSelect={() => change(l)}
             className={cn("cursor-pointer", l === locale && "font-bold")}
           >
-            <span className="w-7 uppercase text-muted-foreground">{l}</span>
+            <LocaleFlag locale={l} className="mr-2" />
             {localeNames[l]}
           </DropdownMenuItem>
         ))}
