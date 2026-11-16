@@ -144,7 +144,13 @@ export async function POST(req: Request) {
 
   // So'rov haqiqatan Telegram'dan kelganini tekshiramiz (setWebhook dagi secret_token).
   if (!token || !adminId || !secret) {
-    return NextResponse.json({ error: "Bot sozlanmagan" }, { status: 503 });
+    // Faqat yo'q o'zgaruvchilarning NOMLARI qaytariladi, qiymatlar hech qachon ko'rsatilmaydi.
+    const missing = [
+      !token && "TELEGRAM_BOT_TOKEN",
+      !adminId && "TELEGRAM_CHAT_ID",
+      !secret && "TELEGRAM_WEBHOOK_SECRET",
+    ].filter(Boolean);
+    return NextResponse.json({ error: "Bot sozlanmagan", missing }, { status: 503 });
   }
   if (req.headers.get("x-telegram-bot-api-secret-token") !== secret) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
