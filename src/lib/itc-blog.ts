@@ -1,4 +1,5 @@
 import "server-only";
+import sanitizeHtml from "sanitize-html";
 
 export type BlogPost = {
   id: string;
@@ -11,24 +12,43 @@ export type BlogPost = {
   author: string | null;
 };
 
-export type BlogResult = {
+export type BlogPostDetail = BlogPost & { html: string };
+
+export type BlogPage = {
   posts: BlogPost[];
-  source: "api" | "sitemap";
-  error?: string;
+  page: number;
+  totalPages: number;
+  total: number;
 };
 
 const SITE = "https://itc-academy.uz";
 const REVALIDATE_SECONDS = 1800;
-const MAX_POSTS = 24;
-const EXCERPT_FETCH_LIMIT = 12;
+const MAX_POSTS = 200;
+const SLUG_RE = /^[A-Za-z0-9_-]{1,64}$/;
+
+const cacheOpts = { next: { revalidate: REVALIDATE_SECONDS, tags: ["itc-blog"] } };
+
+const apiConfig = () => {
+  const url = process.env.ITC_ACADEMY_API_URL;
+  const key = process.env.ITC_ACADEMY_API_KEY;
+  return url && key ? { url: url.endsWith("/") ? url : `${url}/`, key } : null;
+};
+
+const apiHeaders = (key: string) => ({
+  Accept: "application/json",
+  "X-API-Key": key,
+  Authorization: `Api-Key ${key}`,
+});
 
 const decodeEntities = (s: string) =>
   s
-    .replace(/&amp;/g, "&")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
     .replace(/&quot;/g, '"')
-    .replace(/&#x27;|&#39;/g, "'")
     .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
+    .replace(/&gt;/g, ">")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&");
 
 const absolute = (u: string | null | undefined) => {
   if (!u) return null;
@@ -46,47 +66,86 @@ const pick = (obj: Record<string, any>, keys: string[]) => {
   return null;
 };
 
-// ---------- 1) Asosiy yo'l: itc-academy.uz API (API kalit bilan) ----------
-async function fetchFromApi(apiUrl: string, apiKey: string): Promise<BlogPost[]> {
-  const res = await fetch(apiUrl, {
-    headers: {
-      Accept: "application/json",
-      "X-API-Key": apiKey,
-      Authorization: `Api-Key ${apiKey}`,
+const stripSiteSuffix = (title: string) =>
+  title.replace(/\s+[—-]\s+IT Creative Academy\s*$/, "").trim();
+
+export const sanitizePostHtml = (html: string) =>
+  sanitizeHtml(html, {
+    allowedTags: [
+      "p", "br", "hr", "blockquote", "pre", "code", "span", "div",
+      "h2", "h3", "h4", "h5", "h6", "strong", "b", "em", "i", "u", "s", "mark", "sub", "sup",
+      "ul", "ol", "li", "a", "img", "figure", "figcaption",
+      "table", "thead", "tbody", "tr", "th", "td",
+    ],
+    allowedAttributes: {
+      a: ["href", "title"],
+      img: ["src", "alt", "title", "width", "height"],
+      td: ["colspan", "rowspan"],
+      th: ["colspan", "rowspan"],
     },
-    next: { revalidate: REVALIDATE_SECONDS, tags: ["itc-blog"] },
+    allowedSchemes: ["http", "https", "mailto", "tel"],
+    transformTags: {
+      h1: "h2",
+      a: (tagName, attribs) => {
+        const href = absolute(attribs.href) ?? "#";
+        return {
+          tagName,
+          attribs: { ...attribs, href, target: "_blank", rel: "noopener noreferrer nofollow" },
+        };
+      },
+      img: (tagName, attribs) => ({
+        tagName,
+        attribs: { ...attribs, src: absolute(attribs.src) ?? "", loading: "lazy" },
+      }),
+    },
+    allowedSchemesAppliedToAttributes: ["href", "src"],
+    exclusiveFilter: (frame) =>
+      (frame.tag === "img" && !frame.attribs.src) ||
+      (["p", "blockquote"].includes(frame.tag) && !frame.text.trim() && !frame.mediaChildren.length),
   });
+
+// sanitize-html "target"/"rel"/"loading" ni allowedAttributes'dan keyin ham saqlashi uchun
+const withLinkAttrs = (html: string) =>
+  sanitizeHtml(html, {
+    allowedTags: false,
+    allowedAttributes: false,
+  });
+
+// ================= Ro'yxat =================
+
+const fromApiItem = (p: Record<string, any>, i: number): BlogPost => {
+  const slug = pick(p, ["slug", "uid", "code", "id"]);
+  const category = pick(p, ["category", "category_name", "type"]);
+  const author = pick(p, ["author", "author_name"]);
+  return {
+    id: String(slug ?? i),
+    title: decodeEntities(String(pick(p, ["title", "name"]) ?? "")),
+    excerpt: decodeEntities(
+      String(pick(p, ["excerpt", "summary", "short_description", "description"]) ?? "")
+    ),
+    image: absolute(pick(p, ["image", "image_url", "cover", "thumbnail", "photo"])),
+    url: absolute(pick(p, ["url", "link", "absolute_url"])) ?? `${SITE}/blog/${slug ?? ""}/`,
+    publishedAt: pick(p, ["published_at", "created_at", "date", "created"]),
+    category: typeof category === "object" && category ? category.name ?? null : category,
+    author:
+      typeof author === "object" && author ? author.full_name ?? author.name ?? null : author,
+  };
+};
+
+async function indexFromApi(api: { url: string; key: string }): Promise<BlogPost[]> {
+  const res = await fetch(api.url, { headers: apiHeaders(api.key), ...cacheOpts });
   if (!res.ok) throw new Error(`API ${res.status}`);
   const data = await res.json();
   const list: any[] = Array.isArray(data) ? data : data.results ?? data.posts ?? data.data ?? [];
-
-  return list.slice(0, MAX_POSTS).map((p, i) => {
-    const slug = pick(p, ["slug", "uid", "code", "id"]);
-    const url = absolute(pick(p, ["url", "link", "absolute_url"])) ?? `${SITE}/blog/${slug ?? ""}/`;
-    const category = pick(p, ["category", "category_name", "type"]);
-    const author = pick(p, ["author", "author_name"]);
-    return {
-      id: String(slug ?? i),
-      title: decodeEntities(String(pick(p, ["title", "name"]) ?? "")),
-      excerpt: decodeEntities(String(pick(p, ["excerpt", "summary", "short_description", "description"]) ?? "")),
-      image: absolute(pick(p, ["image", "image_url", "cover", "thumbnail", "photo"])),
-      url,
-      publishedAt: pick(p, ["published_at", "created_at", "date", "created"]),
-      category: typeof category === "object" && category ? category.name ?? null : category,
-      author: typeof author === "object" && author ? author.full_name ?? author.name ?? null : author,
-    };
-  });
+  return list.slice(0, MAX_POSTS).map(fromApiItem);
 }
 
-// ---------- 2) Zaxira yo'l: ochiq sitemap.xml + post meta-teglari ----------
-async function fetchFromSitemap(): Promise<BlogPost[]> {
-  const res = await fetch(`${SITE}/sitemap.xml`, {
-    next: { revalidate: REVALIDATE_SECONDS, tags: ["itc-blog"] },
-  });
+async function indexFromSitemap(): Promise<BlogPost[]> {
+  const res = await fetch(`${SITE}/sitemap.xml`, cacheOpts);
   if (!res.ok) throw new Error(`sitemap ${res.status}`);
   const xml = await res.text();
 
-  const entries = Array.from(xml.matchAll(/<url>([\s\S]*?)<\/url>/g))
+  return Array.from(xml.matchAll(/<url>([\s\S]*?)<\/url>/g))
     .map((m) => m[1])
     .map((block) => {
       const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1] ?? "";
@@ -97,60 +156,128 @@ async function fetchFromSitemap(): Promise<BlogPost[]> {
         title: block.match(/<image:title>([\s\S]*?)<\/image:title>/)?.[1] ?? null,
       };
     })
-    .filter((e) => /\/blog\/[^/]+\/$/.test(e.loc))
+    .filter((e) => /\/blog\/[A-Za-z0-9_-]+\/$/.test(e.loc))
     .sort((a, b) => (b.lastmod ?? "").localeCompare(a.lastmod ?? ""))
-    .slice(0, MAX_POSTS);
-
-  const posts = entries.map<BlogPost>((e) => ({
-    id: e.loc.split("/").filter(Boolean).pop() ?? e.loc,
-    title: decodeEntities(e.title ?? ""),
-    excerpt: "",
-    image: e.image,
-    url: e.loc,
-    publishedAt: e.lastmod,
-    category: null,
-    author: null,
-  }));
-
-  // Eng so'nggi postlar uchun qisqa tavsif va aniq sanani meta-teglardan olamiz
-  await Promise.all(
-    posts.slice(0, EXCERPT_FETCH_LIMIT).map(async (post) => {
-      try {
-        const r = await fetch(post.url, {
-          next: { revalidate: REVALIDATE_SECONDS, tags: ["itc-blog"] },
-        });
-        if (!r.ok) return;
-        const html = await r.text();
-        const meta = (prop: string) =>
-          html.match(new RegExp(`<meta (?:property|name)="${prop}" content="([^"]*)"`))?.[1] ?? null;
-        const desc = meta("og:description") ?? meta("description");
-        if (desc) post.excerpt = decodeEntities(desc);
-        post.publishedAt = meta("article:published_time") ?? post.publishedAt;
-        post.author = meta("article:author");
-        post.image = meta("og:image") ?? post.image;
-      } catch {
-        /* tavsifsiz qoldiramiz */
-      }
-    })
-  );
-
-  return posts.filter((p) => p.title);
+    .slice(0, MAX_POSTS)
+    .map<BlogPost>((e) => ({
+      id: e.loc.split("/").filter(Boolean).pop() ?? e.loc,
+      title: decodeEntities(e.title ?? "").trim(),
+      excerpt: "",
+      image: e.image,
+      url: e.loc,
+      publishedAt: e.lastmod,
+      category: null,
+      author: null,
+    }))
+    .filter((p) => p.title);
 }
 
-export async function getItcPosts(): Promise<BlogResult> {
-  const apiUrl = process.env.ITC_ACADEMY_API_URL;
-  const apiKey = process.env.ITC_ACADEMY_API_KEY;
-
-  if (apiUrl && apiKey) {
+async function getIndex(): Promise<{ posts: BlogPost[]; source: "api" | "sitemap" }> {
+  const api = apiConfig();
+  if (api) {
     try {
-      return { posts: await fetchFromApi(apiUrl, apiKey), source: "api" };
+      return { posts: await indexFromApi(api), source: "api" };
     } catch (e) {
       console.error("[itc-blog] API xatosi, sitemap'ga o'tilmoqda:", e);
     }
   }
   try {
-    return { posts: await fetchFromSitemap(), source: "sitemap" };
+    return { posts: await indexFromSitemap(), source: "sitemap" };
   } catch (e) {
-    return { posts: [], source: "sitemap", error: String(e) };
+    console.error("[itc-blog] sitemap xatosi:", e);
+    return { posts: [], source: "sitemap" };
   }
+}
+
+export async function getPostsPage(page: number, perPage = 9): Promise<BlogPage> {
+  const { posts, source } = await getIndex();
+  const total = posts.length;
+  const totalPages = Math.max(1, Math.ceil(total / perPage));
+  const current = Math.min(Math.max(1, Math.floor(page) || 1), totalPages);
+  const slice = posts.slice((current - 1) * perPage, current * perPage).map((p) => ({ ...p }));
+
+  // Sitemap rejimida faqat joriy sahifadagi postlar uchun tavsif va muallifni olamiz
+  if (source === "sitemap") {
+    await Promise.all(
+      slice.map(async (post) => {
+        const meta = await fetchPostMeta(post.id).catch(() => null);
+        if (!meta) return;
+        post.excerpt = meta.excerpt || post.excerpt;
+        post.author = meta.author;
+        post.category = meta.category;
+        post.publishedAt = meta.publishedAt ?? post.publishedAt;
+        post.image = meta.image ?? post.image;
+      })
+    );
+  }
+
+  return { posts: slice, page: current, totalPages, total };
+}
+
+// ================= Bitta post =================
+
+const metaTag = (html: string, prop: string) => {
+  const v = html.match(new RegExp(`<meta (?:property|name)="${prop}" content="([^"]*)"`))?.[1];
+  return v ? decodeEntities(v) : null;
+};
+
+async function fetchPostHtml(slug: string) {
+  const res = await fetch(`${SITE}/blog/${slug}/`, cacheOpts);
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`post ${res.status}`);
+  return res.text();
+}
+
+async function fetchPostMeta(slug: string) {
+  if (!SLUG_RE.test(slug)) return null;
+  const html = await fetchPostHtml(slug);
+  if (!html) return null;
+  return parsePostMeta(slug, html);
+}
+
+function parsePostMeta(slug: string, html: string): BlogPost {
+  const badge = html.match(/<span class="pd-type-badge[^"]*">([\s\S]*?)<\/span>/)?.[1];
+  const category = badge ? decodeEntities(badge.replace(/<[^>]+>/g, "")).trim() || null : null;
+  return {
+    id: slug,
+    title: stripSiteSuffix(metaTag(html, "og:title") ?? ""),
+    excerpt: metaTag(html, "og:description") ?? metaTag(html, "description") ?? "",
+    image: absolute(metaTag(html, "og:image")),
+    url: `${SITE}/blog/${slug}/`,
+    publishedAt: metaTag(html, "article:published_time"),
+    category,
+    author: metaTag(html, "article:author"),
+  };
+}
+
+export async function getPost(slug: string): Promise<BlogPostDetail | null> {
+  if (!SLUG_RE.test(slug)) return null;
+
+  const api = apiConfig();
+  if (api) {
+    try {
+      const res = await fetch(`${api.url}${slug}/`, { headers: apiHeaders(api.key), ...cacheOpts });
+      if (res.ok) {
+        const data = await res.json();
+        const content = pick(data, ["content", "body", "html", "text"]);
+        if (content) {
+          return { ...fromApiItem(data, 0), id: slug, html: withLinkAttrs(sanitizePostHtml(String(content))) };
+        }
+      }
+    } catch (e) {
+      console.error("[itc-blog] API post xatosi, sahifadan olinmoqda:", e);
+    }
+  }
+
+  const html = await fetchPostHtml(slug);
+  if (!html) return null;
+  const meta = parsePostMeta(slug, html);
+  if (!meta.title) return null;
+
+  const body =
+    html.match(/<div class="pd-body"[^>]*>([\s\S]*?)<\/div>\s*<!--\s*Actions\s*-->/)?.[1] ??
+    html.match(/<div class="pd-body"[^>]*>([\s\S]*?)<\/div>/)?.[1] ??
+    "";
+
+  return { ...meta, html: withLinkAttrs(sanitizePostHtml(body)) };
 }
