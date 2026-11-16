@@ -14,9 +14,20 @@ import {
   ArrowUpRight,
   BriefcaseBusiness,
   FileText,
+  GitFork,
   GraduationCap,
+  Star,
 } from "lucide-react";
 import ToolsCarousel from "./tools-carousel";
+import {
+  GITHUB_USER,
+  getContributions,
+  getGithubProfile,
+  getGithubRepos,
+  languageShares,
+  type Contributions,
+} from "@/lib/github";
+import { formatDate } from "@/lib/utils";
 
 export const revalidate = 3600;
 
@@ -26,36 +37,9 @@ export const metadata: Metadata = {
     "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI, React, LMS/CRM tizimlari, AI va Telegram botlar.",
 };
 
-const GITHUB_USER = "Xusanbek0039";
 const FALLBACK_AVATAR = "https://avatars.githubusercontent.com/u/109731657?v=4";
 const CV_URL =
   "https://drive.google.com/file/d/1CeOgFcAtSVFQ-uLgslayaFbH1eCEwDEM/view?usp=sharing";
-
-type GithubProfile = {
-  avatar_url: string;
-  html_url: string;
-  public_repos: number;
-  followers: number;
-  bio: string | null;
-};
-
-async function getGithubProfile(): Promise<GithubProfile | null> {
-  try {
-    const res = await fetch(`https://api.github.com/users/${GITHUB_USER}`, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        ...(process.env.GITHUB_TOKEN
-          ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
-          : {}),
-      },
-      next: { revalidate: 3600 },
-    });
-    if (!res.ok) return null;
-    return (await res.json()) as GithubProfile;
-  } catch {
-    return null;
-  }
-}
 
 const CONTACT_LINKS = [
   {
@@ -185,8 +169,52 @@ const Timeline = ({
   </ol>
 );
 
+const LEVEL_CLASS = [
+  "bg-zinc-800",
+  "bg-emerald-900",
+  "bg-emerald-700",
+  "bg-emerald-500",
+  "bg-emerald-300",
+];
+
+const ContributionGraph = ({ data }: { data: Contributions }) => (
+  <div>
+    <div className="overflow-x-auto pb-2">
+      <div className="flex gap-[3px] w-max">
+        {data.weeks.map((week, wi) => (
+          <div key={wi} className="flex flex-col gap-[3px]">
+            {week.map((d) => (
+              <span
+                key={d.date}
+                title={`${formatDate(d.date)}: ${d.count} ta hissa`}
+                className={`block w-[10px] h-[10px] rounded-[2px] ${LEVEL_CLASS[d.level]}`}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+    <div className="mt-3 flex items-center justify-between text-xs text-zinc-500">
+      <span>So&apos;nggi bir yilda {data.total} ta hissa (contribution)</span>
+      <span className="flex items-center gap-1">
+        Kam
+        {LEVEL_CLASS.map((c) => (
+          <span key={c} className={`block w-[10px] h-[10px] rounded-[2px] ${c}`} />
+        ))}
+        Ko&apos;p
+      </span>
+    </div>
+  </div>
+);
+
 async function Page() {
-  const gh = await getGithubProfile();
+  const [gh, repos, contributions] = await Promise.all([
+    getGithubProfile(),
+    getGithubRepos(),
+    getContributions(),
+  ]);
+  const recentRepos = repos.slice(0, 6);
+  const languages = languageShares(repos);
   const avatar = gh?.avatar_url ?? FALLBACK_AVATAR;
 
   const stats = [
@@ -355,6 +383,105 @@ async function Page() {
               </div>
             </Card>
           </div>
+
+          {(recentRepos.length > 0 || languages.length > 0) && (
+            <Card>
+              <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+                <h2 className="text-2xl flex items-center gap-3">
+                  <FaGithub /> GitHub faolligi
+                </h2>
+                <a
+                  href={`https://github.com/${GITHUB_USER}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
+                >
+                  github.com/{GITHUB_USER}
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
+
+              {contributions && (
+                <div className="mb-8">
+                  <ContributionGraph data={contributions} />
+                </div>
+              )}
+
+              {languages.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="mb-3 text-sm text-zinc-400">
+                    Repozitoriylardagi asosiy tillar
+                  </h3>
+                  <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-zinc-800">
+                    {languages.map((l) => (
+                      <span
+                        key={l.name}
+                        title={`${l.name}: ${l.percent}%`}
+                        style={{ width: `${l.percent}%`, backgroundColor: l.color }}
+                      />
+                    ))}
+                  </div>
+                  <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs">
+                    {languages.map((l) => (
+                      <li key={l.name} className="flex items-center gap-1.5">
+                        <span
+                          className="w-2.5 h-2.5 rounded-full"
+                          style={{ backgroundColor: l.color }}
+                        />
+                        <span className="text-zinc-300">{l.name}</span>
+                        <span className="text-zinc-500">{l.percent}%</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {recentRepos.length > 0 && (
+                <>
+                  <h3 className="mb-3 text-sm text-zinc-400">So&apos;nggi yangilangan repolar</h3>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {recentRepos.map((r) => (
+                      <li key={r.name}>
+                        <a
+                          href={r.html_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-col h-full p-4 rounded-md border-[.5px] border-zinc-700 bg-zinc-800/40 hover:border-zinc-500 transition-colors"
+                        >
+                          <span className="text-zinc-100 truncate">{r.name}</span>
+                          <span className="mt-1 text-xs text-zinc-500 line-clamp-2 min-h-[2rem]">
+                            {r.description ?? "Tavsif yo'q"}
+                          </span>
+                          <span className="mt-3 flex items-center gap-4 text-xs text-zinc-500">
+                            {r.language && (
+                              <span className="flex items-center gap-1">
+                                <span
+                                  className="w-2 h-2 rounded-full"
+                                  style={{
+                                    backgroundColor:
+                                      languages.find((l) => l.name === r.language)?.color ??
+                                      "#71717a",
+                                  }}
+                                />
+                                {r.language}
+                              </span>
+                            )}
+                            <span className="flex items-center gap-1">
+                              <Star className="w-3 h-3" /> {r.stargazers_count}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <GitFork className="w-3 h-3" /> {r.forks_count}
+                            </span>
+                            <span className="ml-auto">{formatDate(r.pushed_at)}</span>
+                          </span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </Card>
+          )}
 
           <Card>
             <h2 className="text-2xl mb-6">Men foydalanadigan texnologiyalar</h2>

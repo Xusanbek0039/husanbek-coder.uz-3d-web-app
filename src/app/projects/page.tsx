@@ -20,7 +20,7 @@ function Page() {
         Har bir loyiha haqida batafsil: arxitektura, texnologiyalar va skrinshotlar.
       </p>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <li
             key={project.id}
             className="group border-[.5px] rounded-md border-zinc-600 overflow-hidden hover:border-zinc-400 transition-colors"
@@ -32,6 +32,7 @@ function Page() {
                   src={project.src}
                   alt={project.title}
                   fill
+                  priority={i < 3}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className="object-cover group-hover:scale-[1.05] transition-transform duration-500"
                 />

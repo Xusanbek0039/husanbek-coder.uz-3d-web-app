@@ -256,7 +256,8 @@ const PROJECT_SKILLS = {
     title: "OpenAI",
     bg: "black",
     fg: "white",
-    icon: <img src="assets/icons/openai-svgrepo-com_white.svg" alt="OpenAI"/>,
+    icon: // eslint-disable-next-line @next/next/no-img-element
+    <img src="/assets/icons/openai-svgrepo-com_white.svg" alt="OpenAI" width={24} height={24} />,
   },
   netlify: {
     title: "Netlify",
@@ -292,7 +293,8 @@ const PROJECT_SKILLS = {
     title: "Java",
     bg: "black",
     fg: "white",
-    icon: <img src="assets/icons/icons8-java.svg" alt="Java"/>,
+    icon: // eslint-disable-next-line @next/next/no-img-element
+    <img src="/assets/icons/icons8-java.svg" alt="Java" width={24} height={24} />,
   },
   cplusplus: {
     title: "C++",
@@ -373,7 +375,7 @@ const projects: Project[] = [
     description: "Oila, video studiya va to'yxonani bitta platformada bog'laydigan tizim: Django DRF API + 5 ta Next.js panel.",
     category: "Django DRF + Next.js, 5 ta panel",
     title: "MarosimGo — marosimlar uchun raqamli platforma",
-    src: "/assets/projects-screenshots/marosimgo/1.png",
+    src: "/assets/projects-screenshots/marosimgo/1.webp",
     screenshots: ["1.png", "2.png", "3.png", "4.png", "5.png"],
     live: "https://marosimgo.uz/",
     github: "https://github.com/Xusanbek0039/Marosim-Go",
@@ -407,7 +409,7 @@ const projects: Project[] = [
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/marosimgo/1.png`,
+              `${BASE_PATH}/marosimgo/1.webp`,
               `${BASE_PATH}/marosimgo/2.png`,
             ]}
           />
@@ -421,7 +423,7 @@ const projects: Project[] = [
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/marosimgo/3.png`,
+              `${BASE_PATH}/marosimgo/3.webp`,
               `${BASE_PATH}/marosimgo/4.png`,
             ]}
           />
@@ -469,7 +471,7 @@ SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/marosimgo/5.png`,
+              `${BASE_PATH}/marosimgo/5.webp`,
             ]}
           />
         </div>
@@ -481,7 +483,7 @@ SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
     description: "Video darslar, testlar, AI yordamchi, coin tizimi va onlayn to'lovlarga ega IT ta'lim platformasi (Django, PWA).",
     category: "Django LMS, PWA, To'lov tizimi",
     title: "ITC Academy — onlayn IT ta'lim platformasi",
-    src: "/assets/projects-screenshots/itc-academy/1.png",
+    src: "/assets/projects-screenshots/itc-academy/1.webp",
     screenshots: ["1.png", "2.png", "3.png", "4.png", "5.png"],
     live: "https://itc-academy.uz/",
     skills: {
@@ -511,8 +513,8 @@ SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
           <ProjectsLinks live={this.live} />
           <SlideShow
             images={[
-              `${BASE_PATH}/itc-academy/1.png`,
-              `${BASE_PATH}/itc-academy/2.png`,
+              `${BASE_PATH}/itc-academy/1.webp`,
+              `${BASE_PATH}/itc-academy/2.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">🔑 Asosiy imkoniyatlar</TypographyH3>
@@ -526,7 +528,7 @@ SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/itc-academy/4.png`,
+              `${BASE_PATH}/itc-academy/4.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">💳 Pullik kurslar va to‘lovlar</TypographyH3>
@@ -542,8 +544,8 @@ SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/itc-academy/3.png`,
-              `${BASE_PATH}/itc-academy/5.png`,
+              `${BASE_PATH}/itc-academy/3.webp`,
+              `${BASE_PATH}/itc-academy/5.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">🏗️ Arxitektura</TypographyH3>
@@ -585,7 +587,7 @@ Phusion Passenger ──► Django (monolit, MVT)
     description: "IT Park Zomin tuman filiali uchun sayt va o'quv boshqaruv tizimi: React + Vite frontend, Django REST API.",
     category: "React + Vite, Django DRF API",
     title: "IT Park Zomin tuman filiali LMS",
-    src: "/assets/projects-screenshots/itclms/landing.png",
+    src: "/assets/projects-screenshots/itclms/landing.webp",
     screenshots: ["landing.png", "1.png", "2.png", "3.png"],
     live: "https://www.itclms.uz/",
     github:"https://github.com/Xusanbek0039/ITC-LMS-API",
@@ -605,7 +607,7 @@ Phusion Passenger ──► Django (monolit, MVT)
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/itclms/landing.png`,
+              `${BASE_PATH}/itclms/landing.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">🔧 API imkoniyatlari</TypographyH3>
@@ -617,9 +619,9 @@ Phusion Passenger ──► Django (monolit, MVT)
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/itclms/1.png`,
+              `${BASE_PATH}/itclms/1.webp`,
               `${BASE_PATH}/itclms/2.png`,
-              `${BASE_PATH}/itclms/3.png`,
+              `${BASE_PATH}/itclms/3.webp`,
               `${BASE_PATH}/itclms/4.png`,
               `${BASE_PATH}/itclms/5.png`,
             ]}
@@ -771,7 +773,7 @@ Admin panel orqali tovarlar va buyurtmalarni boshqarish
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/goodever/3.png`,
+              `${BASE_PATH}/goodever/3.webp`,
               `${BASE_PATH}/goodever/4.png`,
             ]}
           />
@@ -784,8 +786,8 @@ Admin panel orqali tovarlar va buyurtmalarni boshqarish
           <SlideShow
             images={[
               `${BASE_PATH}/goodever/5.png`,
-              `${BASE_PATH}/goodever/6.png`,
-              `${BASE_PATH}/goodever/7.png`,
+              `${BASE_PATH}/goodever/6.webp`,
+              `${BASE_PATH}/goodever/7.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">Kuzatuv hamda statistika </TypographyH3>
@@ -793,7 +795,7 @@ Admin panel orqali tovarlar va buyurtmalarni boshqarish
 Mijoz Google Console Claud hizmat ko`rsatish markaziga ulangan shu panel orqali saytdagi nazoratni ko`rishlari mumkin!
           </p>
           <SlideShow images={[
-                `${BASE_PATH}/goodever/8.png`,
+                `${BASE_PATH}/goodever/8.webp`,
 
             ]} />
         </div>
@@ -805,8 +807,8 @@ Mijoz Google Console Claud hizmat ko`rsatish markaziga ulangan shu panel orqali 
     description: "Three.js/Spline 3D interfeysli, animatsiyalarga boy shaxsiy portfolio sayt (Next.js, TypeScript).",
     category: "Portfolio",
     title: "Mening portfolio saytim",
-    src: "/assets/projects-screenshots/portfolio/landing.png",
-    screenshots: ["assets/projects-screenshots/portfolio/landing.png"],
+    src: "/assets/projects-screenshots/portfolio/landing.webp",
+    screenshots: ["assets/projects-screenshots/portfolio/landing.webp"],
     live: "https://husanbek-coder.uz/",
     github:"https://github.com/Xusanbek0039/husanbek-coder.uz-3d-web-app",
     skills: {
@@ -838,8 +840,8 @@ Mening portfolio web saytimga xush kelibsiz
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/portfolio/landing.png`,
-              `${BASE_PATH}/portfolio/skills.png`,
+              `${BASE_PATH}/portfolio/landing.webp`,
+              `${BASE_PATH}/portfolio/skills.webp`,
             ]}
           />
           <TypographyH3 className="my-4 ">2- xil rejimda tuzilgan</TypographyH3>
@@ -848,8 +850,8 @@ Mening portfolio web saytimga xush kelibsiz
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/portfolio/about.png`,
-              `${BASE_PATH}/portfolio/contact.png`,
+              `${BASE_PATH}/portfolio/about.webp`,
+              `${BASE_PATH}/portfolio/contact.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">Loyihalarim</TypographyH3>
@@ -858,8 +860,8 @@ Mening portfolio web saytimga xush kelibsiz
 Saytda siz men haqimda barcha ma`lumotlarni olishingiz mumkin!          </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/portfolio/projects.png`,
-              `${BASE_PATH}/portfolio/blog.png`,
+              `${BASE_PATH}/portfolio/projects.webp`,
+              `${BASE_PATH}/portfolio/blog.webp`,
             ]}
           />
           <p className="font-mono mb-2 mt-8 text-center">
@@ -893,7 +895,7 @@ Barcha huquqlar himoyalangan!          </p>
           <SlideShow
             images={[
               `${BASE_PATH}/shoira/1.png`,
-              `${BASE_PATH}/shoira/3.png`,
+              `${BASE_PATH}/shoira/3.webp`,
               `${BASE_PATH}/shoira/4.png`,
             ]}
           />
@@ -926,10 +928,10 @@ Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda 
               `${BASE_PATH}/telegram-bot/01.png`,
               `${BASE_PATH}/telegram-bot/02.png`,
               `${BASE_PATH}/telegram-bot/03.png`,
-              `${BASE_PATH}/telegram-bot/04.png`,
+              `${BASE_PATH}/telegram-bot/04.webp`,
               `${BASE_PATH}/telegram-bot/05.png`,
               `${BASE_PATH}/telegram-bot/06.png`,
-              `${BASE_PATH}/telegram-bot/07.png`,
+              `${BASE_PATH}/telegram-bot/07.webp`,
             ]}
           />
         </div>
