@@ -41,6 +41,8 @@ import {
   SiNginx,
   SiVercel,
   SiPwa,
+  SiGoogledrive,
+  SiGithubactions,
 } from "react-icons/si";
 import { TbBrandFramerMotion } from "react-icons/tb";
 import css from "styled-jsx/css";
@@ -343,6 +345,18 @@ const PROJECT_SKILLS = {
     fg: "white",
     icon: <SiThreedotjs />,
   },
+  googleDrive: {
+    title: "Google Drive API",
+    bg: "black",
+    fg: "white",
+    icon: <SiGoogledrive />,
+  },
+  githubActions: {
+    title: "GitHub Actions",
+    bg: "black",
+    fg: "white",
+    icon: <SiGithubactions />,
+  },
 };
 export type Project = {
   id: string;
@@ -356,6 +370,113 @@ export type Project = {
   live: string;
 };
 const projects: Project[] = [
+  { // 00. MarosimGo — marosim xizmatlari platformasi
+    id: "marosimgo",
+    category: "Django DRF + Next.js, 5 ta panel",
+    title: "MarosimGo — marosimlar uchun raqamli platforma",
+    src: "/assets/projects-screenshots/marosimgo/1.png",
+    screenshots: ["1.png", "2.png", "3.png", "4.png", "5.png"],
+    live: "https://marosimgo.uz/",
+    github: "https://github.com/Xusanbek0039/Marosim-Go",
+    skills: {
+      frontend: [
+        PROJECT_SKILLS.next,
+        PROJECT_SKILLS.ts,
+        PROJECT_SKILLS.tailwind,
+        PROJECT_SKILLS.shadcn,
+        PROJECT_SKILLS.framerMotion,
+        PROJECT_SKILLS.reactQuery,
+        PROJECT_SKILLS.threejs,
+      ],
+      backend: [
+        PROJECT_SKILLS.python,
+        PROJECT_SKILLS.django,
+        PROJECT_SKILLS.postgres,
+        PROJECT_SKILLS.googleDrive,
+        PROJECT_SKILLS.githubActions,
+      ],
+    },
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono ">
+            MarosimGo — oila, video studiya va to‘yxonani bitta platformada
+            bog‘laydigan tizim: to‘yxonani tanlash va bron qilishdan tortib,
+            marosim videolarini xavfsiz saqlash va yaqinlar bilan ruxsat
+            asosida ulashishgacha.
+          </TypographyP>
+          <ProjectsLinks live={this.live} repo={this.github} />
+          <SlideShow
+            images={[
+              `${BASE_PATH}/marosimgo/1.png`,
+              `${BASE_PATH}/marosimgo/2.png`,
+            ]}
+          />
+          <TypographyH3 className="my-4 mt-8">👥 Uch tomon — bitta platforma</TypographyH3>
+          <p className="font-mono mb-2">
+            👰 Oilalar — marosim arxivi, galereya, mehmonlarni taklif qilish ·
+            🎬 Studiyalar — video va rasmlarni yuklash, portfolio, reels, chat ·
+            🏛️ To‘yxonalar — zallar, bo‘sh kunlar kalendari, bron so‘rovlari ·
+            🛡️ Super Admin va Admin paneli — granular ruxsatlar, monitoring,
+            audit va obunalar.
+          </p>
+          <SlideShow
+            images={[
+              `${BASE_PATH}/marosimgo/3.png`,
+              `${BASE_PATH}/marosimgo/4.png`,
+            ]}
+          />
+          <TypographyH3 className="my-4 mt-8">🏗️ Arxitektura</TypographyH3>
+          <p className="font-mono mb-2">
+            API-first arxitektura: barcha biznes logika va REST API faqat
+            Django’da (/api/v1/), Next.js ilovalari esa faqat interfeys.
+            Har bir rol uchun alohida Next.js panel statik build qilinib,
+            bitta Django (Passenger) ilovasi orqali 7 ta domenga xizmat
+            ko‘rsatadi — domen nomiga qarab kerakli panel ochiladi. Panellar
+            API’ni o‘z domenida chaqiradi, shuning uchun cookie’lar
+            first-party, CORS kerak emas. Kelajakdagi mobil ilovalar ham
+            xuddi shu API’dan Bearer token bilan foydalanadi.
+          </p>
+          <Architecture
+            diagram={`marosimgo.uz ............ Landing (HTML/CSS + Three.js)
+superadmin. / admin. .... Next.js 16 panel (Super Admin, Admin)
+studio. ................. Next.js panel (Studiya)
+userlogin. .............. Next.js panel (Oila, mehmonlar)
+toyxona. ................ Next.js panel (To‘yxona)
+api. .................... Mobil ilovalar uchun REST API
+        │  HTTPS, /api/v1/ (same-origin cookie yoki Bearer)
+        ▼
+Passenger ──► Django 5.2 + DRF (bitta ilova)
+               ├─ accounts      — JWT, rollar, RBAC, JSHSHIR shifrlash
+               ├─ ceremonies    — marosim arxivi, taklifnomalar
+               ├─ studios / venues — studiya va to‘yxonalar, bron
+               ├─ media         — yuklash, watermark, ko‘rish
+               ├─ subscriptions — obuna rejalari va limitlar
+               ├─ audit / monitoring — o‘zgarmas jurnal, API statistikasi
+               └─ storage       ──► Google Drive (OAuth 2.0)
+        │
+        ▼
+SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
+          />
+          <TypographyH3 className="my-4 mt-8">🔒 Xavfsizlik</TypographyH3>
+          <p className="font-mono mb-2">
+            JWT (access 10 daqiqa, refresh 7 kun, rotation + blacklist, qayta
+            ishlatilgan refresh’da barcha sessiyalar bekor qilinadi) · tokenlar
+            faqat HttpOnly cookie’da · CSRF tekshiruvi · brute-force himoyasi va
+            throttling · JSHSHIR Fernet bilan shifrlanadi, HMAC orqali qidiriladi ·
+            rasmlardan EXIF o‘chiriladi va WEBP’ga qayta kodlanadi · CSP va
+            xavfsizlik sarlavhalari · har bir amal audit jurnaliga yoziladi.
+            Backend pytest testlari va GitHub Actions CI bilan tekshiriladi.
+          </p>
+          <SlideShow
+            images={[
+              `${BASE_PATH}/marosimgo/5.png`,
+            ]}
+          />
+        </div>
+      );
+    },
+  },
   { // 01. ITC Academy — o'quv platformasi
     id: "itc-academy",
     category: "Django LMS, PWA, To'lov tizimi",

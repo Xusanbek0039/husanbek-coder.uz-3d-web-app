@@ -10,6 +10,19 @@ import "@splidejs/react-splide/css";
 
 const PROJECTS = [
   {
+    id: 7,
+    name: "MarosimGo",
+    description: `Oila, studiya va to'yxonani bog'lovchi platforma: Django DRF API + 5 ta Next.js panel.`,
+    link: "https://marosimgo.uz/",
+    images: [
+      "/assets/projects-screenshots/marosimgo/1.png",
+      "/assets/projects-screenshots/marosimgo/2.png",
+      "/assets/projects-screenshots/marosimgo/3.png",
+      "/assets/projects-screenshots/marosimgo/4.png",
+      "/assets/projects-screenshots/marosimgo/5.png",
+    ],
+  },
+  {
     id: 5,
     name: "ITC Academy platformasi",
     description: `Video darslar, testlar, AI yordamchi va coin tizimiga ega onlayn IT ta'lim platformasi (Django, PWA).`,

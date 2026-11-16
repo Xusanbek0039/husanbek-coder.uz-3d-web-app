@@ -407,7 +407,7 @@ const AnimatedBackground = () => {
     });
     gsap.timeline({
       scrollTrigger: {
-        trigger: "#projects",
+        trigger: "#skills-cv",
         start: "top 70%",
         end: "bottom bottom",
         scrub: true,
