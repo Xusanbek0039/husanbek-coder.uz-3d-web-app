@@ -53,9 +53,14 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
 
   // SETUP SOCKET.IO
   useEffect(() => {
+    // Realtime server (index.js) alohida deploy qilinmagan bo'lsa ulanmaymiz —
+    // aks holda brauzer saytning o'zidagi /socket.io ga cheksiz 404 so'rov yuboradi.
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL;
+    if (!wsUrl) return;
     const username =  localStorage.getItem("username") || generateRandomCursor().name
-    const socket = io(process.env.NEXT_PUBLIC_WS_URL!, {
+    const socket = io(wsUrl, {
       query: { username },
+      reconnectionAttempts: 5,
     });
     setSocket(socket);
     socket.on("connect", () => {});
