@@ -41,6 +41,12 @@ const ContactSection = () => {
                 {config.email.replace(/@/g, "(at)")}
               </a>{" "}
               yoki ma&#39;lumotingizni shu yerga qoldiring.
+              <Link
+                href="/services"
+                className="mt-3 block w-fit underline underline-offset-4 text-zinc-200 hover:text-white"
+              >
+                Loyiha buyurtma qilish → Xizmatlar
+              </Link>
             </CardDescription>
           </CardHeader>
           <CardContent>
