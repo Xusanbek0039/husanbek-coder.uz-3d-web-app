@@ -26,7 +26,9 @@
     margin-top: 80px;
 
     p {
-      font-size: 5vw;
+      // Faqat kenglikka bog'langan bo'lsa (5vw), uzun so'zlar (o'zbekcha) har biri alohida
+      // qatorga tushib, menyu ekran balandligidan oshib ketadi — oxirgi bandlar ko'rinmay qoladi.
+      font-size: min(5vw, 7vh);
       padding-right: 2vw;
     }
   }
