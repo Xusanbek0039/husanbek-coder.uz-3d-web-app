@@ -15,7 +15,30 @@ import { config } from "@/data/config";
 import SocketContextProvider from "@/contexts/socketio";
 import RemoteCursors from "@/components/realtime/remote-cursors";
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Husan Suyunov",
+  alternateName: ["Husanbek Suyunov", "Suyunov Husan Shavkat o'g'li"],
+  url: config.site,
+  image: "https://avatars.githubusercontent.com/u/109731657?v=4",
+  jobTitle: "Full-Stack Python Developer",
+  email: `mailto:${config.email}`,
+  worksFor: { "@type": "Organization", name: "IT Park Zomin tuman filiali", url: "https://www.itclms.uz/" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Kimyo International University in Tashkent" },
+  address: { "@type": "PostalAddress", addressRegion: "Jizzax", addressCountry: "UZ" },
+  knowsAbout: ["Python", "Django", "FastAPI", "React", "Next.js", "PostgreSQL", "Telegram bots", "Machine Learning"],
+  sameAs: [
+    config.social.github,
+    config.social.linkedin,
+    config.social.telegram,
+    config.social.youtube,
+    config.social.instagram,
+  ],
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(config.site),
   title: config.title,
   description: config.description.long,
   keywords: config.keywords,
@@ -73,6 +96,10 @@ export default function RootLayout({
         )}
       </head>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
