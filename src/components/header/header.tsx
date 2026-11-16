@@ -1,7 +1,9 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./language-switcher";
 import styles from "./style.module.scss";
 import { opacity, background } from "./anim";
 import Nav from "./nav";
@@ -17,6 +19,7 @@ interface HeaderProps {
 
 const Header = ({ loader }: HeaderProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const t = useTranslations("nav");
   return (
     <motion.header
       className={cn(
@@ -54,6 +57,7 @@ const Header = ({ loader }: HeaderProps) => {
         </Link>
 
         <OnlineUsers />
+        <LanguageSwitcher />
         <FunnyThemeToggle className="w-6 h-6 mr-4" />
         <Button
           variant={"ghost"}
@@ -68,10 +72,10 @@ const Header = ({ loader }: HeaderProps) => {
               variants={opacity}
               animate={!isActive ? "open" : "closed"}
             >
-              Menyu
+              {t("menu")}
             </motion.p>
             <motion.p variants={opacity} animate={isActive ? "open" : "closed"}>
-              Yopish
+              {t("close")}
             </motion.p>
           </div>
           <div

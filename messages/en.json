@@ -1,0 +1,242 @@
+{
+  "meta": {
+    "title": "Husan Suyunov",
+    "description": "Husan Suyunov — Full-Stack Python Developer. I build LMS and CRM systems, web applications, Telegram bots and AI projects with Django, FastAPI and React. Head of the IT Park Zaamin district branch.",
+    "short": "Full-Stack Python Developer: Django, FastAPI, React, LMS/CRM, Telegram bots and AI projects.",
+    "ogAlt": "Husan Suyunov's portfolio"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About me",
+    "skills": "Skills",
+    "projects": "Projects",
+    "services": "Services",
+    "blog": "Blog",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close",
+    "developer": "Developer:",
+    "typography": "Typography:",
+    "images": "Images:",
+    "language": "Language"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "telegramAccount": "Telegram account",
+    "telegramChannel": "Telegram channel"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light mode"
+  },
+  "hero": {
+    "greeting": "Hello there",
+    "role": "Full-Stack Python Developer",
+    "motto": "My motto: every step is the beginning of making a big dream come true. You are strong, nothing can stop you on your path, and you will surely achieve everything.",
+    "cv": "View resume",
+    "message": "Leave a message",
+    "messageTooltip": "Messages section"
+  },
+  "skills": {
+    "title": "My Tech Stack",
+    "hint": "(Click a technology on the keyboard. The full list is below, based on my resume!)"
+  },
+  "cvSkills": {
+    "title": "My Skills",
+    "subtitle": "I build LMS, CRM and AI projects in Python end-to-end — both backend and frontend — and develop Telegram bots.",
+    "groups": {
+      "languages": "Programming languages",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "databases": "Databases",
+      "ai": "Artificial intelligence",
+      "bots": "Telegram bots",
+      "vcs": "Version control",
+      "cloud": "Cloud services",
+      "devops": "DevOps & automation",
+      "testing": "Testing & quality",
+      "spoken": "Languages"
+    },
+    "langs": {
+      "uz": "Uzbek",
+      "ru": "Russian",
+      "en": "English",
+      "ko": "Korean",
+      "native": "native"
+    }
+  },
+  "projectsSection": {
+    "title": "My Projects",
+    "back": "Back",
+    "details": "Details",
+    "visit": "Visit site",
+    "frontend": "Frontend",
+    "backend": "Backend"
+  },
+  "contactSection": {
+    "title1": "GET IN",
+    "title2": "TOUCH",
+    "card": "Contact",
+    "desc1": "Please contact me directly by email",
+    "desc2": "or leave your message here.",
+    "order": "Order a project → Services"
+  },
+  "contactForm": {
+    "name": "Full name",
+    "namePh": "Your name",
+    "email": "Email",
+    "message": "Your message",
+    "messagePh": "Describe your idea in detail (at least 10 characters).",
+    "privacy": "Your message is strictly confidential and never shared with third parties.",
+    "send": "Send message",
+    "wait": "Please wait",
+    "successTitle": "Thank you!",
+    "successDesc": "I'll get back to you as soon as possible.",
+    "errorTitle": "Error",
+    "errorDesc": "Something went wrong! Please check the fields.",
+    "rateLimited": "Too many requests. Please try again a bit later."
+  },
+  "orderForm": {
+    "name": "Your name",
+    "namePh": "Full name",
+    "contact": "Phone, Telegram or email",
+    "contactPh": "+998 90 123 45 67 or @username",
+    "service": "Service",
+    "other": "Other",
+    "budget": "Estimated budget",
+    "message": "About the project",
+    "messagePh": "What do you want to build, which features you need, deadline...",
+    "send": "Send request",
+    "sending": "Sending...",
+    "successTitle": "Request received!",
+    "successDesc": "I'll contact you shortly."
+  },
+  "contactPage": {
+    "metaTitle": "Contact",
+    "metaDescription": "Contact Husan Suyunov about a website, LMS/CRM system, Telegram bot or AI project.",
+    "title": "Contact",
+    "intro": "Have a project idea, a partnership offer or a question? Leave a message — I usually reply within 24 hours.",
+    "phone": "Phone",
+    "toServices": "Want to order a project? See services",
+    "formTitle": "Send a message"
+  },
+  "projectsPage": {
+    "metaTitle": "Projects",
+    "metaDescription": "Projects by Husan Suyunov: MarosimGo, ITC Academy, IT Park Zaamin LMS, Telegram bots, an online store and more — with architecture and tech stack.",
+    "title": "Projects",
+    "subtitle": "Each project in detail: architecture, technologies and screenshots.",
+    "details": "Details",
+    "all": "All projects",
+    "visit": "Visit site",
+    "prev": "Previous project",
+    "next": "Next project",
+    "notFound": "Project not found",
+    "uzOnly": "The detailed project description is currently available in Uzbek only."
+  },
+  "services": {
+    "metaTitle": "Services",
+    "metaDescription": "Websites, LMS/CRM systems, Telegram bots, AI integration and mentoring — start your project with Husan Suyunov.",
+    "title": "Services",
+    "intro": "From idea to a working product: websites, education and business systems, Telegram bots and artificial intelligence — built with technologies proven in real projects.",
+    "cta": "Discuss your project",
+    "examples": "Examples:",
+    "orderBtn": "Order",
+    "process": "How I work",
+    "faq": "FAQ",
+    "orderTitle": "Request a project",
+    "orderNote": "Your request goes straight to my Telegram and email."
+  },
+  "blog": {
+    "metaTitle": "Blog",
+    "metaDescription": "IT news, tutorials, videos and Telegram channel posts — from the ITC Academy blog.",
+    "title": "Blog",
+    "intro": "IT news, tutorials and tips — from the ITC Academy blog, my YouTube and Telegram channel.",
+    "tabsLabel": "Blog sections",
+    "tabArticles": "Articles",
+    "tabVideos": "Videos",
+    "tabTelegram": "Telegram",
+    "total": "{count} posts from the ITC Academy blog",
+    "read": "Read",
+    "emptyArticles": "Couldn't load blog posts. Please try again later!",
+    "emptyVideos": "Couldn't load videos. Please try again later!",
+    "emptyTelegram": "Couldn't load Telegram posts. Please try again later!",
+    "subscribeYoutube": "Subscribe on YouTube",
+    "subscribeTelegram": "Join the channel",
+    "pages": "Pages",
+    "prevPage": "Previous page",
+    "nextPage": "Next page",
+    "allPosts": "All posts",
+    "commentsOn": "Comments & likes — on ITC Academy",
+    "postNotFound": "Post not found",
+    "uzOnly": "Posts are published in Uzbek."
+  },
+  "about": {
+    "metaTitle": "About me",
+    "metaDescription": "Husan Suyunov — Full-Stack Python Developer. Django, FastAPI, React, LMS/CRM systems, AI and Telegram bots.",
+    "role": "Full-Stack Python Developer",
+    "location": "Jizzakh, Sharof Rashidov district",
+    "cv": "View resume",
+    "phone": "Phone",
+    "title": "About me",
+    "p1": "Hi! I'm <b>Husan Suyunov</b>, a Full-Stack Python Developer. I build web applications, LMS and CRM systems end-to-end — backend and frontend — with Python, Django, FastAPI and React. AI projects (NLP, Machine Learning) and Telegram bots are also among my core areas.",
+    "p2": "As <b>head of the IT Park Zaamin district branch</b>, I work on digitalizing the learning process: itclms.uz, the ITC Academy platform and its Telegram bot are results of this work. I study Business Management in Networks at Kimyo International University in Tashkent, so I look at projects from both a technical and a business perspective.",
+    "p3": "Learning new technologies and finding innovative solutions to complex problems are my top priorities. The code of all my projects is open on GitHub.",
+    "stats": {
+      "experience": "years of experience",
+      "repos": "GitHub repositories",
+      "followers": "GitHub followers",
+      "projects": "real projects"
+    },
+    "experienceTitle": "Experience",
+    "educationTitle": "Education",
+    "experience": {
+      "e1": {
+        "period": "2023 — present",
+        "title": "Branch Manager",
+        "place": "IT Park, Zaamin district branch",
+        "text": "Managing the branch and digitalizing the learning process: building and maintaining the itclms.uz and ITC Academy platforms."
+      },
+      "e2": {
+        "period": "2022",
+        "title": "Instructor",
+        "place": "IT Creative — IT Creative Academy",
+        "text": "Classes on Python, web development and Telegram bots; hands-on projects for students."
+      },
+      "e3": {
+        "period": "2021 — 2022",
+        "title": "Accountant Assistant",
+        "place": "“Sharqona Garden Travel”, Tashkent region",
+        "text": "Working with financial documents — this is where my interest in automating business processes began."
+      }
+    },
+    "education": {
+      "d1": {
+        "period": "2022 — 2026",
+        "title": "Business Management in Networks",
+        "place": "Kimyo International University in Tashkent"
+      },
+      "d2": {
+        "period": "2021 — 2022",
+        "title": "HTML + CSS, JavaScript, TypeScript, React",
+        "place": "PDP Academy"
+      },
+      "d3": {
+        "period": "2019 — 2021",
+        "title": "Python algorithms, Telegram bots, web frameworks",
+        "place": "MohirDev platform"
+      }
+    },
+    "keyProjects": "Key projects",
+    "alsoProjects": "Also: KIUT LMS (an LMS for a university) and IT Creative AI.",
+    "languages": "Languages",
+    "github": "GitHub activity",
+    "githubLanguages": "Top languages across repositories",
+    "githubRecent": "Recently updated repositories",
+    "noDescription": "No description",
+    "contributions": "{count} contributions in the last year",
+    "contributionDay": "{date}: {count} contributions",
+    "less": "Less",
+    "more": "More",
+    "tools": "Technologies I use"
+  }
+}

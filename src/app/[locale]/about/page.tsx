@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   FaEnvelope,
   FaGithub,
@@ -10,14 +11,7 @@ import {
   FaTelegram,
   FaYoutube,
 } from "react-icons/fa6";
-import {
-  ArrowUpRight,
-  BriefcaseBusiness,
-  FileText,
-  GitFork,
-  GraduationCap,
-  Star,
-} from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, FileText, GitFork, GraduationCap, Star } from "lucide-react";
 import ToolsCarousel from "./tools-carousel";
 import {
   GITHUB_USER,
@@ -28,96 +22,24 @@ import {
   type Contributions,
 } from "@/lib/github";
 import { formatDate } from "@/lib/utils";
+import { alternatesFor } from "@/i18n/helpers";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
-  title: "Men haqimda | Husan Suyunov",
-  description:
-    "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI, React, LMS/CRM tizimlari, AI va Telegram botlar.",
-};
+type Props = { params: { locale: string } };
+
+export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "about" });
+  return {
+    title: `${t("metaTitle")} | Husan Suyunov`,
+    description: t("metaDescription"),
+    alternates: alternatesFor(locale, "/about"),
+  };
+}
 
 const FALLBACK_AVATAR = "https://avatars.githubusercontent.com/u/109731657?v=4";
 const CV_URL =
   "https://drive.google.com/file/d/1CeOgFcAtSVFQ-uLgslayaFbH1eCEwDEM/view?usp=sharing";
-
-const CONTACT_LINKS = [
-  {
-    name: "Email",
-    content: "itpark0071@gmail.com",
-    href: "mailto:itpark0071@gmail.com",
-    icon: <FaEnvelope />,
-  },
-  {
-    name: "Telefon",
-    content: "+998 97 521 66 86",
-    href: "tel:+998975216686",
-    icon: <FaPhone />,
-  },
-  {
-    name: "Telegram",
-    content: "@husanbek_coder",
-    href: "https://t.me/husanbek_coder",
-    icon: <FaTelegram />,
-  },
-  {
-    name: "GitHub",
-    content: GITHUB_USER,
-    href: `https://github.com/${GITHUB_USER}`,
-    icon: <FaGithub />,
-  },
-  {
-    name: "LinkedIn",
-    content: "xusanbek0039",
-    href: "https://www.linkedin.com/in/xusanbek0039/",
-    icon: <FaLinkedin />,
-  },
-  {
-    name: "YouTube",
-    content: "IT Creative",
-    href: "https://www.youtube.com/@IT_Creative/",
-    icon: <FaYoutube />,
-  },
-];
-
-const EXPERIENCE = [
-  {
-    period: "2023 — hozir",
-    title: "Filial rahbari",
-    place: "IT Park Zomin tuman filiali",
-    text: "Filial faoliyatini boshqarish, o‘quv jarayonini raqamlashtirish: itclms.uz va ITC Academy platformalarini ishlab chiqish va yuritish.",
-  },
-  {
-    period: "2022",
-    title: "O‘qituvchi",
-    place: "IT Creative — IT Creative Academy",
-    text: "Python, web dasturlash va Telegram botlar bo‘yicha darslar; o‘quvchilar uchun amaliy loyihalar.",
-  },
-  {
-    period: "2021 — 2022",
-    title: "Buxgalter yordamchisi",
-    place: "“Sharqona Garden Travel” Toshkent viloyati",
-    text: "Moliyaviy hujjatlar bilan ishlash — biznes jarayonlarini avtomatlashtirishga qiziqishim shu yerdan boshlangan.",
-  },
-];
-
-const EDUCATION = [
-  {
-    period: "2022 — 2026",
-    title: "Tarmoqlarda biznesni boshqarish",
-    place: "Toshkent Xalqaro Kimyo Universiteti",
-  },
-  {
-    period: "2021 — 2022",
-    title: "HTML + CSS, JavaScript, TypeScript, React",
-    place: "PDP Academy",
-  },
-  {
-    period: "2019 — 2021",
-    title: "Python algoritmlar, Telegram botlar, web freymvorklar",
-    place: "MohirDev platformasi",
-  },
-];
 
 const KEY_PROJECTS = [
   { name: "MarosimGo", href: "https://github.com/Xusanbek0039/Marosim-Go" },
@@ -128,19 +50,23 @@ const KEY_PROJECTS = [
 ];
 
 const LANGUAGES = [
-  { name: "O‘zbek tili", level: 100, note: "ona tili" },
-  { name: "Rus tili", level: 50 },
-  { name: "Ingliz tili", level: 45 },
-  { name: "Koreys tili", level: 30 },
+  { key: "uz", level: 100, native: true },
+  { key: "ru", level: 50 },
+  { key: "en", level: 45 },
+  { key: "ko", level: 30 },
 ];
 
-const Card = ({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
+const OTHER: Record<string, string> = { uz: "Boshqa", ru: "Другие", en: "Other" };
+
+const LEVEL_CLASS = [
+  "bg-zinc-800",
+  "bg-emerald-900",
+  "bg-emerald-700",
+  "bg-emerald-500",
+  "bg-emerald-300",
+];
+
+const Card = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <div
     className={`p-6 md:p-10 border-[.5px] rounded-md border-zinc-600 ${className}`}
     style={{ backdropFilter: "blur(2px)" }}
@@ -161,23 +87,25 @@ const Timeline = ({
         <p className="text-xs font-mono text-zinc-500">{item.period}</p>
         <h3 className="text-lg text-zinc-200">{item.title}</h3>
         <p className="text-sm text-zinc-400">{item.place}</p>
-        {item.text && (
-          <p className="mt-2 text-sm text-zinc-500">{item.text}</p>
-        )}
+        {item.text && <p className="mt-2 text-sm text-zinc-500">{item.text}</p>}
       </li>
     ))}
   </ol>
 );
 
-const LEVEL_CLASS = [
-  "bg-zinc-800",
-  "bg-emerald-900",
-  "bg-emerald-700",
-  "bg-emerald-500",
-  "bg-emerald-300",
-];
-
-const ContributionGraph = ({ data }: { data: Contributions }) => (
+const ContributionGraph = ({
+  data,
+  dayLabel,
+  totalLabel,
+  less,
+  more,
+}: {
+  data: Contributions;
+  dayLabel: (date: string, count: number) => string;
+  totalLabel: string;
+  less: string;
+  more: string;
+}) => (
   <div>
     <div className="overflow-x-auto pb-2">
       <div className="flex gap-[3px] w-max">
@@ -186,7 +114,7 @@ const ContributionGraph = ({ data }: { data: Contributions }) => (
             {week.map((d) => (
               <span
                 key={d.date}
-                title={`${formatDate(d.date)}: ${d.count} ta hissa`}
+                title={dayLabel(d.date, d.count)}
                 className={`block w-[10px] h-[10px] rounded-[2px] ${LEVEL_CLASS[d.level]}`}
               />
             ))}
@@ -194,20 +122,24 @@ const ContributionGraph = ({ data }: { data: Contributions }) => (
         ))}
       </div>
     </div>
-    <div className="mt-3 flex items-center justify-between text-xs text-zinc-500">
-      <span>So&apos;nggi bir yilda {data.total} ta hissa (contribution)</span>
+    <div className="mt-3 flex flex-wrap gap-2 items-center justify-between text-xs text-zinc-500">
+      <span>{totalLabel}</span>
       <span className="flex items-center gap-1">
-        Kam
+        {less}
         {LEVEL_CLASS.map((c) => (
           <span key={c} className={`block w-[10px] h-[10px] rounded-[2px] ${c}`} />
         ))}
-        Ko&apos;p
+        {more}
       </span>
     </div>
   </div>
 );
 
-async function Page() {
+async function Page({ params: { locale } }: Props) {
+  setRequestLocale(locale);
+  const t = await getTranslations("about");
+  const tl = await getTranslations("cvSkills.langs");
+
   const [gh, repos, contributions] = await Promise.all([
     getGithubProfile(),
     getGithubRepos(),
@@ -217,12 +149,34 @@ async function Page() {
   const languages = languageShares(repos);
   const avatar = gh?.avatar_url ?? FALLBACK_AVATAR;
 
-  const stats = [
-    { value: "7+", label: "yillik tajriba" },
-    { value: gh ? String(gh.public_repos) : "130+", label: "GitHub repozitoriy" },
-    { value: gh ? String(gh.followers) : "30+", label: "GitHub kuzatuvchi" },
-    { value: "10+", label: "real loyiha" },
+  const contacts = [
+    { name: "Email", content: "itpark0071@gmail.com", href: "mailto:itpark0071@gmail.com", icon: <FaEnvelope /> },
+    { name: t("phone"), content: "+998 97 521 66 86", href: "tel:+998975216686", icon: <FaPhone /> },
+    { name: "Telegram", content: "@husanbek_coder", href: "https://t.me/husanbek_coder", icon: <FaTelegram /> },
+    { name: "GitHub", content: GITHUB_USER, href: `https://github.com/${GITHUB_USER}`, icon: <FaGithub /> },
+    { name: "LinkedIn", content: "xusanbek0039", href: "https://www.linkedin.com/in/xusanbek0039/", icon: <FaLinkedin /> },
+    { name: "YouTube", content: "IT Creative", href: "https://www.youtube.com/@IT_Creative/", icon: <FaYoutube /> },
   ];
+
+  const stats = [
+    { value: "7+", label: t("stats.experience") },
+    { value: gh ? String(gh.public_repos) : "130+", label: t("stats.repos") },
+    { value: gh ? String(gh.followers) : "30+", label: t("stats.followers") },
+    { value: "10+", label: t("stats.projects") },
+  ];
+
+  const experience = (["e1", "e2", "e3"] as const).map((k) => ({
+    period: t(`experience.${k}.period`),
+    title: t(`experience.${k}.title`),
+    place: t(`experience.${k}.place`),
+    text: t(`experience.${k}.text`),
+  }));
+  const education = (["d1", "d2", "d3"] as const).map((k) => ({
+    period: t(`education.${k}.period`),
+    title: t(`education.${k}.title`),
+    place: t(`education.${k}.place`),
+  }));
+  const bold = (chunks: React.ReactNode) => <b>{chunks}</b>;
 
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[200px] text-zinc-300 pt-20 pb-20">
@@ -245,11 +199,9 @@ async function Page() {
               </div>
               <div className="flex flex-col gap-2 lg:items-center ml-6 md:ml-12 lg:ml-0">
                 <p className="text-xl lg:text-center">Husan Suyunov</p>
-                <div className="text-xs bg-zinc-700 w-fit px-3 py-1 rounded-full">
-                  Full-Stack Python Developer
-                </div>
+                <div className="text-xs bg-zinc-700 w-fit px-3 py-1 rounded-full">{t("role")}</div>
                 <p className="flex items-center gap-2 text-xs text-zinc-500">
-                  <FaLocationDot /> Jizzax, Sh. Rashidov tumani
+                  <FaLocationDot /> {t("location")}
                 </p>
               </div>
             </div>
@@ -260,12 +212,12 @@ async function Page() {
               className="mt-6 flex items-center justify-center gap-2 h-11 rounded-md bg-zinc-200 text-black text-sm hover:bg-white transition-colors"
             >
               <FileText className="w-4 h-4" />
-              Resume CV ko&apos;rish
+              {t("cv")}
             </a>
             <hr className="my-6 border-zinc-600" />
             <ul className="grid grid-cols-2 lg:grid-cols-1 gap-3">
-              {CONTACT_LINKS.map((link) => (
-                <li key={link.name}>
+              {contacts.map((link) => (
+                <li key={link.href}>
                   <a
                     className="flex items-center px-3 gap-3 w-full h-12 border-zinc-700 bg-zinc-800 hover:border-zinc-500 border-[.5px] rounded-md transition-colors"
                     href={link.href}
@@ -275,9 +227,7 @@ async function Page() {
                     <div className="w-6 text-lg">{link.icon}</div>
                     <div className="flex flex-col min-w-0">
                       <div className="text-sm">{link.name}</div>
-                      <div className="text-xs text-zinc-500 truncate">
-                        {link.content}
-                      </div>
+                      <div className="text-xs text-zinc-500 truncate">{link.content}</div>
                     </div>
                   </a>
                 </li>
@@ -288,29 +238,10 @@ async function Page() {
 
         <main className="lg:basis-3/4 min-w-0 flex flex-col gap-5">
           <Card>
-            <h1 className="text-3xl mb-6">Men haqimda</h1>
-            <p className="mb-5 leading-relaxed">
-              Assalomu alaykum! Men <b>Suyunov Husan</b> — Full-Stack Python
-              dasturchiman. Python, Django, FastAPI va React yordamida web
-              ilovalar, LMS va CRM tizimlarini backend va frontend qismlari bilan
-              to&apos;liq ishlab chiqaman. Sun&apos;iy intellekt (NLP, Machine
-              Learning) loyihalari va Telegram botlar yaratish ham asosiy
-              yo&apos;nalishlarimdan.
-            </p>
-            <p className="mb-5 leading-relaxed">
-              Hozirda <b>IT Park Zomin tuman filiali rahbari</b> sifatida ta&apos;lim
-              jarayonini raqamlashtirish ustida ishlayman: itclms.uz, ITC
-              Academy platformasi va uning Telegram boti — shu ishning
-              natijalari. Toshkent Xalqaro Kimyo Universitetida &laquo;Tarmoqlarda
-              biznesni boshqarish&raquo; yo&apos;nalishida tahsil olaman, shuning
-              uchun loyihalarga texnik va biznes nuqtai nazaridan birdek
-              qarayman.
-            </p>
-            <p className="leading-relaxed text-zinc-400">
-              Yangi texnologiyalarni o&apos;rganish va murakkab muammolarga
-              innovatsion yechim topish — mening ustuvor vazifalarim. Barcha
-              loyiha kodlarim GitHub&apos;da ochiq.
-            </p>
+            <h1 className="text-3xl mb-6">{t("title")}</h1>
+            <p className="mb-5 leading-relaxed">{t.rich("p1", { b: bold })}</p>
+            <p className="mb-5 leading-relaxed">{t.rich("p2", { b: bold })}</p>
+            <p className="leading-relaxed text-zinc-400">{t("p3")}</p>
             <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
               {stats.map((s) => (
                 <div
@@ -327,21 +258,21 @@ async function Page() {
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
             <Card>
               <h2 className="text-2xl mb-6 flex items-center gap-3">
-                <BriefcaseBusiness className="w-6 h-6" /> Ish tajribasi
+                <BriefcaseBusiness className="w-6 h-6" /> {t("experienceTitle")}
               </h2>
-              <Timeline items={EXPERIENCE} />
+              <Timeline items={experience} />
             </Card>
             <Card>
               <h2 className="text-2xl mb-6 flex items-center gap-3">
-                <GraduationCap className="w-6 h-6" /> Ta&apos;lim
+                <GraduationCap className="w-6 h-6" /> {t("educationTitle")}
               </h2>
-              <Timeline items={EDUCATION} />
+              <Timeline items={education} />
             </Card>
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
             <Card>
-              <h2 className="text-2xl mb-6">Asosiy loyihalar</h2>
+              <h2 className="text-2xl mb-6">{t("keyProjects")}</h2>
               <ul className="flex flex-wrap gap-2">
                 {KEY_PROJECTS.map((p) => (
                   <li key={p.name}>
@@ -357,26 +288,21 @@ async function Page() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-sm text-zinc-500">
-                Shuningdek: KIUT LMS (universitet uchun LMS) va IT Creative AI.
-              </p>
+              <p className="mt-4 text-sm text-zinc-500">{t("alsoProjects")}</p>
             </Card>
             <Card>
-              <h2 className="text-2xl mb-6">Tillar</h2>
+              <h2 className="text-2xl mb-6">{t("languages")}</h2>
               <div className="flex flex-col gap-4">
                 {LANGUAGES.map((lang) => (
-                  <div key={lang.name}>
+                  <div key={lang.key}>
                     <div className="mb-1 flex justify-between text-sm">
-                      <span>{lang.name}</span>
+                      <span>{tl(lang.key)}</span>
                       <span className="font-mono text-zinc-500">
-                        {lang.note ?? `${lang.level}%`}
+                        {lang.native ? tl("native") : `${lang.level}%`}
                       </span>
                     </div>
                     <div className="h-1.5 w-full rounded-full bg-zinc-800 overflow-hidden">
-                      <div
-                        className="h-full rounded-full bg-zinc-300"
-                        style={{ width: `${lang.level}%` }}
-                      />
+                      <div className="h-full rounded-full bg-zinc-300" style={{ width: `${lang.level}%` }} />
                     </div>
                   </div>
                 ))}
@@ -388,7 +314,7 @@ async function Page() {
             <Card>
               <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
                 <h2 className="text-2xl flex items-center gap-3">
-                  <FaGithub /> GitHub faolligi
+                  <FaGithub /> {t("github")}
                 </h2>
                 <a
                   href={`https://github.com/${GITHUB_USER}`}
@@ -403,15 +329,21 @@ async function Page() {
 
               {contributions && (
                 <div className="mb-8">
-                  <ContributionGraph data={contributions} />
+                  <ContributionGraph
+                    data={contributions}
+                    totalLabel={t("contributions", { count: contributions.total })}
+                    dayLabel={(date, count) =>
+                      t("contributionDay", { date: formatDate(date) ?? date, count })
+                    }
+                    less={t("less")}
+                    more={t("more")}
+                  />
                 </div>
               )}
 
               {languages.length > 0 && (
                 <div className="mb-8">
-                  <h3 className="mb-3 text-sm text-zinc-400">
-                    Repozitoriylardagi asosiy tillar
-                  </h3>
+                  <h3 className="mb-3 text-sm text-zinc-400">{t("githubLanguages")}</h3>
                   <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-zinc-800">
                     {languages.map((l) => (
                       <span
@@ -424,11 +356,8 @@ async function Page() {
                   <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs">
                     {languages.map((l) => (
                       <li key={l.name} className="flex items-center gap-1.5">
-                        <span
-                          className="w-2.5 h-2.5 rounded-full"
-                          style={{ backgroundColor: l.color }}
-                        />
-                        <span className="text-zinc-300">{l.name}</span>
+                        <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: l.color }} />
+                        <span className="text-zinc-300">{l.name === "Boshqa" ? OTHER[locale] ?? l.name : l.name}</span>
                         <span className="text-zinc-500">{l.percent}%</span>
                       </li>
                     ))}
@@ -438,7 +367,7 @@ async function Page() {
 
               {recentRepos.length > 0 && (
                 <>
-                  <h3 className="mb-3 text-sm text-zinc-400">So&apos;nggi yangilangan repolar</h3>
+                  <h3 className="mb-3 text-sm text-zinc-400">{t("githubRecent")}</h3>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {recentRepos.map((r) => (
                       <li key={r.name}>
@@ -450,7 +379,7 @@ async function Page() {
                         >
                           <span className="text-zinc-100 truncate">{r.name}</span>
                           <span className="mt-1 text-xs text-zinc-500 line-clamp-2 min-h-[2rem]">
-                            {r.description ?? "Tavsif yo'q"}
+                            {r.description ?? t("noDescription")}
                           </span>
                           <span className="mt-3 flex items-center gap-4 text-xs text-zinc-500">
                             {r.language && (
@@ -459,8 +388,7 @@ async function Page() {
                                   className="w-2 h-2 rounded-full"
                                   style={{
                                     backgroundColor:
-                                      languages.find((l) => l.name === r.language)?.color ??
-                                      "#71717a",
+                                      languages.find((l) => l.name === r.language)?.color ?? "#71717a",
                                   }}
                                 />
                                 {r.language}
@@ -484,7 +412,7 @@ async function Page() {
           )}
 
           <Card>
-            <h2 className="text-2xl mb-6">Men foydalanadigan texnologiyalar</h2>
+            <h2 className="text-2xl mb-6">{t("tools")}</h2>
             <ToolsCarousel />
           </Card>
         </main>

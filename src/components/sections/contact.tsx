@@ -12,7 +12,10 @@ import ContactForm from "../ContactForm";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { config } from "@/data/config";
+import { Link as LocaleLink } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 const ContactSection = () => {
+  const t = useTranslations("contactSection");
   return (
     <section id="contact" className="min-h-screen max-w-7xl mx-auto ">
       <Link href={"#contact"}>
@@ -23,16 +26,16 @@ const ContactSection = () => {
             "dark:bg-gradient-to-b dark:from-white/80 dark:to-white/20 dark:bg-opacity-50"
           )}
         >
-          MEN BILAN <br />
-          BOG&#39;LANISH
+          {t("title1")} <br />
+          {t("title2")}
         </h2>
       </Link>
       <div className="grid grid-cols-1 md:grid-cols-2 z-[9999]">
         <Card className="min-w-7xl bg-white/70 dark:bg-black/70 backdrop-blur-sm rounded-xl mt-10 md:mt-20">
           <CardHeader>
-            <CardTitle className="text-4xl">Bog&#39;lanish</CardTitle>
+            <CardTitle className="text-4xl">{t("card")}</CardTitle>
             <CardDescription>
-            Iltimos, men bilan bevosita elektron pochta orqali bog&#39;laning {" "}
+            {t("desc1")}{" "}
               <a
                 target="_blank"
                 href={`mailto:${config.email}`}
@@ -40,13 +43,13 @@ const ContactSection = () => {
               >
                 {config.email.replace(/@/g, "(at)")}
               </a>{" "}
-              yoki ma&#39;lumotingizni shu yerga qoldiring.
-              <Link
+              {t("desc2")}
+              <LocaleLink
                 href="/services"
                 className="mt-3 block w-fit underline underline-offset-4 text-zinc-200 hover:text-white"
               >
-                Loyiha buyurtma qilish → Xizmatlar
-              </Link>
+                {t("order")}
+              </LocaleLink>
             </CardDescription>
           </CardHeader>
           <CardContent>

@@ -1,29 +1,35 @@
 import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Info } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import projects from "@/data/projects";
+import { localizeProject } from "@/data/projects-i18n";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import { config } from "@/data/config";
+import { Link } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
+import { alternatesFor } from "@/i18n/helpers";
 
-type Props = { params: { id: string } };
+type Props = { params: { locale: string; id: string } };
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ id: p.id }));
+  return routing.locales.flatMap((locale) => projects.map((p) => ({ locale, id: p.id })));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const project = projects.find((p) => p.id === params.id);
-  if (!project) return { title: "Loyiha topilmadi | Husan Suyunov" };
+export async function generateMetadata({ params: { locale, id } }: Props): Promise<Metadata> {
+  const base = projects.find((p) => p.id === id);
+  const t = await getTranslations({ locale, namespace: "projectsPage" });
+  if (!base) return { title: `${t("notFound")} | Husan Suyunov` };
+  const project = localizeProject(base, locale);
   return {
     title: `${project.title} | Husan Suyunov`,
     description: project.description,
-    alternates: { canonical: `/projects/${project.id}` },
+    alternates: alternatesFor(locale, `/projects/${project.id}`),
     openGraph: {
       title: project.title,
       description: project.description,
@@ -33,12 +39,15 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-function Page({ params }: Props) {
-  const index = projects.findIndex((p) => p.id === params.id);
+async function Page({ params: { locale, id } }: Props) {
+  setRequestLocale(locale);
+  const t = await getTranslations("projectsPage");
+  const index = projects.findIndex((p) => p.id === id);
   if (index === -1) notFound();
-  const project = projects[index];
-  const prev = projects[(index - 1 + projects.length) % projects.length];
-  const next = projects[(index + 1) % projects.length];
+  const project = localizeProject(projects[index], locale);
+  const prev = localizeProject(projects[(index - 1 + projects.length) % projects.length], locale);
+  const next = localizeProject(projects[(index + 1) % projects.length], locale);
+  const uzOnly = t("uzOnly");
 
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[150px] text-zinc-300 pt-[100px] pb-20">
@@ -47,17 +56,13 @@ function Page({ params }: Props) {
         className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
-        Barcha loyihalar
+        {t("all")}
       </Link>
 
       <header className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div>
-          <span className="text-xs bg-white text-black rounded-lg px-2 py-0.5">
-            {project.category}
-          </span>
-          <h1 className="mt-4 text-3xl md:text-5xl leading-tight text-zinc-100">
-            {project.title}
-          </h1>
+          <span className="text-xs bg-white text-black rounded-lg px-2 py-0.5">{project.category}</span>
+          <h1 className="mt-4 text-3xl md:text-5xl leading-tight text-zinc-100">{project.title}</h1>
           <p className="mt-4 text-zinc-400 leading-relaxed">{project.description}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a
@@ -66,7 +71,7 @@ function Page({ params }: Props) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 h-10 px-4 rounded-md bg-zinc-200 text-black text-sm hover:bg-white transition-colors"
             >
-              Tashrif buyurish
+              {t("visit")}
               <ArrowUpRight className="w-4 h-4" />
             </a>
             {project.github && (
@@ -112,7 +117,15 @@ function Page({ params }: Props) {
         )}
       </section>
 
+      {uzOnly && (
+        <p className="mt-6 flex items-center gap-2 text-sm text-zinc-400">
+          <Info className="w-4 h-4 shrink-0" />
+          {uzOnly}
+        </p>
+      )}
+
       <section
+        lang={uzOnly ? "uz" : undefined}
         className="mt-6 p-6 md:p-10 border-[.5px] rounded-md border-zinc-600 [&_.font-mono]:text-zinc-300"
         style={{ backdropFilter: "blur(2px)" }}
       >
@@ -126,7 +139,7 @@ function Page({ params }: Props) {
         >
           <ArrowLeft className="w-5 h-5 shrink-0 text-zinc-500 group-hover:text-zinc-200" />
           <span className="min-w-0">
-            <span className="block text-xs text-zinc-500">Oldingi loyiha</span>
+            <span className="block text-xs text-zinc-500">{t("prev")}</span>
             <span className="block truncate">{prev.title}</span>
           </span>
         </Link>
@@ -135,7 +148,7 @@ function Page({ params }: Props) {
           className="group flex items-center justify-end text-right gap-3 p-4 rounded-md border-[.5px] border-zinc-700 hover:border-zinc-500 transition-colors"
         >
           <span className="min-w-0">
-            <span className="block text-xs text-zinc-500">Keyingi loyiha</span>
+            <span className="block text-xs text-zinc-500">{t("next")}</span>
             <span className="block truncate">{next.title}</span>
           </span>
           <ArrowRight className="w-5 h-5 shrink-0 text-zinc-500 group-hover:text-zinc-200" />

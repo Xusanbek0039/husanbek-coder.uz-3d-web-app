@@ -7,6 +7,7 @@ import { Textarea } from "./ui/ace-textarea";
 import { cn } from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
+import { useTranslations } from "next-intl";
 
 const ContactForm = () => {
   const [fullName, setFullName] = React.useState("");
@@ -16,6 +17,7 @@ const ContactForm = () => {
   const [loading, setLoading] = React.useState(false);
 
   const { toast } = useToast();
+  const t = useTranslations("contactForm");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,15 +36,12 @@ const ContactForm = () => {
           website,
         }),
       });
+      if (res.status === 429) throw new Error(t("rateLimited"));
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || data.error) {
-        throw new Error(
-          Array.isArray(data.error) ? data.error.join(" ") : data.error || "Xatolik"
-        );
-      }
+      if (!res.ok || data.error) throw new Error(t("errorDesc"));
       toast({
-        title: "Raxmat!",
-        description: "Men sizga imkon qadar tezroq bog'lanaman.",
+        title: t("successTitle"),
+        description: t("successDesc"),
         variant: "default",
         className: cn("top-0 mx-auto flex fixed md:top-4 md:right-4"),
       });
@@ -52,11 +51,8 @@ const ContactForm = () => {
       setMessage("");
     } catch (err) {
       toast({
-        title: "Xatolik",
-        description:
-          err instanceof Error && err.message !== "Xatolik"
-            ? err.message
-            : "Nimadir xato ketdi! Maydonlarni tekshiring iltimos.",
+        title: t("errorTitle"),
+        description: err instanceof Error ? err.message : t("errorDesc"),
         className: cn(
           "top-0 w-full flex justify-center fixed md:max-w-7xl md:top-4 md:right-4"
         ),
@@ -69,10 +65,10 @@ const ContactForm = () => {
     <form className="min-w-7xl mx-auto sm:mt-4" onSubmit={handleSubmit}>
       <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
         <LabelInputContainer>
-          <Label htmlFor="fullname">To&#39;liq ism familiya</Label>
+          <Label htmlFor="fullname">{t("name")}</Label>
           <Input
             id="fullname"
-            placeholder="Ismingiz"
+            placeholder={t("namePh")}
             type="text"
             required
             value={fullName}
@@ -80,7 +76,7 @@ const ContactForm = () => {
           />
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Elektron manzil</Label>
+          <Label htmlFor="email">{t("email")}</Label>
           <Input
             id="email"
             placeholder="you@example.com"
@@ -102,16 +98,16 @@ const ContactForm = () => {
         onChange={(e) => setWebsite(e.target.value)}
       />
       <div className="grid w-full gap-1.5 mb-4">
-        <Label htmlFor="content">Xabaringiz</Label>
+        <Label htmlFor="content">{t("message")}</Label>
         <Textarea
-          placeholder="Kamida 30 imlodan iborat xabar yozing hamda fikringizni to'liq bayon ettiring iltimos!"
+          placeholder={t("messagePh")}
           id="content"
           required
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
         <p className="text-sm text-muted-foreground">
-          Xabar mutlaqo sir saqlanadi va 3-shaxsga xech qanday ruxsat berilmaydi!!!
+          {t("privacy")}
         </p>
       </div>
       <Button
@@ -122,11 +118,11 @@ const ContactForm = () => {
         {loading ? (
           <div className="flex items-center justify-center">
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            <p>Iltimos kuting</p>
+            <p>{t("wait")}</p>
           </div>
         ) : (
           <div className="flex items-center justify-center">
-            Xabarni yuborish <ChevronRight className="w-4 h-4 ml-4" />
+            {t("send")} <ChevronRight className="w-4 h-4 ml-4" />
           </div>
         )}
         <BottomGradient />

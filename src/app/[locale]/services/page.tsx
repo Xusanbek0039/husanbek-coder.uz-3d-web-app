@@ -1,27 +1,26 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowRight, Check, ChevronDown } from "lucide-react";
-import { SERVICES, PROCESS, FAQ, BUDGETS } from "@/data/services";
+import { getServices, getProcess, getFaq, getBudgets } from "@/data/services";
 import projects from "@/data/projects";
+import { localizeProject } from "@/data/projects-i18n";
 import OrderForm from "@/components/OrderForm";
+import { Link } from "@/i18n/navigation";
+import { alternatesFor } from "@/i18n/helpers";
 
-export const metadata: Metadata = {
-  title: "Xizmatlar | Husan Suyunov",
-  description:
-    "Web sayt, LMS/CRM tizim, Telegram bot, sun'iy intellekt integratsiyasi va mentorlik — Husan Suyunov bilan loyihangizni boshlang.",
-  alternates: { canonical: "/services" },
-};
+type Props = { params: { locale: string }; searchParams: { service?: string } };
 
-const projectTitle = (id: string) => projects.find((p) => p.id === id)?.title;
+export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "services" });
+  return {
+    title: `${t("metaTitle")} | Husan Suyunov`,
+    description: t("metaDescription"),
+    alternates: alternatesFor(locale, "/services"),
+  };
+}
 
-const Card = ({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
+const Card = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <div
     className={`border-[.5px] rounded-md border-zinc-600 ${className}`}
     style={{ backdropFilter: "blur(2px)" }}
@@ -30,26 +29,30 @@ const Card = ({
   </div>
 );
 
-function Page({ searchParams }: { searchParams: { service?: string } }) {
+async function Page({ params: { locale }, searchParams }: Props) {
+  setRequestLocale(locale);
+  const t = await getTranslations("services");
+  const services = getServices(locale);
+  const projectTitle = (id: string) => {
+    const p = projects.find((x) => x.id === id);
+    return p ? localizeProject(p, locale).title.split(" — ")[0] : id;
+  };
+
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[150px] text-zinc-300 pt-[100px] pb-20">
       <header className="max-w-3xl">
-        <h1 className="text-4xl md:text-5xl">Xizmatlar</h1>
-        <p className="mt-4 text-zinc-400 leading-relaxed">
-          G&apos;oyadan ishlaydigan mahsulotgacha: web sayt, o&apos;quv va biznes
-          tizimlari, Telegram botlar va sun&apos;iy intellekt. Real loyihalarda
-          sinalgan texnologiyalar bilan ishlayman.
-        </p>
+        <h1 className="text-4xl md:text-5xl">{t("title")}</h1>
+        <p className="mt-4 text-zinc-400 leading-relaxed">{t("intro")}</p>
         <a
           href="#buyurtma"
           className="mt-6 inline-flex items-center gap-2 h-11 px-5 rounded-md bg-zinc-200 text-black text-sm hover:bg-white transition-colors"
         >
-          Loyihani muhokama qilish <ArrowRight className="w-4 h-4" />
+          {t("cta")} <ArrowRight className="w-4 h-4" />
         </a>
       </header>
 
       <ul className="mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {SERVICES.map((s) => (
+        {services.map((s) => (
           <li key={s.id}>
             <Card className="p-6 h-full flex flex-col">
               <div className="text-3xl">{s.emoji}</div>
@@ -64,23 +67,20 @@ function Page({ searchParams }: { searchParams: { service?: string } }) {
                 ))}
               </ul>
               <div className="mt-4 flex flex-wrap gap-1.5">
-                {s.stack.map((t) => (
-                  <span
-                    key={t}
-                    className="font-mono text-xs px-2 py-0.5 rounded bg-zinc-800 text-zinc-300"
-                  >
-                    {t}
+                {s.stack.map((tech) => (
+                  <span key={tech} className="font-mono text-xs px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">
+                    {tech}
                   </span>
                 ))}
               </div>
               {s.examples.length > 0 && (
                 <p className="mt-4 text-xs text-zinc-500">
-                  Misollar:{" "}
+                  {t("examples")}{" "}
                   {s.examples.map((id, i) => (
                     <React.Fragment key={id}>
                       {i > 0 && ", "}
                       <Link href={`/projects/${id}`} className="underline hover:text-zinc-200">
-                        {projectTitle(id)?.split(" — ")[0] ?? id}
+                        {projectTitle(id)}
                       </Link>
                     </React.Fragment>
                   ))}
@@ -89,11 +89,11 @@ function Page({ searchParams }: { searchParams: { service?: string } }) {
               <div className="mt-auto pt-6 flex items-center justify-between gap-3">
                 <span className="text-sm text-zinc-400">{s.price}</span>
                 <Link
-                  href={`/services?service=${s.id}#buyurtma`}
+                  href={{ pathname: "/services", query: { service: s.id }, hash: "buyurtma" }}
                   scroll={false}
                   className="inline-flex items-center gap-1 text-sm px-3 py-1.5 rounded-md border-[.5px] border-zinc-600 hover:border-zinc-400 transition-colors"
                 >
-                  Buyurtma berish <ArrowRight className="w-3.5 h-3.5" />
+                  {t("orderBtn")} <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </Card>
@@ -102,9 +102,9 @@ function Page({ searchParams }: { searchParams: { service?: string } }) {
       </ul>
 
       <section className="mt-16">
-        <h2 className="text-3xl mb-6">Qanday ishlayman</h2>
+        <h2 className="text-3xl mb-6">{t("process")}</h2>
         <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {PROCESS.map((step, i) => (
+          {getProcess(locale).map((step, i) => (
             <li key={step.title}>
               <Card className="p-6 h-full">
                 <span className="font-mono text-sm text-zinc-500">0{i + 1}</span>
@@ -118,13 +118,10 @@ function Page({ searchParams }: { searchParams: { service?: string } }) {
 
       <section className="mt-16 grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-2">
-          <h2 className="text-3xl mb-6">Ko&apos;p beriladigan savollar</h2>
+          <h2 className="text-3xl mb-6">{t("faq")}</h2>
           <div className="flex flex-col gap-3">
-            {FAQ.map((f) => (
-              <details
-                key={f.q}
-                className="group rounded-md border-[.5px] border-zinc-700 bg-zinc-900/40 p-4"
-              >
+            {getFaq(locale).map((f) => (
+              <details key={f.q} className="group rounded-md border-[.5px] border-zinc-700 bg-zinc-900/40 p-4">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-zinc-100">
                   {f.q}
                   <ChevronDown className="w-4 h-4 shrink-0 transition-transform group-open:rotate-180" />
@@ -136,13 +133,11 @@ function Page({ searchParams }: { searchParams: { service?: string } }) {
         </div>
         <div id="buyurtma" className="lg:col-span-3 scroll-mt-24">
           <Card className="p-6 md:p-10 bg-black/40">
-            <h2 className="text-3xl mb-2">Buyurtma berish</h2>
-            <p className="mb-6 text-sm text-zinc-500">
-              Ariza to&apos;g&apos;ridan-to&apos;g&apos;ri menga Telegram va emailga keladi.
-            </p>
+            <h2 className="text-3xl mb-2">{t("orderTitle")}</h2>
+            <p className="mb-6 text-sm text-zinc-500">{t("orderNote")}</p>
             <OrderForm
-              services={SERVICES.map(({ id, title }) => ({ id, title }))}
-              budgets={BUDGETS}
+              services={services.map(({ id, title }) => ({ id, title }))}
+              budgets={getBudgets(locale)}
               defaultService={searchParams.service}
             />
           </Card>

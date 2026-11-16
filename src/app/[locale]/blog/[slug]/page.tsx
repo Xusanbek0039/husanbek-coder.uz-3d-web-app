@@ -1,7 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { alternatesFor } from "@/i18n/helpers";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, CalendarDays, UserRound } from "lucide-react";
 import { getPost } from "@/lib/itc-blog";
@@ -10,16 +12,19 @@ import { config } from "@/data/config";
 
 export const revalidate = 1800;
 
-type Props = { params: { slug: string } };
+type Props = { params: { slug: string; locale: string } };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPost(params.slug);
-  if (!post) return { title: "Post topilmadi | Husan Suyunov" };
+  if (!post) {
+    const t = await getTranslations({ locale: params.locale, namespace: "blog" });
+    return { title: `${t("postNotFound")} | Husan Suyunov` };
+  }
   const url = `${config.site}/blog/${post.id}`;
   return {
     title: `${post.title} | Husan Suyunov`,
     description: post.excerpt,
-    alternates: { canonical: url },
+    alternates: alternatesFor(params.locale, `/blog/${post.id}`),
     openGraph: {
       type: "article",
       title: post.title,
@@ -39,6 +44,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function Page({ params }: Props) {
+  setRequestLocale(params.locale);
+  const t = await getTranslations("blog");
   const post = await getPost(params.slug);
   if (!post) notFound();
 
@@ -52,7 +59,7 @@ async function Page({ params }: Props) {
           className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          Barcha bloglar
+          {t("allPosts")}
         </Link>
 
         <header className="mt-6">
@@ -93,8 +100,10 @@ async function Page({ params }: Props) {
           </div>
         )}
 
+        {t("uzOnly") && <p className="mt-6 text-xs text-zinc-500">{t("uzOnly")}</p>}
         {post.html ? (
           <div
+            lang="uz"
             className="blog-content mt-10 p-6 md:p-10 border-[.5px] rounded-md border-zinc-600"
             style={{ backdropFilter: "blur(2px)" }}
             // HTML server tomonda sanitize-html bilan tozalangan (src/lib/itc-blog.ts)
@@ -102,6 +111,7 @@ async function Page({ params }: Props) {
           />
         ) : (
           <div
+            lang="uz"
             className="blog-content mt-10 p-6 md:p-10 border-[.5px] rounded-md border-zinc-600"
             style={{ backdropFilter: "blur(2px)" }}
           >
@@ -115,7 +125,7 @@ async function Page({ params }: Props) {
             className="inline-flex items-center gap-2 text-zinc-400 hover:text-zinc-100 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Barcha bloglar
+            {t("allPosts")}
           </Link>
           <a
             href={post.url}
@@ -123,7 +133,7 @@ async function Page({ params }: Props) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 w-fit px-4 py-2 rounded-md border-[.5px] border-zinc-600 hover:border-zinc-400 transition-colors"
           >
-            Izoh va layklar — ITC Academy&apos;da
+            {t("commentsOn")}
             <ArrowUpRight className="w-4 h-4" />
           </a>
         </footer>

@@ -2,6 +2,7 @@
 import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import { Brain, Network, TestTube2, Workflow } from "lucide-react";
 import {
   SiAmazonaws,
@@ -31,11 +32,11 @@ import {
 } from "react-icons/si";
 
 type SkillItem = { name: string; icon: ReactNode };
-type SkillGroup = { title: string; emoji: string; items: SkillItem[] };
+type SkillGroup = { key: string; emoji: string; items: SkillItem[] };
 
 const SKILL_GROUPS: SkillGroup[] = [
   {
-    title: "Dasturlash tillari",
+    key: "languages",
     emoji: "💻",
     items: [
       { name: "Python", icon: <SiPython /> },
@@ -45,7 +46,7 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: "Backend",
+    key: "backend",
     emoji: "⚙️",
     items: [
       { name: "Django", icon: <SiDjango /> },
@@ -54,7 +55,7 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: "Frontend",
+    key: "frontend",
     emoji: "🎨",
     items: [
       { name: "HTML", icon: <SiHtml5 /> },
@@ -65,7 +66,7 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: "Ma'lumotlar bazasi",
+    key: "databases",
     emoji: "🗄️",
     items: [
       { name: "PostgreSQL", icon: <SiPostgresql /> },
@@ -74,7 +75,7 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: "Sun'iy intellekt",
+    key: "ai",
     emoji: "🧠",
     items: [
       { name: "Machine Learning", icon: <Brain className="w-4 h-4" /> },
@@ -84,7 +85,7 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: "Telegram botlar",
+    key: "bots",
     emoji: "🤖",
     items: [
       { name: "aiogram", icon: <SiTelegram /> },
@@ -93,7 +94,7 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: "Versiya nazorati",
+    key: "vcs",
     emoji: "🌿",
     items: [
       { name: "Git", icon: <SiGit /> },
@@ -101,7 +102,7 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: "Bulutli xizmatlar",
+    key: "cloud",
     emoji: "☁️",
     items: [
       { name: "AWS", icon: <SiAmazonaws /> },
@@ -109,7 +110,7 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: "DevOps va avtomatlashtirish",
+    key: "devops",
     emoji: "🚀",
     items: [
       { name: "Docker", icon: <SiDocker /> },
@@ -117,7 +118,7 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    title: "Testlash va sifat nazorati",
+    key: "testing",
     emoji: "🧪",
     items: [
       { name: "Unit testing", icon: <TestTube2 className="w-4 h-4" /> },
@@ -129,9 +130,9 @@ const SKILL_GROUPS: SkillGroup[] = [
 ];
 
 const LANGUAGES = [
-  { name: "Rus tili", level: 50 },
-  { name: "Ingliz tili", level: 45 },
-  { name: "Koreys tili", level: 30 },
+  { key: "ru", level: 50 },
+  { key: "en", level: 45 },
+  { key: "ko", level: 30 },
 ];
 
 const cardClass = cn(
@@ -141,6 +142,7 @@ const cardClass = cn(
 );
 
 const CvSkillsSection = () => {
+  const t = useTranslations("cvSkills");
   return (
     <section
       id="skills-cv"
@@ -153,17 +155,15 @@ const CvSkillsSection = () => {
           "dark:bg-gradient-to-b dark:from-white/80 dark:to-white/20 dark:bg-opacity-50"
         )}
       >
-        Ko&apos;nikmalarim
+        {t("title")}
       </h2>
       <p className="mx-auto mt-4 mb-12 max-w-2xl text-center text-sm md:text-base text-neutral-600 dark:text-neutral-400">
-        Python asosida LMS, CRM va sun&apos;iy intellekt loyihalarini backend va
-        frontend qismlari bilan to&apos;liq yarataman, Telegram botlar ishlab
-        chiqaman.
+        {t("subtitle")}
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {SKILL_GROUPS.map((group, idx) => (
           <motion.div
-            key={group.title}
+            key={group.key}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
@@ -172,7 +172,7 @@ const CvSkillsSection = () => {
           >
             <h3 className="mb-4 text-lg font-semibold text-neutral-800 dark:text-neutral-100">
               <span className="mr-2">{group.emoji}</span>
-              {group.title}
+              {t(`groups.${group.key}`)}
             </h3>
             <ul className="flex flex-wrap gap-2">
               {group.items.map((item) => (
@@ -200,13 +200,13 @@ const CvSkillsSection = () => {
         >
           <h3 className="mb-4 text-lg font-semibold text-neutral-800 dark:text-neutral-100">
             <span className="mr-2">🌍</span>
-            Tillar
+            {t("groups.spoken")}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {LANGUAGES.map((lang) => (
-              <div key={lang.name}>
+              <div key={lang.key}>
                 <div className="mb-1 flex justify-between font-mono text-sm text-neutral-700 dark:text-neutral-300">
-                  <span>{lang.name}</span>
+                  <span>{t(`langs.${lang.key}`)}</span>
                   <span>{lang.level}%</span>
                 </div>
                 <div className="h-2 w-full overflow-hidden rounded-full bg-neutral-300/70 dark:bg-neutral-800">

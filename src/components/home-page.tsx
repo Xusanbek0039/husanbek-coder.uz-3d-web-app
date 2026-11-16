@@ -10,7 +10,7 @@ import ProjectsSection from "@/components/sections/projects";
 import ContactSection from "@/components/sections/contact";
 import HeroSection from "@/components/sections/hero";
 
-function MainPage() {
+function HomePage() {
   return (
     <>
       <SmoothScroll>
@@ -29,4 +29,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default HomePage;

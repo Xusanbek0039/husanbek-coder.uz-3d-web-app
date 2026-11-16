@@ -1,0 +1,242 @@
+{
+  "meta": {
+    "title": "Husan Suyunov",
+    "description": "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI va React yordamida LMS, CRM tizimlari, web ilovalar, Telegram botlar va sun'iy intellekt loyihalarini ishlab chiqaman. IT Park Zomin tuman filiali rahbari.",
+    "short": "Full-Stack Python dasturchi: Django, FastAPI, React, LMS/CRM, Telegram botlar va AI loyihalari.",
+    "ogAlt": "Husan Suyunov portfoliosi"
+  },
+  "nav": {
+    "home": "Bosh sahifa",
+    "about": "Men haqimda",
+    "skills": "Ko'nikmalar",
+    "projects": "Loyihalar",
+    "services": "Xizmatlar",
+    "blog": "Bloglar",
+    "contact": "Bog'lanish",
+    "menu": "Menyu",
+    "close": "Yopish",
+    "developer": "Dasturchi:",
+    "typography": "Tipografiya:",
+    "images": "Rasmlar:",
+    "language": "Til"
+  },
+  "footer": {
+    "rights": "Barcha huquqlar himoyalangan.",
+    "telegramAccount": "Telegram hisob",
+    "telegramChannel": "Telegram kanal"
+  },
+  "theme": {
+    "toggle": "Mavzu tanlash",
+    "light": "Tongi rejim"
+  },
+  "hero": {
+    "greeting": "Assalomu alaykum",
+    "role": "Full-Stack Python Dasturchi",
+    "motto": "Mening shiorim: Har bir qadam, katta orzularni ro'yobga chiqarishning boshlanishi. Sen kuchlisan, sening yo'lingda hech narsa to'xtata olmaydi va sen albatta hammasiga erishasan.",
+    "cv": "Resume CV ko'rish",
+    "message": "Xabar qoldirish",
+    "messageTooltip": "Xabarlar bo'limi"
+  },
+  "skills": {
+    "title": "Texnologiyalarim",
+    "hint": "(Klaviaturadagi texnologiya ustiga bosing. To'liq ro'yxat — pastda, CV asosida!)"
+  },
+  "cvSkills": {
+    "title": "Ko'nikmalarim",
+    "subtitle": "Python asosida LMS, CRM va sun'iy intellekt loyihalarini backend va frontend qismlari bilan to'liq yarataman, Telegram botlar ishlab chiqaman.",
+    "groups": {
+      "languages": "Dasturlash tillari",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "databases": "Ma'lumotlar bazasi",
+      "ai": "Sun'iy intellekt",
+      "bots": "Telegram botlar",
+      "vcs": "Versiya nazorati",
+      "cloud": "Bulutli xizmatlar",
+      "devops": "DevOps va avtomatlashtirish",
+      "testing": "Testlash va sifat nazorati",
+      "spoken": "Tillar"
+    },
+    "langs": {
+      "uz": "O'zbek tili",
+      "ru": "Rus tili",
+      "en": "Ingliz tili",
+      "ko": "Koreys tili",
+      "native": "ona tili"
+    }
+  },
+  "projectsSection": {
+    "title": "Loyihalarim",
+    "back": "Orqaga",
+    "details": "Batafsil",
+    "visit": "Tashrif buyuring",
+    "frontend": "Frontend",
+    "backend": "Backend"
+  },
+  "contactSection": {
+    "title1": "MEN BILAN",
+    "title2": "BOG'LANISH",
+    "card": "Bog'lanish",
+    "desc1": "Iltimos, men bilan bevosita elektron pochta orqali bog'laning",
+    "desc2": "yoki ma'lumotingizni shu yerga qoldiring.",
+    "order": "Loyiha buyurtma qilish → Xizmatlar"
+  },
+  "contactForm": {
+    "name": "To'liq ism familiya",
+    "namePh": "Ismingiz",
+    "email": "Elektron manzil",
+    "message": "Xabaringiz",
+    "messagePh": "Fikringizni to'liq bayon qiling (kamida 10 ta belgi).",
+    "privacy": "Xabar mutlaqo sir saqlanadi va uchinchi shaxslarga berilmaydi.",
+    "send": "Xabarni yuborish",
+    "wait": "Iltimos kuting",
+    "successTitle": "Rahmat!",
+    "successDesc": "Men siz bilan imkon qadar tezroq bog'lanaman.",
+    "errorTitle": "Xatolik",
+    "errorDesc": "Nimadir xato ketdi! Maydonlarni tekshiring iltimos.",
+    "rateLimited": "Juda ko'p so'rov. Birozdan keyin qayta urinib ko'ring."
+  },
+  "orderForm": {
+    "name": "Ismingiz",
+    "namePh": "Ism familiya",
+    "contact": "Telefon, Telegram yoki email",
+    "contactPh": "+998 90 123 45 67 yoki @username",
+    "service": "Xizmat",
+    "other": "Boshqa",
+    "budget": "Taxminiy byudjet",
+    "message": "Loyiha haqida",
+    "messagePh": "Nima qilmoqchisiz, qanday imkoniyatlar kerak, muddat...",
+    "send": "Buyurtma yuborish",
+    "sending": "Yuborilmoqda...",
+    "successTitle": "Buyurtma qabul qilindi!",
+    "successDesc": "Tez orada siz bilan bog'lanaman."
+  },
+  "contactPage": {
+    "metaTitle": "Bog'lanish",
+    "metaDescription": "Husan Suyunov bilan bog'laning: web sayt, LMS/CRM tizim, Telegram bot yoki AI loyihasi bo'yicha xabar qoldiring.",
+    "title": "Bog'lanish",
+    "intro": "Loyiha g'oyangiz, hamkorlik taklifi yoki savolingiz bormi? Xabar qoldiring — odatda 24 soat ichida javob beraman.",
+    "phone": "Telefon",
+    "toServices": "Loyiha buyurtma qilmoqchimisiz? Xizmatlar sahifasi",
+    "formTitle": "Xabar yuborish"
+  },
+  "projectsPage": {
+    "metaTitle": "Loyihalar",
+    "metaDescription": "Husan Suyunov loyihalari: MarosimGo, ITC Academy, IT Park Zomin LMS, Telegram botlar, online do'kon va boshqalar — arxitektura va texnologiyalari bilan.",
+    "title": "Loyihalar",
+    "subtitle": "Har bir loyiha haqida batafsil: arxitektura, texnologiyalar va skrinshotlar.",
+    "details": "Batafsil",
+    "all": "Barcha loyihalar",
+    "visit": "Tashrif buyurish",
+    "prev": "Oldingi loyiha",
+    "next": "Keyingi loyiha",
+    "notFound": "Loyiha topilmadi",
+    "uzOnly": ""
+  },
+  "services": {
+    "metaTitle": "Xizmatlar",
+    "metaDescription": "Web sayt, LMS/CRM tizim, Telegram bot, sun'iy intellekt integratsiyasi va mentorlik — Husan Suyunov bilan loyihangizni boshlang.",
+    "title": "Xizmatlar",
+    "intro": "G'oyadan ishlaydigan mahsulotgacha: web sayt, o'quv va biznes tizimlari, Telegram botlar va sun'iy intellekt. Real loyihalarda sinalgan texnologiyalar bilan ishlayman.",
+    "cta": "Loyihani muhokama qilish",
+    "examples": "Misollar:",
+    "orderBtn": "Buyurtma berish",
+    "process": "Qanday ishlayman",
+    "faq": "Ko'p beriladigan savollar",
+    "orderTitle": "Buyurtma berish",
+    "orderNote": "Ariza to'g'ridan-to'g'ri menga Telegram va emailga keladi."
+  },
+  "blog": {
+    "metaTitle": "Bloglar",
+    "metaDescription": "IT dunyosi yangiliklari, darsliklar, video darslar va Telegram kanal postlari — ITC Academy blogidan.",
+    "title": "Bloglar",
+    "intro": "IT dunyosi yangiliklari, darsliklar va maslahatlar — ITC Academy blogi, YouTube va Telegram kanalimdan.",
+    "tabsLabel": "Blog bo'limlari",
+    "tabArticles": "Maqolalar",
+    "tabVideos": "Videolar",
+    "tabTelegram": "Telegram",
+    "total": "ITC Academy blogidan jami {count} ta post",
+    "read": "O'qish",
+    "emptyArticles": "Hozircha blog postlarini yuklab bo'lmadi. Keyinroq qayta urinib ko'ring!",
+    "emptyVideos": "Videolarni yuklab bo'lmadi. Keyinroq qayta urinib ko'ring!",
+    "emptyTelegram": "Telegram postlarini yuklab bo'lmadi. Keyinroq qayta urinib ko'ring!",
+    "subscribeYoutube": "YouTube kanalga obuna bo'lish",
+    "subscribeTelegram": "Kanalga obuna bo'lish",
+    "pages": "Sahifalar",
+    "prevPage": "Oldingi sahifa",
+    "nextPage": "Keyingi sahifa",
+    "allPosts": "Barcha bloglar",
+    "commentsOn": "Izoh va layklar — ITC Academy'da",
+    "postNotFound": "Post topilmadi",
+    "uzOnly": ""
+  },
+  "about": {
+    "metaTitle": "Men haqimda",
+    "metaDescription": "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI, React, LMS/CRM tizimlari, AI va Telegram botlar.",
+    "role": "Full-Stack Python Developer",
+    "location": "Jizzax, Sh. Rashidov tumani",
+    "cv": "Resume CV ko'rish",
+    "phone": "Telefon",
+    "title": "Men haqimda",
+    "p1": "Assalomu alaykum! Men <b>Suyunov Husan</b> — Full-Stack Python dasturchiman. Python, Django, FastAPI va React yordamida web ilovalar, LMS va CRM tizimlarini backend va frontend qismlari bilan to'liq ishlab chiqaman. Sun'iy intellekt (NLP, Machine Learning) loyihalari va Telegram botlar yaratish ham asosiy yo'nalishlarimdan.",
+    "p2": "Hozirda <b>IT Park Zomin tuman filiali rahbari</b> sifatida ta'lim jarayonini raqamlashtirish ustida ishlayman: itclms.uz, ITC Academy platformasi va uning Telegram boti — shu ishning natijalari. Toshkent Xalqaro Kimyo Universitetida «Tarmoqlarda biznesni boshqarish» yo'nalishida tahsil olaman, shuning uchun loyihalarga texnik va biznes nuqtai nazaridan birdek qarayman.",
+    "p3": "Yangi texnologiyalarni o'rganish va murakkab muammolarga innovatsion yechim topish — mening ustuvor vazifalarim. Barcha loyiha kodlarim GitHub'da ochiq.",
+    "stats": {
+      "experience": "yillik tajriba",
+      "repos": "GitHub repozitoriy",
+      "followers": "GitHub kuzatuvchi",
+      "projects": "real loyiha"
+    },
+    "experienceTitle": "Ish tajribasi",
+    "educationTitle": "Ta'lim",
+    "experience": {
+      "e1": {
+        "period": "2023 — hozir",
+        "title": "Filial rahbari",
+        "place": "IT Park Zomin tuman filiali",
+        "text": "Filial faoliyatini boshqarish, o'quv jarayonini raqamlashtirish: itclms.uz va ITC Academy platformalarini ishlab chiqish va yuritish."
+      },
+      "e2": {
+        "period": "2022",
+        "title": "O'qituvchi",
+        "place": "IT Creative — IT Creative Academy",
+        "text": "Python, web dasturlash va Telegram botlar bo'yicha darslar; o'quvchilar uchun amaliy loyihalar."
+      },
+      "e3": {
+        "period": "2021 — 2022",
+        "title": "Buxgalter yordamchisi",
+        "place": "“Sharqona Garden Travel” Toshkent viloyati",
+        "text": "Moliyaviy hujjatlar bilan ishlash — biznes jarayonlarini avtomatlashtirishga qiziqishim shu yerdan boshlangan."
+      }
+    },
+    "education": {
+      "d1": {
+        "period": "2022 — 2026",
+        "title": "Tarmoqlarda biznesni boshqarish",
+        "place": "Toshkent Xalqaro Kimyo Universiteti"
+      },
+      "d2": {
+        "period": "2021 — 2022",
+        "title": "HTML + CSS, JavaScript, TypeScript, React",
+        "place": "PDP Academy"
+      },
+      "d3": {
+        "period": "2019 — 2021",
+        "title": "Python algoritmlar, Telegram botlar, web freymvorklar",
+        "place": "MohirDev platformasi"
+      }
+    },
+    "keyProjects": "Asosiy loyihalar",
+    "alsoProjects": "Shuningdek: KIUT LMS (universitet uchun LMS) va IT Creative AI.",
+    "languages": "Tillar",
+    "github": "GitHub faolligi",
+    "githubLanguages": "Repozitoriylardagi asosiy tillar",
+    "githubRecent": "So'nggi yangilangan repolar",
+    "noDescription": "Tavsif yo'q",
+    "contributions": "So'nggi bir yilda {count} ta hissa (contribution)",
+    "contributionDay": "{date}: {count} ta hissa",
+    "less": "Kam",
+    "more": "Ko'p",
+    "tools": "Men foydalanadigan texnologiyalar"
+  }
+}

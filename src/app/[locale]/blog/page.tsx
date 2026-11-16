@@ -1,7 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { alternatesFor } from "@/i18n/helpers";
 import {
   ArrowUpRight,
   CalendarDays,
@@ -20,12 +22,18 @@ import VideoGrid from "@/components/blog/video-grid";
 
 export const revalidate = 1800;
 
-export const metadata: Metadata = {
-  title: "Bloglar | Husan Suyunov",
-  description:
-    "IT dunyosi yangiliklari, darsliklar, video darslar va Telegram kanal postlari — ITC Academy blogidan.",
-  alternates: { canonical: "/blog" },
-};
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: "blog" });
+  return {
+    title: `${t("metaTitle")} | Husan Suyunov`,
+    description: t("metaDescription"),
+    alternates: alternatesFor(locale, "/blog"),
+  };
+}
 
 type Tab = "articles" | "videos" | "telegram";
 
@@ -53,20 +61,21 @@ const pageNumbers = (current: number, total: number): (number | "…")[] => {
   return out;
 };
 
-const Pagination = ({ page, totalPages }: { page: number; totalPages: number }) => {
+const Pagination = async ({ page, totalPages }: { page: number; totalPages: number }) => {
   if (totalPages <= 1) return null;
+  const t = await getTranslations("blog");
   const base =
     "flex items-center justify-center min-w-10 h-10 px-3 rounded-md border-[.5px] text-sm transition-colors";
   return (
     <nav
-      aria-label="Sahifalar"
+      aria-label={t("pages")}
       className="mt-12 flex flex-wrap items-center justify-center gap-2"
     >
       {page > 1 ? (
         <Link
           href={pageHref(page - 1)}
           className={`${base} border-zinc-600 hover:border-zinc-400`}
-          aria-label="Oldingi sahifa"
+          aria-label={t("prevPage")}
         >
           <ChevronLeft className="w-4 h-4" />
         </Link>
@@ -104,7 +113,7 @@ const Pagination = ({ page, totalPages }: { page: number; totalPages: number }) 
         <Link
           href={pageHref(page + 1)}
           className={`${base} border-zinc-600 hover:border-zinc-400`}
-          aria-label="Keyingi sahifa"
+          aria-label={t("nextPage")}
         >
           <ChevronRight className="w-4 h-4" />
         </Link>
@@ -120,31 +129,33 @@ const Pagination = ({ page, totalPages }: { page: number; totalPages: number }) 
 const first = (v?: string | string[]) => (Array.isArray(v) ? v[0] : v);
 
 async function Page({
+  params: { locale },
   searchParams,
 }: {
+  params: { locale: string };
   searchParams: { page?: string | string[]; tab?: string | string[] };
 }) {
+  setRequestLocale(locale);
+  const t = await getTranslations("blog");
   const showVideos = hasYoutubeKey();
   const rawTab = first(searchParams.tab);
   const tab: Tab =
     rawTab === "telegram" ? "telegram" : rawTab === "videos" && showVideos ? "videos" : "articles";
 
   const tabs: { id: Tab; label: string; href: string }[] = [
-    { id: "articles", label: "Maqolalar", href: "/blog" },
-    ...(showVideos ? [{ id: "videos" as Tab, label: "Videolar", href: "/blog?tab=videos" }] : []),
-    { id: "telegram", label: "Telegram", href: "/blog?tab=telegram" },
+    { id: "articles", label: t("tabArticles"), href: "/blog" },
+    ...(showVideos ? [{ id: "videos" as Tab, label: t("tabVideos"), href: "/blog?tab=videos" }] : []),
+    { id: "telegram", label: t("tabTelegram"), href: "/blog?tab=telegram" },
   ];
 
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[150px] text-zinc-300 pb-20">
       <div className="mt-[100px] mb-8">
-        <h1 className="text-4xl">Bloglar</h1>
-        <p className="mt-2 text-sm text-zinc-500">
-          IT dunyosi yangiliklari, darsliklar va maslahatlar — ITC Academy
-          blogi, YouTube va Telegram kanalimdan.
-        </p>
+        <h1 className="text-4xl">{t("title")}</h1>
+        <p className="mt-2 text-sm text-zinc-500">{t("intro")}</p>
+        {t("uzOnly") && <p className="mt-1 text-xs text-zinc-600">{t("uzOnly")}</p>}
       </div>
-      <nav aria-label="Blog bo'limlari" className="mb-10 flex flex-wrap gap-2">
+      <nav aria-label={t("tabsLabel")} className="mb-10 flex flex-wrap gap-2">
         {tabs.map((t) => (
           <Link
             key={t.id}
@@ -169,9 +180,9 @@ async function Page({
 }
 
 async function VideosTab() {
+  const t = await getTranslations("blog");
   const videos = await getYoutubeVideos(12);
-  if (videos.length === 0)
-    return <Empty text="Videolarni yuklab bo'lmadi. Keyinroq qayta urinib ko'ring!" />;
+  if (videos.length === 0) return <Empty text={t("emptyVideos")} />;
   return (
     <>
       <VideoGrid videos={videos.map((v) => ({ ...v, date: formatDate(v.publishedAt) }))} />
@@ -182,7 +193,7 @@ async function VideosTab() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-md border-[.5px] border-zinc-600 hover:border-zinc-400 text-sm transition-colors"
         >
-          <FaYoutube className="text-red-500" /> YouTube kanalga obuna bo&apos;lish
+          <FaYoutube className="text-red-500" /> {t("subscribeYoutube")}
         </a>
       </div>
     </>
@@ -190,9 +201,9 @@ async function VideosTab() {
 }
 
 async function TelegramTab() {
+  const t = await getTranslations("blog");
   const posts = await getTelegramPosts(12);
-  if (posts.length === 0)
-    return <Empty text="Telegram postlarini yuklab bo'lmadi. Keyinroq qayta urinib ko'ring!" />;
+  if (posts.length === 0) return <Empty text={t("emptyTelegram")} />;
   return (
     <>
       <ul className="columns-1 md:columns-2 lg:columns-3 gap-6 [&>li]:mb-6">
@@ -247,7 +258,7 @@ async function TelegramTab() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2 rounded-md border-[.5px] border-zinc-600 hover:border-zinc-400 text-sm transition-colors"
         >
-          <FaTelegram className="text-sky-400" /> Kanalga obuna bo&apos;lish
+          <FaTelegram className="text-sky-400" /> {t("subscribeTelegram")}
         </a>
       </div>
     </>
@@ -255,12 +266,13 @@ async function TelegramTab() {
 }
 
 async function ArticlesTab({ page: requested }: { page: number }) {
+  const t = await getTranslations("blog");
   const { posts, page, totalPages, total } = await getPostsPage(requested, PER_PAGE);
 
   return (
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm text-zinc-500">
-        <span>{total > 0 && `ITC Academy blogidan jami ${total} ta post`}</span>
+        <span>{total > 0 && t("total", { count: total })}</span>
         <a
           href="https://itc-academy.uz/blog/"
           target="_blank"
@@ -274,10 +286,7 @@ async function ArticlesTab({ page: requested }: { page: number }) {
 
       {posts.length === 0 ? (
         <div className="flex justify-center items-center h-[40vh]">
-          <h2 className="text-2xl text-center">
-            Hozircha blog postlarini yuklab bo&apos;lmadi. Keyinroq qayta urinib
-            ko&apos;ring!
-          </h2>
+          <h2 className="text-2xl text-center">{t("emptyArticles")}</h2>
         </div>
       ) : (
         <>
@@ -332,7 +341,7 @@ async function ArticlesTab({ page: requested }: { page: number }) {
                           )}
                         </div>
                         <span className="flex items-center gap-1 text-zinc-300">
-                          O&apos;qish
+                          {t("read")}
                           <ChevronRight className="w-3.5 h-3.5" />
                         </span>
                       </div>

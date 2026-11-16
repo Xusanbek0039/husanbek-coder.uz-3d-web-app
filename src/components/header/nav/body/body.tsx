@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { Link, usePathname } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import styles from "./style.module.scss";
 import { blur, translate } from "../../anim";
 import { Link as LinkType } from "@/types";
 import { cn } from "@/lib/utils";
-import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface SelectedLink {
@@ -25,13 +25,14 @@ export default function Body({
   setSelectedLink,
   setIsActive,
 }: BodyProps) {
-  const params = useParams();
-  const [currentHref, setCurrentHref] = useState("/");
+  const t = useTranslations("nav");
+  const pathname = usePathname();
+  const [hash, setHash] = useState("");
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const { pathname, hash } = window.location;
-    setCurrentHref(pathname + hash);
-  }, [params]);
+    setHash(window.location.hash);
+  }, [pathname]);
+  const currentHref = pathname + hash;
 
   const getChars = (word: string) => {
     let chars: JSX.Element[] = [];
@@ -56,7 +57,8 @@ export default function Body({
   return (
     <div className={cn(styles.body, "flex flex-col items-end md:flex-row")}>
       {links.map((link, index) => {
-        const { title, href, target } = link;
+        const { title, href, target, key } = link;
+        const label = key ? t(key) : title;
 
         return (
           <Link
@@ -80,7 +82,7 @@ export default function Body({
                   : "closed"
               }
             >
-              {getChars(title)}
+              {getChars(label)}
             </motion.p>
           </Link>
         );

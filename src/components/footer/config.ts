@@ -1,10 +1,10 @@
-const footer: { title: string; href: string }[] = [
+const footer: { key: "telegramAccount" | "telegramChannel"; href: string }[] = [
   {
-    title: "Telegram hisob",
+    key: "telegramAccount",
     href: "https://t.me/husanbek_coder",
   },
   {
-    title: "Telegram kanal",
+    key: "telegramChannel",
     href: "https://t.me/IT_Creative",
   },
 ];

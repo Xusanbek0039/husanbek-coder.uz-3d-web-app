@@ -7,6 +7,7 @@ import { Textarea } from "./ui/ace-textarea";
 import { Button } from "./ui/button";
 import { useToast } from "./ui/use-toast";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 type Props = {
   services: { id: string; title: string }[];
@@ -33,6 +34,8 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
   });
   const [loading, setLoading] = React.useState(false);
   const { toast } = useToast();
+  const t = useTranslations("orderForm");
+  const tc = useTranslations("contactForm");
 
   React.useEffect(() => {
     const title = services.find((s) => s.id === defaultService)?.title;
@@ -53,25 +56,19 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "order", ...form }),
       });
+      if (res.status === 429) throw new Error(tc("rateLimited"));
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || data.error) {
-        throw new Error(
-          Array.isArray(data.error) ? data.error.join(" ") : data.error || "Xatolik"
-        );
-      }
+      if (!res.ok || data.error) throw new Error(tc("errorDesc"));
       toast({
-        title: "Buyurtma qabul qilindi!",
-        description: "Tez orada siz bilan bog'lanaman.",
+        title: t("successTitle"),
+        description: t("successDesc"),
         className: cn("top-0 mx-auto flex fixed md:top-4 md:right-4"),
       });
       setForm((f) => ({ ...f, fullName: "", contact: "", message: "" }));
     } catch (err) {
       toast({
-        title: "Xatolik",
-        description:
-          err instanceof Error && err.message !== "Xatolik"
-            ? err.message
-            : "Nimadir xato ketdi! Maydonlarni tekshiring iltimos.",
+        title: tc("errorTitle"),
+        description: err instanceof Error ? err.message : tc("errorDesc"),
         className: cn("top-0 w-full flex justify-center fixed md:max-w-7xl md:top-4 md:right-4"),
         variant: "destructive",
       });
@@ -83,27 +80,27 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="order-name">Ismingiz</Label>
+          <Label htmlFor="order-name">{t("name")}</Label>
           <Input
             id="order-name"
-            placeholder="Ism familiya"
+            placeholder={t("namePh")}
             required
             value={form.fullName}
             onChange={set("fullName")}
           />
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="order-contact">Telefon, Telegram yoki email</Label>
+          <Label htmlFor="order-contact">{t("contact")}</Label>
           <Input
             id="order-contact"
-            placeholder="+998 90 123 45 67 yoki @username"
+            placeholder={t("contactPh")}
             required
             value={form.contact}
             onChange={set("contact")}
           />
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="order-service">Xizmat</Label>
+          <Label htmlFor="order-service">{t("service")}</Label>
           <select
             id="order-service"
             className={selectClass}
@@ -115,11 +112,11 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
                 {s.title}
               </option>
             ))}
-            <option value="Boshqa">Boshqa</option>
+            <option value={t("other")}>{t("other")}</option>
           </select>
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="order-budget">Taxminiy byudjet</Label>
+          <Label htmlFor="order-budget">{t("budget")}</Label>
           <select
             id="order-budget"
             className={selectClass}
@@ -145,10 +142,10 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
         onChange={set("website")}
       />
       <div className="flex flex-col gap-2">
-        <Label htmlFor="order-message">Loyiha haqida</Label>
+        <Label htmlFor="order-message">{t("message")}</Label>
         <Textarea
           id="order-message"
-          placeholder="Nima qilmoqchisiz, qanday imkoniyatlar kerak, muddat..."
+          placeholder={t("messagePh")}
           required
           rows={5}
           value={form.message}
@@ -162,11 +159,11 @@ const OrderForm = ({ services, budgets, defaultService }: Props) => {
       >
         {loading ? (
           <span className="flex items-center gap-2">
-            <Loader2 className="h-4 w-4 animate-spin" /> Yuborilmoqda...
+            <Loader2 className="h-4 w-4 animate-spin" /> {t("sending")}
           </span>
         ) : (
           <span className="flex items-center gap-2">
-            Buyurtma yuborish <ChevronRight className="h-4 w-4" />
+            {t("send")} <ChevronRight className="h-4 w-4" />
           </span>
         )}
       </Button>

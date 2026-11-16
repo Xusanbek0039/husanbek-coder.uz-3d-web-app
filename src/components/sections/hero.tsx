@@ -13,8 +13,10 @@ import { BlurIn, BoxReveal } from "../reveal-animations";
 import ScrollDownIcon from "../scroll-down-icon";
 import { SiGithub, SiLinkedin, SiTelegram, SiYoutube } from "react-icons/si";
 import { config } from "@/data/config";
+import { useTranslations } from "next-intl";
 
 const HeroSection = () => {
+  const t = useTranslations("hero");
   const { isLoading } = usePreloader();
 
   return (
@@ -38,7 +40,7 @@ const HeroSection = () => {
                       "cursor-default font-display sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
-                    Assalomu alaykum 
+                    {t("greeting")}
                     <br className="md:hidden" />
                   </p>
                 </BlurIn>
@@ -64,7 +66,7 @@ const HeroSection = () => {
                       side="top"
                       className="dark:bg-white dark:text-black"
                     >
-                      Mening shiorim: Har bir qadam, katta orzularni ro&#39;yobga chiqarishning boshlanishi. Sen kuchlisan, sening yo&#39;lingda hech narsa to&#39;xtata olmaydi va sen albatta hammasiga erishasan.
+                      {t("motto")}
                     </TooltipContent>
 
                   </Tooltip>
@@ -77,7 +79,7 @@ const HeroSection = () => {
                       "cursor-default font-display sm:text-xl md:text-xl whitespace-nowrap bg-clip-text "
                     )}
                   >
-                    Full-Stack Python Dasturchi
+                    {t("role")}
                   </p>
                 </BlurIn>
               </div>
@@ -92,7 +94,7 @@ const HeroSection = () => {
                   <BoxReveal delay={2} width="100%" >
                     <Button className="flex items-center gap-2 w-full">
                       <File size={24} />
-                      <p>Resume CV ko&#39;rish</p>
+                      <p>{t("cv")}</p>
                     </Button>
                   </BoxReveal>
                 </Link>
@@ -104,12 +106,12 @@ const HeroSection = () => {
                           variant={"outline"}
                           className="block w-full overflow-hidden"
                         >
-                          Xabar qoldirish
+                          {t("message")}
                         </Button>
                       </Link>
                     </TooltipTrigger>
                     <TooltipContent side="bottom">
-                      <p>Xabarlar bo&#39;limi</p>
+                      <p>{t("messageTooltip")}</p>
                     </TooltipContent>
                   </Tooltip>
                   <Link

@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -16,6 +17,7 @@ export default function FunnyThemeToggle({
   className?: string;
 }) {
   const { setTheme, theme } = useTheme();
+  const t = useTranslations("theme");
   const [counter, setCounter] = React.useState({ dark: 0, light: 0 });
   const { toast } = useToast();
 
@@ -45,7 +47,7 @@ export default function FunnyThemeToggle({
         >
           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all duration-500 dark:-rotate-90 dark:scale-0 pointer-events-none" />
           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all duration-500 dark:rotate-0 dark:scale-100 pointer-events-none" />
-          <span className="sr-only">Mavzu tanlash</span>
+          <span className="sr-only">{t("toggle")}</span>
         </Button>
       ) : (
         <Popover>
@@ -57,13 +59,13 @@ export default function FunnyThemeToggle({
             >
               <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all duration-500 dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all duration-500 dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Mavzu tanlash</span>
+              <span className="sr-only">{t("toggle")}</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent className="z-[99999] flex flex-col items-center gap-2">
             {/* <p className="text-sm">these stunts are done by professional only</p> */}
             <p className="text-sm text-center">{themeDisclaimers.light[counter.light]}</p>
-            <Button onClick={goLight}>Tongi rejim</Button>
+            <Button onClick={goLight}>{t("light")}</Button>
           </PopoverContent>
         </Popover>
       )}
