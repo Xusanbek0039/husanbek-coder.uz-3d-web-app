@@ -274,3 +274,7 @@ export async function getPost(slug: string): Promise<BlogPostDetail | null> {
 
   return { ...meta, html: sanitizePostHtml(body) };
 }
+
+export async function getAllPosts(): Promise<BlogPost[]> {
+  return (await getIndex()).posts;
+}
