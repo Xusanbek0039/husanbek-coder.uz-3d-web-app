@@ -5,7 +5,7 @@ const footer: { title: string; href: string }[] = [
   },
   {
     title: "Telegram kanal",
-    href: "https://t.me/IT_Creative_News",
+    href: "https://t.me/IT_Creative",
   },
 ];
 
