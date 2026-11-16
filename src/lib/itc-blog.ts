@@ -78,8 +78,8 @@ export const sanitizePostHtml = (html: string) =>
       "table", "thead", "tbody", "tr", "th", "td",
     ],
     allowedAttributes: {
-      a: ["href", "title"],
-      img: ["src", "alt", "title", "width", "height"],
+      a: ["href", "title", "target", "rel"],
+      img: ["src", "alt", "title", "width", "height", "loading"],
       td: ["colspan", "rowspan"],
       th: ["colspan", "rowspan"],
     },
@@ -102,13 +102,6 @@ export const sanitizePostHtml = (html: string) =>
     exclusiveFilter: (frame) =>
       (frame.tag === "img" && !frame.attribs.src) ||
       (["p", "blockquote"].includes(frame.tag) && !frame.text.trim() && !frame.mediaChildren.length),
-  });
-
-// sanitize-html "target"/"rel"/"loading" ni allowedAttributes'dan keyin ham saqlashi uchun
-const withLinkAttrs = (html: string) =>
-  sanitizeHtml(html, {
-    allowedTags: false,
-    allowedAttributes: false,
   });
 
 // ================= Ro'yxat =================
@@ -261,7 +254,7 @@ export async function getPost(slug: string): Promise<BlogPostDetail | null> {
         const data = await res.json();
         const content = pick(data, ["content", "body", "html", "text"]);
         if (content) {
-          return { ...fromApiItem(data, 0), id: slug, html: withLinkAttrs(sanitizePostHtml(String(content))) };
+          return { ...fromApiItem(data, 0), id: slug, html: sanitizePostHtml(String(content)) };
         }
       }
     } catch (e) {
@@ -279,5 +272,5 @@ export async function getPost(slug: string): Promise<BlogPostDetail | null> {
     html.match(/<div class="pd-body"[^>]*>([\s\S]*?)<\/div>/)?.[1] ??
     "";
 
-  return { ...meta, html: withLinkAttrs(sanitizePostHtml(body)) };
+  return { ...meta, html: sanitizePostHtml(body) };
 }
