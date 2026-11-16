@@ -1,349 +1,365 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image"; // ✅ next/image import qilindi
+import React from "react";
+import type { Metadata } from "next";
+import Image from "next/image";
 import {
-  DiMongodb,
-  DiNginx,
-  DiNpm,
-  DiPostgresql,
-  DiVim,
-} from "react-icons/di";
-import {
-  FaAws,
-  FaCss3,
-  FaDocker,
   FaEnvelope,
-  FaGit,
   FaGithub,
-  FaHtml5,
   FaLinkedin,
-  FaLinux,
-  FaNodeJs,
+  FaLocationDot,
   FaPhone,
-  FaReact,
-  FaVuejs,
-  FaYarn,
+  FaTelegram,
+  FaYoutube,
 } from "react-icons/fa6";
 import {
-  RiFirebaseFill,
-  RiJavascriptFill,
-  RiNextjsFill,
-  RiTailwindCssFill,
-} from "react-icons/ri";
-import {
-  SiExpress,
-  SiJavascript,
-  SiKubuntu,
-  SiPm2,
-  SiPrettier,
-  SiTypescript,
-  SiVercel,
-  SiVisualstudiocode,
-} from "react-icons/si";
-import { TbTerminal2 } from "react-icons/tb";
-// @ts-ignore
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
+  ArrowUpRight,
+  BriefcaseBusiness,
+  FileText,
+  GraduationCap,
+} from "lucide-react";
+import ToolsCarousel from "./tools-carousel";
+
+export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: "Men haqimda | Husan Suyunov",
+  description:
+    "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI, React, LMS/CRM tizimlari, AI va Telegram botlar.",
+};
+
+const GITHUB_USER = "Xusanbek0039";
+const FALLBACK_AVATAR = "https://avatars.githubusercontent.com/u/109731657?v=4";
+const CV_URL =
+  "https://drive.google.com/file/d/1CeOgFcAtSVFQ-uLgslayaFbH1eCEwDEM/view?usp=sharing";
+
+type GithubProfile = {
+  avatar_url: string;
+  html_url: string;
+  public_repos: number;
+  followers: number;
+  bio: string | null;
+};
+
+async function getGithubProfile(): Promise<GithubProfile | null> {
+  try {
+    const res = await fetch(`https://api.github.com/users/${GITHUB_USER}`, {
+      headers: {
+        Accept: "application/vnd.github+json",
+        ...(process.env.GITHUB_TOKEN
+          ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+          : {}),
+      },
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as GithubProfile;
+  } catch {
+    return null;
+  }
+}
 
 const CONTACT_LINKS = [
   {
     name: "Email",
-    content: "itpark0071@gmail",
+    content: "itpark0071@gmail.com",
     href: "mailto:itpark0071@gmail.com",
-    icon: <FaEnvelope height={"50px"} />,
+    icon: <FaEnvelope />,
   },
   {
-    name: "Phone",
-    content: "975216686",
+    name: "Telefon",
+    content: "+998 97 521 66 86",
     href: "tel:+998975216686",
-    icon: <FaPhone height={"50px"} />,
+    icon: <FaPhone />,
+  },
+  {
+    name: "Telegram",
+    content: "@husanbek_coder",
+    href: "https://t.me/husanbek_coder",
+    icon: <FaTelegram />,
+  },
+  {
+    name: "GitHub",
+    content: GITHUB_USER,
+    href: `https://github.com/${GITHUB_USER}`,
+    icon: <FaGithub />,
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/xusanbek0039/ ",
-    content: "Husanbek",
-    icon: <FaLinkedin height={"50px"} />,
+    content: "xusanbek0039",
+    href: "https://www.linkedin.com/in/xusanbek0039/",
+    icon: <FaLinkedin />,
   },
   {
-    name: "GitHub",
-    href: "https://github.com/xusanbek0039 ",
-    content: "Husanbek GITHUB",
-    icon: <FaGithub height={"50px"} />,
+    name: "YouTube",
+    content: "IT Creative",
+    href: "https://www.youtube.com/@IT_Creative/",
+    icon: <FaYoutube />,
   },
 ];
 
-const TOOLS = [
+const EXPERIENCE = [
   {
-    name: "JavaScript",
-    content: "JavaScript — yuqori darajadagi, interpretatsiya qilinadigan dasturlash tili",
-    icon: <SiJavascript size={"50px"} color={"#f0db4f"} />,
-    color: "#f0db4f",
+    period: "2023 — hozir",
+    title: "Filial rahbari",
+    place: "IT Park Zomin tuman filiali",
+    text: "Filial faoliyatini boshqarish, o‘quv jarayonini raqamlashtirish: itclms.uz va ITC Academy platformalarini ishlab chiqish va yuritish.",
   },
   {
-    name: "TypeScript",
-    content: "TypeScript — JavaScript asosidagi, lekin statik tiplarga ega dasturlash tili",
-    icon: <SiTypescript size={"50px"} color={"#007acc"} />,
-    color: "#007acc",
+    period: "2022",
+    title: "O‘qituvchi",
+    place: "IT Creative — IT Creative Academy",
+    text: "Python, web dasturlash va Telegram botlar bo‘yicha darslar; o‘quvchilar uchun amaliy loyihalar.",
   },
   {
-    name: "HTML",
-    content: "HTML — veb-sahifalarning tuzilmasini yaratish uchun ishlatiladi",
-    icon: <FaHtml5 size={"50px"} color="#e34c26" />,
-    color: "#e34c26",
-  },
-  {
-    name: "CSS",
-    content: "CSS — veb-sahifalarning ko‘rinishi va dizaynini yaratadi",
-    icon: <FaCss3 size={"50px"} color="#563d7c" />,
-    color: "#563d7c",
-  },
-  {
-    name: "Nodejs",
-    content: "Node.js — JavaScript-ni serverda ishga tushirish imkonini beruvchi platforma",
-    icon: <FaNodeJs size={"50px"} color="#6cc24a" />,
-    color: "#6cc24a",
-  },
-  {
-    name: "React.js",
-    content: "React — foydalanuvchi interfeyslarini yaratish uchun JavaScript kutubxonasi",
-    icon: <FaReact size={"50px"} color="#61dafb" />,
-    color: "#61dafb",
-  },
-  {
-    name: "Docker",
-    content: "Docker — ilovalarni konteynerlarda joylash va boshqarish vositasi",
-    icon: <FaDocker size={"50px"} color="#2496ed" />,
-    color: "#2496ed",
-  },
-  {
-    name: "NginX",
-    content: "Nginx — yuqori unumdorlikka ega veb-server va teskari proksi",
-    icon: <DiNginx size={"50px"} color="#008000" />,
-    color: "#008000",
-  },
-  {
-    name: "Vue.js",
-    content: "Vue.js — progressiv JavaScript framework, foydalanuvchi interfeyslari uchun",
-    icon: <FaVuejs size={"50px"} color="#41b883" />,
-    color: "#41b883",
-  },
-  {
-    name: "Express.js",
-    content: "Express.js — Node.js uchun engil va moslashuvchan veb-framework",
-    icon: <SiExpress size={"50px"} color="#fff" />,
-    color: "#000000",
-  },
-  {
-    name: "PostgreSQL",
-    content: "PostgreSQL — kuchli va kengaytiriladigan ochiq kodli ma’lumotlar bazasi",
-    icon: <DiPostgresql size={"50px"} color="#336791" />,
-    color: "#336791",
-  },
-  {
-    name: "MongoDB",
-    content: "MongoDB — hujjatlar asosidagi NoSQL ma’lumotlar bazasi",
-    icon: <DiMongodb size={"50px"} color="#4db33d" />,
-    color: "#4db33d",
-  },
-  {
-    name: "Tailwind CSS",
-    content: "Tailwind — tez va moslashtirilgan veb-dizayn uchun CSS framework",
-    icon: <RiTailwindCssFill size={"50px"} color="#06b6d4" />,
-    color: "#06b6d4",
-  },
-  {
-    name: "Firebase",
-    content: "Firebase — Google’ning backend xizmatlari platformasi",
-    icon: <RiFirebaseFill size={"50px"} color="#FFCA28" />,
-    color: "#FFCA28",
-  },
-  {
-    name: "Git",
-    content: "Git — versiyalarni boshqarish tizimi, kod o‘zgarishlarini nazorat qilish uchun",
-    icon: <FaGit size={"50px"} color="#f05032" />,
-    color: "#f05032",
-  },
-  {
-    name: "GitHub",
-    content: "GitHub — Git repozitoriylarini saqlash va boshqarish uchun platforma",
-    icon: <FaGithub size={"50px"} color="#fff" />,
-    color: "#000000",
-  },
-  {
-    name: "VS Code",
-    content: "Visual Studio Code — eng mashhur kod muharriri, kengaytmalarga boy",
-    icon: <SiVisualstudiocode size={"50px"} color="#007acc" />,
-    color: "#007acc",
-  },
-  {
-    name: "VIM",
-    content: "Vim — kuchli klaviatura asosidagi matn muharriri",
-    icon: <DiVim size={"50px"} color="#fff" />,
-    color: "#000000",
-  },
-  {
-    name: "Prettier",
-    content: "Prettier — kodni avtomatik ravishda formatlovchi vosita",
-    icon: <SiPrettier size={"50px"} color="#f7b93c" />,
-    color: "#f7b93c",
-  },
-  {
-    name: "NPM",
-    content: "NPM — JavaScript kutubxonalarini o‘rnatish va boshqarish uchun paket menejeri",
-    icon: <DiNpm size={"50px"} color="#CB3837" />,
-    color: "#CB3837",
-  },
-  {
-    name: "Yarn",
-    content: "Yarn — JavaScript paketlarini boshqarish uchun NPM alternativasi",
-    icon: <FaYarn size={"50px"} color="#2C8EBB" />,
-    color: "#2C8EBB",
-  },
-  {
-    name: "Vercel",
-    content: "Vercel — Next.js va boshqa frontend loyihalarini joylash uchun platforma",
-    icon: <SiVercel size={"50px"} color="#fff" />,
-    color: "#000000",
-  },
-  {
-    name: "Linux",
-    content: "Linux — ochiq kodli operatsion tizim yadrosi, ko‘p serverlarda ishlatiladi",
-    icon: <FaLinux size={"50px"} color="#fff" />,
-    color: "#000000",
-  },
-  {
-    name: "Kubuntu",
-    content: "Kubuntu — KDE muhitida ishlaydigan Ubuntu distributivi",
-    icon: <SiKubuntu size={"50px"} color="#0077C4" />,
-    color: "#000000",
-  },
-  {
-    name: "Terminal",
-    content: "Terminal — buyruqlar orqali tizim bilan muloqot qilish interfeysi",
-    icon: <TbTerminal2 size={"50px"} color="#fff" />,
-    color: "#000000",
-  },
-  {
-    name: "AWS",
-    content: "AWS — Amazon tomonidan taqdim etilgan keng qamrovli bulutli xizmatlar",
-    icon: <FaAws size={"50px"} color="#3f51b5" />,
-    color: "#000000",
+    period: "2021 — 2022",
+    title: "Buxgalter yordamchisi",
+    place: "“Sharqona Garden Travel” Toshkent viloyati",
+    text: "Moliyaviy hujjatlar bilan ishlash — biznes jarayonlarini avtomatlashtirishga qiziqishim shu yerdan boshlangan.",
   },
 ];
 
+const EDUCATION = [
+  {
+    period: "2022 — 2026",
+    title: "Tarmoqlarda biznesni boshqarish",
+    place: "Toshkent Xalqaro Kimyo Universiteti",
+  },
+  {
+    period: "2021 — 2022",
+    title: "HTML + CSS, JavaScript, TypeScript, React",
+    place: "PDP Academy",
+  },
+  {
+    period: "2019 — 2021",
+    title: "Python algoritmlar, Telegram botlar, web freymvorklar",
+    place: "MohirDev platformasi",
+  },
+];
 
-function Page() {
-  const [toolsLoaded, setToolsLoaded] = useState(false);
+const KEY_PROJECTS = [
+  { name: "MarosimGo", href: "https://github.com/Xusanbek0039/Marosim-Go" },
+  { name: "ITC Academy", href: "https://itc-academy.uz/" },
+  { name: "ITC Zomin LMS", href: "https://www.itclms.uz/" },
+  { name: "Goodever.uz", href: "https://goodever.uz/" },
+  { name: "@itc_academybot", href: "https://t.me/itc_academybot" },
+];
 
-  useEffect(() => {
-    setToolsLoaded(true);
-  }, []);
+const LANGUAGES = [
+  { name: "O‘zbek tili", level: 100, note: "ona tili" },
+  { name: "Rus tili", level: 50 },
+  { name: "Ingliz tili", level: 45 },
+  { name: "Koreys tili", level: 30 },
+];
+
+const Card = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div
+    className={`p-6 md:p-10 border-[.5px] rounded-md border-zinc-600 ${className}`}
+    style={{ backdropFilter: "blur(2px)" }}
+  >
+    {children}
+  </div>
+);
+
+const Timeline = ({
+  items,
+}: {
+  items: { period: string; title: string; place: string; text?: string }[];
+}) => (
+  <ol className="relative border-l border-zinc-700 ml-2">
+    {items.map((item) => (
+      <li key={item.period + item.title} className="mb-8 last:mb-0 ml-6">
+        <span className="absolute -left-[5px] mt-2 w-[9px] h-[9px] rounded-full bg-zinc-300" />
+        <p className="text-xs font-mono text-zinc-500">{item.period}</p>
+        <h3 className="text-lg text-zinc-200">{item.title}</h3>
+        <p className="text-sm text-zinc-400">{item.place}</p>
+        {item.text && (
+          <p className="mt-2 text-sm text-zinc-500">{item.text}</p>
+        )}
+      </li>
+    ))}
+  </ol>
+);
+
+async function Page() {
+  const gh = await getGithubProfile();
+  const avatar = gh?.avatar_url ?? FALLBACK_AVATAR;
+
+  const stats = [
+    { value: "7+", label: "yillik tajriba" },
+    { value: gh ? String(gh.public_repos) : "130+", label: "GitHub repozitoriy" },
+    { value: gh ? String(gh.followers) : "30+", label: "GitHub kuzatuvchi" },
+    { value: "10+", label: "real loyiha" },
+  ];
 
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[200px] text-zinc-300 pt-20 pb-20">
       <div className="flex flex-col lg:flex-row gap-5">
-        <aside className="w-full md:basis-1/4">
+        <aside className="w-full lg:basis-1/4 lg:min-w-[280px]">
           <div
-            className="p-4 md:p-8 lg:p-10 rounded-2xl border-[.5px] border-zinc-600"
-            style={{
-              backdropFilter: "blur(2px)",
-            }}
+            className="p-4 md:p-8 rounded-2xl border-[.5px] border-zinc-600 lg:sticky lg:top-24"
+            style={{ backdropFilter: "blur(2px)" }}
           >
             <div className="flex flex-row lg:flex-col items-center">
               <div className="flex justify-center items-center lg:w-full lg:aspect-square bg-zinc-800 rounded-xl lg:mb-5">
-                {/* ✅ img o'rniga next/image */}
                 <Image
-                  className="rounded-full p-4 lg:p-10 w-[100px] md:w-[150px] lg:w-[200px] aspect-square bg-zinc-800"
-                  alt="me"
-                  src="/assets/me.jpg"
-                  width={200}
-                  height={200}
+                  className="rounded-full m-4 lg:m-8 w-[100px] md:w-[150px] lg:w-[200px] aspect-square object-cover"
+                  alt="Husan Suyunov"
+                  src={avatar}
+                  width={400}
+                  height={400}
+                  priority
                 />
               </div>
-              <div className="flex flex-col gap-3 lg:items-center ml-10 md:ml-20 lg:ml-0">
-                <p className="text-center text-xl">Husan Suyunov</p>
+              <div className="flex flex-col gap-2 lg:items-center ml-6 md:ml-12 lg:ml-0">
+                <p className="text-xl lg:text-center">Husan Suyunov</p>
                 <div className="text-xs bg-zinc-700 w-fit px-3 py-1 rounded-full">
-                  Full-Stack Developer
+                  Full-Stack Python Developer
                 </div>
+                <p className="flex items-center gap-2 text-xs text-zinc-500">
+                  <FaLocationDot /> Jizzax, Sh. Rashidov tumani
+                </p>
               </div>
             </div>
-            <div className="hidden lg:block">
-              <hr className="my-10 border-zinc-600" />
-              <ul className="flex flex-col gap-3">
-                {CONTACT_LINKS.map((link) => (
-                  <li key={link.name}>
-                    <a
-                      className="flex items-center px-3 gap-3 w-full h-12 border-zinc-700 bg-zinc-800 hover:border-zinc-600 border-[.5px] rounded-md "
-                      href={link.href}
-                    >
-                      <div className="w-8">{link.icon}</div>
-                      <div className="flex flex-col">
-                        <div className="text-sm">{link.name}</div>
-                        <div className="text-xs text-zinc-500">
-                          {link.content}
-                        </div>
+            <a
+              href={CV_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 flex items-center justify-center gap-2 h-11 rounded-md bg-zinc-200 text-black text-sm hover:bg-white transition-colors"
+            >
+              <FileText className="w-4 h-4" />
+              Resume CV ko&apos;rish
+            </a>
+            <hr className="my-6 border-zinc-600" />
+            <ul className="grid grid-cols-2 lg:grid-cols-1 gap-3">
+              {CONTACT_LINKS.map((link) => (
+                <li key={link.name}>
+                  <a
+                    className="flex items-center px-3 gap-3 w-full h-12 border-zinc-700 bg-zinc-800 hover:border-zinc-500 border-[.5px] rounded-md transition-colors"
+                    href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                  >
+                    <div className="w-6 text-lg">{link.icon}</div>
+                    <div className="flex flex-col min-w-0">
+                      <div className="text-sm">{link.name}</div>
+                      <div className="text-xs text-zinc-500 truncate">
+                        {link.content}
                       </div>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+
+        <main className="lg:basis-3/4 min-w-0 flex flex-col gap-5">
+          <Card>
+            <h1 className="text-3xl mb-6">Men haqimda</h1>
+            <p className="mb-5 leading-relaxed">
+              Assalomu alaykum! Men <b>Suyunov Husan</b> — Full-Stack Python
+              dasturchiman. Python, Django, FastAPI va React yordamida web
+              ilovalar, LMS va CRM tizimlarini backend va frontend qismlari bilan
+              to&apos;liq ishlab chiqaman. Sun&apos;iy intellekt (NLP, Machine
+              Learning) loyihalari va Telegram botlar yaratish ham asosiy
+              yo&apos;nalishlarimdan.
+            </p>
+            <p className="mb-5 leading-relaxed">
+              Hozirda <b>IT Park Zomin tuman filiali rahbari</b> sifatida ta&apos;lim
+              jarayonini raqamlashtirish ustida ishlayman: itclms.uz, ITC
+              Academy platformasi va uning Telegram boti — shu ishning
+              natijalari. Toshkent Xalqaro Kimyo Universitetida &laquo;Tarmoqlarda
+              biznesni boshqarish&raquo; yo&apos;nalishida tahsil olaman, shuning
+              uchun loyihalarga texnik va biznes nuqtai nazaridan birdek
+              qarayman.
+            </p>
+            <p className="leading-relaxed text-zinc-400">
+              Yangi texnologiyalarni o&apos;rganish va murakkab muammolarga
+              innovatsion yechim topish — mening ustuvor vazifalarim. Barcha
+              loyiha kodlarim GitHub&apos;da ochiq.
+            </p>
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
+              {stats.map((s) => (
+                <div
+                  key={s.label}
+                  className="rounded-md border-[.5px] border-zinc-700 bg-zinc-800/60 p-4 text-center"
+                >
+                  <div className="text-3xl text-zinc-100">{s.value}</div>
+                  <div className="mt-1 text-xs text-zinc-500">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
+            <Card>
+              <h2 className="text-2xl mb-6 flex items-center gap-3">
+                <BriefcaseBusiness className="w-6 h-6" /> Ish tajribasi
+              </h2>
+              <Timeline items={EXPERIENCE} />
+            </Card>
+            <Card>
+              <h2 className="text-2xl mb-6 flex items-center gap-3">
+                <GraduationCap className="w-6 h-6" /> Ta&apos;lim
+              </h2>
+              <Timeline items={EDUCATION} />
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
+            <Card>
+              <h2 className="text-2xl mb-6">Asosiy loyihalar</h2>
+              <ul className="flex flex-wrap gap-2">
+                {KEY_PROJECTS.map((p) => (
+                  <li key={p.name}>
+                    <a
+                      href={p.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sm px-3 py-1.5 rounded-md border-[.5px] border-zinc-600 hover:border-zinc-400 transition-colors"
+                    >
+                      {p.name}
+                      <ArrowUpRight className="w-3.5 h-3.5" />
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
-        </aside>
-        <main className="basis-3/4 w-[500px]">
-          <div
-            className="p-10 border-[.5px] rounded-md border-zinc-600"
-            style={{ backdropFilter: "blur(2px)" }}
-          >
-                <h1 className="text-3xl mb-10 lg:md-20">Men haqimda</h1>
-                <p className="mb-10 text-roboto">
-                  Assalomu alaykum! Men Suyunov Husan, Toshkent shahridagi Kimyo Universitetining 
-                  “Tarmoqlarda biznesni boshqarish” yo‘nalishi bo‘yicha 4-kurs talabasi va Full Stack dasturchiman. 
-                  Web texnologiyalar, foydalanuvchi interfeyslari (frontend) va server qismini (backend) ishlab chiqishda 
-                  chuqur bilim va tajribaga egaman. Men zamonaviy veb-ilovalarni yaratishda React, Next.js, Node.js, 
-                  MongoDB, PostgreSQL kabi texnologiyalardan faol foydalanaman. 
-                </p>
-                <p className="mb-10">
-                  Avtomatlashtirilgan tizimlar yaratish, foydalanuvchi tajribasini yaxshilash, hamkorlikda ishlash va 
-                  natijaga yo‘naltirilgan yondashuv – mening asosiy ustuvorliklarimdan. 
-                  Bo‘sh vaqtlarimda yangi texnologiyalarni o‘rganaman, kod yozaman, 
-                  va ilhom olish uchun kofe ichib, yangi loyihalar ustida fikr yuritaman.
-                </p>
-
-            <h1 className="text-3xl mb-10 lg:md-20">Men foydalanadigan narsalar</h1>
-            <div className="mb-5">
-              {!toolsLoaded ? (
-                <p className="h-[100px]"></p>
-              ) : (
-                <Splide
-                  options={{
-                    type: "loop",
-                    interval: 2000,
-                    autoplay: true,
-                    pagination: false,
-                    speed: 2000,
-                    perPage: 5,
-                    perMove: 1,
-                    rewind: true,
-                    easing: "cubic-bezier(0.25, 1, 0.5, 1)",
-                    arrows: false,
-                  }}
-                  aria-label="Mening sevimli rasmlarim"
-                >
-                  {TOOLS.reverse().map((tool) => (
-                    <SplideSlide key={tool.name}>
+              <p className="mt-4 text-sm text-zinc-500">
+                Shuningdek: KIUT LMS (universitet uchun LMS) va IT Creative AI.
+              </p>
+            </Card>
+            <Card>
+              <h2 className="text-2xl mb-6">Tillar</h2>
+              <div className="flex flex-col gap-4">
+                {LANGUAGES.map((lang) => (
+                  <div key={lang.name}>
+                    <div className="mb-1 flex justify-between text-sm">
+                      <span>{lang.name}</span>
+                      <span className="font-mono text-zinc-500">
+                        {lang.note ?? `${lang.level}%`}
+                      </span>
+                    </div>
+                    <div className="h-1.5 w-full rounded-full bg-zinc-800 overflow-hidden">
                       <div
-                        key={tool.name}
-                        className="w-fit p-2 border-[.5px] border-zinc-600 rounded-md"
-                      >
-                        {tool.icon}
-                      </div>
-                    </SplideSlide>
-                  ))}
-                </Splide>
-              )}
-            </div>
+                        className="h-full rounded-full bg-zinc-300"
+                        style={{ width: `${lang.level}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
           </div>
+
+          <Card>
+            <h2 className="text-2xl mb-6">Men foydalanadigan texnologiyalar</h2>
+            <ToolsCarousel />
+          </Card>
         </main>
       </div>
     </div>

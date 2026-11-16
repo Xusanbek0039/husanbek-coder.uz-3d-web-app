@@ -43,7 +43,7 @@ const config = {
     instagram: "https://www.instagram.com/husanbek_coder/",
     facebook: "https://www.facebook.com/",
     github: "https://github.com/xusanbek0039/",
-    youtube:"hhtps://youtube.com/@IT_Creative",
+    youtube:"https://youtube.com/@IT_Creative",
     telegram:"https://t.me/husanbek_coder",
   },
 };

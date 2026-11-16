@@ -27,7 +27,7 @@ const links: (Link & { icon: string })[] = [
   },
   {
     title: 'Bloglar',
-    href: '/blogs',
+    href: '/blog',
     thumbnail: '/assets/nav-link-previews/blog.png',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21H5a2 2 0 01-2-2V7a2 2 0 012-2h5l2 2h7a2 2 0 012 2v10a2 2 0 01-2 2z" /></svg>`
   },
