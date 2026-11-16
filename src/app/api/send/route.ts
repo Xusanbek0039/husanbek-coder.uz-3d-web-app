@@ -25,8 +25,7 @@ const OrderSchema = z.object({
   website: z.string().optional(), // honeypot
 });
 
-const Payload = z.union([OrderSchema, ContactSchema]);
-type PayloadT = z.infer<typeof Payload>;
+type PayloadT = z.infer<typeof ContactSchema> | z.infer<typeof OrderSchema>;
 
 // ---------- Oddiy rate limit (bitta server instansiyasi doirasida) ----------
 const WINDOW_MS = 10 * 60 * 1000;
@@ -119,7 +118,8 @@ async function sendEmail(p: PayloadT) {
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => null);
-    const parsed = Payload.safeParse(body);
+    const parsed =
+      body?.type === "order" ? OrderSchema.safeParse(body) : ContactSchema.safeParse(body);
     if (!parsed.success) {
       const issues = parsed.error.issues.map((issue) => issue.message);
       return NextResponse.json({ error: issues }, { status: 400 });
