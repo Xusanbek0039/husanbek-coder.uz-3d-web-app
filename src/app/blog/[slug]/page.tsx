@@ -93,13 +93,21 @@ async function Page({ params }: Props) {
           </div>
         )}
 
-        <div
-          className="blog-content mt-10 p-6 md:p-10 border-[.5px] rounded-md border-zinc-600"
-          style={{ backdropFilter: "blur(2px)" }}
-          dangerouslySetInnerHTML={{
-            __html: post.html || `<p>${post.excerpt}</p>`,
-          }}
-        />
+        {post.html ? (
+          <div
+            className="blog-content mt-10 p-6 md:p-10 border-[.5px] rounded-md border-zinc-600"
+            style={{ backdropFilter: "blur(2px)" }}
+            // HTML server tomonda sanitize-html bilan tozalangan (src/lib/itc-blog.ts)
+            dangerouslySetInnerHTML={{ __html: post.html }}
+          />
+        ) : (
+          <div
+            className="blog-content mt-10 p-6 md:p-10 border-[.5px] rounded-md border-zinc-600"
+            style={{ backdropFilter: "blur(2px)" }}
+          >
+            <p>{post.excerpt}</p>
+          </div>
+        )}
 
         <footer className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm">
           <Link
