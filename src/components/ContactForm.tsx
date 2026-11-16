@@ -7,16 +7,15 @@ import { Textarea } from "./ui/ace-textarea";
 import { cn } from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
 
 const ContactForm = () => {
   const [fullName, setFullName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [message, setMessage] = React.useState("");
+  const [website, setWebsite] = React.useState(""); // honeypot
   const [loading, setLoading] = React.useState(false);
 
   const { toast } = useToast();
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,13 +27,19 @@ const ContactForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          type: "contact",
           fullName,
           email,
           message,
+          website,
         }),
       });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data.error) {
+        throw new Error(
+          Array.isArray(data.error) ? data.error.join(" ") : data.error || "Xatolik"
+        );
+      }
       toast({
         title: "Raxmat!",
         description: "Men sizga imkon qadar tezroq bog'lanaman.",
@@ -45,14 +50,13 @@ const ContactForm = () => {
       setFullName("");
       setEmail("");
       setMessage("");
-      const timer = setTimeout(() => {
-        router.push("/");
-        clearTimeout(timer);
-      }, 1000);
     } catch (err) {
       toast({
         title: "Xatolik",
-        description: "Nimadir xato ketdi! Maydonlarni tekshiring iltimos.",
+        description:
+          err instanceof Error && err.message !== "Xatolik"
+            ? err.message
+            : "Nimadir xato ketdi! Maydonlarni tekshiring iltimos.",
         className: cn(
           "top-0 w-full flex justify-center fixed md:max-w-7xl md:top-4 md:right-4"
         ),
@@ -87,6 +91,16 @@ const ContactForm = () => {
           />
         </LabelInputContainer>
       </div>
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+        value={website}
+        onChange={(e) => setWebsite(e.target.value)}
+      />
       <div className="grid w-full gap-1.5 mb-4">
         <Label htmlFor="content">Xabaringiz</Label>
         <Textarea

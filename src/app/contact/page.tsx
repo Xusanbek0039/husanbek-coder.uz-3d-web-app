@@ -1,71 +1,73 @@
 import React from "react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { FaEnvelope, FaGithub, FaPhone, FaTelegram } from "react-icons/fa6";
+import { ArrowUpRight } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
+import { config } from "@/data/config";
+
+export const metadata: Metadata = {
+  title: "Bog'lanish | Husan Suyunov",
+  description:
+    "Husan Suyunov bilan bog'laning: web sayt, LMS/CRM tizim, Telegram bot yoki AI loyihasi bo'yicha xabar qoldiring.",
+  alternates: { canonical: "/contact" },
+};
+
+const CHANNELS = [
+  { name: "Telegram", value: "@husanbek_coder", href: config.social.telegram, icon: <FaTelegram /> },
+  { name: "Telefon", value: "+998 97 521 66 86", href: "tel:+998975216686", icon: <FaPhone /> },
+  { name: "Email", value: config.email, href: `mailto:${config.email}`, icon: <FaEnvelope /> },
+  { name: "GitHub", value: "Xusanbek0039", href: config.social.github, icon: <FaGithub /> },
+];
 
 function Page() {
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(event)
-  }
   return (
-    <section>
-      <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-        <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-zinc-200">
-          Men bilab bog&apos;lanish
-        </h2>
-        <form action="#" className="space-y-8">
-          <div>
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >Email manzilingiz
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-              placeholder="name@flowbite.com"
-              required
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="subject"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Nima mavzuda?
-            </label>
-            <input
-              type="text"
-              id="subject"
-              className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-              placeholder="Sizga qanday yordam berishimni menga xabar bering"
-              required
-            />
-          </div>
-          <div className="sm:col-span-2">
-            <label
-              htmlFor="message"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-            >
-              Sizning xabaringiz
-            </label>
-            <textarea
-              id="message"
-              rows={6}
-              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              placeholder="Fikr qoldiring..."
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            className="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-            // onClick={handleSubmit}
+    <div className="container mx-auto px-4 md:px-[50px] xl:px-[150px] text-zinc-300 pt-[100px] pb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div
+          className="lg:col-span-2 p-6 md:p-10 border-[.5px] rounded-md border-zinc-600"
+          style={{ backdropFilter: "blur(2px)" }}
+        >
+          <h1 className="text-4xl">Bog&apos;lanish</h1>
+          <p className="mt-4 text-zinc-400 leading-relaxed">
+            Loyiha g&apos;oyangiz, hamkorlik taklifi yoki savolingiz bormi?
+            Xabar qoldiring — odatda 24 soat ichida javob beraman.
+          </p>
+          <ul className="mt-8 flex flex-col gap-3">
+            {CHANNELS.map((c) => (
+              <li key={c.name}>
+                <a
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 px-3 h-12 rounded-md border-[.5px] border-zinc-700 bg-zinc-800 hover:border-zinc-500 transition-colors"
+                >
+                  <span className="w-6 text-lg">{c.icon}</span>
+                  <span className="flex flex-col min-w-0">
+                    <span className="text-sm">{c.name}</span>
+                    <span className="text-xs text-zinc-500 truncate">{c.value}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <Link
+            href="/services"
+            className="mt-8 inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
           >
-            Xabarni yuborish
-          </button>
-        </form>
+            Loyiha buyurtma qilmoqchimisiz? Xizmatlar sahifasi
+            <ArrowUpRight className="w-4 h-4" />
+          </Link>
+        </div>
+        <div
+          className="lg:col-span-3 p-6 md:p-10 border-[.5px] rounded-md border-zinc-600 bg-black/40"
+          style={{ backdropFilter: "blur(2px)" }}
+        >
+          <h2 className="text-2xl mb-6">Xabar yuborish</h2>
+          <ContactForm />
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
 
