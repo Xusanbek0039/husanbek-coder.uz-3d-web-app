@@ -46,7 +46,7 @@ export default function Body({
           exit="exit"
           key={char + i}
         >
-          {char}
+          {char === " " ? "00A0" : char}
         </motion.span>
       );
     });

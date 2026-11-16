@@ -2,13 +2,13 @@ import { Link } from "@/types";
 
 const links: (Link & { icon: string })[] = [
   {
-    title: 'Bosh_saxifa',
+    title: 'Bosh saxifa',
     href: '/',
     thumbnail: '/assets/nav-link-previews/landing.png',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 2v6m0 0h4m-4 0H7m4-6v6" /></svg>`
   },
   {
-    title: 'Men_haqimda',
+    title: 'Men haqimda',
     href: '/about',
     thumbnail: '/assets/nav-link-previews/about.png',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.657 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`
