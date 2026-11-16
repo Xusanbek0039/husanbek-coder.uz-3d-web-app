@@ -366,12 +366,14 @@ export type Project = {
   screenshots: string[];
   skills: { frontend: Skill[]; backend: Skill[] };
   content: React.ReactNode | any;
+  description: string;
   github?: string;
   live: string;
 };
 const projects: Project[] = [
   { // 00. MarosimGo — marosim xizmatlari platformasi
     id: "marosimgo",
+    description: "Oila, video studiya va to'yxonani bitta platformada bog'laydigan tizim: Django DRF API + 5 ta Next.js panel.",
     category: "Django DRF + Next.js, 5 ta panel",
     title: "MarosimGo — marosimlar uchun raqamli platforma",
     src: "/assets/projects-screenshots/marosimgo/1.png",
@@ -479,6 +481,7 @@ SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
   },
   { // 01. ITC Academy — o'quv platformasi
     id: "itc-academy",
+    description: "Video darslar, testlar, AI yordamchi, coin tizimi va onlayn to'lovlarga ega IT ta'lim platformasi (Django, PWA).",
     category: "Django LMS, PWA, To'lov tizimi",
     title: "ITC Academy — onlayn IT ta'lim platformasi",
     src: "/assets/projects-screenshots/itc-academy/1.png",
@@ -581,7 +584,8 @@ Phusion Passenger ──► Django (monolit, MVT)
     },
   },
   { // 02. ITC LMS — IT Park Zomin
-    id: "LMS",
+    id: "itc-lms",
+    description: "IT Park Zomin tuman filiali uchun sayt va o'quv boshqaruv tizimi: React + Vite frontend, Django REST API.",
     category: "React + Vite, Django DRF API",
     title: "IT Park Zomin tuman filiali LMS",
     src: "/assets/projects-screenshots/itclms/landing.png",
@@ -651,6 +655,7 @@ itc-academy.uz (login / ariza)`}
   },
   { // 03. ITC Academy Telegram bot
     id: "itc-academy-bot",
+    description: "ITC Academy platformasining Telegram'dagi AI yordamchisi — kurslar va yangiliklar bir joyda.",
     category: "Telegram Bot, AI yordamchi",
     title: "ITC Academy Telegram BOT",
     src: "/assets/projects-screenshots/itc-bot/1.png",
@@ -701,7 +706,8 @@ itc-academy.uz (Django backend + DB)`}
     },
   },
   { // 02. FinanceMe project
-    id: "Goodever",
+    id: "goodever",
+    description: "HORECA, qurilish va ofis mahsulotlari uchun online do'kon: katalog, savatcha, buyurtma va admin panel.",
     category: "Online magazin CRM",
     title: "Sotuv bo`limini online qilish",
     src: "/assets/projects-screenshots/goodever/1.png",
@@ -799,6 +805,7 @@ Mijoz Google Console Claud hizmat ko`rsatish markaziga ulangan shu panel orqali 
   },
   { // 03. Portfolio project
     id: "portfolio",
+    description: "Three.js/Spline 3D interfeysli, animatsiyalarga boy shaxsiy portfolio sayt (Next.js, TypeScript).",
     category: "Portfolio",
     title: "Mening portfolio saytim",
     src: "/assets/projects-screenshots/portfolio/landing.png",
@@ -865,13 +872,14 @@ Barcha huquqlar himoyalangan!          </p>
     },
   },
   { // 04. Smart parking assitant
-    id: "portfolio",
+    id: "shoira-blog",
+    description: "Uch tilli, dark/light rejimli zamonaviy blog platformasi — maqolalar yozish va ulashish.",
     category: "Portfolio",
     title: "Shoira portfolio web sayt",
     src: "/assets/projects-screenshots/shoira/1.png",
     screenshots: ["01.jpeg", "03.png"],
     live: "https://shoira-blog.uz",
-    github:"https://github.com/xusanbek0039/shoira-blog,uz",
+    github: "https://github.com/Xusanbek0039/shoira-blog.uz",
     skills: {
       frontend: [PROJECT_SKILLS.python,PROJECT_SKILLS.js],
       backend: [PROJECT_SKILLS.python, PROJECT_SKILLS.html, PROJECT_SKILLS.js, PROJECT_SKILLS.mongo],
@@ -897,13 +905,14 @@ Barcha huquqlar himoyalangan!          </p>
     },
   },
   { // 05. Smart Job Tracker project
-    id: "telegrambot",
+    id: "chatgpt-telegram-bot",
+    description: "OpenAI API asosidagi ochiq kodli ChatGPT Telegram bot.",
     category: "OpenAI API",
     title: "ChatGPT Telegram BOT",
     src: "/assets/projects-screenshots/telegram-bot/02.png",
     screenshots: ["01.png", "02.png", "03.png","04.png","05.png","06.png","07.png"],
     live: "https://t.me/chatgpt_avtobot",
-    github:"https://github.com/xusanbek0039/husanbek-coder.uz-3d-web-app",
+    github: "https://github.com/Xusanbek0039/openai_api_telegram_bot",
     skills: {
       frontend: [],
       backend: [PROJECT_SKILLS.python, PROJECT_SKILLS.html, PROJECT_SKILLS.js, PROJECT_SKILLS.mongo],
@@ -931,7 +940,8 @@ Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda 
     },
   },
   { // 06. Savinder Puri portfolio project
-    id: "instavideosave",
+    id: "instagram-video-bot",
+    description: "Instagram videolarini Telegram orqali yuklab beruvchi ochiq kodli bot.",
     category: "Instagram API",
     title: "Instagram Video Upload",
     src: "/assets/projects-screenshots/instagram-bot/01.png",
