@@ -136,8 +136,8 @@ const LANGUAGES = [
 
 const cardClass = cn(
   "rounded-xl border p-5",
-  "border-neutral-300/70 bg-white/70",
-  "dark:border-neutral-700/70 dark:bg-black/50"
+  "border-neutral-300/70 bg-white/80",
+  "dark:border-neutral-700/70 dark:bg-black/70"
 );
 
 const CvSkillsSection = () => {
@@ -168,7 +168,7 @@ const CvSkillsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.4, delay: (idx % 3) * 0.08 }}
-            className={cn(cardClass, "backdrop-blur-sm")}
+            className={cn(cardClass, "backdrop-blur-md")}
           >
             <h3 className="mb-4 text-lg font-semibold text-neutral-800 dark:text-neutral-100">
               <span className="mr-2">{group.emoji}</span>
@@ -196,7 +196,7 @@ const CvSkillsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.4, delay: 0.16 }}
-          className={cn(cardClass, "backdrop-blur-sm sm:col-span-2 lg:col-span-2")}
+          className={cn(cardClass, "backdrop-blur-md sm:col-span-2 lg:col-span-2")}
         >
           <h3 className="mb-4 text-lg font-semibold text-neutral-800 dark:text-neutral-100">
             <span className="mr-2">🌍</span>
