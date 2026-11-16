@@ -1,5 +1,6 @@
 import "server-only";
 import sanitizeHtml from "sanitize-html";
+import { decodeEntities } from "./html";
 
 export type BlogPost = {
   id: string;
@@ -39,16 +40,6 @@ const apiHeaders = (key: string) => ({
   "X-API-Key": key,
   Authorization: `Api-Key ${key}`,
 });
-
-const decodeEntities = (s: string) =>
-  s
-    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
-    .replace(/&quot;/g, '"')
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&");
 
 const absolute = (u: string | null | undefined) => {
   if (!u) return null;
