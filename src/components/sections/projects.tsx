@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="max-w-7xl mx-auto md:h-[130vh]">
+    <section id="projects" className="max-w-7xl mx-auto md:min-h-[130vh]">
       <Link href={"#projects"}>
         <h2
           className={cn(

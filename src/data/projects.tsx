@@ -35,6 +35,12 @@ import {
   SiApachemaven,
   SiCplusplus,
   SiArduino,
+  SiDjango,
+  SiTelegram,
+  SiGreensock,
+  SiNginx,
+  SiVercel,
+  SiPwa,
 } from "react-icons/si";
 import { TbBrandFramerMotion } from "react-icons/tb";
 import css from "styled-jsx/css";
@@ -68,6 +74,14 @@ const ProjectsLinks = ({ live, repo }: { live: string; repo?: string }) => {
         </Link>
       )}
     </div>
+  );
+};
+
+const Architecture = ({ diagram }: { diagram: string }) => {
+  return (
+    <pre className="font-mono text-xs md:text-sm leading-relaxed whitespace-pre overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-100/60 dark:bg-neutral-900/60 p-4 my-4">
+      {diagram}
+    </pre>
   );
 };
 
@@ -218,7 +232,7 @@ const PROJECT_SKILLS = {
     title: "GSAP",
     bg: "black",
     fg: "white",
-    icon: "",
+    icon: <SiGreensock />,
   },
   framerMotion: {
     title: "Framer Motion",
@@ -293,6 +307,42 @@ const PROJECT_SKILLS = {
     fg: "white",
     icon: <SiArduino/>,
   },
+  django: {
+    title: "Django",
+    bg: "black",
+    fg: "white",
+    icon: <SiDjango />,
+  },
+  telegram: {
+    title: "Telegram Bot API",
+    bg: "black",
+    fg: "white",
+    icon: <SiTelegram />,
+  },
+  nginx: {
+    title: "Nginx",
+    bg: "black",
+    fg: "white",
+    icon: <SiNginx />,
+  },
+  vercel: {
+    title: "Vercel",
+    bg: "black",
+    fg: "white",
+    icon: <SiVercel />,
+  },
+  pwa: {
+    title: "PWA",
+    bg: "black",
+    fg: "white",
+    icon: <SiPwa />,
+  },
+  threejs: {
+    title: "Three.js",
+    bg: "black",
+    fg: "white",
+    icon: <SiThreedotjs />,
+  },
 };
 export type Project = {
   id: string;
@@ -306,27 +356,143 @@ export type Project = {
   live: string;
 };
 const projects: Project[] = [
-  { // 01. AI Docker file optimizer project
-    id: "LMS",
-    category: "DjangoDRF LMS, CRM, API",
-    title: "IT Park Zomin tuman filiali LMS",
-    src: "/assets/projects-screenshots/itclms/1.png",
-    screenshots: ["1.png", "2.png", "3.png"],
-    live: "https://itclms.uz/",
-    github:"https://github.com/Xusanbek0039/ITC-LMS-API",
+  { // 01. ITC Academy — o'quv platformasi
+    id: "itc-academy",
+    category: "Django LMS, PWA, To'lov tizimi",
+    title: "ITC Academy — onlayn IT ta'lim platformasi",
+    src: "/assets/projects-screenshots/itc-academy/1.png",
+    screenshots: ["1.png", "2.png", "3.png", "4.png", "5.png"],
+    live: "https://itc-academy.uz/",
     skills: {
-      frontend: [PROJECT_SKILLS.js, PROJECT_SKILLS.next, PROJECT_SKILLS.tailwind, PROJECT_SKILLS.vite],
-      backend: [PROJECT_SKILLS.openai,PROJECT_SKILLS.netlify,PROJECT_SKILLS.python],
+      frontend: [
+        PROJECT_SKILLS.html,
+        PROJECT_SKILLS.css,
+        PROJECT_SKILLS.js,
+        PROJECT_SKILLS.gsap,
+        PROJECT_SKILLS.threejs,
+        PROJECT_SKILLS.pwa,
+      ],
+      backend: [
+        PROJECT_SKILLS.python,
+        PROJECT_SKILLS.django,
+        PROJECT_SKILLS.nginx,
+        PROJECT_SKILLS.telegram,
+      ],
     },
     get content() {
       return (
         <div>
           <TypographyP className="font-mono ">
-          🔧 API imkoniyatlari: 👥 Foydalanuvchilarni ro‘yxatdan o‘tkazish va avtorizatsiya qilish 📚 Kurslar va darslar (lessons) bilan ishlash 📝 Testlar va topshiriqlar (assignments)ni boshqarish 📊 Baholash tizimi (grades, progress) 🔒 JWT yoki Token orqali xavfsiz autentifikatsiya 🧑‍🏫 O‘qituvchi va talabalar rollari 📆 Kalendar va jadval integra
-
-
+            itc-academy.uz — IT kasblarini noldan o‘rganish uchun to‘liq onlayn
+            platforma: video darslar, testlar, uy vazifalari, AI yordamchi,
+            o‘yinlar, coin tizimi va sertifikatlar — hammasi bitta joyda.
+          </TypographyP>
+          <ProjectsLinks live={this.live} />
+          <SlideShow
+            images={[
+              `${BASE_PATH}/itc-academy/1.png`,
+              `${BASE_PATH}/itc-academy/2.png`,
+            ]}
+          />
+          <TypographyH3 className="my-4 mt-8">🔑 Asosiy imkoniyatlar</TypographyH3>
+          <p className="font-mono mb-2">
+            🎬 Video darslar va amaliy topshiriqlar · 📝 Testlar va uy vazifalari
+            (ustoz tekshiradi) · 🤖 24/7 AI yordamchi (sayt va Telegram bot
+            orqali) · 🪙 Coin tizimi — test, vazifa, kunlik savol va o‘yinlar
+            uchun coin, do‘kon va kurs chegirmalari · 🎓 Sertifikatlar · 👨‍👩‍👧
+            Ota-ona paneli (davomat va baholar) · 📚 Kutubxona va startaplar
+            bo‘limi.
+          </p>
+          <SlideShow
+            images={[
+              `${BASE_PATH}/itc-academy/4.png`,
+            ]}
+          />
+          <TypographyH3 className="my-4 mt-8">💳 Pullik kurslar va to‘lovlar</TypographyH3>
+          <p className="font-mono mb-2">
+            Kurslar bir martalik to‘lov bilan umrbod ochiladi — to‘lovdan keyin
+            kurs avtomatik faollashadi. Click, Payme, Paynet, Uzum, Humo kabi
+            mahalliy to‘lov tizimlari qo‘llab-quvvatlanadi.
+          </p>
+          <TypographyH3 className="my-4 mt-8">📰 Blog va yangiliklar</TypographyH3>
+          <p className="font-mono mb-2">
+            IT dunyosi yangiliklari, darsliklar va maslahatlar — kategoriyalar,
+            qidiruv, layk va izohlar bilan.
+          </p>
+          <SlideShow
+            images={[
+              `${BASE_PATH}/itc-academy/3.png`,
+              `${BASE_PATH}/itc-academy/5.png`,
+            ]}
+          />
+          <TypographyH3 className="my-4 mt-8">🏗️ Arxitektura</TypographyH3>
+          <p className="font-mono mb-2">
+            Server-side rendering asosidagi monolit Django ilova. Sahifalar
+            Django shablonlari orqali serverda yig‘iladi, interaktivlik va 3D
+            effektlar esa vanilla JS + GSAP/ScrollTrigger, Lenis va Three.js
+            yordamida qo‘shilgan. Sayt PWA sifatida o‘rnatiladi (service worker),
+            Android (TWA) va desktop ilova ko‘rinishida ham ishlaydi.
+          </p>
+          <Architecture
+            diagram={`Brauzer / PWA / Android (TWA) / Desktop ilova
+        │  HTTPS
+        ▼
+Nginx (reverse proxy + kesh)
+        │
+        ▼
+Phusion Passenger ──► Django (monolit, MVT)
+                       ├─ accounts   — ro‘yxat, login, rollar (o‘quvchi/ustoz/ota-ona)
+                       ├─ kurslar    — darslar, video, test, vazifa
+                       ├─ coin       — mukofot, do‘kon, chegirmalar
+                       ├─ blog       — postlar, layk, izohlar
+                       ├─ payments   — Click / Payme / Paynet / Uzum
+                       └─ AI yordamchi API
+        │                         ▲
+        ▼                         │
+  Ma’lumotlar bazasi       Telegram bot (@itc_academybot)`}
+          />
+          <p className="font-mono mb-2">
+            Xavfsizlik: CSRF himoyasi, X-Frame-Options: DENY, nosniff va XSS
+            sarlavhalari, faqat HTTPS orqali ishlovchi cookie’lar.
+          </p>
+        </div>
+      );
+    },
+  },
+  { // 02. ITC LMS — IT Park Zomin
+    id: "LMS",
+    category: "React + Vite, Django DRF API",
+    title: "IT Park Zomin tuman filiali LMS",
+    src: "/assets/projects-screenshots/itclms/landing.png",
+    screenshots: ["landing.png", "1.png", "2.png", "3.png"],
+    live: "https://www.itclms.uz/",
+    github:"https://github.com/Xusanbek0039/ITC-LMS-API",
+    skills: {
+      frontend: [PROJECT_SKILLS.react, PROJECT_SKILLS.vite, PROJECT_SKILLS.tailwind, PROJECT_SKILLS.js],
+      backend: [PROJECT_SKILLS.python, PROJECT_SKILLS.django, PROJECT_SKILLS.vercel],
+    },
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono ">
+            IT Park Zomin tuman filiali (IT Shaharchasi) uchun rasmiy sayt va
+            o‘quv boshqaruv tizimi: kurslar, afzalliklar, statistika va aloqa
+            bo‘limlari. Ro‘yxatdan o‘tish va kirish ITC Academy platformasi
+            bilan bog‘langan.
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
+          <SlideShow
+            images={[
+              `${BASE_PATH}/itclms/landing.png`,
+            ]}
+          />
+          <TypographyH3 className="my-4 mt-8">🔧 API imkoniyatlari</TypographyH3>
+          <p className="font-mono mb-2">
+            👥 Foydalanuvchilarni ro‘yxatdan o‘tkazish va avtorizatsiya · 📚 Kurslar
+            va darslar · 📝 Testlar va topshiriqlar · 📊 Baholash tizimi (grades,
+            progress) · 🔒 JWT/Token orqali xavfsiz autentifikatsiya · 🧑‍🏫
+            O‘qituvchi va talaba rollari · 📆 Kalendar va dars jadvali.
+          </p>
           <SlideShow
             images={[
               `${BASE_PATH}/itclms/1.png`,
@@ -334,8 +500,80 @@ const projects: Project[] = [
               `${BASE_PATH}/itclms/3.png`,
               `${BASE_PATH}/itclms/4.png`,
               `${BASE_PATH}/itclms/5.png`,
-
             ]}
+          />
+          <TypographyH3 className="my-4 mt-8">🏗️ Arxitektura</TypographyH3>
+          <p className="font-mono mb-2">
+            Frontend va backend ajratilgan (decoupled) arxitektura: React + Vite
+            asosidagi SPA Vercel CDN’ida joylashgan, ma’lumotlar Django REST
+            Framework API orqali JSON ko‘rinishida olinadi. SEO uchun Open Graph,
+            Twitter Card va geo meta-teglar sozlangan.
+          </p>
+          <Architecture
+            diagram={`Foydalanuvchi (brauzer)
+        │
+        ▼
+Vercel Edge / CDN ──► React SPA (Vite build, Tailwind CSS)
+        │                    │  REST / JSON (JWT)
+        │                    ▼
+        │            Django REST Framework API
+        │              ├─ auth & rollar
+        │              ├─ kurslar / darslar
+        │              ├─ topshiriqlar / baholar
+        │              └─ jadval
+        ▼
+itc-academy.uz (login / ariza)`}
+          />
+        </div>
+      );
+    },
+  },
+  { // 03. ITC Academy Telegram bot
+    id: "itc-academy-bot",
+    category: "Telegram Bot, AI yordamchi",
+    title: "ITC Academy Telegram BOT",
+    src: "/assets/projects-screenshots/itc-bot/1.png",
+    screenshots: ["1.png"],
+    live: "https://t.me/itc_academybot",
+    skills: {
+      frontend: [PROJECT_SKILLS.telegram],
+      backend: [PROJECT_SKILLS.python, PROJECT_SKILLS.django, PROJECT_SKILLS.openai],
+    },
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono ">
+            @itc_academybot — ITC Academy platformasining Telegram’dagi
+            yordamchisi. O‘quvchilar saytga kirmasdan ham AI yordamchidan savol
+            so‘rashi, kurslar va yangiliklar haqida ma’lumot olishi mumkin.
+          </TypographyP>
+          <ProjectsLinks live={this.live} />
+          <SlideShow
+            images={[
+              `${BASE_PATH}/itc-bot/1.png`,
+            ]}
+          />
+          <TypographyH3 className="my-4 mt-8">🏗️ Arxitektura</TypographyH3>
+          <p className="font-mono mb-2">
+            Bot Telegram Bot API orqali ishlaydi va ITC Academy (Django)
+            backend’i bilan bitta ma’lumotlar bazasi/API’dan foydalanadi —
+            shuning uchun foydalanuvchi, kurs va coin ma’lumotlari sayt bilan
+            sinxron.
+          </p>
+          <Architecture
+            diagram={`Telegram foydalanuvchi
+        │
+        ▼
+Telegram Bot API
+        │  update’lar
+        ▼
+Bot servisi (Python)
+   ├─ buyruqlar va menyular
+   ├─ AI yordamchi ──► LLM API
+   └─ platforma bilan integratsiya
+        │
+        ▼
+itc-academy.uz (Django backend + DB)`}
           />
         </div>
       );
@@ -483,7 +721,12 @@ Mening portfolio web saytimga xush kelibsiz
           <p className="font-mono mb-2">
             Sayt tungi hamda ertalabgi rejimlarda yaratilgan!
           </p>
-          <SlideShow images={[`${BASE_PATH}/portfolio/navbar.png`]} />
+          <SlideShow
+            images={[
+              `${BASE_PATH}/portfolio/about.png`,
+              `${BASE_PATH}/portfolio/contact.png`,
+            ]}
+          />
           <TypographyH3 className="my-4 mt-8">Loyihalarim</TypographyH3>
 
           <p className="font-mono mb-2">
@@ -491,7 +734,7 @@ Saytda siz men haqimda barcha ma`lumotlarni olishingiz mumkin!          </p>
           <SlideShow
             images={[
               `${BASE_PATH}/portfolio/projects.png`,
-              `${BASE_PATH}/portfolio/project.png`,
+              `${BASE_PATH}/portfolio/blog.png`,
             ]}
           />
           <p className="font-mono mb-2 mt-8 text-center">

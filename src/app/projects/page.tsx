@@ -10,11 +10,32 @@ import "@splidejs/react-splide/css";
 
 const PROJECTS = [
   {
+    id: 5,
+    name: "ITC Academy platformasi",
+    description: `Video darslar, testlar, AI yordamchi va coin tizimiga ega onlayn IT ta'lim platformasi (Django, PWA).`,
+    link: "https://itc-academy.uz/",
+    images: [
+      "/assets/projects-screenshots/itc-academy/1.png",
+      "/assets/projects-screenshots/itc-academy/2.png",
+      "/assets/projects-screenshots/itc-academy/3.png",
+      "/assets/projects-screenshots/itc-academy/4.png",
+      "/assets/projects-screenshots/itc-academy/5.png",
+    ],
+  },
+  {
+    id: 6,
+    name: "ITC Academy Telegram BOT",
+    description: `@itc_academybot — platformaning Telegram'dagi AI yordamchisi.`,
+    link: "https://t.me/itc_academybot",
+    images: ["/assets/projects-screenshots/itc-bot/1.png"],
+  },
+  {
     id: 1,
     name: "IT Park Zomin tuman filiali LMS",
     description: `O'quv bo'limini online qilish uchun LMS loyiha API ma'lumotlari ochiq!`,
-    link: "https://itclms.uz",
+    link: "https://www.itclms.uz/",
     images: [
+      "/assets/projects-screenshots/itclms/landing.png",
       "/assets/projects-screenshots/itclms/1.png",
       "/assets/projects-screenshots/itclms/2.png",
       "/assets/projects-screenshots/itclms/3.png",
@@ -26,7 +47,7 @@ const PROJECTS = [
     id: 2,
     name: "Online do'kon CRM goodever.uz",
     description: `Online do'kon loyihasi. Zakazga yasab berilgan!`,
-    link: "https://github.com/Abhiz2411/FinanceMe-Devops-Project-01",
+    link: "https://goodever.uz",
     images: [
       "/assets/projects-screenshots/goodever/1.png",
       "/assets/projects-screenshots/goodever/2.png",
@@ -42,7 +63,7 @@ const PROJECTS = [
     id: 3,
     name: "Husan Suyunov Portfolio Web SiTE",
     description: `Portfolio ko'rsatish uchun ishlab chiqilgan loyiha.`,
-    link: "https://www.goodever.uz/",
+    link: "https://husanbek-coder.uz/",
     images: [
       "/assets/projects-screenshots/portfolio/landing.png",
       "/assets/projects-screenshots/portfolio/blog.png",
