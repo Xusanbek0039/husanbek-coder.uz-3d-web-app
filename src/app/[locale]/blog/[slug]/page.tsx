@@ -6,11 +6,12 @@ import { Link } from "@/i18n/navigation";
 import { alternatesFor } from "@/i18n/helpers";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, CalendarDays, UserRound } from "lucide-react";
-import { getPost } from "@/lib/itc-blog";
+import { getEngagement, getPost } from "@/lib/itc-blog";
 import { formatDate } from "@/lib/utils";
 import { config } from "@/data/config";
+import PostEngagement from "@/components/blog/post-engagement";
 
-export const revalidate = 1800;
+export const revalidate = 300;
 
 type Props = { params: { slug: string; locale: string } };
 
@@ -46,7 +47,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 async function Page({ params }: Props) {
   setRequestLocale(params.locale);
   const t = await getTranslations("blog");
-  const post = await getPost(params.slug);
+  const [post, engagement] = await Promise.all([
+    getPost(params.slug),
+    getEngagement(params.slug),
+  ]);
   if (!post) notFound();
 
   const date = formatDate(post.publishedAt);
@@ -118,6 +122,8 @@ async function Page({ params }: Props) {
             <p>{post.excerpt}</p>
           </div>
         )}
+
+        {engagement && <PostEngagement data={engagement} />}
 
         <footer className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm">
           <Link

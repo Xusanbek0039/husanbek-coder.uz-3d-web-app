@@ -5,11 +5,37 @@ Portfolio (`/blog` sahifasi) postlarni server tomonda oladi:
 1. `ITC_ACADEMY_API_URL` va `ITC_ACADEMY_API_KEY` sozlangan bo'lsa — shu API'dan (`X-API-Key` sarlavhasi bilan).
 2. Aks holda yoki API xato bersa — `https://itc-academy.uz/sitemap.xml` va har bir postning meta-teglaridan.
 
-Keshlash:
+Keshlash: postlar, like va izohlar — 5 daqiqa. Darhol yangilash — itc-academy.uz
+post saqlanganda `POST /api/revalidate/blog` ni chaqiradi (pastda).
 
-- Postlar ro'yxati (sitemap / API) — 5 daqiqa. Yangi post ko'pi bilan ~5 daqiqada chiqadi.
-- Bitta post sahifasi — 30 daqiqa.
-- Darhol yangilash — itc-academy.uz post saqlanganda `POST /api/revalidate/blog` ni chaqiradi (pastda).
+## Like va izohlar (post tagida)
+
+`getEngagement()` — `src/lib/itc-blog.ts`, ko'rinishi — `src/components/blog/post-engagement.tsx`.
+
+1. `ITC_ACADEMY_API_KEY` bo'lsa — Django API'dan: like soni, **kim like bosgani** (ism + rasm),
+   izohlar va har bir izohning like soni.
+2. Kalit yo'q yoki API xato bersa — post sahifasidan: like soni va izohlar (kim like bosgani
+   public sahifada yo'q, shuning uchun ko'rinmaydi).
+
+Django tomoni allaqachon yozilgan (`learning-managment-sistem-django`):
+
+- `blog/api.py` — `GET /api/public/blog/posts/<token>/engagement/`, sarlavha `X-API-Key`.
+- `config/settings.py` — `PORTFOLIO_API_KEY` (`.env` dan). Bo'sh bo'lsa API yopiq (401).
+- Faqat ism-familiya va profil rasmi qaytadi (telefon, username yo'q). Testlar: `blog/tests.py`.
+
+Ulash:
+
+```bash
+# 1. Kalit yaratish
+python -c "import secrets; print(secrets.token_urlsafe(40))"
+# 2. itc-academy.uz serverida .env:   PORTFOLIO_API_KEY=<kalit>   (keyin restart)
+# 3. Netlify env:                     ITC_ACADEMY_API_KEY=<o'sha kalit>   (keyin redeploy)
+# 4. Tekshirish:
+curl -H "X-API-Key: <kalit>" https://itc-academy.uz/api/public/blog/posts/oQ3OFvNjSvwE/engagement/
+```
+
+`ITC_ACADEMY_API_URL` ni bo'sh qoldiring — postlar ro'yxati API'si Django'da hali yo'q
+(pastdagi namuna kod qo'shilmaguncha).
 
 ## Yangi postni darhol ko'rsatish (revalidate webhook)
 

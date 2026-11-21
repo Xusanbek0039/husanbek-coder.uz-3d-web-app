@@ -10,6 +10,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Eye,
+  Heart,
+  MessageCircle,
   UserRound,
 } from "lucide-react";
 import { FaTelegram, FaYoutube } from "react-icons/fa6";
@@ -313,6 +315,24 @@ async function ArticlesTab({ page: requested }: { page: number }) {
                       {post.category && (
                         <span className="absolute top-3 left-3 text-xs bg-white text-black rounded-lg px-2 py-0.5">
                           {post.category}
+                        </span>
+                      )}
+                      {(post.likes !== null || post.comments !== null) && (
+                        <span className="absolute bottom-3 right-3 flex items-center gap-3 text-xs text-white bg-black/60 backdrop-blur-sm rounded-lg px-2 py-1">
+                          {post.likes !== null && (
+                            <span className="flex items-center gap-1">
+                              <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" aria-hidden />
+                              <span aria-hidden>{post.likes}</span>
+                              <span className="sr-only">{t("likesCount", { count: post.likes })}</span>
+                            </span>
+                          )}
+                          {post.comments !== null && (
+                            <span className="flex items-center gap-1">
+                              <MessageCircle className="w-3.5 h-3.5" aria-hidden />
+                              <span aria-hidden>{post.comments}</span>
+                              <span className="sr-only">{t("commentsCount", { count: post.comments })}</span>
+                            </span>
+                          )}
                         </span>
                       )}
                     </div>
