@@ -5,7 +5,75 @@ Portfolio (`/blog` sahifasi) postlarni server tomonda oladi:
 1. `ITC_ACADEMY_API_URL` va `ITC_ACADEMY_API_KEY` sozlangan bo'lsa — shu API'dan (`X-API-Key` sarlavhasi bilan).
 2. Aks holda yoki API xato bersa — `https://itc-academy.uz/sitemap.xml` va har bir postning meta-teglaridan.
 
-Natija 30 daqiqa keshlanadi (`revalidate = 1800`).
+Keshlash:
+
+- Postlar ro'yxati (sitemap / API) — 5 daqiqa. Yangi post ko'pi bilan ~5 daqiqada chiqadi.
+- Bitta post sahifasi — 30 daqiqa.
+- Darhol yangilash — itc-academy.uz post saqlanganda `POST /api/revalidate/blog` ni chaqiradi (pastda).
+
+## Yangi postni darhol ko'rsatish (revalidate webhook)
+
+Portfolio hosting (Netlify) env'iga:
+
+```
+BLOG_REVALIDATE_SECRET=<uzun tasodifiy qiymat>
+```
+
+Qo'lda tekshirish:
+
+```bash
+curl -X POST https://husanbek-coder.uz/api/revalidate/blog \
+  -H "X-Revalidate-Secret: <o'sha qiymat>"
+# {"ok":true,...}
+```
+
+Django tomonida (`blog/signals.py`) — post saqlanganda/o'chirilganda chaqiriladi:
+
+```python
+import threading
+
+import requests
+from django.conf import settings
+from django.db import transaction
+from django.db.models.signals import post_delete, post_save
+from django.dispatch import receiver
+
+from .models import Post
+
+
+def _ping_portfolio():
+    url = getattr(settings, "PORTFOLIO_REVALIDATE_URL", "")
+    secret = getattr(settings, "PORTFOLIO_REVALIDATE_SECRET", "")
+    if not (url and secret):
+        return
+    try:
+        requests.post(url, headers={"X-Revalidate-Secret": secret}, timeout=5)
+    except requests.RequestException:
+        pass  # portfolio ishlamasa ham admin panel to'xtamasin
+
+
+@receiver([post_save, post_delete], sender=Post)
+def revalidate_portfolio_blog(sender, **kwargs):
+    # tranzaksiya tugagach, fon oqimida — saqlash sekinlashmaydi
+    transaction.on_commit(lambda: threading.Thread(target=_ping_portfolio, daemon=True).start())
+```
+
+`blog/apps.py` da signallarni ulash:
+
+```python
+class BlogConfig(AppConfig):
+    name = "blog"
+
+    def ready(self):
+        from . import signals  # noqa: F401
+```
+
+`settings.py` / `.env`:
+
+```python
+PORTFOLIO_REVALIDATE_URL = "https://husanbek-coder.uz/api/revalidate/blog"
+PORTFOLIO_REVALIDATE_SECRET = env("PORTFOLIO_REVALIDATE_SECRET")  # = BLOG_REVALIDATE_SECRET
+```
 
 ## Django tomoniga qo'shish (itc-academy.uz)
 

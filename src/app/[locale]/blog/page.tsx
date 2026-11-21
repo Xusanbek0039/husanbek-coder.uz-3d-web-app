@@ -20,7 +20,7 @@ import { formatDate, cn } from "@/lib/utils";
 import { config } from "@/data/config";
 import VideoGrid from "@/components/blog/video-grid";
 
-export const revalidate = 1800;
+export const revalidate = 300;
 
 export async function generateMetadata({
   params: { locale },

@@ -23,11 +23,16 @@ export type BlogPage = {
 };
 
 const SITE = "https://itc-academy.uz";
-const REVALIDATE_SECONDS = 1800;
 const MAX_POSTS = 200;
 const SLUG_RE = /^[A-Za-z0-9_-]{1,64}$/;
 
-const cacheOpts = { next: { revalidate: REVALIDATE_SECONDS, tags: ["itc-blog"] } };
+export const ITC_BLOG_TAG = "itc-blog";
+
+// Ro'yxat (sitemap/API) tez-tez o'zgaradi — yangi post 5 daqiqada ko'rinadi.
+// Bitta post sahifasi kamdan-kam o'zgaradi — uzoqroq keshlanadi.
+// Darhol yangilash: POST /api/revalidate/blog (docs/itc-academy-blog-api.md)
+const listCacheOpts = { next: { revalidate: 300, tags: [ITC_BLOG_TAG] } };
+const postCacheOpts = { next: { revalidate: 1800, tags: [ITC_BLOG_TAG] } };
 
 const apiConfig = () => {
   const url = process.env.ITC_ACADEMY_API_URL;
@@ -117,7 +122,7 @@ const fromApiItem = (p: Record<string, any>, i: number): BlogPost => {
 };
 
 async function indexFromApi(api: { url: string; key: string }): Promise<BlogPost[]> {
-  const res = await fetch(api.url, { headers: apiHeaders(api.key), ...cacheOpts });
+  const res = await fetch(api.url, { headers: apiHeaders(api.key), ...listCacheOpts });
   if (!res.ok) throw new Error(`API ${res.status}`);
   const data = await res.json();
   const list: any[] = Array.isArray(data) ? data : data.results ?? data.posts ?? data.data ?? [];
@@ -125,7 +130,7 @@ async function indexFromApi(api: { url: string; key: string }): Promise<BlogPost
 }
 
 async function indexFromSitemap(): Promise<BlogPost[]> {
-  const res = await fetch(`${SITE}/sitemap.xml`, cacheOpts);
+  const res = await fetch(`${SITE}/sitemap.xml`, listCacheOpts);
   if (!res.ok) throw new Error(`sitemap ${res.status}`);
   const xml = await res.text();
 
@@ -206,7 +211,7 @@ const metaTag = (html: string, prop: string) => {
 };
 
 async function fetchPostHtml(slug: string) {
-  const res = await fetch(`${SITE}/blog/${slug}/`, cacheOpts);
+  const res = await fetch(`${SITE}/blog/${slug}/`, postCacheOpts);
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`post ${res.status}`);
   return res.text();
@@ -240,7 +245,10 @@ export async function getPost(slug: string): Promise<BlogPostDetail | null> {
   const api = apiConfig();
   if (api) {
     try {
-      const res = await fetch(`${api.url}${slug}/`, { headers: apiHeaders(api.key), ...cacheOpts });
+      const res = await fetch(`${api.url}${slug}/`, {
+        headers: apiHeaders(api.key),
+        ...postCacheOpts,
+      });
       if (res.ok) {
         const data = await res.json();
         const content = pick(data, ["content", "body", "html", "text"]);
