@@ -94,10 +94,10 @@ async function Page({ params: { locale } }: Props) {
             <p className="mt-1 text-xl text-emerald-800 font-semibold">{t("title")}</p>
             <p className="mt-1 text-sm text-zinc-500">{t("location")}</p>
           </div>
-          <ul className="text-sm text-zinc-600 md:text-right space-y-0.5">
+          <ul className="text-sm text-zinc-600 md:text-right">
             {contacts.map((c) => (
               <li key={c.href}>
-                <a href={c.href} className="hover:text-emerald-800">
+                <a href={c.href} className="inline-block py-1 hover:text-emerald-800">
                   {c.label}
                 </a>
               </li>

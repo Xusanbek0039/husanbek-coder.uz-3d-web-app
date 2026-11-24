@@ -49,9 +49,8 @@ const HeroSection = ({ rank, rankUrl, metrics, cvAvailable }: HeroProps) => {
   return (
     <section id="hero" aria-labelledby="hero-title" className={cn("relative w-full min-h-screen")}>
       <div className="grid md:grid-cols-2">
-        {/* Matn server HTML'da ham bor (SEO); preloader tugagach animatsiya uchun qayta mount bo'ladi */}
+        {/* Matn server HTML'da bor (SEO). Ism (LCP) darhol ko'rinadi, qolganlari preloader tugagach animatsiya bilan chiqadi */}
         <div
-          key={isLoading ? "loading" : "ready"}
           className={cn(
             "min-h-[calc(100dvh-3rem)] md:min-h-[calc(100dvh-4rem)] z-[2]",
             "col-span-1",
@@ -60,7 +59,7 @@ const HeroSection = ({ rank, rankUrl, metrics, cvAvailable }: HeroProps) => {
           )}
         >
           <div>
-            <BlurIn delay={0.5}>
+            <BlurIn delay={0.5} play={!isLoading}>
               <div className="flex flex-wrap items-center gap-2 ml-3 mb-2">
                 <span className="flex items-center gap-2 rounded-full border border-emerald-600/50 bg-emerald-500/10 pl-1 pr-3 py-1 text-xs text-emerald-800 dark:text-emerald-300 font-sans">
                   <Image
@@ -88,7 +87,7 @@ const HeroSection = ({ rank, rankUrl, metrics, cvAvailable }: HeroProps) => {
                 </a>
               </div>
             </BlurIn>
-            <BlurIn delay={0.7}>
+            <BlurIn delay={0.7} play={!isLoading}>
               <p
                 className={cn(
                   "md:self-start mt-4 font-thin text-md text-slate-600 dark:text-zinc-300 ml-3",
@@ -98,7 +97,7 @@ const HeroSection = ({ rank, rankUrl, metrics, cvAvailable }: HeroProps) => {
                 {t("greeting")}
               </p>
             </BlurIn>
-            <BlurIn delay={1}>
+            <div>
               <Tooltip delayDuration={300}>
                 <TooltipTrigger asChild>
                   <h1
@@ -117,18 +116,18 @@ const HeroSection = ({ rank, rankUrl, metrics, cvAvailable }: HeroProps) => {
                   {t("motto")}
                 </TooltipContent>
               </Tooltip>
-            </BlurIn>
-            <BlurIn delay={1.2}>
+            </div>
+            <BlurIn delay={1.2} play={!isLoading}>
               <p className="md:self-start md:mt-4 ml-3 max-w-xl text-md sm:text-xl text-slate-700 dark:text-zinc-200 font-display">
                 {t("role")}
               </p>
             </BlurIn>
-            <BlurIn delay={1.4}>
+            <BlurIn delay={1.4} play={!isLoading}>
               <p className="ml-3 mt-2 max-w-md text-sm text-slate-700 dark:text-zinc-300 font-sans">
                 {t("tagline")}
               </p>
             </BlurIn>
-            <BlurIn delay={1.5}>
+            <BlurIn delay={1.5} play={!isLoading}>
               <dl className="ml-3 mt-5 flex flex-wrap gap-x-6 gap-y-2 font-sans">
                 {metricItems.map((m) => (
                   <div key={m.label} className="flex items-baseline gap-1.5">

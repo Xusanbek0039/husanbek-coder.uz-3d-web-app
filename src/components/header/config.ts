@@ -18,7 +18,7 @@ const links: (Link & { icon: string })[] = [
   {
     title: "Ko'nikmalar",
     key: 'skills',
-    href: '/#skills',
+    href: '/#skills-cv',
     thumbnail: '/assets/nav-link-previews/skills.webp',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3a1 1 0 00-1 1v4.25H5.25a1 1 0 000 2H8.75v4.25a1 1 0 001 1h4.25v3.5a1 1 0 102 0v-3.5h4.25a1 1 0 100-2h-4.25v-4.25a1 1 0 00-1-1H9.75V4a1 1 0 00-1-1z" /></svg>`
   },

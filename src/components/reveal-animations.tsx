@@ -9,6 +9,8 @@ interface BlurIntProps {
   children: ReactNode;
   className?: string;
   delay?: number;
+  /** false bo'lsa yashirin holatda kutib turadi (masalan, preloader tugaguncha) */
+  play?: boolean;
   variant?: {
     hidden: { filter: string; opacity: number };
     visible: { filter: string; opacity: number };
@@ -21,6 +23,7 @@ export const BlurIn = ({
   variant,
   delay = 0,
   duration = 1,
+  play = true,
 }: BlurIntProps) => {
   const defaultVariants = {
     hidden: { filter: "blur(10px)", opacity: 0 },
@@ -29,9 +32,10 @@ export const BlurIn = ({
   const combinedVariants = variant || defaultVariants;
 
   return (
-    <motion.h1
+    // div: avval motion.h1 edi — hero'da bir nechta (ichma-ich) h1 paydo bo'lardi
+    <motion.div
       initial="hidden"
-      animate="visible"
+      animate={play ? "visible" : "hidden"}
       transition={{ duration, delay }}
       variants={combinedVariants}
       className={cn(
@@ -40,7 +44,7 @@ export const BlurIn = ({
       )}
     >
       {children}
-    </motion.h1>
+    </motion.div>
   );
 };
 

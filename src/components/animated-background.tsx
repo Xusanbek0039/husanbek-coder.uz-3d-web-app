@@ -558,12 +558,26 @@ const AnimatedBackground = () => {
     };
     return { start, stop };
   };
-  // "Harakatni kamaytirish" yoki "Trafikni tejash" yoqilgan qurilmalarda og'ir 3D sahnani yuklamaymiz
+  // Og'ir 3D sahna (Spline) quyidagi hollarda yuklanmaydi: telefon (<768px), "harakatni kamaytirish"
+  // yoki "trafikni tejash" yoqilgan. Desktopda esa sahifa to'liq yuklangach, brauzer bo'sh paytida yuklanadi.
   const [lite, setLite] = useState<boolean | null>(null);
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const small = window.matchMedia("(max-width: 767px)").matches;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-    setLite(Boolean(reduced || saveData));
+    if (reduced || small || saveData) {
+      setLite(true);
+      return;
+    }
+    const start = () => {
+      const ric = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number })
+        .requestIdleCallback;
+      if (ric) ric(() => setLite(false), { timeout: 2500 });
+      else setTimeout(() => setLite(false), 1200);
+    };
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+    return () => window.removeEventListener("load", start);
   }, []);
   if (lite !== false) return null;
 

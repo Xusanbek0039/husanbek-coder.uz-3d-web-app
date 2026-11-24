@@ -6,7 +6,7 @@ import SectionHeading from "../ui/section-heading";
 const SkillsSection = () => {
   const t = useTranslations("skills");
   return (
-    <section id="skills" aria-labelledby="skills-title" className="w-full h-screen md:h-[150dvh]">
+    <section id="skills" aria-labelledby="skills-title" className="hidden md:block w-full md:h-[150dvh]">
       <div className="top-[70px] sticky mb-96 px-4">
         <BoxReveal width="100%">
           <SectionHeading id="skills-title">{t("title")}</SectionHeading>
