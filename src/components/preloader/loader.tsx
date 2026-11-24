@@ -59,7 +59,8 @@ export default function Index() {
       variants={slideUp}
       initial="initial"
       exit="exit"
-      className={styles.introduction}
+      // Telefonda (<768px) chizilmaydi: u yerda 3D sahna yuklanmaydi, kontent darhol ko'rinadi
+      className={`${styles.introduction} max-md:hidden`}
     >
       {dimension.width > 0 && (
         <>

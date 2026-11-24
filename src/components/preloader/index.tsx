@@ -11,6 +11,12 @@ import { AnimatePresence } from "framer-motion";
 
 import Loader from "./loader";
 import gsap from "gsap";
+import { usePathname } from "next/navigation";
+import { routing } from "@/i18n/routing";
+
+// Preloader faqat 3D sahna yuklanadigan joyda kerak: bosh sahifa (/, /ru, /en)
+const isHomePath = (path: string | null) =>
+  path === "/" || routing.locales.some((l) => path === `/${l}`);
 
 type PreloaderContextType = {
   isLoading: boolean;
@@ -38,7 +44,9 @@ export const usePreloader = () => {
 };
 const LOADING_TIME = 2.5;
 function Preloader({ children, disabled = false }: PreloaderProps) {
-  const [isLoading, setIsLoading] = useState(true);
+  const pathname = usePathname();
+  // Ichki sahifalarda (about, resume, ...) preloader umuman ko'rsatilmaydi — kontent darhol chiqadi
+  const [isLoading, setIsLoading] = useState(() => !disabled && isHomePath(pathname));
   const [loadingPercent, setLoadingPercent] = useState(0);
   const loadingTween = useRef<gsap.core.Tween>();
 
@@ -50,6 +58,16 @@ function Preloader({ children, disabled = false }: PreloaderProps) {
   };
   const loadingPercentRef = useRef<{ value: number }>({ value: 0 });
   useEffect(() => {
+    if (!isLoading) {
+      setLoadingPercent(100);
+      return;
+    }
+    // Telefonda yoki "harakatni kamaytirish" rejimida 3D yuklanmaydi — kutishga hojat yo'q
+    if (window.matchMedia("(max-width: 767px), (prefers-reduced-motion: reduce)").matches) {
+      setLoadingPercent(100);
+      setIsLoading(false);
+      return;
+    }
     loadingTween.current = gsap.to(loadingPercentRef.current, {
       value: 100,
       duration: LOADING_TIME,
