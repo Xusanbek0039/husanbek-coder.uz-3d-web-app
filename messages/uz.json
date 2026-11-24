@@ -282,14 +282,21 @@
   "experienceSection": {
     "title": "Tajriba va ta'lim",
     "more": "To'liq rezyume",
-    "present": "hozir"
+    "present": "hozir",
+    "summary": "{positions} ta lavozim · hozir {current} ta joyda ishlayman",
+    "current": "Hozir",
+    "kinds": {
+      "teaching": "Pedagogika",
+      "management": "Boshqaruv",
+      "development": "Dasturlash"
+    }
   },
   "resume": {
     "metaTitle": "Rezyume (CV) — Full-Stack Python dasturchi",
     "metaDescription": "Husan Suyunov rezyumesi: Full-Stack Python dasturchi — Django, DRF, FastAPI, React. Ish tajribasi, loyihalar va ta'lim.",
     "title": "Full-Stack Python dasturchi",
     "summaryTitle": "Qisqacha",
-    "summary": "{years}+ yillik tajribaga ega Full-Stack Python dasturchiman. Backendni Django, DRF va FastAPI'da, frontendni React va Next.js'da yozaman: LMS va CRM tizimlari, REST API va Telegram botlar. Hozir IT Park Zomin filiali rahbari sifatida itclms.uz va ITC Academy platformalarini ishlab chiqaman va yuritaman.",
+    "summary": "{years}+ yillik tajribaga ega Full-Stack Python dasturchi va dasturlash mentoriman. Backendni Django, DRF va FastAPI'da, frontendni React va Next.js'da yozaman: LMS va CRM tizimlari, REST API va Telegram botlar. Hozir Raqamli ta'limni rivojlantirish markazida dasturchi mentor va IT Park Zomin filiali rahbariman, itclms.uz va ITC Academy platformalarini ishlab chiqaman. Pedagogik tajribam bor: dasturlashni amaliy loyihalar orqali o'rgataman.",
     "skillsTitle": "Texnik ko'nikmalar",
     "experienceTitle": "Ish tajribasi",
     "projectsTitle": "Asosiy loyihalar",
@@ -301,6 +308,13 @@
     "print": "Chop etish / PDF saqlash",
     "pdf": "PDF (Google Drive)",
     "location": "Jizzax, O'zbekiston",
-    "download": "CV yuklab olish (PDF)"
+    "download": "CV yuklab olish (PDF)",
+    "competenciesTitle": "Asosiy kompetensiyalar",
+    "facts": {
+      "years": "yil tajriba",
+      "positions": "lavozim",
+      "projects": "loyiha",
+      "rank": "committers.top, O'zbekiston"
+    }
   }
 }

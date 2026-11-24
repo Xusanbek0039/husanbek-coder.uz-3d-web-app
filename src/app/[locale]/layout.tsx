@@ -81,7 +81,17 @@ const personJsonLd = (description: string, rank: CommittersRank) => ({
   jobTitle: "Full-Stack Python Developer",
   description,
   email: `mailto:${config.email}`,
-  worksFor: { "@type": "Organization", name: "IT Park Zomin tuman filiali", url: "https://www.itclms.uz/" },
+  worksFor: [
+    { "@type": "Organization", name: "IT Park Zomin tuman filiali", url: "https://www.itclms.uz/" },
+    {
+      "@type": "GovernmentOrganization",
+      name: "O'zbekiston Respublikasi Raqamli texnologiyalar vazirligi huzuridagi Raqamli ta'limni rivojlantirish markazi",
+    },
+  ],
+  hasOccupation: [
+    { "@type": "Occupation", name: "Full-Stack Python Developer" },
+    { "@type": "Occupation", name: "Programming Mentor" },
+  ],
   alumniOf: { "@type": "CollegeOrUniversity", name: "Kimyo International University in Tashkent" },
   address: { "@type": "PostalAddress", addressRegion: "Jizzax", addressCountry: "UZ" },
   knowsAbout: skills.filter((s) => s.level === "core").map((s) => s.name),

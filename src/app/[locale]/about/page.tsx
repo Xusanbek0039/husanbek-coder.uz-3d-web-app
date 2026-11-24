@@ -101,7 +101,14 @@ async function Page({ params: { locale } }: Props) {
   ];
 
   const present = await getTranslations("experienceSection");
-  const experience = experienceTimeline(locale, present("present"));
+  const experience = experienceTimeline(locale, {
+    present: present("present"),
+    kinds: {
+      teaching: present("kinds.teaching"),
+      management: present("kinds.management"),
+      development: present("kinds.development"),
+    },
+  });
   const education = educationTimeline(locale, present("present"));
   const bold = (chunks: React.ReactNode) => <b>{chunks}</b>;
 
@@ -192,7 +199,7 @@ async function Page({ params: { locale } }: Props) {
               <h2 className="text-2xl mb-6 flex items-center gap-3">
                 <BriefcaseBusiness className="w-6 h-6" aria-hidden="true" /> {t("experienceTitle")}
               </h2>
-              <Timeline items={experience} />
+              <Timeline items={experience} currentLabel={present("current")} />
             </Card>
             <Card>
               <h2 className="text-2xl mb-6 flex items-center gap-3">

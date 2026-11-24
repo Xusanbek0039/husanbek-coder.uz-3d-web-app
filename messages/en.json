@@ -282,14 +282,21 @@
   "experienceSection": {
     "title": "Experience & education",
     "more": "Full resume",
-    "present": "present"
+    "present": "present",
+    "summary": "{positions} positions · currently in {current} roles",
+    "current": "Current",
+    "kinds": {
+      "teaching": "Teaching",
+      "management": "Management",
+      "development": "Development"
+    }
   },
   "resume": {
     "metaTitle": "Resume (CV) — Full-Stack Python Developer",
     "metaDescription": "Resume of Husan Suyunov, Full-Stack Python developer — Django, DRF, FastAPI, React. Work experience, projects and education.",
     "title": "Full-Stack Python Developer",
     "summaryTitle": "Summary",
-    "summary": "Full-Stack Python developer with {years}+ years of experience. I build backends with Django, DRF and FastAPI and frontends with React and Next.js: LMS and CRM systems, REST APIs and Telegram bots. As IT Park Zaamin branch manager I build and run the itclms.uz and ITC Academy platforms.",
+    "summary": "Full-Stack Python developer and programming mentor with {years}+ years of experience. I build backends with Django, DRF and FastAPI and frontends with React and Next.js: LMS and CRM systems, REST APIs and Telegram bots. Currently a programming mentor at the Digital Education Development Center and IT Park Zaamin branch manager, building the itclms.uz and ITC Academy platforms. I have teaching experience: I teach programming through hands-on projects.",
     "skillsTitle": "Technical skills",
     "experienceTitle": "Work experience",
     "projectsTitle": "Key projects",
@@ -301,6 +308,13 @@
     "print": "Print / save as PDF",
     "pdf": "PDF (Google Drive)",
     "location": "Jizzakh, Uzbekistan",
-    "download": "Download CV (PDF)"
+    "download": "Download CV (PDF)",
+    "competenciesTitle": "Core competencies",
+    "facts": {
+      "years": "years of experience",
+      "positions": "positions",
+      "projects": "projects",
+      "rank": "committers.top, Uzbekistan"
+    }
   }
 }

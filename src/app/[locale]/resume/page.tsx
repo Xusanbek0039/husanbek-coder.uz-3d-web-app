@@ -10,7 +10,8 @@ import { getGithubProfile, GITHUB_USER } from "@/lib/github";
 import { getCommittersRank } from "@/lib/committers";
 import { displayHost } from "@/components/profile/project-links";
 import PrintButton from "./print-button";
-import { skills, spokenLanguages } from "@/data/skills";
+import { competencies, skills, spokenLanguages } from "@/data/skills";
+import { experience as experienceData, sortedExperience } from "@/data/experience";
 import { educationTimeline, experienceTimeline } from "@/data/timeline";
 import { CV_PDF_PATH, experienceYears } from "@/data/profile";
 import { pick } from "@/data/types";
@@ -53,7 +54,22 @@ async function Page({ params: { locale } }: Props) {
   const cvAvailable = hasCvPdf();
   const [gh, rank] = await Promise.all([getGithubProfile(), getCommittersRank()]);
 
-  const experience = experienceTimeline(locale, tp("present"));
+  const labels = {
+    present: tp("present"),
+    kinds: {
+      teaching: tp("kinds.teaching"),
+      management: tp("kinds.management"),
+      development: tp("kinds.development"),
+    },
+  };
+  const experience = experienceTimeline(locale, labels);
+  const currentRoles = sortedExperience().filter((e) => e.end === null);
+  const facts = [
+    { value: `${experienceYears()}+`, label: t("facts.years") },
+    { value: String(experienceData.length), label: t("facts.positions") },
+    { value: String(projects.length), label: t("facts.projects") },
+    { value: `#${rank.rank}`, label: t("facts.rank") },
+  ];
   const education = educationTimeline(locale, tp("present"));
   const keyProjects = KEY_PROJECT_IDS.map((id) => projects.find((p) => p.id === id))
     .filter((p): p is (typeof projects)[number] => Boolean(p))
@@ -92,7 +108,14 @@ async function Page({ params: { locale } }: Props) {
           <div>
             <h1 className="text-4xl font-bold text-zinc-900">Husan Suyunov</h1>
             <p className="mt-1 text-xl text-emerald-800 font-semibold">{t("title")}</p>
-            <p className="mt-1 text-sm text-zinc-500">{t("location")}</p>
+            <ul className="mt-2 space-y-0.5 text-sm text-zinc-700">
+              {currentRoles.map((r) => (
+                <li key={r.id}>
+                  <span className="font-semibold">{pick(r.role, locale)}</span> — {pick(r.organization, locale)}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-1 text-sm text-zinc-600">{t("location")}</p>
           </div>
           <ul className="text-sm text-zinc-600 md:text-right">
             {contacts.map((c) => (
@@ -105,8 +128,90 @@ async function Page({ params: { locale } }: Props) {
           </ul>
         </header>
 
+        <dl className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
+          {facts.map((f) => (
+            <div key={f.label} className="rounded-md bg-zinc-100 p-3 text-center">
+              <dt className="sr-only">{f.label}</dt>
+              <dd className="text-2xl font-bold text-zinc-900">{f.value}</dd>
+              <dd aria-hidden="true" className="text-xs text-zinc-600">{f.label}</dd>
+            </div>
+          ))}
+        </dl>
+
         <Section title={t("summaryTitle")}>
           <p className="text-sm leading-relaxed">{t("summary", { years: experienceYears() })}</p>
+        </Section>
+
+        <Section title={t("competenciesTitle")}>
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+            {competencies.map((c) => (
+              <li key={c.id} className="rounded-md border border-zinc-200 p-3 break-inside-avoid">
+                <h3 className="font-semibold text-zinc-900">{pick(c.title, locale)}</h3>
+                <p className="mt-1 text-zinc-600">{pick(c.description, locale)}</p>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section title={t("experienceTitle")}>
+          <ol className="relative border-l-2 border-zinc-200 ml-1 space-y-5">
+            {experience.map((e) => (
+              <li key={e.period + e.title} className="ml-5 break-inside-avoid">
+                <span
+                  aria-hidden="true"
+                  className={`absolute -left-[7px] mt-1.5 h-3 w-3 rounded-full ${
+                    e.current ? "bg-emerald-600" : "bg-zinc-300"
+                  }`}
+                />
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                  <h3 className="text-base font-semibold text-zinc-900">{e.title}</h3>
+                  <span className="flex items-center gap-2 text-xs font-mono text-zinc-600">
+                    {e.current && (
+                      <span className="rounded-full bg-emerald-100 px-2 py-0.5 font-sans text-emerald-800">
+                        {tp("current")}
+                      </span>
+                    )}
+                    {e.period}
+                  </span>
+                </div>
+                <p className="text-sm text-zinc-700">{e.place}</p>
+                {e.tags && e.tags.length > 0 && (
+                  <p className="mt-1 text-xs text-zinc-600">{e.tags.join(" · ")}</p>
+                )}
+                {e.items && e.items.length > 0 && (
+                  <ul className="mt-1 list-disc pl-4 text-sm text-zinc-700">
+                    {e.items.map((text) => (
+                      <li key={text}>{text}</li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ol>
+        </Section>
+
+        <Section title={t("projectsTitle")}>
+          <ul className="space-y-3">
+            {keyProjects.map((p) => (
+              <li key={p.id} className="text-sm break-inside-avoid">
+                <div className="flex flex-wrap items-baseline gap-x-3">
+                  <h3 className="font-semibold text-zinc-900">{p.title}</h3>
+                  {p.live && (
+                    <a href={p.live} target="_blank" rel="noopener noreferrer" className="text-emerald-800 underline">
+                      {displayHost(p.live)}
+                    </a>
+                  )}
+                  {p.github && (
+                    <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-zinc-600 underline">
+                      GitHub
+                    </a>
+                  )}
+                </div>
+                <p className="text-xs text-zinc-600">{p.category}</p>
+                <p className="mt-0.5 text-zinc-600">{p.description}</p>
+              </li>
+            ))}
+          </ul>
         </Section>
 
         <Section title={t("skillsTitle")}>
@@ -122,52 +227,6 @@ async function Page({ params: { locale } }: Props) {
           </dl>
         </Section>
 
-        <Section title={t("experienceTitle")}>
-          <ul className="space-y-4">
-            {experience.map((e) => (
-              <li key={e.period + e.title} className="break-inside-avoid">
-                <div className="flex flex-wrap justify-between gap-2">
-                  <h3 className="font-semibold text-zinc-900">
-                    {e.title} — <span className="font-normal">{e.place}</span>
-                  </h3>
-                  <span className="text-xs font-mono text-zinc-500">{e.period}</span>
-                </div>
-                {e.items && (
-                  <ul className="mt-1 list-disc pl-4 text-sm text-zinc-600">
-                    {e.items.map((text) => (
-                      <li key={text}>{text}</li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        <Section title={t("projectsTitle")}>
-          <ul className="space-y-3">
-            {keyProjects.map((p) => (
-              <li key={p.id} className="text-sm break-inside-avoid">
-                <div className="flex flex-wrap items-baseline gap-x-3">
-                  <h3 className="font-semibold text-zinc-900">{p.title}</h3>
-                  {p.live && (
-                    <a href={p.live} target="_blank" rel="noopener noreferrer" className="text-emerald-800 underline">
-                      {displayHost(p.live)}
-                    </a>
-                  )}
-                  {p.github && (
-                    <a href={p.github} target="_blank" rel="noopener noreferrer" className="text-zinc-500 underline">
-                      GitHub
-                    </a>
-                  )}
-                </div>
-                <p className="text-xs text-zinc-500">{p.category}</p>
-                <p className="mt-0.5 text-zinc-600">{p.description}</p>
-              </li>
-            ))}
-          </ul>
-        </Section>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
           <Section title={t("educationTitle")}>
             <ul className="space-y-3 text-sm">
@@ -175,7 +234,7 @@ async function Page({ params: { locale } }: Props) {
                 <li key={e.period + e.title}>
                   <h3 className="font-semibold text-zinc-900">{e.place}</h3>
                   <p className="text-zinc-600">{e.title}</p>
-                  <p className="text-xs font-mono text-zinc-500">{e.period}</p>
+                  <p className="text-xs font-mono text-zinc-600">{e.period}</p>
                 </li>
               ))}
             </ul>

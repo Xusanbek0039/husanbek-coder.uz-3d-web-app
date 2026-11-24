@@ -282,14 +282,21 @@
   "experienceSection": {
     "title": "Опыт и образование",
     "more": "Полное резюме",
-    "present": "н. в."
+    "present": "н. в.",
+    "summary": "{positions} должностей · сейчас работаю в {current} местах",
+    "current": "Сейчас",
+    "kinds": {
+      "teaching": "Педагогика",
+      "management": "Управление",
+      "development": "Разработка"
+    }
   },
   "resume": {
     "metaTitle": "Резюме (CV) — Full-Stack Python-разработчик",
     "metaDescription": "Резюме Хусана Суюнова: Full-Stack Python-разработчик — Django, DRF, FastAPI, React. Опыт работы, проекты и образование.",
     "title": "Full-Stack Python-разработчик",
     "summaryTitle": "Кратко",
-    "summary": "Full-Stack Python-разработчик с опытом {years}+ лет. Бэкенд пишу на Django, DRF и FastAPI, фронтенд — на React и Next.js: LMS и CRM-системы, REST API и Telegram-боты. Сейчас руковожу филиалом IT Park в Заамине и развиваю платформы itclms.uz и ITC Academy.",
+    "summary": "Full-Stack Python-разработчик и ментор по программированию с опытом {years}+ лет. Бэкенд пишу на Django, DRF и FastAPI, фронтенд — на React и Next.js: LMS и CRM-системы, REST API и Telegram-боты. Сейчас — ментор-программист в Центре развития цифрового образования и руководитель филиала IT Park в Заамине, разрабатываю платформы itclms.uz и ITC Academy. Есть педагогический опыт: обучаю программированию на практических проектах.",
     "skillsTitle": "Технические навыки",
     "experienceTitle": "Опыт работы",
     "projectsTitle": "Ключевые проекты",
@@ -301,6 +308,13 @@
     "print": "Печать / сохранить PDF",
     "pdf": "PDF (Google Drive)",
     "location": "Джизак, Узбекистан",
-    "download": "Скачать CV (PDF)"
+    "download": "Скачать CV (PDF)",
+    "competenciesTitle": "Ключевые компетенции",
+    "facts": {
+      "years": "лет опыта",
+      "positions": "должностей",
+      "projects": "проектов",
+      "rank": "committers.top, Узбекистан"
+    }
   }
 }
