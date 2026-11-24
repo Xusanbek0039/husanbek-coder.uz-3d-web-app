@@ -1,56 +1,13 @@
 "use client";
-import React, { ReactNode } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
-import { Bot, Braces, Workflow } from "lucide-react";
-import {
-  SiDjango,
-  SiDocker,
-  SiFastapi,
-  SiGithubactions,
-  SiHtml5,
-  SiJavascript,
-  SiMongodb,
-  SiNextdotjs,
-  SiNginx,
-  SiOpenai,
-  SiPostgresql,
-  SiPython,
-  SiReact,
-  SiTailwindcss,
-  SiTelegram,
-  SiThreedotjs,
-  SiTypescript,
-  SiVite,
-} from "react-icons/si";
+import { skillIcon } from "@/components/profile/skill-icons";
 import { skills, spokenLanguages, type SkillLevel } from "@/data/skills";
 import { pick } from "@/data/types";
 import SectionHeading from "@/components/ui/section-heading";
 
-// Faqat ko'rinish: texnologiya nomi -> ikonka (ro'yxatning o'zi src/data/skills.ts da)
-const ICONS: Record<string, ReactNode> = {
-  Python: <SiPython />,
-  Django: <SiDjango />,
-  "Django REST Framework": <Workflow className="w-4 h-4" />,
-  FastAPI: <SiFastapi />,
-  React: <SiReact />,
-  "Next.js": <SiNextdotjs />,
-  PostgreSQL: <SiPostgresql />,
-  Docker: <SiDocker />,
-  aiogram: <Bot className="w-4 h-4" />,
-  JavaScript: <SiJavascript />,
-  TypeScript: <SiTypescript />,
-  "HTML / CSS": <SiHtml5 />,
-  "Tailwind CSS": <SiTailwindcss />,
-  MongoDB: <SiMongodb />,
-  "Telegram Bot API": <SiTelegram />,
-  "OpenAI API": <SiOpenai />,
-  "GitHub Actions": <SiGithubactions />,
-  Nginx: <SiNginx />,
-  Vite: <SiVite />,
-  "Three.js": <SiThreedotjs />,
-};
 
 const LEVELS: SkillLevel[] = ["core", "familiar"];
 
@@ -102,9 +59,7 @@ const CvSkillsSection = () => {
                       "dark:bg-neutral-800/80 dark:text-neutral-100"
                     )}
                   >
-                    <span className="text-base" aria-hidden="true">
-                      {ICONS[s.name] ?? <Braces className="w-4 h-4" />}
-                    </span>
+                    {React.createElement(skillIcon(s.name), { className: "text-base", "aria-hidden": true })}
                     {s.name}
                   </li>
                 ))}
