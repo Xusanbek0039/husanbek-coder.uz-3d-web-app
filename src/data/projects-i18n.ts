@@ -63,13 +63,13 @@ const PROJECT_I18N: Record<string, { ru: Meta; en: Meta }> = {
   },
   goodever: {
     ru: {
-      title: "Онлайн-отдел продаж",
+      title: "Goodever.uz — интернет-магазин и CRM",
       category: "Интернет-магазин, CRM",
       description:
         "Интернет-магазин товаров для HoReCa, строительства и офиса: каталог, корзина, заказы и админ-панель.",
     },
     en: {
-      title: "Taking the sales department online",
+      title: "Goodever.uz — online store and CRM",
       category: "Online store, CRM",
       description:
         "An online store for HoReCa, construction and office supplies: catalog, cart, orders and an admin panel.",
