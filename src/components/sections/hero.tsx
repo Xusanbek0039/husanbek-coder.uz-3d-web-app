@@ -15,6 +15,7 @@ import ScrollDownIcon from "../scroll-down-icon";
 import { SiGithub, SiTelegram, SiYoutube } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
 import { config } from "@/data/config";
+import { Link as LocaleLink } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 const AVATAR = "https://avatars.githubusercontent.com/u/109731657?v=4";
@@ -130,20 +131,14 @@ const HeroSection = ({ rank, rankUrl }: { rank: number; rankUrl: string }) => {
                     </Button>
                   </BoxReveal>
                 </Link>
-                <Link
-                  href={
-                    "https://drive.google.com/file/d/1CeOgFcAtSVFQ-uLgslayaFbH1eCEwDEM/view?usp=sharing"
-                  }
-                  target="_blank"
-                  className="flex-1"
-                >
+                <LocaleLink href="/resume" className="flex-1">
                   <BoxReveal delay={2} width="100%" >
                     <Button className="flex items-center gap-2 w-full">
                       <File size={24} />
                       <p>{t("cv")}</p>
                     </Button>
                   </BoxReveal>
-                </Link>
+                </LocaleLink>
                 </div>
                 <div className="md:self-start flex flex-wrap sm:flex-nowrap gap-3">
                   <Tooltip delayDuration={300}>

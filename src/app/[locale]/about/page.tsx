@@ -25,6 +25,7 @@ import Timeline from "@/components/profile/timeline";
 import ContributionGraph from "@/components/profile/contribution-graph";
 import { formatDate } from "@/lib/utils";
 import { alternatesFor } from "@/i18n/helpers";
+import { Link } from "@/i18n/navigation";
 
 export const revalidate = 3600;
 
@@ -40,8 +41,6 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
 }
 
 const FALLBACK_AVATAR = "https://avatars.githubusercontent.com/u/109731657?v=4";
-const CV_URL =
-  "https://drive.google.com/file/d/1CeOgFcAtSVFQ-uLgslayaFbH1eCEwDEM/view?usp=sharing";
 
 const KEY_PROJECTS = [
   { name: "MarosimGo", href: "https://github.com/Xusanbek0039/Marosim-Go" },
@@ -142,15 +141,13 @@ async function Page({ params: { locale } }: Props) {
                 </p>
               </div>
             </div>
-            <a
-              href={CV_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/resume"
               className="mt-6 flex items-center justify-center gap-2 h-11 rounded-md bg-zinc-200 text-black text-sm hover:bg-white transition-colors"
             >
               <FileText className="w-4 h-4" />
               {t("cv")}
-            </a>
+            </Link>
             <hr className="my-6 border-zinc-600" />
             <ul className="grid grid-cols-2 lg:grid-cols-1 gap-3">
               {contacts.map((link) => (
