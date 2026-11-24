@@ -27,6 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const pages = [
     ...entry("/", "monthly", 1),
     ...entry("/about", "monthly", 0.9),
+    ...entry("/resume", "monthly", 0.9),
     ...entry("/projects", "monthly", 0.9),
     ...entry("/services", "monthly", 0.9),
     ...entry("/blog", "daily", 0.8),

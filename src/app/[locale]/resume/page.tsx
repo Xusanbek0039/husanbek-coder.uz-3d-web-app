@@ -15,7 +15,7 @@ export const revalidate = 3600;
 
 type Props = { params: { locale: string } };
 
-export const CV_PDF_URL =
+const CV_PDF_URL =
   "https://drive.google.com/file/d/1CeOgFcAtSVFQ-uLgslayaFbH1eCEwDEM/view?usp=sharing";
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
