@@ -15,6 +15,7 @@ import Script from "next/script";
 import Preloader from "@/components/preloader";
 import EasterEggs from "@/components/easter-eggs";
 import { config } from "@/data/config";
+import { skills } from "@/data/skills";
 import SocketContextProvider from "@/contexts/socketio";
 import RemoteCursors from "@/components/realtime/remote-cursors";
 import { routing, ogLocales, type Locale } from "@/i18n/routing";
@@ -41,7 +42,6 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
     metadataBase: new URL(config.site),
     title: t("title"),
     description: t("description"),
-    keywords: config.keywords,
     authors: [{ name: config.author }],
     alternates: alternatesFor(locale, "/"),
     openGraph: {
@@ -80,13 +80,13 @@ const personJsonLd = (description: string, rank: CommittersRank) => ({
   alternateName: ["Husanbek Suyunov", "Suyunov Husan Shavkat o'g'li", "Хусан Суюнов"],
   url: config.site,
   image: "https://avatars.githubusercontent.com/u/109731657?v=4",
-  jobTitle: "Python Backend Developer",
+  jobTitle: "Full-Stack Python Developer",
   description,
   email: `mailto:${config.email}`,
   worksFor: { "@type": "Organization", name: "IT Park Zomin tuman filiali", url: "https://www.itclms.uz/" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Kimyo International University in Tashkent" },
   address: { "@type": "PostalAddress", addressRegion: "Jizzax", addressCountry: "UZ" },
-  knowsAbout: ["Python", "Backend development", "Django", "Django REST Framework", "FastAPI", "REST API", "PostgreSQL", "Docker", "CI/CD", "Telegram bots"],
+  knowsAbout: skills.filter((s) => s.level === "core").map((s) => s.name),
   knowsLanguage: ["uz", "ru", "en"],
   nationality: { "@type": "Country", name: "Uzbekistan" },
   award: `#${rank.rank} of ${rank.total} most active GitHub users in Uzbekistan (committers.top)`,

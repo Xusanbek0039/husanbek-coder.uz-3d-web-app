@@ -71,7 +71,7 @@ const TOOLS = [
   },
   {
     name: "CSS",
-    content: "CSS — veb-sahifalarning ko‘rinishi va dizaynini yaratadi",
+    content: "CSS — veb-sahifalarning ko'rinishi va dizaynini yaratadi",
     icon: <FaCss3 size={"50px"} color="#563d7c" />,
     color: "#563d7c",
   },
@@ -113,13 +113,13 @@ const TOOLS = [
   },
   {
     name: "PostgreSQL",
-    content: "PostgreSQL — kuchli va kengaytiriladigan ochiq kodli ma’lumotlar bazasi",
+    content: "PostgreSQL — kuchli va kengaytiriladigan ochiq kodli ma'lumotlar bazasi",
     icon: <DiPostgresql size={"50px"} color="#336791" />,
     color: "#336791",
   },
   {
     name: "MongoDB",
-    content: "MongoDB — hujjatlar asosidagi NoSQL ma’lumotlar bazasi",
+    content: "MongoDB — hujjatlar asosidagi NoSQL ma'lumotlar bazasi",
     icon: <DiMongodb size={"50px"} color="#4db33d" />,
     color: "#4db33d",
   },
@@ -131,13 +131,13 @@ const TOOLS = [
   },
   {
     name: "Firebase",
-    content: "Firebase — Google’ning backend xizmatlari platformasi",
+    content: "Firebase — Google'ning backend xizmatlari platformasi",
     icon: <RiFirebaseFill size={"50px"} color="#FFCA28" />,
     color: "#FFCA28",
   },
   {
     name: "Git",
-    content: "Git — versiyalarni boshqarish tizimi, kod o‘zgarishlarini nazorat qilish uchun",
+    content: "Git — versiyalarni boshqarish tizimi, kod o'zgarishlarini nazorat qilish uchun",
     icon: <FaGit size={"50px"} color="#f05032" />,
     color: "#f05032",
   },
@@ -167,7 +167,7 @@ const TOOLS = [
   },
   {
     name: "NPM",
-    content: "NPM — JavaScript kutubxonalarini o‘rnatish va boshqarish uchun paket menejeri",
+    content: "NPM — JavaScript kutubxonalarini o'rnatish va boshqarish uchun paket menejeri",
     icon: <DiNpm size={"50px"} color="#CB3837" />,
     color: "#CB3837",
   },
@@ -185,7 +185,7 @@ const TOOLS = [
   },
   {
     name: "Linux",
-    content: "Linux — ochiq kodli operatsion tizim yadrosi, ko‘p serverlarda ishlatiladi",
+    content: "Linux — ochiq kodli operatsion tizim yadrosi, ko'p serverlarda ishlatiladi",
     icon: <FaLinux size={"50px"} color="#fff" />,
     color: "#000000",
   },

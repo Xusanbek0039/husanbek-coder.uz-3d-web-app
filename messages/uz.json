@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Husan Suyunov — Python Backend Dasturchi | Django, FastAPI",
-    "description": "Husan Suyunov — O'zbekistonlik Python Backend dasturchi. Django, DRF va FastAPI'da REST API, LMS va CRM tizimlari, Telegram botlar. 7+ yil tajriba.",
-    "short": "Python Backend dasturchi: Django, DRF, FastAPI, PostgreSQL, Docker — REST API, LMS/CRM va Telegram botlar.",
+    "title": "Husan Suyunov — Full-Stack Python dasturchi | Django, React, Telegram bot",
+    "description": "Husan Suyunov — Full-Stack Python dasturchi, IT Park Zomin filiali rahbari. Django, DRF, FastAPI va React'da LMS, CRM tizimlari va Telegram botlar yarataman.",
+    "short": "Full-Stack Python dasturchi: Django, DRF, FastAPI, React — LMS/CRM tizimlari va Telegram botlar.",
     "ogAlt": "Husan Suyunov portfoliosi"
   },
   "nav": {
@@ -18,7 +18,8 @@
     "developer": "Dasturchi:",
     "typography": "Tipografiya:",
     "images": "Rasmlar:",
-    "language": "Til"
+    "language": "Til",
+    "homeLabel": "{name} — bosh sahifa"
   },
   "footer": {
     "rights": "Barcha huquqlar himoyalangan.",
@@ -31,45 +32,45 @@
   },
   "hero": {
     "greeting": "Assalomu alaykum",
-    "role": "Python Backend Dasturchi",
+    "role": "Full-Stack Python dasturchi | IT Park Zomin filiali rahbari",
     "motto": "Mening shiorim: Har bir qadam, katta orzularni ro'yobga chiqarishning boshlanishi. Sen kuchlisan, sening yo'lingda hech narsa to'xtata olmaydi va sen albatta hammasiga erishasan.",
-    "cv": "Resume CV ko'rish",
-    "message": "Xabar qoldirish",
-    "messageTooltip": "Xabarlar bo'limi",
+    "cv": "Rezyume",
     "openToWork": "Yangi loyihalarga ochiqman",
-    "tagline": "Django, DRF va FastAPI'da REST API, LMS va CRM tizimlari — g'oyadan production'gacha",
+    "tagline": "Django va React'da LMS, CRM tizimlari va Telegram botlarni g'oyadan ishga tushirishgacha yarataman.",
     "viewProjects": "Loyihalarni ko'rish",
-    "rankBadge": "O'zbekistonda #{rank} · committers.top"
+    "rankBadge": "O'zbekistonda #{rank} · committers.top",
+    "metrics": {
+      "years": "yil tajriba",
+      "projects": "loyiha",
+      "students": "o'quvchi"
+    },
+    "order": "Loyiha buyurtma qilish",
+    "cvDownload": "CV yuklab olish",
+    "socials": "Ijtimoiy tarmoqlar",
+    "socialLabel": "{name} (yangi oynada ochiladi)",
+    "avatarAlt": "Husan Suyunov portreti — Full-Stack Python dasturchi"
   },
   "skills": {
     "title": "Texnologiyalarim",
-    "hint": "(Klaviaturadagi texnologiya ustiga bosing. To'liq ro'yxat — pastda, CV asosida!)"
+    "hint": "3D klaviaturadagi tugmani bosing — texnologiya nomi va qisqa tavsifi chiqadi. Pastda esa to'liq ro'yxat."
   },
   "cvSkills": {
     "title": "Ko'nikmalarim",
-    "subtitle": "Asosiy yo'nalishim — Python Backend: Django, DRF va FastAPI'da REST API, ma'lumotlar bazasi va integratsiyalar. Qolganlari backendni to'ldiruvchi ko'nikmalar.",
+    "subtitle": "Faqat real loyihalarimda ishlatgan texnologiyalar — ikki darajada.",
     "groups": {
-      "languages": "Dasturlash tillari",
-      "backend": "Python Backend",
-      "frontend": "Frontend",
-      "databases": "Ma'lumotlar bazasi",
-      "ai": "Sun'iy intellekt",
-      "bots": "Telegram botlar",
-      "vcs": "Versiya nazorati",
-      "cloud": "Bulutli xizmatlar",
-      "devops": "DevOps va bulut",
-      "testing": "Testlash",
-      "spoken": "Tillar",
-      "extra": "Qo'shimcha ko'nikmalar"
+      "spoken": "Tillar"
     },
     "langs": {
-      "uz": "O'zbek tili",
-      "ru": "Rus tili",
-      "en": "Ingliz tili",
-      "ko": "Koreys tili",
       "native": "ona tili"
     },
-    "primaryBadge": "asosiy yo'nalish"
+    "levels": {
+      "core": "Asosiy",
+      "familiar": "Tanish"
+    },
+    "levelHints": {
+      "core": "Loyihalarimda asosiy ish quroli",
+      "familiar": "Ayrim loyihalarda qo'llaganman"
+    }
   },
   "projectsSection": {
     "title": "Loyihalarim",
@@ -77,22 +78,35 @@
     "details": "Batafsil",
     "visit": "Tashrif buyuring",
     "frontend": "Frontend",
-    "backend": "Backend"
+    "backend": "Backend",
+    "filters": {
+      "label": "Turkum bo'yicha filtr",
+      "all": "Barchasi",
+      "web": "Web platforma",
+      "lms": "LMS",
+      "bot": "Telegram bot",
+      "ai": "AI"
+    },
+    "client": "Mijoz loyihasi",
+    "year": "Yil",
+    "role": "Rol",
+    "tech": "Texnologiyalar",
+    "screenshotAlt": "{title} loyihasi skrinshoti"
   },
   "contactSection": {
-    "title1": "MEN BILAN",
-    "title2": "BOG'LANISH",
     "card": "Bog'lanish",
     "desc1": "Iltimos, men bilan bevosita elektron pochta orqali bog'laning",
     "desc2": "yoki ma'lumotingizni shu yerga qoldiring.",
-    "order": "Loyiha buyurtma qilish → Xizmatlar"
+    "order": "Loyiha buyurtma qilish → Xizmatlar",
+    "title": "Men bilan bog'lanish",
+    "socials": "Ijtimoiy tarmoqlar"
   },
   "contactForm": {
     "name": "To'liq ism familiya",
     "namePh": "Ismingiz",
     "email": "Elektron manzil",
     "message": "Xabaringiz",
-    "messagePh": "Fikringizni to'liq bayon qiling (kamida 10 ta belgi).",
+    "messagePh": "Fikringizni yozing (10–1000 belgi).",
     "privacy": "Xabar mutlaqo sir saqlanadi va uchinchi shaxslarga berilmaydi.",
     "send": "Xabarni yuborish",
     "wait": "Iltimos kuting",
@@ -102,9 +116,9 @@
     "errorDesc": "Nimadir xato ketdi! Maydonlarni tekshiring iltimos.",
     "rateLimited": "Juda ko'p so'rov. Birozdan keyin qayta urinib ko'ring.",
     "errors": {
-      "fullName": "Ismingizni kiriting (kamida 2 ta harf).",
-      "email": "Email manzil noto'g'ri.",
-      "message": "Xabar juda qisqa — kamida 10 ta belgi yozing.",
+      "fullName": "Ism 2 tadan 50 tagacha belgidan iborat bo'lsin.",
+      "email": "Email manzil noto'g'ri formatda.",
+      "message": "Xabar 10 tadan 1000 tagacha belgidan iborat bo'lsin.",
       "contact": "Telefon, Telegram yoki email kiriting (kamida 5 ta belgi).",
       "service": "Xizmat turini tanlang.",
       "budget": "Byudjet noto'g'ri.",
@@ -197,13 +211,13 @@
   },
   "about": {
     "metaTitle": "Men haqimda",
-    "metaDescription": "Husan Suyunov — Python Backend dasturchi. Django, DRF, FastAPI, PostgreSQL va Docker; REST API, LMS/CRM tizimlari va Telegram botlar.",
-    "role": "Python Backend Developer",
+    "metaDescription": "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI, React, LMS/CRM tizimlari, AI va Telegram botlar.",
+    "role": "Full-Stack Python dasturchi",
     "location": "Jizzax, Sh. Rashidov tumani",
     "cv": "Resume CV ko'rish",
     "phone": "Telefon",
     "title": "Men haqimda",
-    "p1": "Assalomu alaykum! Men <b>Suyunov Husan</b> — Python Backend dasturchiman. Django, Django REST Framework va FastAPI yordamida REST API, LMS va CRM tizimlarining server qismini loyihalayman: ma'lumotlar bazasi, autentifikatsiya, to'lov va Telegram integratsiyalari. Kerak bo'lganda React'da frontend qismini ham yozaman, Telegram botlar va AI xizmatlarini backendga ulayman.",
+    "p1": "Assalomu alaykum! Men <b>Suyunov Husan</b> — Full-Stack Python dasturchiman. Python, Django, FastAPI va React yordamida web ilovalar, LMS va CRM tizimlarini backend va frontend qismlari bilan to'liq ishlab chiqaman. Sun'iy intellekt (NLP, Machine Learning) loyihalari va Telegram botlar yaratish ham asosiy yo'nalishlarimdan.",
     "p2": "Hozirda <b>IT Park Zomin tuman filiali rahbari</b> sifatida ta'lim jarayonini raqamlashtirish ustida ishlayman: itclms.uz, ITC Academy platformasi va uning Telegram boti — shu ishning natijalari. Toshkent Xalqaro Kimyo Universitetida «Tarmoqlarda biznesni boshqarish» yo'nalishida tahsil olaman, shuning uchun loyihalarga texnik va biznes nuqtai nazaridan birdek qarayman.",
     "p3": "Yangi texnologiyalarni o'rganish va murakkab muammolarga innovatsion yechim topish — mening ustuvor vazifalarim. Barcha loyiha kodlarim GitHub'da ochiq.",
     "stats": {
@@ -216,43 +230,6 @@
     },
     "experienceTitle": "Ish tajribasi",
     "educationTitle": "Ta'lim",
-    "experience": {
-      "e1": {
-        "period": "2023 — hozir",
-        "title": "Filial rahbari",
-        "place": "IT Park Zomin tuman filiali",
-        "text": "Filial faoliyatini boshqarish, o'quv jarayonini raqamlashtirish: itclms.uz va ITC Academy platformalarini ishlab chiqish va yuritish."
-      },
-      "e2": {
-        "period": "2022",
-        "title": "O'qituvchi",
-        "place": "IT Creative — IT Creative Academy",
-        "text": "Python, web dasturlash va Telegram botlar bo'yicha darslar; o'quvchilar uchun amaliy loyihalar."
-      },
-      "e3": {
-        "period": "2021 — 2022",
-        "title": "Buxgalter yordamchisi",
-        "place": "“Sharqona Garden Travel” Toshkent viloyati",
-        "text": "Moliyaviy hujjatlar bilan ishlash — biznes jarayonlarini avtomatlashtirishga qiziqishim shu yerdan boshlangan."
-      }
-    },
-    "education": {
-      "d1": {
-        "period": "2022 — 2026",
-        "title": "Tarmoqlarda biznesni boshqarish",
-        "place": "Toshkent Xalqaro Kimyo Universiteti"
-      },
-      "d2": {
-        "period": "2021 — 2022",
-        "title": "HTML + CSS, JavaScript, TypeScript, React",
-        "place": "PDP Academy"
-      },
-      "d3": {
-        "period": "2019 — 2021",
-        "title": "Python algoritmlar, Telegram botlar, web freymvorklar",
-        "place": "MohirDev platformasi"
-      }
-    },
     "keyProjects": "Asosiy loyihalar",
     "alsoProjects": "Shuningdek: KIUT LMS (universitet uchun LMS) va IT Creative AI.",
     "languages": "Tillar",
@@ -264,7 +241,8 @@
     "contributionDay": "{date}: {count} ta hissa",
     "less": "Kam",
     "more": "Ko'p",
-    "tools": "Men foydalanadigan texnologiyalar"
+    "tools": "Men foydalanadigan texnologiyalar",
+    "avatarAlt": "Husan Suyunov portreti — Full-Stack Python dasturchi"
   },
   "homeStats": {
     "title": "Raqamlarda",
@@ -286,23 +264,16 @@
   },
   "experienceSection": {
     "title": "Tajriba va ta'lim",
-    "more": "Batafsil ma'lumot"
+    "more": "To'liq rezyume",
+    "present": "hozir"
   },
   "resume": {
-    "metaTitle": "Rezyume (CV) — Python Backend Dasturchi",
-    "metaDescription": "Husan Suyunov rezyumesi: Python Backend dasturchi — Django, DRF, FastAPI, PostgreSQL, Docker. Ish tajribasi, loyihalar va ta'lim.",
-    "title": "Python Backend Dasturchi",
+    "metaTitle": "Rezyume (CV) — Full-Stack Python dasturchi",
+    "metaDescription": "Husan Suyunov rezyumesi: Full-Stack Python dasturchi — Django, DRF, FastAPI, React. Ish tajribasi, loyihalar va ta'lim.",
+    "title": "Full-Stack Python dasturchi",
     "summaryTitle": "Qisqacha",
-    "summary": "7+ yillik tajribaga ega Python Backend dasturchiman. Django, Django REST Framework va FastAPI asosida REST API, LMS va CRM tizimlarini loyihalayman va production'ga chiqaraman: ma'lumotlar bazasi modellari, autentifikatsiya, to'lov va Telegram integratsiyalari, Docker va CI/CD. Hozir IT Park Zomin filiali rahbari sifatida itclms.uz va ITC Academy platformalarini ishlab chiqaman va yurgizaman.",
+    "summary": "{years}+ yillik tajribaga ega Full-Stack Python dasturchiman. Backendni Django, DRF va FastAPI'da, frontendni React va Next.js'da yozaman: LMS va CRM tizimlari, REST API va Telegram botlar. Hozir IT Park Zomin filiali rahbari sifatida itclms.uz va ITC Academy platformalarini ishlab chiqaman va yuritaman.",
     "skillsTitle": "Texnik ko'nikmalar",
-    "skills": {
-      "backend": "Backend",
-      "db": "Ma'lumotlar bazasi",
-      "devops": "DevOps",
-      "testing": "Testlash",
-      "bots": "Telegram botlar",
-      "extra": "Qo'shimcha"
-    },
     "experienceTitle": "Ish tajribasi",
     "projectsTitle": "Asosiy loyihalar",
     "educationTitle": "Ta'lim",
@@ -312,6 +283,7 @@
     "repos": "GitHub'da {count} ta ochiq repozitoriy",
     "print": "Chop etish / PDF saqlash",
     "pdf": "PDF (Google Drive)",
-    "location": "Jizzax, O'zbekiston"
+    "location": "Jizzax, O'zbekiston",
+    "download": "CV yuklab olish (PDF)"
   }
 }

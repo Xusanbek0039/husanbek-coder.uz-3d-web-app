@@ -21,8 +21,8 @@ const EasterEggs = () => {
       console.clear();
       console.log(
         "%cHey, dasturchi! 👨‍💻\n" +
-        "Konsoldan foydalanayotganingni ko‘ryapman — demak sen jiddiysan! 🧠\n" +
-        "Bir oz sehr ko‘rishni xohlaysanmi? ✨\n" +
+        "Konsoldan foydalanayotganingni ko'ryapman — demak sen jiddiysan! 🧠\n" +
+        "Bir oz sehr ko'rishni xohlaysanmi? ✨\n" +
         "Faqat %c'husan'%c deb yoz va Enter bos — tomosha boshlanadi! 🎩🪄",
 
         "color: #FFD700; font-size: 16px; font-weight: bold; background-color: black; padding: 10px; border-radius: 10px; margin-top:20px",
@@ -46,7 +46,7 @@ const EasterEggs = () => {
             const timer = setTimeout(() => {
               console.log(
                 "%cPssst! 🤫\n\n" +
-                "Senga mushuklar yoqadimi? 😺 Ha bo‘lsa, viewportda 'n' tugmasini bos — keyin nima bo‘lishini ko‘r! 🐱✨",
+                "Senga mushuklar yoqadimi? 😺 Ha bo'lsa, viewportda 'n' tugmasini bos — keyin nima bo'lishini ko'r! 🐱✨",
 
                 "color: #FF69B4; font-size: 16px; font-weight: bold; background-color: black; padding: 10px; border-radius: 10px;"
               );

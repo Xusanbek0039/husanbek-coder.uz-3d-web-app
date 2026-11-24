@@ -46,32 +46,25 @@ import {
 import { TbBrandFramerMotion } from "react-icons/tb";
 const BASE_PATH = "/assets/projects-screenshots";
 
-const ProjectsLinks = ({ live, repo }: { live: string; repo?: string }) => {
+const ProjectsLinks = ({ live, repo }: { live?: string; repo?: string }) => {
+  if (!live && !repo) return null;
   return (
     <div className="flex flex-col md:flex-row items-center justify-start gap-3 my-3 mb-8">
-      <Link
-        className="font-mono underline flex gap-2"
-        rel="noopener"
-        target="_new"
-        href={live}
-      >
-        <Button variant={"default"} size={"sm"}>
-          Tashrif buyurish
-          <ArrowUpRight className="ml-3 w-5 h-5" />
+      {live && (
+        <Button asChild variant={"default"} size={"sm"} className="font-mono">
+          <Link rel="noopener noreferrer" target="_blank" href={live}>
+            Tashrif buyurish
+            <ArrowUpRight className="ml-3 w-5 h-5" aria-hidden="true" />
+          </Link>
         </Button>
-      </Link>
+      )}
       {repo && (
-        <Link
-          className="font-mono underline flex gap-2"
-          rel="noopener"
-          target="_new"
-          href={repo}
-        >
-          <Button variant={"default"} size={"sm"}>
-            Github
-            <ArrowUpRight className="ml-3 w-5 h-5" />
-          </Button>
-        </Link>
+        <Button asChild variant={"default"} size={"sm"} className="font-mono">
+          <Link rel="noopener noreferrer" target="_blank" href={repo}>
+            GitHub
+            <ArrowUpRight className="ml-3 w-5 h-5" aria-hidden="true" />
+          </Link>
+        </Button>
       )}
     </div>
   );
@@ -391,7 +384,7 @@ const projects: Project[] = [
     description: "Oila, video studiya va to'yxonani bitta platformada bog'laydigan tizim: Django DRF API + 5 ta Next.js panel.",
     category: "Django DRF + Next.js, 5 ta panel",
     title: "MarosimGo — marosimlar uchun raqamli platforma",
-    src: "/assets/projects-screenshots/marosimgo/1.webp",
+    src: "/assets/projects-screenshots/marosimgo/marosimgo-cover.webp",
     screenshots: ["1.png", "2.png", "3.png", "4.png", "5.png"],
     live: "https://marosimgo.uz/",
     github: "https://github.com/Xusanbek0039/Marosim-Go",
@@ -417,59 +410,59 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono ">
-            MarosimGo — oila, video studiya va to‘yxonani bitta platformada
-            bog‘laydigan tizim: to‘yxonani tanlash va bron qilishdan tortib,
+            MarosimGo — oila, video studiya va to&apos;yxonani bitta platformada
+            bog&apos;laydigan tizim: to&apos;yxonani tanlash va bron qilishdan tortib,
             marosim videolarini xavfsiz saqlash va yaqinlar bilan ruxsat
             asosida ulashishgacha.
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/marosimgo/1.webp`,
-              `${BASE_PATH}/marosimgo/2.png`,
+              `${BASE_PATH}/marosimgo/marosimgo-cover.webp`,
+              `${BASE_PATH}/marosimgo/marosimgo-screenshot-1.png`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">👥 Uch tomon — bitta platforma</TypographyH3>
           <p className="font-mono mb-2">
             👰 Oilalar — marosim arxivi, galereya, mehmonlarni taklif qilish ·
             🎬 Studiyalar — video va rasmlarni yuklash, portfolio, reels, chat ·
-            🏛️ To‘yxonalar — zallar, bo‘sh kunlar kalendari, bron so‘rovlari ·
+            🏛️ To&apos;yxonalar — zallar, bo&apos;sh kunlar kalendari, bron so&apos;rovlari ·
             🛡️ Super Admin va Admin paneli — granular ruxsatlar, monitoring,
             audit va obunalar.
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/marosimgo/3.webp`,
-              `${BASE_PATH}/marosimgo/4.png`,
+              `${BASE_PATH}/marosimgo/marosimgo-screenshot-2.webp`,
+              `${BASE_PATH}/marosimgo/marosimgo-screenshot-3.png`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">🏗️ Arxitektura</TypographyH3>
           <p className="font-mono mb-2">
             API-first arxitektura: barcha biznes logika va REST API faqat
-            Django’da (/api/v1/), Next.js ilovalari esa faqat interfeys.
+            Django&apos;da (/api/v1/), Next.js ilovalari esa faqat interfeys.
             Har bir rol uchun alohida Next.js panel statik build qilinib,
             bitta Django (Passenger) ilovasi orqali 7 ta domenga xizmat
-            ko‘rsatadi — domen nomiga qarab kerakli panel ochiladi. Panellar
-            API’ni o‘z domenida chaqiradi, shuning uchun cookie’lar
+            ko&apos;rsatadi — domen nomiga qarab kerakli panel ochiladi. Panellar
+            API&apos;ni o&apos;z domenida chaqiradi, shuning uchun cookie&apos;lar
             first-party, CORS kerak emas. Kelajakdagi mobil ilovalar ham
-            xuddi shu API’dan Bearer token bilan foydalanadi.
+            xuddi shu API&apos;dan Bearer token bilan foydalanadi.
           </p>
           <Architecture
             diagram={`marosimgo.uz ............ Landing (HTML/CSS + Three.js)
 superadmin. / admin. .... Next.js 16 panel (Super Admin, Admin)
 studio. ................. Next.js panel (Studiya)
 userlogin. .............. Next.js panel (Oila, mehmonlar)
-toyxona. ................ Next.js panel (To‘yxona)
+toyxona. ................ Next.js panel (To'yxona)
 api. .................... Mobil ilovalar uchun REST API
         │  HTTPS, /api/v1/ (same-origin cookie yoki Bearer)
         ▼
 Passenger ──► Django 5.2 + DRF (bitta ilova)
                ├─ accounts      — JWT, rollar, RBAC, JSHSHIR shifrlash
                ├─ ceremonies    — marosim arxivi, taklifnomalar
-               ├─ studios / venues — studiya va to‘yxonalar, bron
-               ├─ media         — yuklash, watermark, ko‘rish
+               ├─ studios / venues — studiya va to'yxonalar, bron
+               ├─ media         — yuklash, watermark, ko'rish
                ├─ subscriptions — obuna rejalari va limitlar
-               ├─ audit / monitoring — o‘zgarmas jurnal, API statistikasi
+               ├─ audit / monitoring — o'zgarmas jurnal, API statistikasi
                └─ storage       ──► Google Drive (OAuth 2.0)
         │
         ▼
@@ -478,16 +471,16 @@ SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
           <TypographyH3 className="my-4 mt-8">🔒 Xavfsizlik</TypographyH3>
           <p className="font-mono mb-2">
             JWT (access 10 daqiqa, refresh 7 kun, rotation + blacklist, qayta
-            ishlatilgan refresh’da barcha sessiyalar bekor qilinadi) · tokenlar
-            faqat HttpOnly cookie’da · CSRF tekshiruvi · brute-force himoyasi va
+            ishlatilgan refresh&apos;da barcha sessiyalar bekor qilinadi) · tokenlar
+            faqat HttpOnly cookie&apos;da · CSRF tekshiruvi · brute-force himoyasi va
             throttling · JSHSHIR Fernet bilan shifrlanadi, HMAC orqali qidiriladi ·
-            rasmlardan EXIF o‘chiriladi va WEBP’ga qayta kodlanadi · CSP va
+            rasmlardan EXIF o&apos;chiriladi va WEBP&apos;ga qayta kodlanadi · CSP va
             xavfsizlik sarlavhalari · har bir amal audit jurnaliga yoziladi.
             Backend pytest testlari va GitHub Actions CI bilan tekshiriladi.
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/marosimgo/5.webp`,
+              `${BASE_PATH}/marosimgo/marosimgo-screenshot-4.webp`,
             ]}
           />
         </div>
@@ -500,7 +493,7 @@ SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
     description: "Video darslar, testlar, AI yordamchi, coin tizimi va onlayn to'lovlarga ega IT ta'lim platformasi (Django, PWA).",
     category: "Django LMS, PWA, To'lov tizimi",
     title: "ITC Academy — onlayn IT ta'lim platformasi",
-    src: "/assets/projects-screenshots/itc-academy/1.webp",
+    src: "/assets/projects-screenshots/itc-academy/itc-academy-cover.webp",
     screenshots: ["1.png", "2.png", "3.png", "4.png", "5.png"],
     live: "https://itc-academy.uz/",
     skills: {
@@ -523,36 +516,36 @@ SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
       return (
         <div>
           <TypographyP className="font-mono ">
-            itc-academy.uz — IT kasblarini noldan o‘rganish uchun to‘liq onlayn
+            itc-academy.uz — IT kasblarini noldan o&apos;rganish uchun to&apos;liq onlayn
             platforma: video darslar, testlar, uy vazifalari, AI yordamchi,
-            o‘yinlar, coin tizimi va sertifikatlar — hammasi bitta joyda.
+            o&apos;yinlar, coin tizimi va sertifikatlar — hammasi bitta joyda.
           </TypographyP>
           <ProjectsLinks live={this.live} />
           <SlideShow
             images={[
-              `${BASE_PATH}/itc-academy/1.webp`,
-              `${BASE_PATH}/itc-academy/2.webp`,
+              `${BASE_PATH}/itc-academy/itc-academy-cover.webp`,
+              `${BASE_PATH}/itc-academy/itc-academy-screenshot-1.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">🔑 Asosiy imkoniyatlar</TypographyH3>
           <p className="font-mono mb-2">
             🎬 Video darslar va amaliy topshiriqlar · 📝 Testlar va uy vazifalari
             (ustoz tekshiradi) · 🤖 24/7 AI yordamchi (sayt va Telegram bot
-            orqali) · 🪙 Coin tizimi — test, vazifa, kunlik savol va o‘yinlar
-            uchun coin, do‘kon va kurs chegirmalari · 🎓 Sertifikatlar · 👨‍👩‍👧
+            orqali) · 🪙 Coin tizimi — test, vazifa, kunlik savol va o&apos;yinlar
+            uchun coin, do&apos;kon va kurs chegirmalari · 🎓 Sertifikatlar · 👨‍👩‍👧
             Ota-ona paneli (davomat va baholar) · 📚 Kutubxona va startaplar
-            bo‘limi.
+            bo&apos;limi.
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/itc-academy/4.webp`,
+              `${BASE_PATH}/itc-academy/itc-academy-screenshot-3.webp`,
             ]}
           />
-          <TypographyH3 className="my-4 mt-8">💳 Pullik kurslar va to‘lovlar</TypographyH3>
+          <TypographyH3 className="my-4 mt-8">💳 Pullik kurslar va to&apos;lovlar</TypographyH3>
           <p className="font-mono mb-2">
-            Kurslar bir martalik to‘lov bilan umrbod ochiladi — to‘lovdan keyin
+            Kurslar bir martalik to&apos;lov bilan umrbod ochiladi — to&apos;lovdan keyin
             kurs avtomatik faollashadi. Click, Payme, Paynet, Uzum, Humo kabi
-            mahalliy to‘lov tizimlari qo‘llab-quvvatlanadi.
+            mahalliy to&apos;lov tizimlari qo&apos;llab-quvvatlanadi.
           </p>
           <TypographyH3 className="my-4 mt-8">📰 Blog va yangiliklar</TypographyH3>
           <p className="font-mono mb-2">
@@ -561,17 +554,17 @@ SQLite → PostgreSQL (DATABASE_URL) · Redis kesh (ixtiyoriy)`}
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/itc-academy/3.webp`,
-              `${BASE_PATH}/itc-academy/5.webp`,
+              `${BASE_PATH}/itc-academy/itc-academy-screenshot-2.webp`,
+              `${BASE_PATH}/itc-academy/itc-academy-screenshot-4.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">🏗️ Arxitektura</TypographyH3>
           <p className="font-mono mb-2">
             Server-side rendering asosidagi monolit Django ilova. Sahifalar
-            Django shablonlari orqali serverda yig‘iladi, interaktivlik va 3D
+            Django shablonlari orqali serverda yig&apos;iladi, interaktivlik va 3D
             effektlar esa vanilla JS + GSAP/ScrollTrigger, Lenis va Three.js
-            yordamida qo‘shilgan. Sayt PWA sifatida o‘rnatiladi (service worker),
-            Android (TWA) va desktop ilova ko‘rinishida ham ishlaydi.
+            yordamida qo&apos;shilgan. Sayt PWA sifatida o&apos;rnatiladi (service worker),
+            Android (TWA) va desktop ilova ko&apos;rinishida ham ishlaydi.
           </p>
           <Architecture
             diagram={`Brauzer / PWA / Android (TWA) / Desktop ilova
@@ -581,19 +574,19 @@ Nginx (reverse proxy + kesh)
         │
         ▼
 Phusion Passenger ──► Django (monolit, MVT)
-                       ├─ accounts   — ro‘yxat, login, rollar (o‘quvchi/ustoz/ota-ona)
+                       ├─ accounts   — ro'yxat, login, rollar (o'quvchi/ustoz/ota-ona)
                        ├─ kurslar    — darslar, video, test, vazifa
-                       ├─ coin       — mukofot, do‘kon, chegirmalar
+                       ├─ coin       — mukofot, do'kon, chegirmalar
                        ├─ blog       — postlar, layk, izohlar
                        ├─ payments   — Click / Payme / Paynet / Uzum
                        └─ AI yordamchi API
         │                         ▲
         ▼                         │
-  Ma’lumotlar bazasi       Telegram bot (@itc_academybot)`}
+  Ma'lumotlar bazasi       Telegram bot (@itc_academybot)`}
           />
           <p className="font-mono mb-2">
             Xavfsizlik: CSRF himoyasi, X-Frame-Options: DENY, nosniff va XSS
-            sarlavhalari, faqat HTTPS orqali ishlovchi cookie’lar.
+            sarlavhalari, faqat HTTPS orqali ishlovchi cookie&apos;lar.
           </p>
         </div>
       );
@@ -605,7 +598,7 @@ Phusion Passenger ──► Django (monolit, MVT)
     description: "IT Park Zomin tuman filiali uchun sayt va o'quv boshqaruv tizimi: React + Vite frontend, Django REST API.",
     category: "React + Vite, Django DRF API",
     title: "IT Park Zomin tuman filiali LMS",
-    src: "/assets/projects-screenshots/itclms/landing.webp",
+    src: "/assets/projects-screenshots/itclms/itc-lms-cover.webp",
     screenshots: ["landing.png", "1.png", "2.png", "3.png"],
     live: "https://www.itclms.uz/",
     github:"https://github.com/Xusanbek0039/ITC-LMS-API",
@@ -618,37 +611,37 @@ Phusion Passenger ──► Django (monolit, MVT)
         <div>
           <TypographyP className="font-mono ">
             IT Park Zomin tuman filiali (IT Shaharchasi) uchun rasmiy sayt va
-            o‘quv boshqaruv tizimi: kurslar, afzalliklar, statistika va aloqa
-            bo‘limlari. Ro‘yxatdan o‘tish va kirish ITC Academy platformasi
-            bilan bog‘langan.
+            o&apos;quv boshqaruv tizimi: kurslar, afzalliklar, statistika va aloqa
+            bo&apos;limlari. Ro&apos;yxatdan o&apos;tish va kirish ITC Academy platformasi
+            bilan bog&apos;langan.
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/itclms/landing.webp`,
+              `${BASE_PATH}/itclms/itc-lms-cover.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">🔧 API imkoniyatlari</TypographyH3>
           <p className="font-mono mb-2">
-            👥 Foydalanuvchilarni ro‘yxatdan o‘tkazish va avtorizatsiya · 📚 Kurslar
+            👥 Foydalanuvchilarni ro&apos;yxatdan o&apos;tkazish va avtorizatsiya · 📚 Kurslar
             va darslar · 📝 Testlar va topshiriqlar · 📊 Baholash tizimi (grades,
             progress) · 🔒 JWT/Token orqali xavfsiz autentifikatsiya · 🧑‍🏫
-            O‘qituvchi va talaba rollari · 📆 Kalendar va dars jadvali.
+            O&apos;qituvchi va talaba rollari · 📆 Kalendar va dars jadvali.
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/itclms/1.webp`,
-              `${BASE_PATH}/itclms/2.png`,
-              `${BASE_PATH}/itclms/3.webp`,
-              `${BASE_PATH}/itclms/4.png`,
-              `${BASE_PATH}/itclms/5.png`,
+              `${BASE_PATH}/itclms/itc-lms-screenshot-1.webp`,
+              `${BASE_PATH}/itclms/itc-lms-screenshot-2.png`,
+              `${BASE_PATH}/itclms/itc-lms-screenshot-3.webp`,
+              `${BASE_PATH}/itclms/itc-lms-screenshot-4.png`,
+              `${BASE_PATH}/itclms/itc-lms-screenshot-5.png`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">🏗️ Arxitektura</TypographyH3>
           <p className="font-mono mb-2">
             Frontend va backend ajratilgan (decoupled) arxitektura: React + Vite
-            asosidagi SPA Vercel CDN’ida joylashgan, ma’lumotlar Django REST
-            Framework API orqali JSON ko‘rinishida olinadi. SEO uchun Open Graph,
+            asosidagi SPA Vercel CDN&apos;ida joylashgan, ma&apos;lumotlar Django REST
+            Framework API orqali JSON ko&apos;rinishida olinadi. SEO uchun Open Graph,
             Twitter Card va geo meta-teglar sozlangan.
           </p>
           <Architecture
@@ -676,7 +669,7 @@ itc-academy.uz (login / ariza)`}
     description: "ITC Academy platformasining Telegram'dagi AI yordamchisi — kurslar va yangiliklar bir joyda.",
     category: "Telegram bot, AI yordamchi",
     title: "ITC Academy Telegram bot",
-    src: "/assets/projects-screenshots/itc-bot/1.png",
+    src: "/assets/projects-screenshots/itc-bot/itc-academy-bot-cover.png",
     screenshots: ["1.png"],
     live: "https://t.me/itc_academybot",
     skills: {
@@ -687,21 +680,21 @@ itc-academy.uz (login / ariza)`}
       return (
         <div>
           <TypographyP className="font-mono ">
-            @itc_academybot — ITC Academy platformasining Telegram’dagi
-            yordamchisi. O‘quvchilar saytga kirmasdan ham AI yordamchidan savol
-            so‘rashi, kurslar va yangiliklar haqida ma’lumot olishi mumkin.
+            @itc_academybot — ITC Academy platformasining Telegram&apos;dagi
+            yordamchisi. O&apos;quvchilar saytga kirmasdan ham AI yordamchidan savol
+            so&apos;rashi, kurslar va yangiliklar haqida ma&apos;lumot olishi mumkin.
           </TypographyP>
           <ProjectsLinks live={this.live} />
           <SlideShow
             images={[
-              `${BASE_PATH}/itc-bot/1.png`,
+              `${BASE_PATH}/itc-bot/itc-academy-bot-cover.png`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">🏗️ Arxitektura</TypographyH3>
           <p className="font-mono mb-2">
             Bot Telegram Bot API orqali ishlaydi va ITC Academy (Django)
-            backend’i bilan bitta ma’lumotlar bazasi/API’dan foydalanadi —
-            shuning uchun foydalanuvchi, kurs va coin ma’lumotlari sayt bilan
+            backend&apos;i bilan bitta ma&apos;lumotlar bazasi/API&apos;dan foydalanadi —
+            shuning uchun foydalanuvchi, kurs va coin ma&apos;lumotlari sayt bilan
             sinxron.
           </p>
           <Architecture
@@ -709,7 +702,7 @@ itc-academy.uz (login / ariza)`}
         │
         ▼
 Telegram Bot API
-        │  update’lar
+        │  update'lar
         ▼
 Bot servisi (Python)
    ├─ buyruqlar va menyular
@@ -729,8 +722,8 @@ itc-academy.uz (Django backend + DB)`}
     description: "HORECA, qurilish va ofis mahsulotlari uchun online do'kon: katalog, savatcha, buyurtma va admin panel.",
     category: "Onlayn do'kon, CRM",
     title: "Goodever.uz — onlayn do'kon va CRM",
-    src: "/assets/projects-screenshots/goodever/1.png",
-    screenshots: ["/assets/projects-screenshots/goodever/1.png"],
+    src: "/assets/projects-screenshots/goodever/goodever-cover.png",
+    screenshots: ["/assets/projects-screenshots/goodever/goodever-cover.png"],
     skills: {
       frontend: [
         PROJECT_SKILLS.html,
@@ -750,16 +743,16 @@ itc-academy.uz (Django backend + DB)`}
       return (
         <div>
           <TypographyP className="font-mono text-2xl text-center">
-            Goodever.uz | Online do`kon
+            Goodever.uz | Online do&apos;kon
           </TypographyP>
           <TypographyP className="font-mono ">
-          Goodever.uz — bu O‘zbekistondagi HORECA (mehmonxona, restoran, kafe), qurilish mollari, uy va ofis uchun zarur tovarlarni onlayn xarid qilish imkonini beruvchi zamonaviy internet-do‘kon.
+          Goodever.uz — bu O&apos;zbekistondagi HORECA (mehmonxona, restoran, kafe), qurilish mollari, uy va ofis uchun zarur tovarlarni onlayn xarid qilish imkonini beruvchi zamonaviy internet-do&apos;kon.
 
           Asosiy imkoniyatlar
-Tovarlar bo‘yicha to‘liq katalog
+Tovarlar bo&apos;yicha to&apos;liq katalog
 Qidiruv va filtr orqali saralash
 Xarid savatchasi va buyurtma qilish tizimi
-Foydalanuvchi ro‘yxatdan o‘tishi va kirishi
+Foydalanuvchi ro&apos;yxatdan o&apos;tishi va kirishi
 Mahsulotlarga sharh qoldirish (review)
 Admin panel orqali tovarlar va buyurtmalarni boshqarish
           </TypographyP>
@@ -770,31 +763,31 @@ Admin panel orqali tovarlar va buyurtmalarni boshqarish
 
 Frontend: React.js / Next.js
 Backend: Node.js + Express
-Ma`lumotlar bazasi: MongoDB / PostgreSQL
+Ma&apos;lumotlar bazasi: MongoDB / PostgreSQL
 Autentifikatsiya: JWT
-Admin panel: mahsulotlarni boshqarish, buyurtmalarni ko‘rish
+Admin panel: mahsulotlarni boshqarish, buyurtmalarni ko&apos;rish
 Responsive dizayn: barcha qurilmalar uchun moslashuvchan
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/goodever/1.png`,
-              `${BASE_PATH}/goodever/2.png`,
+              `${BASE_PATH}/goodever/goodever-cover.png`,
+              `${BASE_PATH}/goodever/goodever-screenshot-1.png`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">🔑 Asosiy imkoniyatlar
           </TypographyH3>
           <p className="font-mono mb-2">
-          Tovarlar bo‘yicha to‘liq katalog
+          Tovarlar bo&apos;yicha to&apos;liq katalog
 Qidiruv va filtr orqali saralash
 Xarid savatchasi va buyurtma qilish tizimi
-Foydalanuvchi ro‘yxatdan o‘tishi va kirishi
+Foydalanuvchi ro&apos;yxatdan o&apos;tishi va kirishi
 Mahsulotlarga sharh qoldirish (review)
 Admin panel orqali tovarlar va buyurtmalarni boshqarish
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/goodever/3.webp`,
-              `${BASE_PATH}/goodever/4.png`,
+              `${BASE_PATH}/goodever/goodever-screenshot-2.webp`,
+              `${BASE_PATH}/goodever/goodever-screenshot-3.png`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">📦 Maqsad
@@ -805,17 +798,17 @@ Admin panel orqali tovarlar va buyurtmalarni boshqarish
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/goodever/5.png`,
-              `${BASE_PATH}/goodever/6.webp`,
-              `${BASE_PATH}/goodever/7.webp`,
+              `${BASE_PATH}/goodever/goodever-screenshot-4.png`,
+              `${BASE_PATH}/goodever/goodever-screenshot-5.webp`,
+              `${BASE_PATH}/goodever/goodever-screenshot-6.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">Kuzatuv hamda statistika </TypographyH3>
           <p className="font-mono mb-2">
-Mijoz Google Console Claud hizmat ko`rsatish markaziga ulangan shu panel orqali saytdagi nazoratni ko`rishlari mumkin!
+Mijoz Google Console Claud hizmat ko&apos;rsatish markaziga ulangan shu panel orqali saytdagi nazoratni ko&apos;rishlari mumkin!
           </p>
           <SlideShow images={[
-                `${BASE_PATH}/goodever/8.webp`,
+                `${BASE_PATH}/goodever/goodever-screenshot-7.webp`,
 
             ]} />
         </div>
@@ -828,8 +821,8 @@ Mijoz Google Console Claud hizmat ko`rsatish markaziga ulangan shu panel orqali 
     description: "Three.js/Spline 3D interfeysli, animatsiyalarga boy shaxsiy portfolio sayt (Next.js, TypeScript).",
     category: "Portfolio",
     title: "Mening portfolio saytim",
-    src: "/assets/projects-screenshots/portfolio/landing.webp",
-    screenshots: ["assets/projects-screenshots/portfolio/landing.webp"],
+    src: "/assets/projects-screenshots/portfolio/portfolio-cover.webp",
+    screenshots: ["assets/projects-screenshots/portfolio/portfolio-cover.webp"],
     live: "https://husanbek-coder.uz/",
     github:"https://github.com/Xusanbek0039/husanbek-coder.uz-3d-web-app",
     skills: {
@@ -855,14 +848,14 @@ Mening portfolio web saytimga xush kelibsiz
             Loyihada 3D modeldan foydalanilgan{" "}
           </TypographyH3>
           <p className="font-mono mb-2">
-          🔑 Asosiy xususiyatlar: 🎮 3D Interfeys — foydalanuvchini o‘ziga tortadigan WebGL/Three.js asosidagi sahifalar. 💼 Portfolio bo‘limi — bajarilgan ishlar, loyihalar va texnik ko‘nikmalarni ko‘rsatish. 🌙 Dark/Light rejimi — foydalanuvchi qulayligi uchun vizual rejimlarni almashtirish. 🌍 Ko‘p tilli qo‘llab-quvvatlash — o‘zbek va rus tillarida int
+          🔑 Asosiy xususiyatlar: 🎮 3D Interfeys — foydalanuvchini o&apos;ziga tortadigan WebGL/Three.js asosidagi sahifalar. 💼 Portfolio bo&apos;limi — bajarilgan ishlar, loyihalar va texnik ko&apos;nikmalarni ko&apos;rsatish. 🌙 Dark/Light rejimi — foydalanuvchi qulayligi uchun vizual rejimlarni almashtirish. 🌍 Ko&apos;p tilli qo&apos;llab-quvvatlash — o&apos;zbek va rus tillarida int
 
 
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/portfolio/landing.webp`,
-              `${BASE_PATH}/portfolio/skills.webp`,
+              `${BASE_PATH}/portfolio/portfolio-cover.webp`,
+              `${BASE_PATH}/portfolio/portfolio-skills.webp`,
             ]}
           />
           <TypographyH3 className="my-4 ">2- xil rejimda tuzilgan</TypographyH3>
@@ -871,18 +864,18 @@ Mening portfolio web saytimga xush kelibsiz
           </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/portfolio/about.webp`,
-              `${BASE_PATH}/portfolio/contact.webp`,
+              `${BASE_PATH}/portfolio/portfolio-about.webp`,
+              `${BASE_PATH}/portfolio/portfolio-contact.webp`,
             ]}
           />
           <TypographyH3 className="my-4 mt-8">Loyihalarim</TypographyH3>
 
           <p className="font-mono mb-2">
-Saytda siz men haqimda barcha ma`lumotlarni olishingiz mumkin!          </p>
+Saytda siz men haqimda barcha ma&apos;lumotlarni olishingiz mumkin!          </p>
           <SlideShow
             images={[
-              `${BASE_PATH}/portfolio/projects.webp`,
-              `${BASE_PATH}/portfolio/blog.webp`,
+              `${BASE_PATH}/portfolio/portfolio-projects.webp`,
+              `${BASE_PATH}/portfolio/portfolio-blog.webp`,
             ]}
           />
           <p className="font-mono mb-2 mt-8 text-center">
@@ -898,7 +891,7 @@ Barcha huquqlar himoyalangan!          </p>
     description: "Uch tilli, dark/light rejimli zamonaviy blog platformasi — maqolalar yozish va ulashish.",
     category: "Portfolio",
     title: "Shoira portfolio web sayt",
-    src: "/assets/projects-screenshots/shoira/1.png",
+    src: "/assets/projects-screenshots/shoira/shoira-blog-cover.png",
     screenshots: ["01.jpeg", "03.png"],
     live: "https://shoira-blog.uz",
     github: "https://github.com/Xusanbek0039/shoira-blog.uz",
@@ -910,16 +903,16 @@ Barcha huquqlar himoyalangan!          </p>
       return (
         <div>
           <TypographyP className="font-mono ">
-          shoira-blog.uz — bu zamonaviy, xavfsiz va interaktiv blog platformasi bo‘lib, foydalanuvchilarga o‘z maqolalarini yozish, ularni tahrirlash va boshqalar bilan bo‘lishish imkonini beradi. Sayt to‘liq mobilga mos, 3 tilda ishlaydi (O‘zbek, Rus, Ingliz), va foydalanuvchi qulayligi uchun Dark / Light rejim bilan jihozlangan.
+          shoira-blog.uz — bu zamonaviy, xavfsiz va interaktiv blog platformasi bo&apos;lib, foydalanuvchilarga o&apos;z maqolalarini yozish, ularni tahrirlash va boshqalar bilan bo&apos;lishish imkonini beradi. Sayt to&apos;liq mobilga mos, 3 tilda ishlaydi (O&apos;zbek, Rus, Ingliz), va foydalanuvchi qulayligi uchun Dark / Light rejim bilan jihozlangan.
 
 
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/shoira/1.png`,
-              `${BASE_PATH}/shoira/3.webp`,
-              `${BASE_PATH}/shoira/4.png`,
+              `${BASE_PATH}/shoira/shoira-blog-cover.png`,
+              `${BASE_PATH}/shoira/shoira-blog-screenshot-2.webp`,
+              `${BASE_PATH}/shoira/shoira-blog-screenshot-3.png`,
             ]}
           />
         </div>
@@ -932,7 +925,7 @@ Barcha huquqlar himoyalangan!          </p>
     description: "OpenAI API asosidagi ochiq kodli ChatGPT Telegram bot.",
     category: "OpenAI API",
     title: "ChatGPT Telegram bot",
-    src: "/assets/projects-screenshots/telegram-bot/02.png",
+    src: "/assets/projects-screenshots/telegram-bot/chatgpt-telegram-bot-cover.png",
     screenshots: ["01.png", "02.png", "03.png","04.png","05.png","06.png","07.png"],
     live: "https://t.me/chatgpt_avtobot",
     github: "https://github.com/Xusanbek0039/openai_api_telegram_bot",
@@ -944,18 +937,18 @@ Barcha huquqlar himoyalangan!          </p>
       return (
         <div>
           <TypographyP className="font-mono ">
-Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda OpenAI dan API mavjud bo`lsa loyihadan foydalanishingiz mumkin. Biz uchun shunchaki minnatdorchilik bilrishingizni o`zi yetarli!
+Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda OpenAI dan API mavjud bo&apos;lsa loyihadan foydalanishingiz mumkin. Biz uchun shunchaki minnatdorchilik bilrishingizni o&apos;zi yetarli!
           </TypographyP>
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/telegram-bot/01.png`,
-              `${BASE_PATH}/telegram-bot/02.png`,
-              `${BASE_PATH}/telegram-bot/03.png`,
-              `${BASE_PATH}/telegram-bot/04.webp`,
-              `${BASE_PATH}/telegram-bot/05.png`,
-              `${BASE_PATH}/telegram-bot/06.png`,
-              `${BASE_PATH}/telegram-bot/07.webp`,
+              `${BASE_PATH}/telegram-bot/chatgpt-telegram-bot-screenshot-1.png`,
+              `${BASE_PATH}/telegram-bot/chatgpt-telegram-bot-cover.png`,
+              `${BASE_PATH}/telegram-bot/chatgpt-telegram-bot-screenshot-2.png`,
+              `${BASE_PATH}/telegram-bot/chatgpt-telegram-bot-screenshot-3.webp`,
+              `${BASE_PATH}/telegram-bot/chatgpt-telegram-bot-screenshot-4.png`,
+              `${BASE_PATH}/telegram-bot/chatgpt-telegram-bot-screenshot-5.png`,
+              `${BASE_PATH}/telegram-bot/chatgpt-telegram-bot-screenshot-6.webp`,
             ]}
           />
         </div>
@@ -968,7 +961,7 @@ Ushbu loyiha shunchaki portfolio uchun ochiq kodli etib tuzib chiqilgan. Agarda 
     description: "Instagram videolarini Telegram orqali yuklab beruvchi ochiq kodli bot.",
     category: "Instagram API",
     title: "Instagram Video Upload",
-    src: "/assets/projects-screenshots/instagram-bot/01.png",
+    src: "/assets/projects-screenshots/instagram-bot/instagram-video-bot-cover.png",
     screenshots: ["01.png", "02.png", "03.png","04.png","05.png"],
     live: "https://t.me/insta_videobot",
     github:"https://github.com/Xusanbek0039/instagram-video-bot",
@@ -985,11 +978,11 @@ Ushbu loyiha portfolio uchun tuzib chiqilgan ochiq kodli API bilan ishlaydigan l
           <ProjectsLinks live={this.live} repo={this.github} />
           <SlideShow
             images={[
-              `${BASE_PATH}/instagram-bot/01.png`,
-              `${BASE_PATH}/instagram-bot/02.png`,
-              `${BASE_PATH}/instagram-bot/03.png`,
-              `${BASE_PATH}/instagram-bot/04.png`,
-              `${BASE_PATH}/instagram-bot/05.png`,
+              `${BASE_PATH}/instagram-bot/instagram-video-bot-cover.png`,
+              `${BASE_PATH}/instagram-bot/instagram-video-bot-screenshot-1.png`,
+              `${BASE_PATH}/instagram-bot/instagram-video-bot-screenshot-2.png`,
+              `${BASE_PATH}/instagram-bot/instagram-video-bot-screenshot-3.png`,
+              `${BASE_PATH}/instagram-bot/instagram-video-bot-screenshot-4.png`,
             ]}
           />
         </div>
