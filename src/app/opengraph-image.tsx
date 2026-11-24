@@ -5,6 +5,7 @@ export const alt = "Husan Suyunov — Full-Stack Python Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const revalidate = 86400;
+export const runtime = "edge";
 
 const AVATAR = "https://avatars.githubusercontent.com/u/109731657?v=4";
 
