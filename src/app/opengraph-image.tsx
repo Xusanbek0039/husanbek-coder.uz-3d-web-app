@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getCommittersRank } from "@/lib/committers";
 
-export const alt = "Husan Suyunov — Full-Stack Python Developer";
+export const alt = "Husan Suyunov — Python Backend Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const revalidate = 86400;
@@ -32,9 +32,9 @@ export default async function OgImage() {
             Open to new projects
           </div>
           <div style={{ fontSize: 92, fontWeight: 800, marginTop: 24, lineHeight: 1 }}>Husan Suyunov</div>
-          <div style={{ fontSize: 40, color: "#a1a1aa", marginTop: 20 }}>Full-Stack Python Developer</div>
+          <div style={{ fontSize: 40, color: "#a1a1aa", marginTop: 20 }}>Python Backend Developer</div>
           <div style={{ fontSize: 26, color: "#71717a", marginTop: 14 }}>
-            Django · FastAPI · React · LMS/CRM · Telegram bots · AI
+            Django · DRF · FastAPI · PostgreSQL · Docker · REST API
           </div>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", marginTop: 40 }}>
             <div

@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Husan Suyunov — Full-Stack Python Developer",
-    "description": "Husan Suyunov — Full-Stack Python Developer. I build LMS and CRM systems, web applications, Telegram bots and AI projects with Django, FastAPI and React. Head of the IT Park Zaamin district branch.",
-    "short": "Full-Stack Python Developer: Django, FastAPI, React, LMS/CRM, Telegram bots and AI projects.",
+    "title": "Husan Suyunov — Python Backend Developer | Django, FastAPI",
+    "description": "Husan Suyunov — Python Backend Developer from Uzbekistan. REST APIs, LMS and CRM systems with Django, DRF and FastAPI, Telegram bots. 7+ years of experience.",
+    "short": "Python Backend Developer: Django, DRF, FastAPI, PostgreSQL, Docker — REST APIs, LMS/CRM and Telegram bots.",
     "ogAlt": "Husan Suyunov's portfolio"
   },
   "nav": {
@@ -31,13 +31,13 @@
   },
   "hero": {
     "greeting": "Hello there",
-    "role": "Full-Stack Python Developer",
+    "role": "Python Backend Developer",
     "motto": "My motto: every step is the beginning of making a big dream come true. You are strong, nothing can stop you on your path, and you will surely achieve everything.",
     "cv": "View resume",
     "message": "Leave a message",
     "messageTooltip": "Messages section",
     "openToWork": "Open to new projects",
-    "tagline": "LMS, CRM, Telegram bots and AI — from idea to launch",
+    "tagline": "REST APIs, LMS and CRM systems with Django, DRF and FastAPI — from idea to production",
     "viewProjects": "View projects",
     "rankBadge": "#{rank} in Uzbekistan · committers.top"
   },
@@ -47,19 +47,20 @@
   },
   "cvSkills": {
     "title": "My Skills",
-    "subtitle": "I build LMS, CRM and AI projects in Python end-to-end — both backend and frontend — and develop Telegram bots.",
+    "subtitle": "My core focus is Python Backend: REST APIs with Django, DRF and FastAPI, databases and integrations. Everything else supports the backend.",
     "groups": {
       "languages": "Programming languages",
-      "backend": "Backend",
+      "backend": "Python Backend",
       "frontend": "Frontend",
       "databases": "Databases",
       "ai": "Artificial intelligence",
       "bots": "Telegram bots",
       "vcs": "Version control",
       "cloud": "Cloud services",
-      "devops": "DevOps & automation",
-      "testing": "Testing & quality",
-      "spoken": "Languages"
+      "devops": "DevOps & cloud",
+      "testing": "Testing",
+      "spoken": "Languages",
+      "extra": "Additional skills"
     },
     "langs": {
       "uz": "Uzbek",
@@ -67,7 +68,8 @@
       "en": "English",
       "ko": "Korean",
       "native": "native"
-    }
+    },
+    "primaryBadge": "core focus"
   },
   "projectsSection": {
     "title": "My Projects",
@@ -195,13 +197,13 @@
   },
   "about": {
     "metaTitle": "About me",
-    "metaDescription": "Husan Suyunov — Full-Stack Python Developer. Django, FastAPI, React, LMS/CRM systems, AI and Telegram bots.",
-    "role": "Full-Stack Python Developer",
+    "metaDescription": "Husan Suyunov — Python Backend Developer. Django, DRF, FastAPI, PostgreSQL and Docker; REST APIs, LMS/CRM systems and Telegram bots.",
+    "role": "Python Backend Developer",
     "location": "Jizzakh, Sharof Rashidov district",
     "cv": "View resume",
     "phone": "Phone",
     "title": "About me",
-    "p1": "Hi! I'm <b>Husan Suyunov</b>, a Full-Stack Python Developer. I build web applications, LMS and CRM systems end-to-end — backend and frontend — with Python, Django, FastAPI and React. AI projects (NLP, Machine Learning) and Telegram bots are also among my core areas.",
+    "p1": "Hi! I'm <b>Husan Suyunov</b>, a Python Backend Developer. I design the server side of REST APIs, LMS and CRM systems with Django, Django REST Framework and FastAPI: databases, authentication, payment and Telegram integrations. When needed I also build the React frontend and connect Telegram bots and AI services to the backend.",
     "p2": "As <b>head of the IT Park Zaamin district branch</b>, I work on digitalizing the learning process: itclms.uz, the ITC Academy platform and its Telegram bot are results of this work. I study Business Management in Networks at Kimyo International University in Tashkent, so I look at projects from both a technical and a business perspective.",
     "p3": "Learning new technologies and finding innovative solutions to complex problems are my top priorities. The code of all my projects is open on GitHub.",
     "stats": {
@@ -285,5 +287,31 @@
   "experienceSection": {
     "title": "Experience & education",
     "more": "Learn more"
+  },
+  "resume": {
+    "metaTitle": "Resume (CV) — Python Backend Developer",
+    "metaDescription": "Resume of Husan Suyunov, Python Backend Developer — Django, DRF, FastAPI, PostgreSQL, Docker. Work experience, projects and education.",
+    "title": "Python Backend Developer",
+    "summaryTitle": "Summary",
+    "summary": "Python Backend Developer with 7+ years of experience. I design and ship REST APIs, LMS and CRM systems with Django, Django REST Framework and FastAPI: data models, authentication, payment and Telegram integrations, Docker and CI/CD. I currently lead the IT Park Zaamin branch, where I build and run the itclms.uz and ITC Academy platforms.",
+    "skillsTitle": "Technical skills",
+    "skills": {
+      "backend": "Backend",
+      "db": "Databases",
+      "devops": "DevOps",
+      "testing": "Testing",
+      "bots": "Telegram bots",
+      "extra": "Additional"
+    },
+    "experienceTitle": "Work experience",
+    "projectsTitle": "Key projects",
+    "educationTitle": "Education",
+    "languagesTitle": "Languages",
+    "achievementsTitle": "Achievements",
+    "rank": "committers.top: #{rank} of {total} most active GitHub developers in Uzbekistan, {contribs} contributions a year",
+    "repos": "{count} public repositories on GitHub",
+    "print": "Print / save as PDF",
+    "pdf": "PDF (Google Drive)",
+    "location": "Jizzakh, Uzbekistan"
   }
 }

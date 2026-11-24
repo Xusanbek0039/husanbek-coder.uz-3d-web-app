@@ -1,9 +1,9 @@
 const config = {
   title: "Husan Suyunov",
   description: {
-    long: "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI va React yordamida LMS, CRM tizimlari, web ilovalar, Telegram botlar va sun'iy intellekt loyihalarini ishlab chiqaman. IT Park Zomin tuman filiali rahbari.",
+    long: "Husan Suyunov — Python Backend dasturchi. Django, Django REST Framework va FastAPI'da REST API, LMS va CRM tizimlari, Telegram botlar ishlab chiqaman. IT Park Zomin tuman filiali rahbari.",
     short:
-      "Full-Stack Python dasturchi: Django, FastAPI, React, LMS/CRM, Telegram botlar va AI loyihalari.",
+      "Python Backend dasturchi: Django, DRF, FastAPI, PostgreSQL, Docker — REST API, LMS/CRM va Telegram botlar.",
   },
   keywords: [
     "Husan Suyunov",
@@ -11,11 +11,16 @@ const config = {
     "Husanbek",
     "husanbek-coder.uz",
     "Husanbek portfolio",
-    "Full-Stack Python dasturchi",
-    "Python developer Uzbekistan",
+    "Python Backend dasturchi",
+    "Python Backend Developer",
+    "Python backend developer Uzbekistan",
+    "Python dasturchi Toshkent",
     "Django developer",
-    "FastAPI",
-    "React",
+    "Django REST Framework",
+    "FastAPI developer",
+    "REST API",
+    "PostgreSQL",
+    "Docker",
     "LMS ishlab chiqish",
     "CRM tizim",
     "Telegram bot yaratish",

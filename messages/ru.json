@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Хусан Суюнов — Full-Stack Python разработчик",
-    "description": "Хусан Суюнов — Full-Stack Python-разработчик. Создаю LMS и CRM-системы, веб-приложения, Telegram-ботов и проекты с искусственным интеллектом на Django, FastAPI и React. Руководитель филиала IT Park в Зааминском районе.",
-    "short": "Full-Stack Python-разработчик: Django, FastAPI, React, LMS/CRM, Telegram-боты и AI-проекты.",
+    "title": "Хусан Суюнов — Python Backend-разработчик | Django, FastAPI",
+    "description": "Хусан Суюнов — Python Backend-разработчик из Узбекистана. REST API, LMS и CRM-системы на Django, DRF и FastAPI, Telegram-боты. 7+ лет опыта.",
+    "short": "Python Backend-разработчик: Django, DRF, FastAPI, PostgreSQL, Docker — REST API, LMS/CRM и Telegram-боты.",
     "ogAlt": "Портфолио Хусана Суюнова"
   },
   "nav": {
@@ -31,13 +31,13 @@
   },
   "hero": {
     "greeting": "Здравствуйте",
-    "role": "Full-Stack Python-разработчик",
+    "role": "Python Backend-разработчик",
     "motto": "Мой девиз: каждый шаг — это начало воплощения большой мечты. Ты сильный, ничто не остановит тебя на твоём пути, и ты обязательно всего добьёшься.",
     "cv": "Посмотреть резюме",
     "message": "Написать мне",
     "messageTooltip": "Раздел сообщений",
     "openToWork": "Открыт к новым проектам",
-    "tagline": "LMS, CRM, Telegram-боты и AI — от идеи до запуска",
+    "tagline": "REST API, LMS и CRM-системы на Django, DRF и FastAPI — от идеи до продакшена",
     "viewProjects": "Смотреть проекты",
     "rankBadge": "#{rank} в Узбекистане · committers.top"
   },
@@ -47,19 +47,20 @@
   },
   "cvSkills": {
     "title": "Мои навыки",
-    "subtitle": "Создаю LMS, CRM и AI-проекты на Python полностью — и бэкенд, и фронтенд, а также разрабатываю Telegram-ботов.",
+    "subtitle": "Основное направление — Python Backend: REST API на Django, DRF и FastAPI, базы данных и интеграции. Остальное — навыки, дополняющие backend.",
     "groups": {
       "languages": "Языки программирования",
-      "backend": "Бэкенд",
+      "backend": "Python Backend",
       "frontend": "Фронтенд",
       "databases": "Базы данных",
       "ai": "Искусственный интеллект",
       "bots": "Telegram-боты",
       "vcs": "Контроль версий",
       "cloud": "Облачные сервисы",
-      "devops": "DevOps и автоматизация",
-      "testing": "Тестирование и контроль качества",
-      "spoken": "Языки"
+      "devops": "DevOps и облако",
+      "testing": "Тестирование",
+      "spoken": "Языки",
+      "extra": "Дополнительные навыки"
     },
     "langs": {
       "uz": "Узбекский",
@@ -67,7 +68,8 @@
       "en": "Английский",
       "ko": "Корейский",
       "native": "родной"
-    }
+    },
+    "primaryBadge": "основное направление"
   },
   "projectsSection": {
     "title": "Мои проекты",
@@ -195,13 +197,13 @@
   },
   "about": {
     "metaTitle": "Обо мне",
-    "metaDescription": "Хусан Суюнов — Full-Stack Python-разработчик. Django, FastAPI, React, LMS/CRM-системы, AI и Telegram-боты.",
-    "role": "Full-Stack Python Developer",
+    "metaDescription": "Хусан Суюнов — Python Backend-разработчик. Django, DRF, FastAPI, PostgreSQL и Docker; REST API, LMS/CRM-системы и Telegram-боты.",
+    "role": "Python Backend Developer",
     "location": "Джизак, Шараф-Рашидовский район",
     "cv": "Посмотреть резюме",
     "phone": "Телефон",
     "title": "Обо мне",
-    "p1": "Здравствуйте! Я <b>Хусан Суюнов</b> — Full-Stack Python-разработчик. Создаю веб-приложения, LMS и CRM-системы полностью — бэкенд и фронтенд — на Python, Django, FastAPI и React. Также моё основное направление — проекты с искусственным интеллектом (NLP, Machine Learning) и Telegram-боты.",
+    "p1": "Здравствуйте! Я <b>Хусан Суюнов</b> — Python Backend-разработчик. Проектирую серверную часть REST API, LMS и CRM-систем на Django, Django REST Framework и FastAPI: базы данных, аутентификация, интеграции платежей и Telegram. При необходимости пишу и фронтенд на React, подключаю Telegram-ботов и AI-сервисы к бэкенду.",
     "p2": "Сейчас как <b>руководитель филиала IT Park в Зааминском районе</b> занимаюсь цифровизацией учебного процесса: itclms.uz, платформа ITC Academy и её Telegram-бот — результаты этой работы. Учусь в Kimyo International University in Tashkent по направлению «Управление бизнесом в сетях», поэтому смотрю на проекты и с технической, и с бизнес-стороны.",
     "p3": "Изучать новые технологии и находить инновационные решения сложных задач — мои главные приоритеты. Весь код моих проектов открыт на GitHub.",
     "stats": {
@@ -285,5 +287,31 @@
   "experienceSection": {
     "title": "Опыт и образование",
     "more": "Подробнее"
+  },
+  "resume": {
+    "metaTitle": "Резюме (CV) — Python Backend-разработчик",
+    "metaDescription": "Резюме Хусана Суюнова: Python Backend-разработчик — Django, DRF, FastAPI, PostgreSQL, Docker. Опыт работы, проекты и образование.",
+    "title": "Python Backend-разработчик",
+    "summaryTitle": "Кратко",
+    "summary": "Python Backend-разработчик с опытом 7+ лет. Проектирую и вывожу в продакшен REST API, LMS и CRM-системы на Django, Django REST Framework и FastAPI: модели данных, аутентификация, интеграции платежей и Telegram, Docker и CI/CD. Сейчас руковожу филиалом IT Park в Зааминском районе и развиваю платформы itclms.uz и ITC Academy.",
+    "skillsTitle": "Технические навыки",
+    "skills": {
+      "backend": "Backend",
+      "db": "Базы данных",
+      "devops": "DevOps",
+      "testing": "Тестирование",
+      "bots": "Telegram-боты",
+      "extra": "Дополнительно"
+    },
+    "experienceTitle": "Опыт работы",
+    "projectsTitle": "Ключевые проекты",
+    "educationTitle": "Образование",
+    "languagesTitle": "Языки",
+    "achievementsTitle": "Достижения",
+    "rank": "committers.top: #{rank} среди самых активных GitHub-разработчиков Узбекистана (из {total}), {contribs} вкладов за год",
+    "repos": "{count} открытых репозиториев на GitHub",
+    "print": "Печать / сохранить PDF",
+    "pdf": "PDF (Google Drive)",
+    "location": "Джизак, Узбекистан"
   }
 }

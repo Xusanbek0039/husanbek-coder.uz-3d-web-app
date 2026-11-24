@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Husan Suyunov — Full-Stack Python Dasturchi",
-    "description": "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI va React yordamida LMS, CRM tizimlari, web ilovalar, Telegram botlar va sun'iy intellekt loyihalarini ishlab chiqaman. IT Park Zomin tuman filiali rahbari.",
-    "short": "Full-Stack Python dasturchi: Django, FastAPI, React, LMS/CRM, Telegram botlar va AI loyihalari.",
+    "title": "Husan Suyunov — Python Backend Dasturchi | Django, FastAPI",
+    "description": "Husan Suyunov — O'zbekistonlik Python Backend dasturchi. Django, DRF va FastAPI'da REST API, LMS va CRM tizimlari, Telegram botlar. 7+ yil tajriba.",
+    "short": "Python Backend dasturchi: Django, DRF, FastAPI, PostgreSQL, Docker — REST API, LMS/CRM va Telegram botlar.",
     "ogAlt": "Husan Suyunov portfoliosi"
   },
   "nav": {
@@ -31,13 +31,13 @@
   },
   "hero": {
     "greeting": "Assalomu alaykum",
-    "role": "Full-Stack Python Dasturchi",
+    "role": "Python Backend Dasturchi",
     "motto": "Mening shiorim: Har bir qadam, katta orzularni ro'yobga chiqarishning boshlanishi. Sen kuchlisan, sening yo'lingda hech narsa to'xtata olmaydi va sen albatta hammasiga erishasan.",
     "cv": "Resume CV ko'rish",
     "message": "Xabar qoldirish",
     "messageTooltip": "Xabarlar bo'limi",
     "openToWork": "Yangi loyihalarga ochiqman",
-    "tagline": "LMS, CRM, Telegram botlar va AI — g'oyadan ishga tushirishgacha",
+    "tagline": "Django, DRF va FastAPI'da REST API, LMS va CRM tizimlari — g'oyadan production'gacha",
     "viewProjects": "Loyihalarni ko'rish",
     "rankBadge": "O'zbekistonda #{rank} · committers.top"
   },
@@ -47,19 +47,20 @@
   },
   "cvSkills": {
     "title": "Ko'nikmalarim",
-    "subtitle": "Python asosida LMS, CRM va sun'iy intellekt loyihalarini backend va frontend qismlari bilan to'liq yarataman, Telegram botlar ishlab chiqaman.",
+    "subtitle": "Asosiy yo'nalishim — Python Backend: Django, DRF va FastAPI'da REST API, ma'lumotlar bazasi va integratsiyalar. Qolganlari backendni to'ldiruvchi ko'nikmalar.",
     "groups": {
       "languages": "Dasturlash tillari",
-      "backend": "Backend",
+      "backend": "Python Backend",
       "frontend": "Frontend",
       "databases": "Ma'lumotlar bazasi",
       "ai": "Sun'iy intellekt",
       "bots": "Telegram botlar",
       "vcs": "Versiya nazorati",
       "cloud": "Bulutli xizmatlar",
-      "devops": "DevOps va avtomatlashtirish",
-      "testing": "Testlash va sifat nazorati",
-      "spoken": "Tillar"
+      "devops": "DevOps va bulut",
+      "testing": "Testlash",
+      "spoken": "Tillar",
+      "extra": "Qo'shimcha ko'nikmalar"
     },
     "langs": {
       "uz": "O'zbek tili",
@@ -67,7 +68,8 @@
       "en": "Ingliz tili",
       "ko": "Koreys tili",
       "native": "ona tili"
-    }
+    },
+    "primaryBadge": "asosiy yo'nalish"
   },
   "projectsSection": {
     "title": "Loyihalarim",
@@ -195,13 +197,13 @@
   },
   "about": {
     "metaTitle": "Men haqimda",
-    "metaDescription": "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI, React, LMS/CRM tizimlari, AI va Telegram botlar.",
-    "role": "Full-Stack Python Developer",
+    "metaDescription": "Husan Suyunov — Python Backend dasturchi. Django, DRF, FastAPI, PostgreSQL va Docker; REST API, LMS/CRM tizimlari va Telegram botlar.",
+    "role": "Python Backend Developer",
     "location": "Jizzax, Sh. Rashidov tumani",
     "cv": "Resume CV ko'rish",
     "phone": "Telefon",
     "title": "Men haqimda",
-    "p1": "Assalomu alaykum! Men <b>Suyunov Husan</b> — Full-Stack Python dasturchiman. Python, Django, FastAPI va React yordamida web ilovalar, LMS va CRM tizimlarini backend va frontend qismlari bilan to'liq ishlab chiqaman. Sun'iy intellekt (NLP, Machine Learning) loyihalari va Telegram botlar yaratish ham asosiy yo'nalishlarimdan.",
+    "p1": "Assalomu alaykum! Men <b>Suyunov Husan</b> — Python Backend dasturchiman. Django, Django REST Framework va FastAPI yordamida REST API, LMS va CRM tizimlarining server qismini loyihalayman: ma'lumotlar bazasi, autentifikatsiya, to'lov va Telegram integratsiyalari. Kerak bo'lganda React'da frontend qismini ham yozaman, Telegram botlar va AI xizmatlarini backendga ulayman.",
     "p2": "Hozirda <b>IT Park Zomin tuman filiali rahbari</b> sifatida ta'lim jarayonini raqamlashtirish ustida ishlayman: itclms.uz, ITC Academy platformasi va uning Telegram boti — shu ishning natijalari. Toshkent Xalqaro Kimyo Universitetida «Tarmoqlarda biznesni boshqarish» yo'nalishida tahsil olaman, shuning uchun loyihalarga texnik va biznes nuqtai nazaridan birdek qarayman.",
     "p3": "Yangi texnologiyalarni o'rganish va murakkab muammolarga innovatsion yechim topish — mening ustuvor vazifalarim. Barcha loyiha kodlarim GitHub'da ochiq.",
     "stats": {
@@ -285,5 +287,31 @@
   "experienceSection": {
     "title": "Tajriba va ta'lim",
     "more": "Batafsil ma'lumot"
+  },
+  "resume": {
+    "metaTitle": "Rezyume (CV) — Python Backend Dasturchi",
+    "metaDescription": "Husan Suyunov rezyumesi: Python Backend dasturchi — Django, DRF, FastAPI, PostgreSQL, Docker. Ish tajribasi, loyihalar va ta'lim.",
+    "title": "Python Backend Dasturchi",
+    "summaryTitle": "Qisqacha",
+    "summary": "7+ yillik tajribaga ega Python Backend dasturchiman. Django, Django REST Framework va FastAPI asosida REST API, LMS va CRM tizimlarini loyihalayman va production'ga chiqaraman: ma'lumotlar bazasi modellari, autentifikatsiya, to'lov va Telegram integratsiyalari, Docker va CI/CD. Hozir IT Park Zomin filiali rahbari sifatida itclms.uz va ITC Academy platformalarini ishlab chiqaman va yurgizaman.",
+    "skillsTitle": "Texnik ko'nikmalar",
+    "skills": {
+      "backend": "Backend",
+      "db": "Ma'lumotlar bazasi",
+      "devops": "DevOps",
+      "testing": "Testlash",
+      "bots": "Telegram botlar",
+      "extra": "Qo'shimcha"
+    },
+    "experienceTitle": "Ish tajribasi",
+    "projectsTitle": "Asosiy loyihalar",
+    "educationTitle": "Ta'lim",
+    "languagesTitle": "Tillar",
+    "achievementsTitle": "Yutuqlar",
+    "rank": "committers.top: O'zbekistondagi eng faol GitHub dasturchilari ichida #{rank} ({total} kishidan), yiliga {contribs} ta contribution",
+    "repos": "GitHub'da {count} ta ochiq repozitoriy",
+    "print": "Chop etish / PDF saqlash",
+    "pdf": "PDF (Google Drive)",
+    "location": "Jizzax, O'zbekiston"
   }
 }
