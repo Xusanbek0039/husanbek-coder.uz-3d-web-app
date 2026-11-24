@@ -51,3 +51,43 @@ export const spokenLanguages: SpokenLanguage[] = [
   { id: "en", name: { uz: "Ingliz tili", ru: "Английский", en: "English" }, level: "B1" },
   { id: "ko", name: { uz: "Koreys tili", ru: "Корейский", en: "Korean" }, level: "A2" },
 ];
+
+/**
+ * Asosiy kompetensiyalar — src/data/experience.ts dagi lavozimlardan kelib chiqadi
+ * (mentor/o'qituvchi, filial rahbari/menejer, dasturchi).
+ */
+export interface Competency {
+  id: "teaching" | "management" | "development";
+  title: Localized;
+  description: Localized;
+}
+
+export const competencies: Competency[] = [
+  {
+    id: "teaching",
+    title: { uz: "Pedagogik mahorat va mentorlik", ru: "Педагогическое мастерство и менторство", en: "Teaching and mentoring" },
+    description: {
+      uz: "Dasturlash bo'yicha mentor va o'qituvchi: Python, web dasturlash va Telegram botlarni amaliy loyihalar orqali o'rgataman.",
+      ru: "Ментор и преподаватель программирования: обучаю Python, веб-разработке и Telegram-ботам на практических проектах.",
+      en: "Programming mentor and instructor: I teach Python, web development and Telegram bots through hands-on projects.",
+    },
+  },
+  {
+    id: "management",
+    title: { uz: "Boshqaruv", ru: "Управление", en: "Management" },
+    description: {
+      uz: "IT Park Zomin filiali rahbari va Yoshlar axborot texnologiyalari markazida menejer sifatida jamoa va jarayonlarni tashkil etish.",
+      ru: "Организация команды и процессов: руководитель филиала IT Park в Заамине и менеджер в Центре IT для молодёжи.",
+      en: "Organizing teams and processes as IT Park Zaamin branch manager and as a manager at the Youth IT Center.",
+    },
+  },
+  {
+    id: "development",
+    title: { uz: "Full-Stack dasturlash", ru: "Full-Stack разработка", en: "Full-stack development" },
+    description: {
+      uz: "Django, DRF, FastAPI va React'da LMS, CRM tizimlari, REST API va Telegram botlar.",
+      ru: "LMS, CRM-системы, REST API и Telegram-боты на Django, DRF, FastAPI и React.",
+      en: "LMS and CRM systems, REST APIs and Telegram bots with Django, DRF, FastAPI and React.",
+    },
+  },
+];
