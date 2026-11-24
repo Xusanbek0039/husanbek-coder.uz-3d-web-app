@@ -3,6 +3,8 @@ import HomePage from "@/components/home-page";
 import { getContributions, getGithubProfile } from "@/lib/github";
 import { getCommittersRank } from "@/lib/committers";
 import projects from "@/data/projects";
+import { experienceYears, studentsCount } from "@/data/profile";
+import { hasCvPdf } from "@/lib/cv";
 
 export const revalidate = 3600;
 
@@ -22,7 +24,10 @@ export default async function Page({ params: { locale } }: { params: { locale: s
         contributions,
         committers,
         projects: projects.length,
+        years: experienceYears(),
+        students: studentsCount,
       }}
+      cvAvailable={hasCvPdf()}
     />
   );
 }

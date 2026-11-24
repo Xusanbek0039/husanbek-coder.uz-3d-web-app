@@ -12,7 +12,7 @@ import HeroSection from "@/components/sections/hero";
 import StatsSection, { type HomeStats } from "@/components/sections/stats";
 import ExperienceSection from "@/components/sections/experience";
 
-function HomePage({ stats }: { stats: HomeStats }) {
+function HomePage({ stats, cvAvailable }: { stats: HomeStats; cvAvailable: boolean }) {
   return (
     <>
       <SmoothScroll>
@@ -20,7 +20,12 @@ function HomePage({ stats }: { stats: HomeStats }) {
           <div className="top-0 z-0 fixed w-full h-screen">
             <AnimatedBackground />
           </div>
-          <HeroSection rank={stats.committers.rank} rankUrl={stats.committers.url} />
+          <HeroSection
+            rank={stats.committers.rank}
+            rankUrl={stats.committers.url}
+            metrics={{ years: stats.years, projects: stats.projects, students: stats.students }}
+            cvAvailable={cvAvailable}
+          />
           <StatsSection stats={stats} />
           <SkillsSection />
           <CvSkillsSection />

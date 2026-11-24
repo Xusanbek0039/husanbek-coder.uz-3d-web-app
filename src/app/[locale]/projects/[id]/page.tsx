@@ -4,6 +4,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Info } from "lucide-react";
+import ProjectMeta from "@/components/projects/project-meta";
+import { toCardData } from "@/components/projects/card-data";
 import { FaGithub } from "react-icons/fa6";
 import projects from "@/data/projects";
 import { localizeProject } from "@/data/projects-i18n";
@@ -42,6 +44,7 @@ export async function generateMetadata({ params: { locale, id } }: Props): Promi
 async function Page({ params: { locale, id } }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("projectsPage");
+  const ts = await getTranslations("projectsSection");
   const index = projects.findIndex((p) => p.id === id);
   if (index === -1) notFound();
   const project = localizeProject(projects[index], locale);
@@ -64,16 +67,22 @@ async function Page({ params: { locale, id } }: Props) {
           <span className="text-xs bg-white text-black rounded-lg px-2 py-0.5">{project.category}</span>
           <h1 className="mt-4 text-3xl md:text-5xl leading-tight text-zinc-100">{project.title}</h1>
           <p className="mt-4 text-zinc-400 leading-relaxed">{project.description}</p>
+          <ProjectMeta
+            project={{ ...toCardData(projects[index], locale, 8), live: undefined, github: undefined }}
+            className="mt-4"
+          />
           <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 h-10 px-4 rounded-md bg-zinc-200 text-black text-sm hover:bg-white transition-colors"
-            >
-              {t("visit")}
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
+            {project.live && (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 h-10 px-4 rounded-md bg-zinc-200 text-black text-sm hover:bg-white transition-colors"
+              >
+                {t("visit")}
+                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              </a>
+            )}
             {project.github && (
               <a
                 href={project.github}
@@ -90,7 +99,7 @@ async function Page({ params: { locale, id } }: Props) {
         <div className="relative aspect-[3/2] rounded-md overflow-hidden border-[.5px] border-zinc-700 bg-zinc-900">
           <Image
             src={project.src}
-            alt={project.title}
+            alt={ts("screenshotAlt", { title: project.title })}
             fill
             priority
             sizes="(min-width: 1024px) 50vw, 100vw"
@@ -106,13 +115,13 @@ async function Page({ params: { locale, id } }: Props) {
         {project.skills.frontend.length > 0 && (
           <div className="flex flex-col items-center gap-2 text-3xl">
             <FloatingDock items={project.skills.frontend} />
-            <p className="text-sm text-zinc-500">Frontend</p>
+            <p className="text-sm text-zinc-400">Frontend</p>
           </div>
         )}
         {project.skills.backend.length > 0 && (
           <div className="flex flex-col items-center gap-2 text-3xl">
             <FloatingDock items={project.skills.backend} />
-            <p className="text-sm text-zinc-500">Backend</p>
+            <p className="text-sm text-zinc-400">Backend</p>
           </div>
         )}
       </section>

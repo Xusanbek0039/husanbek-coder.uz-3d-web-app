@@ -50,18 +50,21 @@ const Header = ({ loader }: HeaderProps) => {
       >
       </div> */}
       <div className={cn(styles.bar, "flex items-center justify-between")}>
-        <Link href="/" className="flex items-center justify-center">
-          <Button variant={"link"} className="text-md">
+        <Button asChild variant={"link"} className="text-md">
+          <Link href="/" aria-label={t("homeLabel", { name: config.author })}>
             {config.author}
-          </Button>
-        </Link>
+          </Link>
+        </Button>
 
-        <OnlineUsers />
+        {/* Realtime server (NEXT_PUBLIC_WS_URL) deploy qilinmagan bo'lsa hisoblagich doim 0 ko'rsatadi — yashiramiz */}
+        {process.env.NEXT_PUBLIC_WS_URL && <OnlineUsers />}
         <LanguageSwitcher />
         <FunnyThemeToggle className="w-6 h-6 mr-4" />
         <Button
           variant={"ghost"}
           onClick={() => setIsActive(!isActive)}
+          aria-expanded={isActive}
+          aria-label={isActive ? t("close") : t("menu")}
           className={cn(
             styles.el,
             "m-0 p-0 h-6 bg-transparent flex items-center justify-center"

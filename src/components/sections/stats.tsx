@@ -7,6 +7,7 @@ import { ArrowUpRight, Trophy } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { cn, formatDate } from "@/lib/utils";
 import { config } from "@/data/config";
+import SectionHeading from "@/components/ui/section-heading";
 import ContributionGraph from "@/components/profile/contribution-graph";
 import type { Contributions } from "@/lib/github";
 import type { CommittersRank } from "@/lib/committers";
@@ -17,9 +18,11 @@ export type HomeStats = {
   contributions: Contributions | null;
   committers: CommittersRank;
   projects: number;
+  /** Ish tajribasi yillari (src/data/profile.ts) */
+  years: number;
+  /** O'quvchilar soni; null — ko'rsatilmaydi */
+  students: number | null;
 };
-
-const EXPERIENCE_YEARS = 7;
 
 /** Ko'rinishga kelganda 0 dan qiymatgacha sanaydigan raqam */
 const CountUp = ({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) => {
@@ -70,8 +73,8 @@ const StatCard = ({
       <div className={cn("text-4xl md:text-5xl", highlight ? "text-amber-600 dark:text-amber-300" : "text-zinc-900 dark:text-zinc-100")}>
         {children}
       </div>
-      <div className="mt-2 text-sm text-zinc-600 dark:text-zinc-400 font-sans">{label}</div>
-      {sub && <div className="mt-1 text-xs text-zinc-500 font-sans">{sub}</div>}
+      <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300 font-sans">{label}</div>
+      {sub && <div className="mt-1 text-xs text-zinc-600 dark:text-zinc-300 font-sans">{sub}</div>}
     </>
   );
   return href ? (
@@ -89,17 +92,11 @@ const StatsSection = ({ stats }: { stats: HomeStats }) => {
   const yearly = contributions?.total ?? committers.contribs;
 
   return (
-    <section id="stats" className="relative z-[2] max-w-6xl mx-auto px-4 py-24">
-      <h2
-        className={cn(
-          "bg-clip-text text-4xl text-center text-transparent md:text-6xl",
-          "bg-gradient-to-b from-black/80 to-black/50",
-          "dark:bg-gradient-to-b dark:from-white/80 dark:to-white/20"
-        )}
-      >
+    <section id="stats" aria-labelledby="stats-title" className="relative z-[2] max-w-6xl mx-auto px-4 py-24">
+      <SectionHeading id="stats-title">
         {t("title")}
-      </h2>
-      <p className="mt-4 mb-12 text-center text-sm text-zinc-500 font-sans">{t("subtitle")}</p>
+      </SectionHeading>
+      <p className="mt-4 mb-12 text-center text-sm text-zinc-600 dark:text-zinc-300 font-sans">{t("subtitle")}</p>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <StatCard
@@ -117,13 +114,13 @@ const StatsSection = ({ stats }: { stats: HomeStats }) => {
           <CountUp to={yearly} />
         </StatCard>
         <StatCard label={t("experience")}>
-          <CountUp to={EXPERIENCE_YEARS} suffix="+" />
+          <CountUp to={stats.years} suffix="+" />
         </StatCard>
         <StatCard label={t("repos")}>
           {stats.repos != null ? <CountUp to={stats.repos} /> : "130+"}
         </StatCard>
         <StatCard label={t("projects")}>
-          <CountUp to={stats.projects} suffix="+" />
+          <CountUp to={stats.projects} />
         </StatCard>
         <StatCard label={t("followers")}>
           {stats.followers != null ? <CountUp to={stats.followers} /> : "30+"}
@@ -160,7 +157,7 @@ const StatsSection = ({ stats }: { stats: HomeStats }) => {
           <Trophy className="w-4 h-4" /> {t("committers")} <ArrowUpRight className="w-4 h-4" />
         </a>
         {committers.updatedAt && (
-          <span className="text-xs text-zinc-500">
+          <span className="text-xs text-zinc-600 dark:text-zinc-300">
             {t("updated", { date: formatDate(committers.updatedAt) ?? committers.updatedAt })}
           </span>
         )}

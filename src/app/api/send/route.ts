@@ -3,15 +3,16 @@ import { config } from "@/data/config";
 import { Resend } from "resend";
 import { z } from "zod";
 import { NextResponse } from "next/server";
+import { CONTACT_LIMITS } from "@/lib/contact-limits";
 
 export const runtime = "nodejs";
 
 // ---------- Validatsiya ----------
 const ContactSchema = z.object({
   type: z.literal("contact").default("contact"),
-  fullName: z.string().trim().min(2, "To'liq ism noto'g'ri!").max(100),
-  email: z.string().trim().email({ message: "Elektron pochta manzili yaroqsiz!" }).max(200),
-  message: z.string().trim().min(10, "Xabar juda qisqa!").max(4000),
+  fullName: z.string().trim().min(CONTACT_LIMITS.name.min).max(CONTACT_LIMITS.name.max),
+  email: z.string().trim().email().max(CONTACT_LIMITS.emailMax),
+  message: z.string().trim().min(CONTACT_LIMITS.message.min).max(CONTACT_LIMITS.message.max),
   website: z.string().optional(), // honeypot
 });
 

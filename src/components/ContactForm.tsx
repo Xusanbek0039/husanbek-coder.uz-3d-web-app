@@ -9,6 +9,7 @@ import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
 import { useTranslations } from "next-intl";
 import { sendForm } from "@/lib/send-form";
+import { CONTACT_LIMITS, validateContact, type ContactField } from "@/lib/contact-limits";
 
 const ContactForm = () => {
   const [fullName, setFullName] = React.useState("");
@@ -16,6 +17,8 @@ const ContactForm = () => {
   const [message, setMessage] = React.useState("");
   const [website, setWebsite] = React.useState(""); // honeypot
   const [loading, setLoading] = React.useState(false);
+  const [invalid, setInvalid] = React.useState<ContactField[]>([]);
+  const [status, setStatus] = React.useState<"idle" | "success" | "error">("idle");
 
   const { toast } = useToast();
   const t = useTranslations("contactForm");
@@ -23,6 +26,13 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const errors = validateContact({ fullName, email, message });
+    setInvalid(errors);
+    if (errors.length) {
+      setStatus("error");
+      document.getElementById(FIELD_IDS[errors[0]])?.focus();
+      return;
+    }
     setLoading(true);
     try {
       await sendForm(
@@ -36,11 +46,13 @@ const ContactForm = () => {
         variant: "default",
         className: cn("top-0 mx-auto flex fixed md:top-4 md:right-4"),
       });
+      setStatus("success");
       setLoading(false);
       setFullName("");
       setEmail("");
       setMessage("");
     } catch (err) {
+      setStatus("error");
       toast({
         title: t("errorTitle"),
         description: err instanceof Error ? err.message : t("errorDesc"),
@@ -53,31 +65,46 @@ const ContactForm = () => {
     setLoading(false);
   };
   return (
-    <form className="min-w-7xl mx-auto sm:mt-4" onSubmit={handleSubmit}>
+    <form className="min-w-7xl mx-auto sm:mt-4" onSubmit={handleSubmit} noValidate aria-busy={loading}>
       <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
         <LabelInputContainer>
           <Label htmlFor="fullname">{t("name")}</Label>
           <Input
             id="fullname"
+            name="name"
+            autoComplete="name"
             placeholder={t("namePh")}
             type="text"
             required
-            minLength={2}
-            maxLength={100}
+            minLength={CONTACT_LIMITS.name.min}
+            maxLength={CONTACT_LIMITS.name.max}
             value={fullName}
+            aria-invalid={invalid.includes("fullName")}
+            aria-describedby={invalid.includes("fullName") ? "fullname-error" : undefined}
             onChange={(e) => setFullName(e.target.value)}
           />
+          <FieldError id="fullname-error" show={invalid.includes("fullName")}>
+            {tErr("fullName")}
+          </FieldError>
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="email">{t("email")}</Label>
           <Input
             id="email"
+            name="email"
+            autoComplete="email"
             placeholder="you@example.com"
             type="email"
             required
+            maxLength={CONTACT_LIMITS.emailMax}
             value={email}
+            aria-invalid={invalid.includes("email")}
+            aria-describedby={invalid.includes("email") ? "email-error" : undefined}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <FieldError id="email-error" show={invalid.includes("email")}>
+            {tErr("email")}
+          </FieldError>
         </LabelInputContainer>
       </div>
       <input
@@ -96,11 +123,21 @@ const ContactForm = () => {
           placeholder={t("messagePh")}
           id="content"
           required
-          minLength={10}
-          maxLength={4000}
+          minLength={CONTACT_LIMITS.message.min}
+          maxLength={CONTACT_LIMITS.message.max}
           value={message}
+          aria-invalid={invalid.includes("message")}
+          aria-describedby={`content-count${invalid.includes("message") ? " content-error" : ""}`}
           onChange={(e) => setMessage(e.target.value)}
         />
+        <div className="flex justify-between gap-3 text-sm">
+          <FieldError id="content-error" show={invalid.includes("message")}>
+            {tErr("message")}
+          </FieldError>
+          <span id="content-count" className="ml-auto text-xs text-muted-foreground tabular-nums">
+            {message.trim().length} / {CONTACT_LIMITS.message.max}
+          </span>
+        </div>
         <p className="text-sm text-muted-foreground">
           {t("privacy")}
         </p>
@@ -122,11 +159,27 @@ const ContactForm = () => {
         )}
         <BottomGradient />
       </Button>
+      <p role="status" aria-live="polite" className="sr-only">
+        {loading ? t("wait") : status === "success" ? t("successDesc") : status === "error" ? t("errorDesc") : ""}
+      </p>
     </form>
   );
 };
 
 export default ContactForm;
+
+const FIELD_IDS: Record<ContactField, string> = {
+  fullName: "fullname",
+  email: "email",
+  message: "content",
+};
+
+const FieldError = ({ id, show, children }: { id: string; show: boolean; children: React.ReactNode }) =>
+  show ? (
+    <p id={id} className="text-sm text-red-700 dark:text-red-400">
+      {children}
+    </p>
+  ) : null;
 
 const LabelInputContainer = ({
   children,

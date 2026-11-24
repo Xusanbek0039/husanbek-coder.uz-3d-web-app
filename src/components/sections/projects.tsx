@@ -16,68 +16,66 @@ import { localizeProject } from "@/data/projects-i18n";
 
 import SmoothScroll from "../smooth-scroll";
 import projects, { Project } from "@/data/projects";
-import { cn } from "@/lib/utils";
-import ProjectLinks from "@/components/profile/project-links";
+import SectionHeading from "../ui/section-heading";
+import ProjectFilter, {
+  countByKind,
+  matchesFilter,
+  type ProjectFilterValue,
+} from "@/components/projects/project-filter";
+import ProjectMeta from "@/components/projects/project-meta";
+import { toCardData, type ProjectCardData } from "@/components/projects/card-data";
 
 const ProjectsSection = () => {
   const t = useTranslations("projectsSection");
   const locale = useLocale();
+  const [filter, setFilter] = React.useState<ProjectFilterValue>("all");
+  const counts = React.useMemo(() => countByKind(projects), []);
+  const visible = projects.filter((p) => matchesFilter(p.kinds, filter));
+
   return (
-    <section id="projects" className="max-w-7xl mx-auto md:min-h-[130vh]">
-      <Link href={"#projects"}>
-        <h2
-          className={cn(
-            "bg-clip-text text-4xl text-center text-transparent md:text-7xl pt-16",
-            "bg-gradient-to-b from-black/80 to-black/50",
-            "dark:bg-gradient-to-b dark:from-white/80 dark:to-white/20 dark:bg-opacity-50 mb-32"
-          )}
-        >
-          {t("title")}
-        </h2>
-      </Link>
-      <div className="grid grid-cols-1 md:grid-cols-3">
-        {projects.map((project, index) => (
-          <Modall key={project.id} project={localizeProject(project, locale)} />
+    <section id="projects" aria-labelledby="projects-title" className="max-w-7xl mx-auto px-4 md:min-h-[130vh]">
+      <SectionHeading id="projects-title" className="pt-16">
+        {t("title")}
+      </SectionHeading>
+      <ProjectFilter value={filter} onChange={setFilter} counts={counts} className="mt-10 mb-16" />
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-6">
+        {visible.map((project) => (
+          <Modall
+            key={project.id}
+            project={localizeProject(project, locale)}
+            card={toCardData(project, locale)}
+          />
         ))}
       </div>
     </section>
   );
 };
-const Modall = ({ project }: { project: Project }) => {
+
+const Modall = ({ project, card }: { project: Project; card: ProjectCardData }) => {
   const t = useTranslations("projectsSection");
   return (
-    <div className="flex flex-col items-center justify-start mb-10">
+    <div className="flex flex-col items-center justify-start mb-12">
       <Modal>
-        <ModalTrigger className="bg-transparent flex justify-center group/modal-btn">
+        <ModalTrigger
+          className="bg-transparent flex justify-center group/modal-btn p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-lg"
+        >
           <div
-            className="relative w-[400px] h-auto rounded-lg overflow-hidden"
+            className="relative w-[400px] max-w-full h-auto rounded-lg overflow-hidden"
             style={{ aspectRatio: "3/2" }}
           >
             <Image
-              className="absolute w-full h-full top-0 left-0 hover:scale-[1.05] transition-all"
+              className="absolute w-full h-full top-0 left-0 object-cover hover:scale-[1.05] transition-all"
               src={project.src}
-              alt={project.title}
-              width={300}
-              height={300}
+              alt={t("screenshotAlt", { title: project.title })}
+              width={400}
+              height={267}
             />
-            <div className="absolute w-full h-2/3 bottom-0 left-0 bg-gradient-to-t from-black via-black/85 to-transparent pointer-events-none">
+            <div className="absolute w-full h-1/2 bottom-0 left-0 bg-gradient-to-t from-black via-black/85 to-transparent pointer-events-none">
               <div className="flex flex-col h-full items-start justify-end p-6">
-                <div className="text-lg text-left">{project.title}</div>
-                <div className="text-xs bg-white text-black rounded-lg w-fit px-2">
+                <h3 className="text-lg text-left text-white">{project.title}</h3>
+                <span className="text-xs bg-white text-black rounded-lg w-fit px-2">
                   {project.category}
-                </div>
-                <div className="mt-2 flex flex-wrap gap-1 font-sans">
-                  {[...(project.skills.backend ?? []), ...(project.skills.frontend ?? [])]
-                    .slice(0, 4)
-                    .map((s) => (
-                      <span
-                        key={s.title}
-                        className="text-[10px] leading-4 px-1.5 rounded border border-white/30 text-white/80"
-                      >
-                        {s.title}
-                      </span>
-                    ))}
-                </div>
+                </span>
               </div>
             </div>
           </div>
@@ -92,20 +90,26 @@ const Modall = ({ project }: { project: Project }) => {
             <button className="px-2 py-1 bg-gray-200 text-black dark:bg-black dark:border-black dark:text-white border border-gray-300 rounded-md text-sm w-28">
               {t("back")}
             </button>
-            <LocaleLink href={`/projects/${project.id}`}>
-              <button className="px-2 py-1 bg-gray-200 text-black dark:bg-black dark:border-neutral-700 dark:text-white border border-gray-300 rounded-md text-sm w-28">
-                {t("details")}
-              </button>
+            <LocaleLink
+              href={`/projects/${project.id}`}
+              className="px-2 py-1 text-center bg-gray-200 text-black dark:bg-black dark:border-neutral-700 dark:text-white border border-gray-300 rounded-md text-sm w-28"
+            >
+              {t("details")}
             </LocaleLink>
-            <Link href={project.live} target="_blank">
-              <button className="bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28">
-              {t("visit")}
-              </button>
-            </Link>
+            {project.live && (
+              <Link
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-center bg-black text-white dark:bg-white dark:text-black text-sm px-2 py-1 rounded-md border border-black w-28"
+              >
+                {t("visit")}
+              </Link>
+            )}
           </ModalFooter>
         </ModalBody>
       </Modal>
-      <ProjectLinks live={project.live} github={project.github} className="w-[400px] max-w-full mt-3 px-1" />
+      <ProjectMeta project={card} className="w-[400px] max-w-full mt-3 px-1" />
     </div>
   );
 };

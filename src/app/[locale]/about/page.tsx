@@ -22,6 +22,11 @@ import {
 } from "@/lib/github";
 import { getCommittersRank } from "@/lib/committers";
 import Timeline from "@/components/profile/timeline";
+import { educationTimeline, experienceTimeline } from "@/data/timeline";
+import { spokenLanguages } from "@/data/skills";
+import { experienceYears } from "@/data/profile";
+import { pick } from "@/data/types";
+import projects from "@/data/projects";
 import ContributionGraph from "@/components/profile/contribution-graph";
 import { formatDate } from "@/lib/utils";
 import { alternatesFor } from "@/i18n/helpers";
@@ -50,12 +55,6 @@ const KEY_PROJECTS = [
   { name: "@itc_academybot", href: "https://t.me/itc_academybot" },
 ];
 
-const LANGUAGES = [
-  { key: "uz", level: 100, native: true },
-  { key: "ru", level: 50 },
-  { key: "en", level: 45 },
-  { key: "ko", level: 30 },
-];
 
 const OTHER: Record<string, string> = { uz: "Boshqa", ru: "Другие", en: "Other" };
 
@@ -93,25 +92,17 @@ async function Page({ params: { locale } }: Props) {
   ];
 
   const stats = [
-    { value: "7+", label: t("stats.experience") },
+    { value: `${experienceYears()}+`, label: t("stats.experience") },
     { value: gh ? String(gh.public_repos) : "130+", label: t("stats.repos") },
     { value: gh ? String(gh.followers) : "30+", label: t("stats.followers") },
-    { value: "10+", label: t("stats.projects") },
+    { value: String(projects.length), label: t("stats.projects") },
     { value: `#${committers.rank}`, label: t("stats.committers", { total: committers.total }), href: committers.url },
     { value: String(contributions?.total ?? committers.contribs), label: t("stats.contributions") },
   ];
 
-  const experience = (["e1", "e2", "e3"] as const).map((k) => ({
-    period: t(`experience.${k}.period`),
-    title: t(`experience.${k}.title`),
-    place: t(`experience.${k}.place`),
-    text: t(`experience.${k}.text`),
-  }));
-  const education = (["d1", "d2", "d3"] as const).map((k) => ({
-    period: t(`education.${k}.period`),
-    title: t(`education.${k}.title`),
-    place: t(`education.${k}.place`),
-  }));
+  const present = await getTranslations("experienceSection");
+  const experience = experienceTimeline(locale, present("present"));
+  const education = educationTimeline(locale, present("present"));
   const bold = (chunks: React.ReactNode) => <b>{chunks}</b>;
 
   return (
@@ -126,7 +117,7 @@ async function Page({ params: { locale } }: Props) {
               <div className="flex justify-center items-center lg:w-full lg:aspect-square bg-zinc-800 rounded-xl lg:mb-5">
                 <Image
                   className="rounded-full m-4 lg:m-8 w-[100px] md:w-[150px] lg:w-[200px] aspect-square object-cover"
-                  alt="Husan Suyunov"
+                  alt={t("avatarAlt")}
                   src={avatar}
                   width={400}
                   height={400}
@@ -136,7 +127,7 @@ async function Page({ params: { locale } }: Props) {
               <div className="flex flex-col gap-2 lg:items-center ml-6 md:ml-12 lg:ml-0">
                 <p className="text-xl lg:text-center">Husan Suyunov</p>
                 <div className="text-xs bg-zinc-700 w-fit px-3 py-1 rounded-full">{t("role")}</div>
-                <p className="flex items-center gap-2 text-xs text-zinc-500">
+                <p className="flex items-center gap-2 text-xs text-zinc-400">
                   <FaLocationDot /> {t("location")}
                 </p>
               </div>
@@ -161,7 +152,7 @@ async function Page({ params: { locale } }: Props) {
                     <div className="w-6 text-lg">{link.icon}</div>
                     <div className="flex flex-col min-w-0">
                       <div className="text-sm">{link.name}</div>
-                      <div className="text-xs text-zinc-500 truncate">{link.content}</div>
+                      <div className="text-xs text-zinc-400 truncate">{link.content}</div>
                     </div>
                   </a>
                 </li>
@@ -181,7 +172,7 @@ async function Page({ params: { locale } }: Props) {
                 const body = (
                   <>
                     <div className="text-3xl text-zinc-100">{s.value}</div>
-                    <div className="mt-1 text-xs text-zinc-500">{s.label}</div>
+                    <div className="mt-1 text-xs text-zinc-400">{s.label}</div>
                   </>
                 );
                 const cls = "block rounded-md border-[.5px] border-zinc-700 bg-zinc-800/60 p-4 text-center";
@@ -199,13 +190,13 @@ async function Page({ params: { locale } }: Props) {
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
             <Card>
               <h2 className="text-2xl mb-6 flex items-center gap-3">
-                <BriefcaseBusiness className="w-6 h-6" /> {t("experienceTitle")}
+                <BriefcaseBusiness className="w-6 h-6" aria-hidden="true" /> {t("experienceTitle")}
               </h2>
               <Timeline items={experience} />
             </Card>
             <Card>
               <h2 className="text-2xl mb-6 flex items-center gap-3">
-                <GraduationCap className="w-6 h-6" /> {t("educationTitle")}
+                <GraduationCap className="w-6 h-6" aria-hidden="true" /> {t("educationTitle")}
               </h2>
               <Timeline items={education} />
             </Card>
@@ -229,24 +220,19 @@ async function Page({ params: { locale } }: Props) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-sm text-zinc-500">{t("alsoProjects")}</p>
+              <p className="mt-4 text-sm text-zinc-400">{t("alsoProjects")}</p>
             </Card>
             <Card>
               <h2 className="text-2xl mb-6">{t("languages")}</h2>
-              <div className="flex flex-col gap-4">
-                {LANGUAGES.map((lang) => (
-                  <div key={lang.key}>
-                    <div className="mb-1 flex justify-between text-sm">
-                      <span>{tl(lang.key)}</span>
-                      <span className="font-mono text-zinc-500">
-                        {lang.native ? tl("native") : `${lang.level}%`}
-                      </span>
-                    </div>
-                    <div className="h-1.5 w-full rounded-full bg-zinc-800 overflow-hidden">
-                      <div className="h-full rounded-full bg-zinc-300" style={{ width: `${lang.level}%` }} />
-                    </div>
-                  </div>
-                ))}
+              <div>
+                <ul className="flex flex-col gap-3">
+                  {spokenLanguages.map((lang) => (
+                    <li key={lang.id} className="flex justify-between gap-4 text-sm">
+                      <span>{pick(lang.name, locale)}</span>
+                      <span className="font-mono text-zinc-400">{lang.level ?? tl("native")}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Card>
           </div>
@@ -299,7 +285,7 @@ async function Page({ params: { locale } }: Props) {
                       <li key={l.name} className="flex items-center gap-1.5">
                         <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: l.color }} />
                         <span className="text-zinc-300">{l.name === "Boshqa" ? OTHER[locale] ?? l.name : l.name}</span>
-                        <span className="text-zinc-500">{l.percent}%</span>
+                        <span className="text-zinc-400">{l.percent}%</span>
                       </li>
                     ))}
                   </ul>
@@ -319,10 +305,10 @@ async function Page({ params: { locale } }: Props) {
                           className="flex flex-col h-full p-4 rounded-md border-[.5px] border-zinc-700 bg-zinc-800/40 hover:border-zinc-500 transition-colors"
                         >
                           <span className="text-zinc-100 truncate">{r.name}</span>
-                          <span className="mt-1 text-xs text-zinc-500 line-clamp-2 min-h-[2rem]">
+                          <span className="mt-1 text-xs text-zinc-400 line-clamp-2 min-h-[2rem]">
                             {r.description ?? t("noDescription")}
                           </span>
-                          <span className="mt-3 flex items-center gap-4 text-xs text-zinc-500">
+                          <span className="mt-3 flex items-center gap-4 text-xs text-zinc-400">
                             {r.language && (
                               <span className="flex items-center gap-1">
                                 <span
