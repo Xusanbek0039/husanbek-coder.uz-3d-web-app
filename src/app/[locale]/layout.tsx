@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import "../globals.css";
-import ElasticCursor from "@/components/ui/ElasticCursor";
 import Particles from "@/components/Particles";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header/header";
@@ -13,11 +12,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Footer from "@/components/footer/footer";
 import Script from "next/script";
 import Preloader from "@/components/preloader";
-import EasterEggs from "@/components/easter-eggs";
 import { config } from "@/data/config";
 import { skills } from "@/data/skills";
 import SocketContextProvider from "@/contexts/socketio";
-import RemoteCursors from "@/components/realtime/remote-cursors";
+import { LazyEasterEggs, LazyElasticCursor, LazyRemoteCursors } from "@/components/lazy-extras";
 import { routing, ogLocales, type Locale } from "@/i18n/routing";
 import { alternatesFor, isLocale } from "@/i18n/helpers";
 import { getCommittersRank, type CommittersRank } from "@/lib/committers";
@@ -132,7 +130,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
             <Particles className="fixed inset-0 -z-10 animate-fade-in" quantity={100} />
             <Preloader>
               <SocketContextProvider>
-                <RemoteCursors />
+                <LazyRemoteCursors />
                 <TooltipProvider>
                   <Header />
                   {children}
@@ -140,8 +138,8 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
                 </TooltipProvider>
               </SocketContextProvider>
               <Toaster />
-              <EasterEggs />
-              <ElasticCursor />
+              <LazyEasterEggs />
+              <LazyElasticCursor />
             </Preloader>
           </ThemeProvider>
         </NextIntlClientProvider>

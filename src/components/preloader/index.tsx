@@ -10,7 +10,6 @@ import {
 import { AnimatePresence } from "framer-motion";
 
 import Loader from "./loader";
-import gsap from "gsap";
 import { usePathname } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
@@ -48,7 +47,7 @@ function Preloader({ children, disabled = false }: PreloaderProps) {
   // Ichki sahifalarda (about, resume, ...) preloader umuman ko'rsatilmaydi — kontent darhol chiqadi
   const [isLoading, setIsLoading] = useState(() => !disabled && isHomePath(pathname));
   const [loadingPercent, setLoadingPercent] = useState(0);
-  const loadingTween = useRef<gsap.core.Tween>();
+  const loadingTween = useRef<{ progress: (v: number) => { kill: () => void } }>();
 
   const bypassLoading = () => {
     loadingTween.current?.progress(0.99).kill();
@@ -68,19 +67,24 @@ function Preloader({ children, disabled = false }: PreloaderProps) {
       setIsLoading(false);
       return;
     }
-    loadingTween.current = gsap.to(loadingPercentRef.current, {
-      value: 100,
-      duration: LOADING_TIME,
-      ease: "slow(0.7,0.7,false)",
-      onUpdate: () => {
-        setLoadingPercent(loadingPercentRef.current.value);
-      },
-      onComplete: () => {
-        setIsLoading(false);
-        // observe: this change has not been observed for errors.
-        // window.scrollTo(0, 0);
-      },
+    let cancelled = false;
+    import("gsap").then(({ default: gsap }) => {
+      if (cancelled) return;
+      loadingTween.current = gsap.to(loadingPercentRef.current, {
+        value: 100,
+        duration: LOADING_TIME,
+        ease: "slow(0.7,0.7,false)",
+        onUpdate: () => {
+          setLoadingPercent(loadingPercentRef.current.value);
+        },
+        onComplete: () => {
+          setIsLoading(false);
+        },
+      });
     });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (

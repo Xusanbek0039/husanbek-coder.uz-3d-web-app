@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { io, Socket } from "socket.io-client";
+import type { Socket } from "socket.io-client";
 import { generateRandomCursor } from "../lib/generate-random-cursor"
 
 export type User = {
@@ -57,21 +57,27 @@ const SocketContextProvider = ({ children }: { children: ReactNode }) => {
     // aks holda brauzer saytning o'zidagi /socket.io ga cheksiz 404 so'rov yuboradi.
     const wsUrl = process.env.NEXT_PUBLIC_WS_URL;
     if (!wsUrl) return;
-    const username =  localStorage.getItem("username") || generateRandomCursor().name
-    const socket = io(wsUrl, {
-      query: { username },
-      reconnectionAttempts: 5,
-    });
-    setSocket(socket);
-    socket.on("connect", () => {});
-    socket.on("msgs-receive-init", (msgs) => {
-      setMsgs(msgs);
-    });
-    socket.on("msg-receive", (msgs) => {
-      setMsgs((p) => [...p, msgs]);
+    let socket: Socket | undefined;
+    let cancelled = false;
+    // Kutubxona faqat kerak bo'lganda yuklanadi (boshqa hollarda bundle'ga tushmaydi)
+    import("socket.io-client").then(({ io }) => {
+      if (cancelled) return;
+      const username = localStorage.getItem("username") || generateRandomCursor().name;
+      socket = io(wsUrl, {
+        query: { username },
+        reconnectionAttempts: 5,
+      });
+      setSocket(socket);
+      socket.on("msgs-receive-init", (msgs) => {
+        setMsgs(msgs);
+      });
+      socket.on("msg-receive", (msgs) => {
+        setMsgs((p) => [...p, msgs]);
+      });
     });
     return () => {
-      socket.disconnect();
+      cancelled = true;
+      socket?.disconnect();
     };
   }, []);
 
