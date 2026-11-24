@@ -28,7 +28,23 @@
   },
   "theme": {
     "toggle": "Mavzu tanlash",
-    "light": "Tongi rejim"
+    "light": "Tongi rejim",
+    "disclaimers": {
+      "light": [
+        "Diqqat! Yorug' rejim ko'zga zarari ko'proq!",
+        "Diqqat: yorug'lik rejimi oldinda! Iltimos, buni uyda sinab ko'rmang.",
+        "Bunday yorqinlikni faqat malakali mutaxassislar boshqarishi mumkin. Quyosh ko'zoynaklari bilan davom eting!",
+        "O'zingizni tuting! Yorug'lik rejimi sizning kelajagingizdan ko'ra hamma narsani yorqinroq qiladi.",
+        "Kalitni yorug'lik rejimiga o'tkazish... Ko'zlaringiz bunga tayyor ekanligiga ishonchingiz komilmi?"
+      ],
+      "dark": [
+        "Yorug'lik rejimi? Men sizni aqldan ozgan deb o'yladim... lekin qorong'u tomonga qayting!",
+        "Qorong'i rejimga o'tish... Yorqin tomonda hayot qanday kechdi?",
+        "Qorong'i rejim faollashtirildi! Sizga chin qalbimdan rahmat.",
+        "Yana soyalarga xush kelibsiz. U erda yorug'likda hayot qanday edi?",
+        "Qorong'i rejim yoqilgan! Nihoyat, haqiqiy nafosatni tushunadigan kishi."
+      ]
+    }
   },
   "hero": {
     "greeting": "Assalomu alaykum",

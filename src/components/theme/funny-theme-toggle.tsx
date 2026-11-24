@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useToast } from "../ui/use-toast";
-import { themeDisclaimers } from "@/data/constants";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 export default function FunnyThemeToggle({
@@ -18,6 +17,8 @@ export default function FunnyThemeToggle({
 }) {
   const { setTheme, theme } = useTheme();
   const t = useTranslations("theme");
+  // Hazil matnlar tarjima fayllarida (messages/*.json -> theme.disclaimers)
+  const themeDisclaimers = t.raw("disclaimers") as { light: string[]; dark: string[] };
   const [counter, setCounter] = React.useState({ dark: 0, light: 0 });
   const { toast } = useToast();
 
@@ -64,7 +65,7 @@ export default function FunnyThemeToggle({
           </PopoverTrigger>
           <PopoverContent className="z-[99999] flex flex-col items-center gap-2">
             {/* <p className="text-sm">these stunts are done by professional only</p> */}
-            <p className="text-sm text-center">{themeDisclaimers.light[counter.light]}</p>
+            <p className="text-sm text-center">{themeDisclaimers.light[counter.light % themeDisclaimers.light.length]}</p>
             <Button onClick={goLight}>{t("light")}</Button>
           </PopoverContent>
         </Popover>

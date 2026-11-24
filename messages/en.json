@@ -28,7 +28,23 @@
   },
   "theme": {
     "toggle": "Toggle theme",
-    "light": "Light mode"
+    "light": "Light mode",
+    "disclaimers": {
+      "light": [
+        "Warning! Light mode is harder on your eyes!",
+        "Caution: light mode ahead! Please don't try this at home.",
+        "Only trained professionals can handle this much brightness. Proceed with sunglasses!",
+        "Brace yourself! Light mode makes everything brighter than your future.",
+        "Switching to light mode... Are you sure your eyes are ready for this?"
+      ],
+      "dark": [
+        "Light mode? I thought you'd lost your mind... welcome back to the dark side!",
+        "Switching to dark mode... How was life on the bright side?",
+        "Dark mode on! Thank you from the bottom of my heart.",
+        "Welcome back to the shadows. How was life in the light?",
+        "Dark mode enabled! Finally, someone with real taste."
+      ]
+    }
   },
   "hero": {
     "greeting": "Hello there",
