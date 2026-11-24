@@ -3,66 +3,42 @@ import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
-import { Brain, Network, TestTube2, Workflow } from "lucide-react";
+import { Brain, TestTube2, Workflow } from "lucide-react";
 import {
   SiAmazonaws,
-  SiCplusplus,
-  SiCss3,
   SiDjango,
   SiDocker,
   SiFastapi,
-  SiFirebase,
   SiFlask,
   SiGit,
-  SiGithub,
+  SiGithubactions,
   SiHtml5,
-  SiJavascript,
   SiMysql,
-  SiOpenjdk,
   SiPostgresql,
   SiPytest,
   SiPython,
-  SiPytorch,
   SiReact,
-  SiSelenium,
   SiSqlite,
   SiTelegram,
-  SiTensorflow,
   SiTypescript,
 } from "react-icons/si";
 
 type SkillItem = { name: string; icon: ReactNode };
-type SkillGroup = { key: string; emoji: string; items: SkillItem[] };
+type SkillGroup = { key: string; emoji: string; items: SkillItem[]; primary?: boolean; secondary?: boolean };
 
+// Asosiy yo'nalish — Python Backend. Qolganlari backendni qo'llab-quvvatlovchi ko'nikmalar.
 const SKILL_GROUPS: SkillGroup[] = [
-  {
-    key: "languages",
-    emoji: "💻",
-    items: [
-      { name: "Python", icon: <SiPython /> },
-      { name: "HTML + CSS", icon: <SiHtml5 /> },
-      { name: "Java", icon: <SiOpenjdk /> },
-      { name: "C++", icon: <SiCplusplus /> },
-    ],
-  },
   {
     key: "backend",
     emoji: "⚙️",
+    primary: true,
     items: [
+      { name: "Python", icon: <SiPython /> },
       { name: "Django", icon: <SiDjango /> },
+      { name: "Django REST Framework", icon: <SiDjango /> },
       { name: "FastAPI", icon: <SiFastapi /> },
       { name: "Flask", icon: <SiFlask /> },
-    ],
-  },
-  {
-    key: "frontend",
-    emoji: "🎨",
-    items: [
-      { name: "HTML", icon: <SiHtml5 /> },
-      { name: "CSS", icon: <SiCss3 /> },
-      { name: "JavaScript", icon: <SiJavascript /> },
-      { name: "TypeScript", icon: <SiTypescript /> },
-      { name: "React", icon: <SiReact /> },
+      { name: "REST API", icon: <Workflow className="w-4 h-4" /> },
     ],
   },
   {
@@ -75,13 +51,22 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    key: "ai",
-    emoji: "🧠",
+    key: "devops",
+    emoji: "🚀",
     items: [
-      { name: "Machine Learning", icon: <Brain className="w-4 h-4" /> },
-      { name: "Deep Learning", icon: <Network className="w-4 h-4" /> },
-      { name: "TensorFlow", icon: <SiTensorflow /> },
-      { name: "PyTorch", icon: <SiPytorch /> },
+      { name: "Docker", icon: <SiDocker /> },
+      { name: "GitHub Actions (CI/CD)", icon: <SiGithubactions /> },
+      { name: "AWS", icon: <SiAmazonaws /> },
+      { name: "Git", icon: <SiGit /> },
+    ],
+  },
+  {
+    key: "testing",
+    emoji: "🧪",
+    items: [
+      { name: "PyTest", icon: <SiPytest /> },
+      { name: "Unit testing", icon: <TestTube2 className="w-4 h-4" /> },
+      { name: "Integration testing", icon: <TestTube2 className="w-4 h-4" /> },
     ],
   },
   {
@@ -94,37 +79,14 @@ const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    key: "vcs",
-    emoji: "🌿",
+    key: "extra",
+    emoji: "➕",
+    secondary: true,
     items: [
-      { name: "Git", icon: <SiGit /> },
-      { name: "GitHub", icon: <SiGithub /> },
-    ],
-  },
-  {
-    key: "cloud",
-    emoji: "☁️",
-    items: [
-      { name: "AWS", icon: <SiAmazonaws /> },
-      { name: "Firebase", icon: <SiFirebase /> },
-    ],
-  },
-  {
-    key: "devops",
-    emoji: "🚀",
-    items: [
-      { name: "Docker", icon: <SiDocker /> },
-      { name: "CI/CD", icon: <Workflow className="w-4 h-4" /> },
-    ],
-  },
-  {
-    key: "testing",
-    emoji: "🧪",
-    items: [
-      { name: "Unit testing", icon: <TestTube2 className="w-4 h-4" /> },
-      { name: "Integration testing", icon: <TestTube2 className="w-4 h-4" /> },
-      { name: "PyTest", icon: <SiPytest /> },
-      { name: "Selenium", icon: <SiSelenium /> },
+      { name: "React", icon: <SiReact /> },
+      { name: "TypeScript", icon: <SiTypescript /> },
+      { name: "HTML + CSS", icon: <SiHtml5 /> },
+      { name: "Machine Learning", icon: <Brain className="w-4 h-4" /> },
     ],
   },
 ];
@@ -168,11 +130,21 @@ const CvSkillsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.4, delay: (idx % 3) * 0.08 }}
-            className={cn(cardClass, "backdrop-blur-md")}
+            className={cn(
+              cardClass,
+              "backdrop-blur-md",
+              group.primary && "sm:col-span-2 border-emerald-500/60 dark:border-emerald-500/50 ring-1 ring-emerald-500/20",
+              group.secondary && "opacity-80"
+            )}
           >
-            <h3 className="mb-4 text-lg font-semibold text-neutral-800 dark:text-neutral-100">
-              <span className="mr-2">{group.emoji}</span>
+            <h3 className="mb-4 flex flex-wrap items-center gap-2 text-lg font-semibold text-neutral-800 dark:text-neutral-100">
+              <span>{group.emoji}</span>
               {t(`groups.${group.key}`)}
+              {group.primary && (
+                <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-xs font-normal text-emerald-700 dark:text-emerald-300">
+                  {t("primaryBadge")}
+                </span>
+              )}
             </h3>
             <ul className="flex flex-wrap gap-2">
               {group.items.map((item) => (
