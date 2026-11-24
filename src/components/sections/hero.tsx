@@ -2,7 +2,8 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
-import { File, Github, Linkedin } from "lucide-react";
+import { File, FolderKanban, Trophy } from "lucide-react";
+import Image from "next/image";
 import {
   Tooltip,
   TooltipContent,
@@ -11,11 +12,14 @@ import {
 import { usePreloader } from "../preloader";
 import { BlurIn, BoxReveal } from "../reveal-animations";
 import ScrollDownIcon from "../scroll-down-icon";
-import { SiGithub, SiLinkedin, SiTelegram, SiYoutube } from "react-icons/si";
+import { SiGithub, SiTelegram, SiYoutube } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 import { config } from "@/data/config";
 import { useTranslations } from "next-intl";
 
-const HeroSection = () => {
+const AVATAR = "https://avatars.githubusercontent.com/u/109731657?v=4";
+
+const HeroSection = ({ rank, rankUrl }: { rank: number; rankUrl: string }) => {
   const t = useTranslations("hero");
   const { isLoading } = usePreloader();
 
@@ -33,6 +37,34 @@ const HeroSection = () => {
           {!isLoading && (
             <>
               <div className="">
+                <BlurIn delay={0.5}>
+                  <div className="flex flex-wrap items-center gap-2 ml-3 mb-2">
+                    <span className="flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 pl-1 pr-3 py-1 text-xs text-emerald-600 dark:text-emerald-300 font-sans">
+                      <Image
+                        src={AVATAR}
+                        alt={config.author}
+                        width={24}
+                        height={24}
+                        priority
+                        className="rounded-full w-6 h-6"
+                      />
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                      </span>
+                      {t("openToWork")}
+                    </span>
+                    <a
+                      href={rankUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs text-amber-700 dark:text-amber-300 font-sans hover:bg-amber-500/20 transition-colors"
+                    >
+                      <Trophy className="w-3.5 h-3.5" />
+                      {t("rankBadge", { rank })}
+                    </a>
+                  </div>
+                </BlurIn>
                 <BlurIn delay={0.7}>
                   <p
                     className={cn(
@@ -82,8 +114,22 @@ const HeroSection = () => {
                     {t("role")}
                   </p>
                 </BlurIn>
+                <BlurIn delay={1.4}>
+                  <p className="ml-3 mt-2 max-w-md text-sm text-slate-600 dark:text-zinc-400 font-sans">
+                    {t("tagline")}
+                  </p>
+                </BlurIn>
               </div>
               <div className="mt-8 md:ml-2 flex flex-col gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
+                <Link href={"#projects"} className="flex-1">
+                  <BoxReveal delay={1.8} width="100%">
+                    <Button variant={"secondary"} className="flex items-center gap-2 w-full">
+                      <FolderKanban size={22} />
+                      <p>{t("viewProjects")}</p>
+                    </Button>
+                  </BoxReveal>
+                </Link>
                 <Link
                   href={
                     "https://drive.google.com/file/d/1CeOgFcAtSVFQ-uLgslayaFbH1eCEwDEM/view?usp=sharing"
@@ -98,7 +144,8 @@ const HeroSection = () => {
                     </Button>
                   </BoxReveal>
                 </Link>
-                <div className="md:self-start flex gap-3">
+                </div>
+                <div className="md:self-start flex flex-wrap gap-3">
                   <Tooltip delayDuration={300}>
                     <TooltipTrigger asChild>
                       <Link href={"#contact"}>
@@ -128,6 +175,15 @@ const HeroSection = () => {
                   >
                     <Button variant={"outline"}>
                       <SiGithub size={24} />
+                    </Button>
+                  </Link>
+                  <Link
+                    href={config.social.linkedin}
+                    target="_blank"
+                    aria-label="LinkedIn"
+                  >
+                    <Button variant={"outline"}>
+                      <FaLinkedin size={24} />
                     </Button>
                   </Link>
                   <Link
