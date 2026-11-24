@@ -17,6 +17,7 @@ import { localizeProject } from "@/data/projects-i18n";
 import SmoothScroll from "../smooth-scroll";
 import projects, { Project } from "@/data/projects";
 import { cn } from "@/lib/utils";
+import ProjectLinks from "@/components/profile/project-links";
 
 const ProjectsSection = () => {
   const t = useTranslations("projectsSection");
@@ -45,7 +46,7 @@ const ProjectsSection = () => {
 const Modall = ({ project }: { project: Project }) => {
   const t = useTranslations("projectsSection");
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex flex-col items-center justify-start mb-10">
       <Modal>
         <ModalTrigger className="bg-transparent flex justify-center group/modal-btn">
           <div
@@ -104,6 +105,7 @@ const Modall = ({ project }: { project: Project }) => {
           </ModalFooter>
         </ModalBody>
       </Modal>
+      <ProjectLinks live={project.live} github={project.github} className="w-[400px] max-w-full mt-3 px-1" />
     </div>
   );
 };

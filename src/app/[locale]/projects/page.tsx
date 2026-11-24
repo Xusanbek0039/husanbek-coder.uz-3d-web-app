@@ -7,6 +7,7 @@ import projects from "@/data/projects";
 import { localizeProject } from "@/data/projects-i18n";
 import { Link } from "@/i18n/navigation";
 import { alternatesFor } from "@/i18n/helpers";
+import ProjectLinks from "@/components/profile/project-links";
 
 type Props = { params: { locale: string } };
 
@@ -32,10 +33,10 @@ async function Page({ params: { locale } }: Props) {
         {list.map((project, i) => (
           <li
             key={project.id}
-            className="group border-[.5px] rounded-md border-zinc-600 overflow-hidden hover:border-zinc-400 transition-colors"
+            className="group flex flex-col border-[.5px] rounded-md border-zinc-600 overflow-hidden hover:border-zinc-400 transition-colors"
             style={{ backdropFilter: "blur(2px)" }}
           >
-            <Link href={`/projects/${project.id}`} className="flex flex-col h-full">
+            <Link href={`/projects/${project.id}`} className="flex flex-col flex-1">
               <div className="relative aspect-[3/2] bg-zinc-900 overflow-hidden">
                 <Image
                   src={project.src}
@@ -58,6 +59,7 @@ async function Page({ params: { locale } }: Props) {
                 </span>
               </div>
             </Link>
+            <ProjectLinks live={project.live} github={project.github} className="px-4 pb-4" />
           </li>
         ))}
       </ul>
