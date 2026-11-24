@@ -12,6 +12,8 @@ import { alternatesFor, localizedPath } from "@/i18n/helpers";
 import { config } from "@/data/config";
 import { ogLocales, type Locale } from "@/i18n/routing";
 
+const OG_IMAGE = `${config.site}/opengraph-image`;
+
 type Props = { params: { locale: string }; searchParams: { service?: string } };
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
@@ -30,8 +32,10 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
       type: "website",
       locale: ogLocales[locale as Locale],
       siteName: "Husan Suyunov",
+      // openGraph override qilinganda ildizdagi opengraph-image avtomatik qo'shilmaydi
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: title }],
     },
-    twitter: { card: "summary_large_image", title, description: t("metaDescription") },
+    twitter: { card: "summary_large_image", title, description: t("metaDescription"), images: [OG_IMAGE] },
   };
 }
 
