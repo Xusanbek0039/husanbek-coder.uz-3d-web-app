@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
@@ -20,8 +20,34 @@ interface HeaderProps {
 const Header = ({ loader }: HeaderProps) => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const t = useTranslations("nav");
+  const headerRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  const closeMenu = useCallback((returnFocus = false) => {
+    setIsActive(false);
+    if (returnFocus) menuButtonRef.current?.focus();
+  }, []);
+
+  // Menyu ochiq bo'lsa: Esc bosilganda yoki header'dan tashqariga bosilganda yopiladi
+  useEffect(() => {
+    if (!isActive) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMenu(true);
+    };
+    const onPointerDown = (e: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) closeMenu();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [isActive, closeMenu]);
+
   return (
     <motion.header
+      ref={headerRef}
       className={cn(
         styles.header,
         "transition-colors delay-100 duration-500 ease-in"
@@ -61,6 +87,7 @@ const Header = ({ loader }: HeaderProps) => {
         <LanguageSwitcher />
         <FunnyThemeToggle className="w-6 h-6 mr-4" />
         <Button
+          ref={menuButtonRef}
           variant={"ghost"}
           onClick={() => setIsActive(!isActive)}
           aria-expanded={isActive}
@@ -93,6 +120,9 @@ const Header = ({ loader }: HeaderProps) => {
         initial="initial"
         animate={isActive ? "open" : "closed"}
         className={styles.background}
+        // Sahifaning bo'sh joyiga (qorong'i qatlamga) bosish menyuni yopadi
+        onClick={() => closeMenu()}
+        aria-hidden="true"
       ></motion.div>
       <AnimatePresence mode="wait">
         {isActive && <Nav setIsActive={setIsActive} />}
