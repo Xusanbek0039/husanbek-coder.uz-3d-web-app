@@ -19,6 +19,15 @@ import SocketContextProvider from "@/contexts/socketio";
 import RemoteCursors from "@/components/realtime/remote-cursors";
 import { routing, ogLocales, type Locale } from "@/i18n/routing";
 import { alternatesFor, isLocale } from "@/i18n/helpers";
+import { getCommittersRank, type CommittersRank } from "@/lib/committers";
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Husan Suyunov",
+  url: config.site,
+  inLanguage: ["uz", "ru", "en"],
+};
 
 type Props = { children: React.ReactNode; params: { locale: string } };
 
@@ -40,14 +49,13 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
       description: t("short"),
       url: config.site,
       locale: ogLocales[locale as Locale],
-      images: [{ url: config.ogImg, width: 800, height: 600, alt: t("ogAlt") }],
+      // Rasm: ./opengraph-image.tsx (1200x630, dinamik reyting bilan)
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: t("title"),
       description: t("short"),
-      images: [config.ogImg],
     },
     robots: { index: true, follow: true },
     icons: { icon: "/favicon.ico" },
@@ -65,7 +73,7 @@ const rubik = Rubik({
   weight: ["700", "800"],
 });
 
-const personJsonLd = (description: string) => ({
+const personJsonLd = (description: string, rank: CommittersRank) => ({
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Husan Suyunov",
@@ -79,6 +87,10 @@ const personJsonLd = (description: string) => ({
   alumniOf: { "@type": "CollegeOrUniversity", name: "Kimyo International University in Tashkent" },
   address: { "@type": "PostalAddress", addressRegion: "Jizzax", addressCountry: "UZ" },
   knowsAbout: ["Python", "Django", "FastAPI", "React", "Next.js", "PostgreSQL", "Telegram bots", "Machine Learning"],
+  knowsLanguage: ["uz", "ru", "en"],
+  nationality: { "@type": "Country", name: "Uzbekistan" },
+  award: `#${rank.rank} of ${rank.total} most active GitHub users in Uzbekistan (committers.top)`,
+  subjectOf: { "@type": "WebPage", name: "committers.top — Uzbekistan", url: rank.url },
   sameAs: [
     config.social.github,
     config.social.linkedin,
@@ -93,6 +105,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
   setRequestLocale(locale);
   const messages = await getMessages();
   const t = await getTranslations("meta");
+  const rank = await getCommittersRank();
 
   return (
     <html lang={locale} className={locale === "ru" ? rubik.className : archivoBlack.className}>
@@ -108,7 +121,11 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
       <body>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(t("short"))) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(t("short"), rank)) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
