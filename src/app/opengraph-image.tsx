@@ -36,7 +36,7 @@ export default async function OgImage() {
           <div style={{ fontSize: 26, color: "#71717a", marginTop: 14 }}>
             Django · FastAPI · React · LMS/CRM · Telegram bots · AI
           </div>
-          <div style={{ display: "flex", marginTop: 44 }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", marginTop: 40 }}>
             <div
               style={{
                 display: "flex",
@@ -45,26 +45,28 @@ export default async function OgImage() {
                 border: "2px solid #f59e0b",
                 background: "rgba(245,158,11,0.12)",
                 color: "#fcd34d",
-                fontSize: 30,
+                fontSize: 26,
+                whiteSpace: "nowrap",
               }}
             >
-              {`#${rank} in Uzbekistan on committers.top · of ${total}`}
+              {`#${rank} of ${total} in Uzbekistan · committers.top`}
             </div>
             <div
               style={{
                 display: "flex",
                 padding: "14px 26px",
-                marginLeft: 16,
+                marginTop: 14,
                 borderRadius: 999,
                 border: "2px solid #3f3f46",
                 color: "#d4d4d8",
-                fontSize: 30,
+                fontSize: 26,
+                whiteSpace: "nowrap",
               }}
             >
-              {`${contribs.toLocaleString("en-US")} contributions`}
+              {`${contribs.toLocaleString("en-US")} contributions / year`}
             </div>
           </div>
-          <div style={{ fontSize: 26, color: "#52525b", marginTop: 40 }}>husanbek-coder.uz</div>
+          <div style={{ fontSize: 26, color: "#52525b", marginTop: 30 }}>husanbek-coder.uz</div>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
