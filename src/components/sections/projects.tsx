@@ -59,11 +59,23 @@ const Modall = ({ project }: { project: Project }) => {
               width={300}
               height={300}
             />
-            <div className="absolute w-full h-1/2 bottom-0 left-0 bg-gradient-to-t from-black via-black/85 to-transparent pointer-events-none">
+            <div className="absolute w-full h-2/3 bottom-0 left-0 bg-gradient-to-t from-black via-black/85 to-transparent pointer-events-none">
               <div className="flex flex-col h-full items-start justify-end p-6">
                 <div className="text-lg text-left">{project.title}</div>
                 <div className="text-xs bg-white text-black rounded-lg w-fit px-2">
                   {project.category}
+                </div>
+                <div className="mt-2 flex flex-wrap gap-1 font-sans">
+                  {[...(project.skills.backend ?? []), ...(project.skills.frontend ?? [])]
+                    .slice(0, 4)
+                    .map((s) => (
+                      <span
+                        key={s.title}
+                        className="text-[10px] leading-4 px-1.5 rounded border border-white/30 text-white/80"
+                      >
+                        {s.title}
+                      </span>
+                    ))}
                 </div>
               </div>
             </div>
