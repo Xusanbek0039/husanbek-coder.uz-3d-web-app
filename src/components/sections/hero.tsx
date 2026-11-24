@@ -145,7 +145,7 @@ const HeroSection = ({ rank, rankUrl }: { rank: number; rankUrl: string }) => {
                   </BoxReveal>
                 </Link>
                 </div>
-                <div className="md:self-start flex flex-wrap gap-3">
+                <div className="md:self-start flex flex-wrap sm:flex-nowrap gap-3">
                   <Tooltip delayDuration={300}>
                     <TooltipTrigger asChild>
                       <Link href={"#contact"}>
