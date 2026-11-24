@@ -181,9 +181,9 @@
     "uzOnly": ""
   },
   "services": {
-    "metaTitle": "Xizmatlar",
-    "metaDescription": "Web sayt, LMS/CRM tizim, Telegram bot, sun'iy intellekt integratsiyasi va mentorlik — Husan Suyunov bilan loyihangizni boshlang.",
-    "title": "Xizmatlar",
+    "metaTitle": "Web sayt, LMS/CRM va Telegram bot yaratish xizmatlari",
+    "metaDescription": "Web sayt va landing, LMS/CRM tizim, Telegram bot va AI integratsiyasi buyurtma qiling. Django, FastAPI, React. Click/Payme to'lov, SEO va qo'llab-quvvatlash.",
+    "title": "Web sayt, LMS/CRM va Telegram bot yaratish xizmatlari",
     "intro": "G'oyadan ishlaydigan mahsulotgacha: web sayt, o'quv va biznes tizimlari, Telegram botlar va sun'iy intellekt. Real loyihalarda sinalgan texnologiyalar bilan ishlayman.",
     "cta": "Loyihani muhokama qilish",
     "examples": "Misollar:",
@@ -191,7 +191,10 @@
     "process": "Qanday ishlayman",
     "faq": "Ko'p beriladigan savollar",
     "orderTitle": "Buyurtma berish",
-    "orderNote": "Ariza to'g'ridan-to'g'ri menga Telegram va emailga keladi."
+    "orderNote": "Ariza to'g'ridan-to'g'ri menga Telegram va emailga keladi.",
+    "breadcrumb": "Sahifa yo'li",
+    "catalogName": "Dasturlash xizmatlari",
+    "priceLabel": "Narx"
   },
   "blog": {
     "metaTitle": "Bloglar",

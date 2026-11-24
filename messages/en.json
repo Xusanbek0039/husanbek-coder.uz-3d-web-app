@@ -181,9 +181,9 @@
     "uzOnly": "The detailed project description is currently available in Uzbek only."
   },
   "services": {
-    "metaTitle": "Services",
-    "metaDescription": "Websites, LMS/CRM systems, Telegram bots, AI integration and mentoring — start your project with Husan Suyunov.",
-    "title": "Services",
+    "metaTitle": "Website, LMS/CRM and Telegram bot development services",
+    "metaDescription": "Order a website or landing page, LMS/CRM system, Telegram bot or AI integration. Django, FastAPI, React. Click/Payme payments, SEO and post-launch support.",
+    "title": "Website, LMS/CRM and Telegram bot development",
     "intro": "From idea to a working product: websites, education and business systems, Telegram bots and artificial intelligence — built with technologies proven in real projects.",
     "cta": "Discuss your project",
     "examples": "Examples:",
@@ -191,7 +191,10 @@
     "process": "How I work",
     "faq": "FAQ",
     "orderTitle": "Request a project",
-    "orderNote": "Your request goes straight to my Telegram and email."
+    "orderNote": "Your request goes straight to my Telegram and email.",
+    "breadcrumb": "Breadcrumb",
+    "catalogName": "Development services",
+    "priceLabel": "Price"
   },
   "blog": {
     "metaTitle": "Blog",
