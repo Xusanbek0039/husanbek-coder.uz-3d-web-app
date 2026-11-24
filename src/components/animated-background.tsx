@@ -9,7 +9,6 @@ import { sleep } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { usePreloader } from "./preloader";
 import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -282,11 +281,12 @@ const AnimatedBackground = () => {
   }, [activeSection, splineApp]);
 
   const [keyboardRevealed, setKeyboardRevealed] = useState(false);
-  const router = useRouter();
   //reveal keycaps
   useEffect(() => {
-    const hash = activeSection === "hero" ? "#" : `#${activeSection}`;
-    router.push("/" + hash, { scroll: false });
+    // Faqat hash'ni almashtiramiz — router.push("/") /ru va /en sahifalaridan uzbekchaga o'tkazib yuborardi
+    const { pathname, search } = window.location;
+    const hash = activeSection === "hero" ? "" : `#${activeSection}`;
+    window.history.replaceState(window.history.state, "", pathname + search + hash);
     if (!splineApp || isLoading || keyboardRevealed) return;
     revealKeyCaps();
   }, [splineApp, isLoading, activeSection]);
@@ -298,7 +298,6 @@ const AnimatedBackground = () => {
     await sleep(400);
     kbd.visible = true;
     setKeyboardRevealed(true);
-    console.log(activeSection);
     gsap.fromTo(
       kbd?.scale,
       { x: 0.01, y: 0.01, z: 0.01 },
@@ -559,9 +558,18 @@ const AnimatedBackground = () => {
     };
     return { start, stop };
   };
+  // "Harakatni kamaytirish" yoki "Trafikni tejash" yoqilgan qurilmalarda og'ir 3D sahnani yuklamaymiz
+  const [lite, setLite] = useState<boolean | null>(null);
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    setLite(Boolean(reduced || saveData));
+  }, []);
+  if (lite !== false) return null;
+
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={null}>
         <Spline
           ref={splineContainer}
           onLoad={(app: Application) => {

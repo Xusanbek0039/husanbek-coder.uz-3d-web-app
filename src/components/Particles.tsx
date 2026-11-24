@@ -148,7 +148,8 @@ export default function Particles({
 
   const drawParticles = () => {
     clearContext();
-    const particleCount = quantity;
+    // Kichik ekranlarda (telefon) zarrachalar sonini kamaytiramiz — CPU/batareyani tejash
+    const particleCount = window.innerWidth < 768 ? Math.min(quantity, 35) : quantity;
     for (let i = 0; i < particleCount; i++) {
       const circle = circleParams();
       drawCircle(circle);
