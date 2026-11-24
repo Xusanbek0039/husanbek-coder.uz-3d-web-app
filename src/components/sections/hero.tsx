@@ -11,7 +11,7 @@ import {
 import { usePreloader } from "../preloader";
 import { BlurIn, BoxReveal } from "../reveal-animations";
 import ScrollDownIcon from "../scroll-down-icon";
-import { SiGithub, SiTelegram, SiYoutube } from "react-icons/si";
+import { SiGithub, SiInstagram, SiTelegram, SiYoutube } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
 import { config } from "@/data/config";
 import { CV_PDF_PATH } from "@/data/profile";
@@ -30,9 +30,10 @@ export type HeroProps = {
 };
 
 const SOCIALS = [
+  { href: config.social.telegram, label: "Telegram", icon: SiTelegram },
+  { href: config.social.instagram, label: "Instagram", icon: SiInstagram },
   { href: config.social.github, label: "GitHub", icon: SiGithub },
   { href: config.social.linkedin, label: "LinkedIn", icon: FaLinkedin },
-  { href: config.social.telegram, label: "Telegram", icon: SiTelegram },
   { href: config.social.youtube, label: "YouTube", icon: SiYoutube },
 ];
 
@@ -127,6 +128,26 @@ const HeroSection = ({ rank, rankUrl, metrics, cvAvailable }: HeroProps) => {
                 {t("tagline")}
               </p>
             </BlurIn>
+            {/* Ijtimoiy tarmoqlar — qisqa tavsif ostida */}
+            <BlurIn delay={1.45} play={!isLoading}>
+              <ul className="ml-3 mt-4 flex flex-wrap gap-3" aria-label={t("socials")}>
+                {SOCIALS.map(({ href, label, icon: Icon }) => (
+                  <li key={label}>
+                    <Button asChild variant="outline" size="icon">
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={t("socialLabel", { name: label })}
+                        title={label}
+                      >
+                        <Icon size={20} aria-hidden="true" />
+                      </a>
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            </BlurIn>
             <BlurIn delay={1.5} play={!isLoading}>
               <dl className="ml-3 mt-5 flex flex-wrap gap-x-6 gap-y-2 font-sans">
                 {metricItems.map((m) => (
@@ -177,22 +198,6 @@ const HeroSection = ({ rank, rankUrl, metrics, cvAvailable }: HeroProps) => {
                 </Button>
               )}
             </div>
-            <ul className="md:self-start flex flex-wrap gap-3" aria-label={t("socials")}>
-              {SOCIALS.map(({ href, label, icon: Icon }) => (
-                <li key={label}>
-                  <Button asChild variant="outline" size="icon">
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={t("socialLabel", { name: label })}
-                    >
-                      <Icon size={20} aria-hidden="true" />
-                    </a>
-                  </Button>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
         <div className="grid col-span-1"></div>
