@@ -27,9 +27,9 @@ function HomePage({ stats, cvAvailable }: { stats: HomeStats; cvAvailable: boole
             cvAvailable={cvAvailable}
           />
           <StatsSection stats={stats} />
+          <ExperienceSection />
           <SkillsSection />
           <CvSkillsSection />
-          <ExperienceSection />
           <ProjectsSection />
           <ContactSection />
         </main>

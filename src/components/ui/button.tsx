@@ -8,6 +8,7 @@ import {
   forwardRef,
   isValidElement,
   type ButtonHTMLAttributes,
+  type ReactElement,
   type ReactNode,
 } from "react";
 
@@ -62,7 +63,21 @@ const addClassNameRecursively = (
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+    const classes = cn(buttonVariants({ variant, size, className }), "cursor-can-hover");
+    if (asChild) {
+      // Slot faqat BITTA element qabul qiladi. Children.map massiv qaytarardi va hech narsa
+      // chizilmasdi; shuningdek pointer-events-none havolaning o'ziga emas, faqat ichiga qo'yiladi.
+      if (!isValidElement(children)) return null;
+      const child = children as ReactElement<{ children?: ReactNode }>;
+      return (
+        <Slot className={classes} ref={ref} {...props}>
+          {cloneElement(child, {
+            children: addClassNameRecursively(child.props.children, "pointer-events-none"),
+          })}
+        </Slot>
+      );
+    }
+    const Comp = "button";
     return (
       <Comp
         className={cn(

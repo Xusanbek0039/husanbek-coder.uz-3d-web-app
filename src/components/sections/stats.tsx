@@ -24,14 +24,29 @@ export type HomeStats = {
   students: number | null;
 };
 
-/** Ko'rinishga kelganda 0 dan qiymatgacha sanaydigan raqam */
+/**
+ * Ko'rinishga kelganda 0 dan qiymatgacha sanaydigan raqam.
+ * Server HTML'ida (va JS'siz o'qiydigan botlar uchun) darhol haqiqiy qiymat chiqadi;
+ * brauzerda, element hali ekranda bo'lmasa, 0 ga tushirilib, ko'ringanda sanaladi.
+ */
 const CountUp = ({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(to);
+  const armed = useRef(false);
 
   useEffect(() => {
-    if (!inView) return;
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.top > window.innerHeight) {
+      armed.current = true;
+      setValue(0);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!inView || !armed.current) return;
     const controls = animate(0, to, {
       duration: 1.6,
       ease: "easeOut",
