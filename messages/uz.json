@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Husan Suyunov",
+    "title": "Husan Suyunov — Full-Stack Python Dasturchi",
     "description": "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI va React yordamida LMS, CRM tizimlari, web ilovalar, Telegram botlar va sun'iy intellekt loyihalarini ishlab chiqaman. IT Park Zomin tuman filiali rahbari.",
     "short": "Full-Stack Python dasturchi: Django, FastAPI, React, LMS/CRM, Telegram botlar va AI loyihalari.",
     "ogAlt": "Husan Suyunov portfoliosi"
@@ -35,7 +35,11 @@
     "motto": "Mening shiorim: Har bir qadam, katta orzularni ro'yobga chiqarishning boshlanishi. Sen kuchlisan, sening yo'lingda hech narsa to'xtata olmaydi va sen albatta hammasiga erishasan.",
     "cv": "Resume CV ko'rish",
     "message": "Xabar qoldirish",
-    "messageTooltip": "Xabarlar bo'limi"
+    "messageTooltip": "Xabarlar bo'limi",
+    "openToWork": "Yangi loyihalarga ochiqman",
+    "tagline": "LMS, CRM, Telegram botlar va AI — g'oyadan ishga tushirishgacha",
+    "viewProjects": "Loyihalarni ko'rish",
+    "rankBadge": "O'zbekistonda #{rank} · committers.top"
   },
   "skills": {
     "title": "Texnologiyalarim",
@@ -204,7 +208,9 @@
       "experience": "yillik tajriba",
       "repos": "GitHub repozitoriy",
       "followers": "GitHub kuzatuvchi",
-      "projects": "real loyiha"
+      "projects": "real loyiha",
+      "committers": "O'zbekistonda eng faol GitHub dasturchilari orasida ({total} kishidan)",
+      "contributions": "yillik GitHub hissa"
     },
     "experienceTitle": "Ish tajribasi",
     "educationTitle": "Ta'lim",
@@ -257,5 +263,27 @@
     "less": "Kam",
     "more": "Ko'p",
     "tools": "Men foydalanadigan texnologiyalar"
+  },
+  "homeStats": {
+    "title": "Raqamlarda",
+    "subtitle": "GitHub va committers.top ma'lumotlari avtomatik yangilanadi",
+    "experience": "yillik tajriba",
+    "repos": "ochiq repozitoriy",
+    "contributions": "yillik GitHub hissa",
+    "rank": "committers.top O'zbekiston reytingi",
+    "rankOf": "{total} ta faol dasturchi ichida",
+    "projects": "ishga tushgan loyiha",
+    "followers": "GitHub kuzatuvchi",
+    "github": "GitHub profil",
+    "committers": "Reytingni ko'rish",
+    "updated": "Yangilangan: {date}",
+    "contributionsTotal": "So'nggi bir yilda {count} ta hissa",
+    "contributionDay": "{date}: {count} ta hissa",
+    "less": "Kam",
+    "more": "Ko'p"
+  },
+  "experienceSection": {
+    "title": "Tajriba va ta'lim",
+    "more": "Batafsil ma'lumot"
   }
 }

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Husan Suyunov",
+    "title": "Husan Suyunov — Full-Stack Python Developer",
     "description": "Husan Suyunov — Full-Stack Python Developer. I build LMS and CRM systems, web applications, Telegram bots and AI projects with Django, FastAPI and React. Head of the IT Park Zaamin district branch.",
     "short": "Full-Stack Python Developer: Django, FastAPI, React, LMS/CRM, Telegram bots and AI projects.",
     "ogAlt": "Husan Suyunov's portfolio"
@@ -35,7 +35,11 @@
     "motto": "My motto: every step is the beginning of making a big dream come true. You are strong, nothing can stop you on your path, and you will surely achieve everything.",
     "cv": "View resume",
     "message": "Leave a message",
-    "messageTooltip": "Messages section"
+    "messageTooltip": "Messages section",
+    "openToWork": "Open to new projects",
+    "tagline": "LMS, CRM, Telegram bots and AI — from idea to launch",
+    "viewProjects": "View projects",
+    "rankBadge": "#{rank} in Uzbekistan · committers.top"
   },
   "skills": {
     "title": "My Tech Stack",
@@ -204,7 +208,9 @@
       "experience": "years of experience",
       "repos": "GitHub repositories",
       "followers": "GitHub followers",
-      "projects": "real projects"
+      "projects": "real projects",
+      "committers": "among the most active GitHub developers in Uzbekistan (of {total})",
+      "contributions": "GitHub contributions this year"
     },
     "experienceTitle": "Experience",
     "educationTitle": "Education",
@@ -257,5 +263,27 @@
     "less": "Less",
     "more": "More",
     "tools": "Technologies I use"
+  },
+  "homeStats": {
+    "title": "By the numbers",
+    "subtitle": "GitHub and committers.top data updates automatically",
+    "experience": "years of experience",
+    "repos": "public repositories",
+    "contributions": "GitHub contributions this year",
+    "rank": "committers.top Uzbekistan ranking",
+    "rankOf": "among {total} active developers",
+    "projects": "launched projects",
+    "followers": "GitHub followers",
+    "github": "GitHub profile",
+    "committers": "See the ranking",
+    "updated": "Updated: {date}",
+    "contributionsTotal": "{count} contributions in the last year",
+    "contributionDay": "{date}: {count} contributions",
+    "less": "Less",
+    "more": "More"
+  },
+  "experienceSection": {
+    "title": "Experience & education",
+    "more": "Learn more"
   }
 }

@@ -9,8 +9,10 @@ import CvSkillsSection from "@/components/sections/cv-skills";
 import ProjectsSection from "@/components/sections/projects";
 import ContactSection from "@/components/sections/contact";
 import HeroSection from "@/components/sections/hero";
+import StatsSection, { type HomeStats } from "@/components/sections/stats";
+import ExperienceSection from "@/components/sections/experience";
 
-function HomePage() {
+function HomePage({ stats }: { stats: HomeStats }) {
   return (
     <>
       <SmoothScroll>
@@ -18,9 +20,11 @@ function HomePage() {
           <div className="top-0 z-0 fixed w-full h-screen">
             <AnimatedBackground />
           </div>
-          <HeroSection />
+          <HeroSection rank={stats.committers.rank} rankUrl={stats.committers.url} />
+          <StatsSection stats={stats} />
           <SkillsSection />
           <CvSkillsSection />
+          <ExperienceSection />
           <ProjectsSection />
           <ContactSection />
         </main>

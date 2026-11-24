@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Хусан Суюнов",
+    "title": "Хусан Суюнов — Full-Stack Python разработчик",
     "description": "Хусан Суюнов — Full-Stack Python-разработчик. Создаю LMS и CRM-системы, веб-приложения, Telegram-ботов и проекты с искусственным интеллектом на Django, FastAPI и React. Руководитель филиала IT Park в Зааминском районе.",
     "short": "Full-Stack Python-разработчик: Django, FastAPI, React, LMS/CRM, Telegram-боты и AI-проекты.",
     "ogAlt": "Портфолио Хусана Суюнова"
@@ -35,7 +35,11 @@
     "motto": "Мой девиз: каждый шаг — это начало воплощения большой мечты. Ты сильный, ничто не остановит тебя на твоём пути, и ты обязательно всего добьёшься.",
     "cv": "Посмотреть резюме",
     "message": "Написать мне",
-    "messageTooltip": "Раздел сообщений"
+    "messageTooltip": "Раздел сообщений",
+    "openToWork": "Открыт к новым проектам",
+    "tagline": "LMS, CRM, Telegram-боты и AI — от идеи до запуска",
+    "viewProjects": "Смотреть проекты",
+    "rankBadge": "#{rank} в Узбекистане · committers.top"
   },
   "skills": {
     "title": "Мои технологии",
@@ -204,7 +208,9 @@
       "experience": "лет опыта",
       "repos": "репозиториев GitHub",
       "followers": "подписчиков GitHub",
-      "projects": "реальных проектов"
+      "projects": "реальных проектов",
+      "committers": "среди самых активных GitHub-разработчиков Узбекистана (из {total})",
+      "contributions": "вкладов на GitHub за год"
     },
     "experienceTitle": "Опыт работы",
     "educationTitle": "Образование",
@@ -257,5 +263,27 @@
     "less": "Меньше",
     "more": "Больше",
     "tools": "Технологии, которые я использую"
+  },
+  "homeStats": {
+    "title": "В цифрах",
+    "subtitle": "Данные GitHub и committers.top обновляются автоматически",
+    "experience": "лет опыта",
+    "repos": "открытых репозиториев",
+    "contributions": "вкладов на GitHub за год",
+    "rank": "рейтинг committers.top по Узбекистану",
+    "rankOf": "среди {total} активных разработчиков",
+    "projects": "запущенных проектов",
+    "followers": "подписчиков на GitHub",
+    "github": "Профиль GitHub",
+    "committers": "Смотреть рейтинг",
+    "updated": "Обновлено: {date}",
+    "contributionsTotal": "{count} вкладов за последний год",
+    "contributionDay": "{date}: {count} вкладов",
+    "less": "Меньше",
+    "more": "Больше"
+  },
+  "experienceSection": {
+    "title": "Опыт и образование",
+    "more": "Подробнее"
   }
 }

@@ -19,8 +19,10 @@ import {
   getGithubProfile,
   getGithubRepos,
   languageShares,
-  type Contributions,
 } from "@/lib/github";
+import { getCommittersRank } from "@/lib/committers";
+import Timeline from "@/components/profile/timeline";
+import ContributionGraph from "@/components/profile/contribution-graph";
 import { formatDate } from "@/lib/utils";
 import { alternatesFor } from "@/i18n/helpers";
 
@@ -58,14 +60,6 @@ const LANGUAGES = [
 
 const OTHER: Record<string, string> = { uz: "Boshqa", ru: "Другие", en: "Other" };
 
-const LEVEL_CLASS = [
-  "bg-zinc-800",
-  "bg-emerald-900",
-  "bg-emerald-700",
-  "bg-emerald-500",
-  "bg-emerald-300",
-];
-
 const Card = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <div
     className={`p-6 md:p-10 border-[.5px] rounded-md border-zinc-600 ${className}`}
@@ -75,75 +69,16 @@ const Card = ({ children, className = "" }: { children: React.ReactNode; classNa
   </div>
 );
 
-const Timeline = ({
-  items,
-}: {
-  items: { period: string; title: string; place: string; text?: string }[];
-}) => (
-  <ol className="relative border-l border-zinc-700 ml-2">
-    {items.map((item) => (
-      <li key={item.period + item.title} className="mb-8 last:mb-0 ml-6">
-        <span className="absolute -left-[5px] mt-2 w-[9px] h-[9px] rounded-full bg-zinc-300" />
-        <p className="text-xs font-mono text-zinc-500">{item.period}</p>
-        <h3 className="text-lg text-zinc-200">{item.title}</h3>
-        <p className="text-sm text-zinc-400">{item.place}</p>
-        {item.text && <p className="mt-2 text-sm text-zinc-500">{item.text}</p>}
-      </li>
-    ))}
-  </ol>
-);
-
-const ContributionGraph = ({
-  data,
-  dayLabel,
-  totalLabel,
-  less,
-  more,
-}: {
-  data: Contributions;
-  dayLabel: (date: string, count: number) => string;
-  totalLabel: string;
-  less: string;
-  more: string;
-}) => (
-  <div>
-    <div className="overflow-x-auto pb-2">
-      <div className="flex gap-[3px] w-max">
-        {data.weeks.map((week, wi) => (
-          <div key={wi} className="flex flex-col gap-[3px]">
-            {week.map((d) => (
-              <span
-                key={d.date}
-                title={dayLabel(d.date, d.count)}
-                className={`block w-[10px] h-[10px] rounded-[2px] ${LEVEL_CLASS[d.level]}`}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-    <div className="mt-3 flex flex-wrap gap-2 items-center justify-between text-xs text-zinc-500">
-      <span>{totalLabel}</span>
-      <span className="flex items-center gap-1">
-        {less}
-        {LEVEL_CLASS.map((c) => (
-          <span key={c} className={`block w-[10px] h-[10px] rounded-[2px] ${c}`} />
-        ))}
-        {more}
-      </span>
-    </div>
-  </div>
-);
-
 async function Page({ params: { locale } }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("about");
   const tl = await getTranslations("cvSkills.langs");
 
-  const [gh, repos, contributions] = await Promise.all([
+  const [gh, repos, contributions, committers] = await Promise.all([
     getGithubProfile(),
     getGithubRepos(),
     getContributions(),
+    getCommittersRank(),
   ]);
   const recentRepos = repos.slice(0, 6);
   const languages = languageShares(repos);
@@ -163,6 +98,8 @@ async function Page({ params: { locale } }: Props) {
     { value: gh ? String(gh.public_repos) : "130+", label: t("stats.repos") },
     { value: gh ? String(gh.followers) : "30+", label: t("stats.followers") },
     { value: "10+", label: t("stats.projects") },
+    { value: `#${committers.rank}`, label: t("stats.committers", { total: committers.total }), href: committers.url },
+    { value: String(contributions?.total ?? committers.contribs), label: t("stats.contributions") },
   ];
 
   const experience = (["e1", "e2", "e3"] as const).map((k) => ({
@@ -242,16 +179,23 @@ async function Page({ params: { locale } }: Props) {
             <p className="mb-5 leading-relaxed">{t.rich("p1", { b: bold })}</p>
             <p className="mb-5 leading-relaxed">{t.rich("p2", { b: bold })}</p>
             <p className="leading-relaxed text-zinc-400">{t("p3")}</p>
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
-              {stats.map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-md border-[.5px] border-zinc-700 bg-zinc-800/60 p-4 text-center"
-                >
-                  <div className="text-3xl text-zinc-100">{s.value}</div>
-                  <div className="mt-1 text-xs text-zinc-500">{s.label}</div>
-                </div>
-              ))}
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3">
+              {stats.map((s) => {
+                const body = (
+                  <>
+                    <div className="text-3xl text-zinc-100">{s.value}</div>
+                    <div className="mt-1 text-xs text-zinc-500">{s.label}</div>
+                  </>
+                );
+                const cls = "block rounded-md border-[.5px] border-zinc-700 bg-zinc-800/60 p-4 text-center";
+                return "href" in s && s.href ? (
+                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className={`${cls} hover:border-emerald-500 transition-colors`}>
+                    {body}
+                  </a>
+                ) : (
+                  <div key={s.label} className={cls}>{body}</div>
+                );
+              })}
             </div>
           </Card>
 
