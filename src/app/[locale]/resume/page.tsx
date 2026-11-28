@@ -28,7 +28,7 @@ const CV_DRIVE_URL =
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "resume" });
-  return pageMetadata(locale, "/resume", `${t("metaTitle")} | Husan Suyunov`, t("metaDescription"));
+  return pageMetadata(locale, "/resume", t("metaTitle"), t("metaDescription"));
 }
 
 const KEY_PROJECT_IDS = ["marosimgo", "itc-academy", "itc-lms", "itc-academy-bot", "goodever"];
@@ -77,7 +77,7 @@ async function Page({ params: { locale } }: Props) {
     { label: "+998 97 521 66 86", href: "tel:+998975216686" },
     { label: "t.me/husanbek_coder", href: config.social.telegram },
     { label: `github.com/${GITHUB_USER}`, href: `https://github.com/${GITHUB_USER}` },
-    { label: "linkedin.com/in/xusanbek0039", href: config.social.linkedin },
+    { label: "linkedin.com/in/husan-suyunov-b6887933b", href: config.social.linkedin },
     { label: "husanbek-coder.uz", href: config.site },
   ];
 
@@ -256,7 +256,8 @@ async function Page({ params: { locale } }: Props) {
                 {spokenLanguages.map((l) => (
                   <li key={l.id} className="flex justify-between gap-4">
                     <span>{pick(l.name, locale)}</span>
-                    <span className="text-zinc-600">{l.level ?? tl("native")}</span>
+                    {" "}
+                    <span className="text-zinc-600">{l.level ?? `(${tl("native")})`}</span>
                   </li>
                 ))}
               </ul>

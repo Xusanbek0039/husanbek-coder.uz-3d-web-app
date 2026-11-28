@@ -28,6 +28,7 @@ import { spokenLanguages } from "@/data/skills";
 import { experienceYears } from "@/data/profile";
 import { pick } from "@/data/types";
 import projects from "@/data/projects";
+import { config } from "@/data/config";
 import ContributionGraph from "@/components/profile/contribution-graph";
 import { formatDate } from "@/lib/utils";
 import JsonLd from "@/components/seo/json-ld";
@@ -40,7 +41,7 @@ type Props = { params: { locale: string } };
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "about" });
-  return pageMetadata(locale, "/about", `${t("metaTitle")} | Husan Suyunov`, t("metaDescription"));
+  return pageMetadata(locale, "/about", t("metaTitle"), t("metaDescription"));
 }
 
 const FALLBACK_AVATAR = "https://avatars.githubusercontent.com/u/109731657?v=4";
@@ -86,7 +87,7 @@ async function Page({ params: { locale } }: Props) {
     { name: "Telegram", content: "@husanbek_coder", href: "https://t.me/husanbek_coder", icon: <FaTelegram /> },
     { name: "GitHub", content: GITHUB_USER, href: `https://github.com/${GITHUB_USER}`, icon: <FaGithub /> },
     { name: "GitLab", content: "Xusanbek0071", href: "https://gitlab.com/Xusanbek0071", icon: <FaGitlab /> },
-    { name: "LinkedIn", content: "xusanbek0039", href: "https://www.linkedin.com/in/xusanbek0039/", icon: <FaLinkedin /> },
+    { name: "LinkedIn", content: "Husan Suyunov", href: config.social.linkedin, icon: <FaLinkedin /> },
     { name: "YouTube", content: "IT Creative", href: "https://www.youtube.com/@IT_Creative/", icon: <FaYoutube /> },
   ];
 
@@ -249,7 +250,8 @@ async function Page({ params: { locale } }: Props) {
                   {spokenLanguages.map((lang) => (
                     <li key={lang.id} className="flex justify-between gap-4 text-sm">
                       <span>{pick(lang.name, locale)}</span>
-                      <span className="font-mono text-zinc-400">{lang.level ?? tl("native")}</span>
+                      {" "}
+                      <span className="font-mono text-zinc-400">{lang.level ?? `(${tl("native")})`}</span>
                     </li>
                   ))}
                 </ul>

@@ -34,9 +34,10 @@ export const toCardData = (project: Project, locale: string, maxTech = 5): Proje
     year: p.year,
     role: p.role ? pick(p.role, locale) : undefined,
     outcome: p.outcome ? pick(p.outcome, locale) : undefined,
-    tech: [...(p.skills.backend ?? []), ...(p.skills.frontend ?? [])]
-      .map((s) => s.title)
-      .slice(0, maxTech),
+    // Bir texnologiya ham frontend, ham backend'da bo'lsa, kartada bir marta chiqadi
+    tech: Array.from(
+      new Set([...(p.skills.backend ?? []), ...(p.skills.frontend ?? [])].map((s) => s.title))
+    ).slice(0, maxTech),
     live: p.live,
     github: p.github,
   };

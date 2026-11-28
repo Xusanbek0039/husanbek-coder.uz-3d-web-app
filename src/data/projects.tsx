@@ -6,6 +6,7 @@ import { ArrowUpRight, Languages } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
 import type { Localized } from "./types";
+import type { Locale } from "@/i18n/routing";
 import { RiNextjsFill, RiNodejsFill, RiReactjsFill } from "react-icons/ri";
 import {
   SiChakraui,
@@ -424,11 +425,19 @@ export type Project = {
   role?: Localized;
   /** 1–2 qatorli natija, masalan "300+ foydalanuvchi". Berilmagan bo'lsa ko'rsatilmaydi. */
   outcome?: Localized;
+  /**
+   * Batafsil matn (`content`) qaysi tillarda yozilgan. Berilmasa — faqat "uz".
+   * Ro'yxatda yo'q tillarda sahifa noindex, sitemap va hreflang'ga kirmaydi.
+   */
+  contentLocales?: Locale[];
   /** Loyiha holati. Berilmagan bo'lsa — tugallangan loyiha, belgi ko'rsatilmaydi. */
   status?: "inProgress";
   github?: string;
   live?: string;
 };
+/** Loyiha batafsil matni mavjud bo'lgan tillar */
+export const projectLocales = (project: Project): Locale[] => project.contentLocales ?? ["uz"];
+
 const projects: Project[] = [
   { // Uz-Sentiment — o'zbekcha sharhlar tahlili (NLP)
     id: "uz-sentiment",

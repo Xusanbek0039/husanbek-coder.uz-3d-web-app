@@ -9,21 +9,20 @@ import OrderForm from "@/components/OrderForm";
 import OrderServiceButton from "@/components/order-service-button";
 import { Link } from "@/i18n/navigation";
 import { alternatesFor, localizedPath } from "@/i18n/helpers";
-import { PERSON_ID } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE, PERSON_ID, withSiteName } from "@/lib/seo";
 import JsonLd from "@/components/seo/json-ld";
 import { config } from "@/data/config";
 import { ogLocales, type Locale } from "@/i18n/routing";
 
-const OG_IMAGE = `${config.site}/opengraph-image`;
 
 type Props = { params: { locale: string }; searchParams: { service?: string } };
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "services" });
-  const title = `${t("metaTitle")} | Husan Suyunov`;
+  const title = withSiteName(t("metaTitle"));
   const url = `${config.site}${localizedPath(locale, "/services")}`;
   return {
-    title,
+    title: t("metaTitle"),
     description: t("metaDescription"),
     alternates: alternatesFor(locale, "/services"),
     // Ulashilganda (Telegram, Facebook, LinkedIn) bosh sahifa emas, shu sahifa sarlavhasi chiqsin
@@ -35,9 +34,9 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
       locale: ogLocales[locale as Locale],
       siteName: "Husan Suyunov",
       // openGraph override qilinganda ildizdagi opengraph-image avtomatik qo'shilmaydi
-      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: title }],
+      images: [{ ...DEFAULT_OG_IMAGE, alt: title }],
     },
-    twitter: { card: "summary_large_image", title, description: t("metaDescription"), images: [OG_IMAGE] },
+    twitter: { card: "summary_large_image", title, description: t("metaDescription"), images: [DEFAULT_OG_IMAGE.url] },
   };
 }
 

@@ -20,12 +20,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPost(params.slug);
   if (!post) {
     const t = await getTranslations({ locale: params.locale, namespace: "blog" });
-    return { title: `${t("postNotFound")} | Husan Suyunov` };
+    return { title: t("postNotFound") };
   }
   const title = clampText(post.title, 60);
   const description = clampText(post.excerpt || post.title, 160);
   return {
-    title: `${title} | Husan Suyunov`,
+    title,
     description,
     // Post itc-academy.uz dagi maqolaning nusxasi: Google'ga asl manba ko'rsatiladi,
     // takroriy kontent sifatida baholanmaydi (docs/seo.md)
@@ -118,10 +118,17 @@ async function Page({ params }: Props) {
         </header>
 
         <PostMedia
-          title={post.title}
           images={post.images}
           video={post.video}
-          imageAlt={(n) => t("imageAlt", { title: post.title, n })}
+          alts={post.images.map((_, i) =>
+            post.images.length === 1 ? post.title : t("imageAlt", { title: post.title, n: i + 1 })
+          )}
+          labels={{
+            open: t("galleryOpen"),
+            close: t("galleryClose"),
+            prev: t("galleryPrev"),
+            next: t("galleryNext"),
+          }}
         />
 
         {t("uzOnly") && <p className="mt-6 text-xs text-zinc-500">{t("uzOnly")}</p>}

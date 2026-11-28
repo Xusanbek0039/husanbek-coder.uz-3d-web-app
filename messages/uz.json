@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Husan Suyunov (Husanbek) — Full-Stack Python dasturchi | Django, React",
+    "title": "Husan Suyunov (Husanbek) — Full-Stack Python dasturchi",
     "description": "Husan Suyunov — Full-Stack Python dasturchi, IT Park Zomin filiali rahbari. Django, DRF, FastAPI va React'da LMS, CRM tizimlari va Telegram botlar yarataman.",
     "short": "Full-Stack Python dasturchi: Django, DRF, FastAPI, React — LMS/CRM tizimlari va Telegram botlar.",
     "ogAlt": "Husan Suyunov portfoliosi"
@@ -160,8 +160,8 @@
     "successDesc": "Tez orada siz bilan bog'lanaman."
   },
   "contactPage": {
-    "metaTitle": "Bog'lanish",
-    "metaDescription": "Husan Suyunov bilan bog'laning: web sayt, LMS/CRM tizim, Telegram bot yoki AI loyihasi bo'yicha xabar qoldiring.",
+    "metaTitle": "Bog'lanish — loyiha buyurtma qilish",
+    "metaDescription": "Husan Suyunov bilan bog'laning: web sayt, LMS/CRM tizim, Telegram bot yoki AI loyihasi bo'yicha xabar qoldiring. Telegram, telefon, email yoki forma orqali.",
     "title": "Bog'lanish",
     "intro": "Loyiha g'oyangiz, hamkorlik taklifi yoki savolingiz bormi? Xabar qoldiring — odatda 24 soat ichida javob beraman.",
     "phone": "Telefon",
@@ -169,8 +169,8 @@
     "formTitle": "Xabar yuborish"
   },
   "projectsPage": {
-    "metaTitle": "Loyihalar",
-    "metaDescription": "Husan Suyunov loyihalari: MarosimGo, ITC Academy, IT Park Zomin LMS, Telegram botlar, online do'kon va boshqalar — arxitektura va texnologiyalari bilan.",
+    "metaTitle": "Loyihalar — Django, React va Telegram bot",
+    "metaDescription": "Husan Suyunov loyihalari: MarosimGo, ITC Academy, IT Park Zomin LMS, Telegram botlar va onlayn do'kon — arxitektura, texnologiyalar va skrinshotlar bilan.",
     "title": "Loyihalar",
     "subtitle": "Har bir loyiha haqida batafsil: arxitektura, texnologiyalar va skrinshotlar.",
     "details": "Batafsil",
@@ -182,7 +182,7 @@
     "uzOnly": ""
   },
   "services": {
-    "metaTitle": "Web sayt, LMS/CRM va Telegram bot yaratish xizmatlari",
+    "metaTitle": "Web sayt va Telegram bot yaratish xizmati",
     "metaDescription": "Web sayt va landing, LMS/CRM tizim, Telegram bot va AI integratsiyasi buyurtma qiling. Django, FastAPI, React. Click/Payme to'lov, SEO va qo'llab-quvvatlash.",
     "title": "Web sayt, LMS/CRM va Telegram bot yaratish xizmatlari",
     "intro": "G'oyadan ishlaydigan mahsulotgacha: web sayt, o'quv va biznes tizimlari, Telegram botlar va sun'iy intellekt. Real loyihalarda sinalgan texnologiyalar bilan ishlayman.",
@@ -198,8 +198,8 @@
     "priceLabel": "Narx"
   },
   "blog": {
-    "metaTitle": "Bloglar",
-    "metaDescription": "IT dunyosi yangiliklari, darsliklar, video darslar va Telegram kanal postlari — ITC Academy blogidan.",
+    "metaTitle": "Blog — IT yangiliklari va video darslar",
+    "metaDescription": "Husan Suyunov blogi: ITC Academy'dagi IT yangiliklari va maqolalar, YouTube'dagi IT Creative video darslari va Telegram kanal postlari — bitta sahifada.",
     "title": "Bloglar",
     "intro": "IT dunyosi yangiliklari, darsliklar va maslahatlar — ITC Academy blogi, YouTube va Telegram kanalimdan.",
     "tabsLabel": "Blog bo'limlari",
@@ -231,11 +231,15 @@
     "video": "Video",
     "imagesCount": "{count} ta rasm",
     "imageAlt": "{title} — rasm {n}",
-    "uzOnly": ""
+    "uzOnly": "",
+    "galleryOpen": "Rasmni kattalashtirish",
+    "galleryClose": "Yopish",
+    "galleryPrev": "Oldingi rasm",
+    "galleryNext": "Keyingi rasm"
   },
   "about": {
-    "metaTitle": "Men haqimda",
-    "metaDescription": "Husan Suyunov — Full-Stack Python dasturchi. Django, FastAPI, React, LMS/CRM tizimlari, AI va Telegram botlar.",
+    "metaTitle": "Men haqimda — Full-Stack Python dasturchi",
+    "metaDescription": "Husan Suyunov — Full-Stack Python dasturchi va IT Park Zomin filiali rahbari. Tajriba, ko'nikmalar, GitHub faolligi, tillar va asosiy loyihalar bir sahifada.",
     "role": "Full-Stack Python dasturchi",
     "location": "Jizzax, Sh. Rashidov tumani",
     "cv": "Resume CV ko'rish",
@@ -300,7 +304,7 @@
   },
   "resume": {
     "metaTitle": "Rezyume (CV) — Full-Stack Python dasturchi",
-    "metaDescription": "Husan Suyunov rezyumesi: Full-Stack Python dasturchi — Django, DRF, FastAPI, React. Ish tajribasi, loyihalar va ta'lim.",
+    "metaDescription": "Husan Suyunov rezyumesi: Full-Stack Python dasturchi — Django, DRF, FastAPI, React. Ish tajribasi, loyihalar, ko'nikmalar va ta'lim, PDF nusxasi bilan.",
     "title": "Full-Stack Python dasturchi",
     "summaryTitle": "Qisqacha",
     "summary": "{years}+ yillik tajribaga ega Full-Stack Python dasturchi va dasturlash mentoriman. Backendni Django, DRF va FastAPI'da, frontendni React va Next.js'da yozaman: LMS va CRM tizimlari, REST API va Telegram botlar. Hozir Raqamli ta'limni rivojlantirish markazida dasturchi mentor va IT Park Zomin filiali rahbariman, itclms.uz va ITC Academy platformalarini ishlab chiqaman. Pedagogik tajribam bor: dasturlashni amaliy loyihalar orqali o'rgataman.",
@@ -323,5 +327,12 @@
       "projects": "loyiha",
       "rank": "committers.top, O'zbekiston"
     }
+  },
+  "notFoundPage": {
+    "title": "Sahifa topilmadi",
+    "text": "Siz qidirgan sahifa o'chirilgan, ko'chirilgan yoki manzil xato yozilgan bo'lishi mumkin.",
+    "path": "sahifa",
+    "error": "bunday sahifa topilmadi",
+    "linksTitle": "Balki sizga shular kerakdir"
   }
 }

@@ -14,9 +14,9 @@ const config = {
   },
   social: {
     twitter: "https://x.com/xusanbek0039/",
-    linkedin: "https://www.linkedin.com/in/xusanbek0039/",
+    linkedin: "https://www.linkedin.com/in/husan-suyunov-b6887933b/",
     instagram: "https://www.instagram.com/husanbek_coder/",
-    facebook: "https://www.facebook.com/",
+    facebook: "https://www.facebook.com/husanbek.dev",
     github: "https://github.com/xusanbek0039/",
     gitlab: "https://gitlab.com/Xusanbek0071",
     youtube: "https://www.youtube.com/@IT_Creative",

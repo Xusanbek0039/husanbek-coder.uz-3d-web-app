@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Husan Suyunov (Husanbek) — Full-Stack Python Developer | Django, React",
+    "title": "Husan Suyunov (Husanbek) — Full-Stack Python Developer",
     "description": "Husan Suyunov — Full-Stack Python developer and IT Park Zaamin branch manager. I build LMS, CRM systems and Telegram bots with Django, DRF, FastAPI and React.",
     "short": "Full-Stack Python developer: Django, DRF, FastAPI, React — LMS/CRM systems and Telegram bots.",
     "ogAlt": "Husan Suyunov's portfolio"
@@ -160,8 +160,8 @@
     "successDesc": "I'll contact you shortly."
   },
   "contactPage": {
-    "metaTitle": "Contact",
-    "metaDescription": "Contact Husan Suyunov about a website, LMS/CRM system, Telegram bot or AI project.",
+    "metaTitle": "Contact — start your website or bot project",
+    "metaDescription": "Contact Husan Suyunov about a website, LMS/CRM system, Telegram bot or AI project. Reach me via Telegram, phone or email, or leave a message using the form.",
     "title": "Contact",
     "intro": "Have a project idea, a partnership offer or a question? Leave a message — I usually reply within 24 hours.",
     "phone": "Phone",
@@ -169,8 +169,8 @@
     "formTitle": "Send a message"
   },
   "projectsPage": {
-    "metaTitle": "Projects",
-    "metaDescription": "Projects by Husan Suyunov: MarosimGo, ITC Academy, IT Park Zaamin LMS, Telegram bots, an online store and more — with architecture and tech stack.",
+    "metaTitle": "Projects — Django, React and Telegram bots",
+    "metaDescription": "Projects by Husan Suyunov: MarosimGo, ITC Academy, IT Park Zaamin LMS, Telegram bots, an online store and more — with architecture, tech stack and screenshots.",
     "title": "Projects",
     "subtitle": "Each project in detail: architecture, technologies and screenshots.",
     "details": "Details",
@@ -182,7 +182,7 @@
     "uzOnly": "The detailed project description is currently available in Uzbek only."
   },
   "services": {
-    "metaTitle": "Website, LMS/CRM and Telegram bot development services",
+    "metaTitle": "Website and Telegram bot development",
     "metaDescription": "Order a website or landing page, LMS/CRM system, Telegram bot or AI integration. Django, FastAPI, React. Click/Payme payments, SEO and post-launch support.",
     "title": "Website, LMS/CRM and Telegram bot development",
     "intro": "From idea to a working product: websites, education and business systems, Telegram bots and artificial intelligence — built with technologies proven in real projects.",
@@ -198,8 +198,8 @@
     "priceLabel": "Price"
   },
   "blog": {
-    "metaTitle": "Blog",
-    "metaDescription": "IT news, tutorials, videos and Telegram channel posts — from the ITC Academy blog.",
+    "metaTitle": "Blog — IT news and video tutorials",
+    "metaDescription": "Husan Suyunov's blog: IT news and articles from ITC Academy, IT Creative video tutorials on YouTube and Telegram channel posts, mostly in Uzbek.",
     "title": "Blog",
     "intro": "IT news, tutorials and tips — from the ITC Academy blog, my YouTube and Telegram channel.",
     "tabsLabel": "Blog sections",
@@ -231,11 +231,15 @@
     "video": "Video",
     "imagesCount": "{count} images",
     "imageAlt": "{title} — image {n}",
-    "uzOnly": "Posts are published in Uzbek."
+    "uzOnly": "Posts are published in Uzbek.",
+    "galleryOpen": "Enlarge image",
+    "galleryClose": "Close",
+    "galleryPrev": "Previous image",
+    "galleryNext": "Next image"
   },
   "about": {
-    "metaTitle": "About me",
-    "metaDescription": "Husan Suyunov — Full-Stack Python Developer. Django, FastAPI, React, LMS/CRM systems, AI and Telegram bots.",
+    "metaTitle": "About me — Full-Stack Python Developer",
+    "metaDescription": "Husan Suyunov is a Full-Stack Python developer and IT Park Zaamin branch manager. Experience, skills, GitHub activity, languages and key projects in one place.",
     "role": "Full-Stack Python Developer",
     "location": "Jizzakh, Sharof Rashidov district",
     "cv": "View resume",
@@ -300,7 +304,7 @@
   },
   "resume": {
     "metaTitle": "Resume (CV) — Full-Stack Python Developer",
-    "metaDescription": "Resume of Husan Suyunov, Full-Stack Python developer — Django, DRF, FastAPI, React. Work experience, projects and education.",
+    "metaDescription": "Resume of Husan Suyunov, Full-Stack Python developer: Django, DRF, FastAPI, React. Work experience, key projects, skills and education, with a downloadable PDF.",
     "title": "Full-Stack Python Developer",
     "summaryTitle": "Summary",
     "summary": "Full-Stack Python developer and programming mentor with {years}+ years of experience. I build backends with Django, DRF and FastAPI and frontends with React and Next.js: LMS and CRM systems, REST APIs and Telegram bots. Currently a programming mentor at the Digital Education Development Center and IT Park Zaamin branch manager, building the itclms.uz and ITC Academy platforms. I have teaching experience: I teach programming through hands-on projects.",
@@ -323,5 +327,12 @@
       "projects": "projects",
       "rank": "committers.top, Uzbekistan"
     }
+  },
+  "notFoundPage": {
+    "title": "Page not found",
+    "text": "The page you are looking for may have been removed, moved, or the address was mistyped.",
+    "path": "page",
+    "error": "page not found",
+    "linksTitle": "Maybe you are looking for"
   }
 }

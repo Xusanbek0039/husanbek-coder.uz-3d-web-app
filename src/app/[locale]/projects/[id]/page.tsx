@@ -7,12 +7,12 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Info } from "lucide-react";
 import ProjectMeta from "@/components/projects/project-meta";
 import { toCardData } from "@/components/projects/card-data";
 import { FaGithub } from "react-icons/fa6";
-import projects from "@/data/projects";
+import projects, { projectLocales } from "@/data/projects";
 import { localizeProject } from "@/data/projects-i18n";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import { config } from "@/data/config";
 import { Link } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import { alternatesFor } from "@/i18n/helpers";
 import JsonLd from "@/components/seo/json-ld";
 import { PERSON_ID, absoluteUrl, breadcrumbJsonLd, clampText } from "@/lib/seo";
@@ -28,13 +28,16 @@ export function generateStaticParams() {
 export async function generateMetadata({ params: { locale, id } }: Props): Promise<Metadata> {
   const base = projects.find((p) => p.id === id);
   const t = await getTranslations({ locale, namespace: "projectsPage" });
-  if (!base) return { title: `${t("notFound")} | Husan Suyunov` };
+  if (!base) return { title: t("notFound") };
   const project = localizeProject(base, locale);
   const description = clampText(project.description, 160);
+  const available = projectLocales(base);
   return {
-    title: `${project.title} | Husan Suyunov`,
+    title: project.title,
     description,
-    alternates: alternatesFor(locale, `/projects/${project.id}`),
+    alternates: alternatesFor(locale, `/projects/${project.id}`, available),
+    // Tarjima qilinmagan til: matn o'zbekcha qoladi — takroriy kontent bo'lmasligi uchun indekslanmaydi
+    robots: available.includes(locale as Locale) ? undefined : { index: false, follow: true },
     openGraph: {
       title: project.title,
       description,

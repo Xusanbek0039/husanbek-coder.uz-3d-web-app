@@ -19,7 +19,7 @@ import { LazyEasterEggs, LazyElasticCursor, LazyRemoteCursors } from "@/componen
 import { routing, ogLocales, type Locale } from "@/i18n/routing";
 import { alternatesFor, isLocale } from "@/i18n/helpers";
 import { getCommittersRank, type CommittersRank } from "@/lib/committers";
-import { PERSON_ID, WEBSITE_ID } from "@/lib/seo";
+import { PERSON_ID, TITLE_TEMPLATE, WEBSITE_ID } from "@/lib/seo";
 import JsonLd from "@/components/seo/json-ld";
 
 const websiteJsonLd = (description: string) => ({
@@ -44,7 +44,7 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
   const t = await getTranslations({ locale, namespace: "meta" });
   return {
     metadataBase: new URL(config.site),
-    title: t("title"),
+    title: { default: t("title"), template: TITLE_TEMPLATE },
     description: t("description"),
     applicationName: "Husan Suyunov",
     authors: [{ name: config.author, url: config.site }],
@@ -64,8 +64,12 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
       description: t("short"),
     },
     robots: { index: true, follow: true },
-    // Google Search Console. HTML fayl usuli: public/google61bf653d910ca37d.html
-    verification: { google: "YTD0fLdAhFj3NGU6jOWh_ewfbSDNp7MvSnshIKTm1l0" },
+    // Google Search Console (HTML fayl usuli: public/google61bf653d910ca37d.html) va Yandex Webmaster
+    verification: {
+      google: "YTD0fLdAhFj3NGU6jOWh_ewfbSDNp7MvSnshIKTm1l0",
+      // Yandex Webmaster kodi Netlify env'da; berilmagan bo'lsa teg chiqmaydi
+      yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || undefined,
+    },
     icons: { icon: "/favicon.ico" },
   };
 }

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Хусан Суюнов (Husanbek) — Full-Stack Python-разработчик | Django, React",
+    "title": "Хусан Суюнов (Husanbek) — Full-Stack Python-разработчик",
     "description": "Хусан Суюнов — Full-Stack Python-разработчик, руководитель филиала IT Park в Заамине. Создаю LMS, CRM-системы и Telegram-боты на Django, FastAPI и React.",
     "short": "Full-Stack Python-разработчик: Django, DRF, FastAPI, React — LMS/CRM-системы и Telegram-боты.",
     "ogAlt": "Портфолио Хусана Суюнова"
@@ -160,8 +160,8 @@
     "successDesc": "Я скоро свяжусь с вами."
   },
   "contactPage": {
-    "metaTitle": "Контакты",
-    "metaDescription": "Свяжитесь с Хусаном Суюновым: веб-сайт, LMS/CRM-система, Telegram-бот или AI-проект — оставьте сообщение.",
+    "metaTitle": "Контакты — заказать сайт или Telegram-бота",
+    "metaDescription": "Свяжитесь с Хусаном Суюновым: сайт, LMS/CRM-система, Telegram-бот или AI-проект. Напишите в Telegram, позвоните, отправьте email или оставьте заявку в форме.",
     "title": "Контакты",
     "intro": "Есть идея проекта, предложение о сотрудничестве или вопрос? Напишите — обычно отвечаю в течение 24 часов.",
     "phone": "Телефон",
@@ -169,8 +169,8 @@
     "formTitle": "Отправить сообщение"
   },
   "projectsPage": {
-    "metaTitle": "Проекты",
-    "metaDescription": "Проекты Хусана Суюнова: MarosimGo, ITC Academy, LMS IT Park Заамин, Telegram-боты, интернет-магазин и другие — с архитектурой и технологиями.",
+    "metaTitle": "Проекты — Django, React и Telegram-боты",
+    "metaDescription": "Проекты Хусана Суюнова: MarosimGo, ITC Academy, LMS IT Park Заамин, Telegram-боты, интернет-магазин и другие — с архитектурой, технологиями и скриншотами.",
     "title": "Проекты",
     "subtitle": "Подробно о каждом проекте: архитектура, технологии и скриншоты.",
     "details": "Подробнее",
@@ -182,7 +182,7 @@
     "uzOnly": "Подробное описание проекта пока доступно только на узбекском языке."
   },
   "services": {
-    "metaTitle": "Создание сайтов, LMS/CRM и Telegram-ботов — услуги",
+    "metaTitle": "Создание сайтов и Telegram-ботов — услуги",
     "metaDescription": "Закажите сайт и лендинг, LMS/CRM-систему, Telegram-бота и AI-интеграцию. Django, FastAPI, React. Оплата Click/Payme, SEO и поддержка после запуска.",
     "title": "Создание сайтов, LMS/CRM-систем и Telegram-ботов",
     "intro": "От идеи до работающего продукта: веб-сайты, учебные и бизнес-системы, Telegram-боты и искусственный интеллект. Работаю с технологиями, проверенными на реальных проектах.",
@@ -198,8 +198,8 @@
     "priceLabel": "Цена"
   },
   "blog": {
-    "metaTitle": "Блог",
-    "metaDescription": "Новости IT, уроки, видео и посты Telegram-канала — из блога ITC Academy.",
+    "metaTitle": "Блог — IT-новости, статьи и видеоуроки",
+    "metaDescription": "Блог Хусана Суюнова: IT-новости и статьи ITC Academy, видеоуроки YouTube-канала IT Creative и посты Telegram-канала. Материалы на узбекском.",
     "title": "Блог",
     "intro": "Новости IT, уроки и советы — из блога ITC Academy, моего YouTube и Telegram-канала.",
     "tabsLabel": "Разделы блога",
@@ -231,11 +231,15 @@
     "video": "Видео",
     "imagesCount": "Изображений: {count}",
     "imageAlt": "{title} — изображение {n}",
-    "uzOnly": "Статьи публикуются на узбекском языке."
+    "uzOnly": "Статьи публикуются на узбекском языке.",
+    "galleryOpen": "Увеличить изображение",
+    "galleryClose": "Закрыть",
+    "galleryPrev": "Предыдущее изображение",
+    "galleryNext": "Следующее изображение"
   },
   "about": {
-    "metaTitle": "Обо мне",
-    "metaDescription": "Хусан Суюнов — Full-Stack Python-разработчик. Django, FastAPI, React, LMS/CRM-системы, AI и Telegram-боты.",
+    "metaTitle": "Обо мне — Full-Stack Python-разработчик",
+    "metaDescription": "Хусан Суюнов — Full-Stack Python-разработчик и руководитель филиала IT Park в Заамине. Опыт, навыки, активность на GitHub, языки и ключевые проекты.",
     "role": "Full-Stack Python-разработчик",
     "location": "Джизак, Шараф-Рашидовский район",
     "cv": "Посмотреть резюме",
@@ -300,7 +304,7 @@
   },
   "resume": {
     "metaTitle": "Резюме (CV) — Full-Stack Python-разработчик",
-    "metaDescription": "Резюме Хусана Суюнова: Full-Stack Python-разработчик — Django, DRF, FastAPI, React. Опыт работы, проекты и образование.",
+    "metaDescription": "Резюме Хусана Суюнова: Full-Stack Python-разработчик — Django, DRF, FastAPI, React. Опыт работы, ключевые проекты, навыки и образование. Можно скачать PDF.",
     "title": "Full-Stack Python-разработчик",
     "summaryTitle": "Кратко",
     "summary": "Full-Stack Python-разработчик и ментор по программированию с опытом {years}+ лет. Бэкенд пишу на Django, DRF и FastAPI, фронтенд — на React и Next.js: LMS и CRM-системы, REST API и Telegram-боты. Сейчас — ментор-программист в Центре развития цифрового образования и руководитель филиала IT Park в Заамине, разрабатываю платформы itclms.uz и ITC Academy. Есть педагогический опыт: обучаю программированию на практических проектах.",
@@ -323,5 +327,12 @@
       "projects": "проектов",
       "rank": "committers.top, Узбекистан"
     }
+  },
+  "notFoundPage": {
+    "title": "Страница не найдена",
+    "text": "Страница, которую вы ищете, была удалена, перемещена или адрес набран с ошибкой.",
+    "path": "stranitsa",
+    "error": "страница не найдена",
+    "linksTitle": "Возможно, вам нужно это"
   }
 }

@@ -19,7 +19,7 @@ const SOCIALS = [
   { href: config.social.telegram, label: "Telegram", handle: "@husanbek_coder", icon: SiTelegram },
   { href: config.social.github, label: "GitHub", handle: "Xusanbek0039", icon: SiGithub },
   { href: config.social.gitlab, label: "GitLab", handle: "Xusanbek0071", icon: SiGitlab },
-  { href: config.social.linkedin, label: "LinkedIn", handle: "xusanbek0039", icon: FaLinkedin },
+  { href: config.social.linkedin, label: "LinkedIn", handle: "Husan Suyunov", icon: FaLinkedin },
 ];
 
 const ContactSection = () => {

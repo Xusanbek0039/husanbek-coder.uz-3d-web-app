@@ -76,9 +76,9 @@ const CvSkillsSection = () => {
                 key={lang.id}
                 className="flex items-center justify-between gap-3 rounded-md bg-neutral-200/80 dark:bg-neutral-800/80 px-3 py-2 text-sm"
               >
-                <span className="text-neutral-900 dark:text-neutral-100">{pick(lang.name, locale)}</span>
+                <span className="text-neutral-900 dark:text-neutral-100">{pick(lang.name, locale)}</span>{" "}
                 <span className="font-mono text-xs text-neutral-700 dark:text-neutral-300">
-                  {lang.level ?? t("langs.native")}
+                  {lang.level ?? `(${t("langs.native")})`}
                 </span>
               </li>
             ))}

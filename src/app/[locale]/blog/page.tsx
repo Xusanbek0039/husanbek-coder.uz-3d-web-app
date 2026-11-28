@@ -33,7 +33,7 @@ export async function generateMetadata({
   params: { locale: string };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "blog" });
-  return pageMetadata(locale, "/blog", `${t("metaTitle")} | Husan Suyunov`, t("metaDescription"));
+  return pageMetadata(locale, "/blog", t("metaTitle"), t("metaDescription"));
 }
 
 type Tab = "articles" | "videos" | "telegram";
