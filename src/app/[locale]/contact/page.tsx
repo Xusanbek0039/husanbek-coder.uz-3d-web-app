@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { FaEnvelope, FaGithub, FaPhone, FaTelegram } from "react-icons/fa6";
+import { FaEnvelope, FaGithub, FaGitlab, FaPhone, FaTelegram } from "react-icons/fa6";
 import { ArrowUpRight } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import { config } from "@/data/config";
@@ -28,6 +28,7 @@ async function Page({ params: { locale } }: Props) {
     { name: t("phone"), value: "+998 97 521 66 86", href: "tel:+998975216686", icon: <FaPhone /> },
     { name: "Email", value: config.email, href: `mailto:${config.email}`, icon: <FaEnvelope /> },
     { name: "GitHub", value: "Xusanbek0039", href: config.social.github, icon: <FaGithub /> },
+    { name: "GitLab", value: "Xusanbek0071", href: config.social.gitlab, icon: <FaGitlab /> },
   ];
 
   return (

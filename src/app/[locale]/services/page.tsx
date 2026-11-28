@@ -72,7 +72,7 @@ async function Page({ params: { locale }, searchParams }: Props) {
         areaServed: { "@type": "Country", name: "Uzbekistan" },
         availableLanguage: ["uz", "ru", "en"],
         founder: { "@type": "Person", name: "Husan Suyunov", url: config.site },
-        sameAs: [config.social.telegram, config.social.github, config.social.linkedin],
+        sameAs: [config.social.telegram, config.social.github, config.social.gitlab, config.social.linkedin],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: t("catalogName"),

@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
   FaEnvelope,
   FaGithub,
+  FaGitlab,
   FaLinkedin,
   FaLocationDot,
   FaPhone,
@@ -87,6 +88,7 @@ async function Page({ params: { locale } }: Props) {
     { name: t("phone"), content: "+998 97 521 66 86", href: "tel:+998975216686", icon: <FaPhone /> },
     { name: "Telegram", content: "@husanbek_coder", href: "https://t.me/husanbek_coder", icon: <FaTelegram /> },
     { name: "GitHub", content: GITHUB_USER, href: `https://github.com/${GITHUB_USER}`, icon: <FaGithub /> },
+    { name: "GitLab", content: "Xusanbek0071", href: "https://gitlab.com/Xusanbek0071", icon: <FaGitlab /> },
     { name: "LinkedIn", content: "xusanbek0039", href: "https://www.linkedin.com/in/xusanbek0039/", icon: <FaLinkedin /> },
     { name: "YouTube", content: "IT Creative", href: "https://www.youtube.com/@IT_Creative/", icon: <FaYoutube /> },
   ];

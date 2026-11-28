@@ -11,7 +11,7 @@ import {
 import { usePreloader } from "../preloader";
 import { BlurIn, BoxReveal } from "../reveal-animations";
 import ScrollDownIcon from "../scroll-down-icon";
-import { SiGithub, SiInstagram, SiTelegram, SiYoutube } from "react-icons/si";
+import { SiGithub, SiGitlab, SiInstagram, SiTelegram, SiYoutube } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
 import { config } from "@/data/config";
 import { CV_PDF_PATH } from "@/data/profile";
@@ -33,6 +33,7 @@ const SOCIALS = [
   { href: config.social.telegram, label: "Telegram", icon: SiTelegram },
   { href: config.social.instagram, label: "Instagram", icon: SiInstagram },
   { href: config.social.github, label: "GitHub", icon: SiGithub },
+  { href: config.social.gitlab, label: "GitLab", icon: SiGitlab },
   { href: config.social.linkedin, label: "LinkedIn", icon: FaLinkedin },
   { href: config.social.youtube, label: "YouTube", icon: SiYoutube },
 ];

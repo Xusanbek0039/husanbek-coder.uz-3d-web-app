@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { SiGithub, SiTelegram } from "react-icons/si";
+import { SiGithub, SiGitlab, SiTelegram } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa6";
 import ContactForm from "../ContactForm";
 import SectionHeading from "../ui/section-heading";
@@ -18,6 +18,7 @@ import { useTranslations } from "next-intl";
 const SOCIALS = [
   { href: config.social.telegram, label: "Telegram", handle: "@husanbek_coder", icon: SiTelegram },
   { href: config.social.github, label: "GitHub", handle: "Xusanbek0039", icon: SiGithub },
+  { href: config.social.gitlab, label: "GitLab", handle: "Xusanbek0071", icon: SiGitlab },
   { href: config.social.linkedin, label: "LinkedIn", handle: "xusanbek0039", icon: FaLinkedin },
 ];
 

@@ -101,6 +101,7 @@ const personJsonLd = (description: string, rank: CommittersRank) => ({
   subjectOf: { "@type": "WebPage", name: "committers.top — Uzbekistan", url: rank.url },
   sameAs: [
     config.social.github,
+    config.social.gitlab,
     config.social.linkedin,
     config.social.telegram,
     config.social.youtube,

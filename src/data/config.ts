@@ -18,6 +18,7 @@ const config = {
     instagram: "https://www.instagram.com/husanbek_coder/",
     facebook: "https://www.facebook.com/",
     github: "https://github.com/xusanbek0039/",
+    gitlab: "https://gitlab.com/Xusanbek0071",
     youtube: "https://www.youtube.com/@IT_Creative",
     telegram: "https://t.me/husanbek_coder",
     telegramChannel: "https://t.me/IT_Creative",
