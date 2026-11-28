@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { config } from "@/data/config";
 import projects from "@/data/projects";
-import { getAllPosts } from "@/lib/itc-blog";
 import { routing } from "@/i18n/routing";
 import { localizedPath } from "@/i18n/helpers";
 
@@ -23,7 +22,7 @@ const entry = (path: string, changeFrequency: Freq, priority: number, lastModifi
     },
   }));
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [
     ...entry("/", "monthly", 1),
     ...entry("/about", "monthly", 0.9),
@@ -36,15 +35,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const projectPages = projects.flatMap((p) => entry(`/projects/${p.id}`, "monthly", 0.7));
 
-  const posts = await getAllPosts().catch(() => []);
-  const postPages = posts.flatMap((post) =>
-    entry(
-      `/blog/${post.id}`,
-      "monthly",
-      0.5,
-      post.publishedAt ? new Date(post.publishedAt) : new Date()
-    )
-  );
-
-  return [...pages, ...projectPages, ...postPages];
+  // Blog postlari sitemap'ga kirmaydi: ularning canonical'i itc-academy.uz dagi asl maqola
+  return [...pages, ...projectPages];
 }
