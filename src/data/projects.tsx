@@ -2,7 +2,7 @@ import AceTernityLogo from "@/components/logos/aceternity";
 import SlideShow from "@/components/slide-show";
 import { Button } from "@/components/ui/button";
 import { TypographyH3, TypographyP } from "@/components/ui/typography";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Languages } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
 import type { Localized } from "./types";
@@ -42,6 +42,8 @@ import {
   SiPwa,
   SiGoogledrive,
   SiGithubactions,
+  SiScikitlearn,
+  SiFastapi,
 } from "react-icons/si";
 import { TbBrandFramerMotion } from "react-icons/tb";
 const BASE_PATH = "/assets/projects-screenshots";
@@ -350,6 +352,54 @@ const PROJECT_SKILLS = {
     fg: "white",
     icon: <SiGithubactions />,
   },
+  nlp: {
+    title: "NLP",
+    bg: "black",
+    fg: "white",
+    icon: <Languages />,
+  },
+  transformers: {
+    title: "Transformers",
+    bg: "black",
+    fg: "white",
+    icon: (
+      <span>
+        <strong>T</strong>f
+      </span>
+    ),
+  },
+  xlmRoberta: {
+    title: "XLM-RoBERTa",
+    bg: "black",
+    fg: "white",
+    icon: (
+      <span>
+        <strong>XLM</strong>R
+      </span>
+    ),
+  },
+  sklearn: {
+    title: "scikit-learn",
+    bg: "black",
+    fg: "white",
+    icon: <SiScikitlearn />,
+  },
+  fastapi: {
+    title: "FastAPI",
+    bg: "black",
+    fg: "white",
+    icon: <SiFastapi />,
+  },
+  huggingface: {
+    title: "HuggingFace",
+    bg: "black",
+    fg: "white",
+    icon: (
+      <span>
+        <strong>HF</strong>
+      </span>
+    ),
+  },
 };
 /** Filtr turkumlari: Web platforma / LMS / Telegram bot / AI */
 export type ProjectKind = "web" | "lms" | "bot" | "ai";
@@ -374,10 +424,65 @@ export type Project = {
   role?: Localized;
   /** 1–2 qatorli natija, masalan "300+ foydalanuvchi". Berilmagan bo'lsa ko'rsatilmaydi. */
   outcome?: Localized;
+  /** Loyiha holati. Berilmagan bo'lsa — tugallangan loyiha, belgi ko'rsatilmaydi. */
+  status?: "inProgress";
   github?: string;
   live?: string;
 };
 const projects: Project[] = [
+  { // Uz-Sentiment — o'zbekcha sharhlar tahlili (NLP)
+    id: "uz-sentiment",
+    kinds: ["ai"],
+    status: "inProgress",
+    description: "Uzum Market'dagi o'zbekcha mahsulot sharhlarini negative, neutral va positive sinflarga ajratuvchi NLP loyiha. ~352 ming sharhdan iborat dataset, TF-IDF baseline va XLM-RoBERTa modeli, FastAPI + React demo.",
+    category: "NLP, sentiment tahlil",
+    title: "Uz-Sentiment — o'zbekcha sharhlar tahlili",
+    // Muqova: demo skrinshotlari tayyor bo'lganda faqat shu yo'lni almashtiring
+    src: "/assets/projects-screenshots/uz-sentiment/uz-sentiment-cover.webp",
+    screenshots: [],
+    github: "https://github.com/Xusanbek0039/uz-sentiment",
+    skills: {
+      frontend: [PROJECT_SKILLS.react],
+      backend: [
+        PROJECT_SKILLS.python,
+        PROJECT_SKILLS.nlp,
+        PROJECT_SKILLS.transformers,
+        PROJECT_SKILLS.xlmRoberta,
+        PROJECT_SKILLS.sklearn,
+        PROJECT_SKILLS.fastapi,
+        PROJECT_SKILLS.huggingface,
+      ],
+    },
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono ">
+            Uz-Sentiment — Uzum Market&apos;dagi o&apos;zbekcha mahsulot sharhlarini
+            negative, neutral va positive sinflarga ajratuvchi NLP loyiha.
+            Loyiha hozir ishlab chiqilmoqda.
+          </TypographyP>
+          <ProjectsLinks repo={this.github} />
+          <SlideShow images={[this.src]} />
+          <TypographyH3 className="my-4 mt-8">📊 Dataset</TypographyH3>
+          <p className="font-mono mb-2">
+            ~352 ming o&apos;zbekcha mahsulot sharhidan iborat dataset, har bir
+            sharh uch sinfdan biriga ajratilgan: negative, neutral yoki positive.
+          </p>
+          <TypographyH3 className="my-4 mt-8">🧠 Modellar</TypographyH3>
+          <p className="font-mono mb-2">
+            TF-IDF + scikit-learn asosidagi baseline model va HuggingFace
+            Transformers yordamida o&apos;zbekcha sharhlarga moslab o&apos;qitilgan
+            XLM-RoBERTa modeli.
+          </p>
+          <TypographyH3 className="my-4 mt-8">🏗️ Demo</TypographyH3>
+          <p className="font-mono mb-2">
+            Model FastAPI orqali API sifatida taqdim etiladi, React interfeysida
+            esa sharh matnini kiritib, uning sinfini ko&apos;rish mumkin bo&apos;ladi.
+          </p>
+        </div>
+      );
+    },
+  },
   { // 00. MarosimGo — marosim xizmatlari platformasi
     id: "marosimgo",
     kinds: ["web"],
