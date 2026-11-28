@@ -19,14 +19,20 @@ import { LazyEasterEggs, LazyElasticCursor, LazyRemoteCursors } from "@/componen
 import { routing, ogLocales, type Locale } from "@/i18n/routing";
 import { alternatesFor, isLocale } from "@/i18n/helpers";
 import { getCommittersRank, type CommittersRank } from "@/lib/committers";
+import { PERSON_ID, WEBSITE_ID } from "@/lib/seo";
+import JsonLd from "@/components/seo/json-ld";
 
-const websiteJsonLd = {
+const websiteJsonLd = (description: string) => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": WEBSITE_ID,
   name: "Husan Suyunov",
+  alternateName: ["Husanbek Coder", "husanbek-coder.uz"],
   url: config.site,
+  description,
   inLanguage: ["uz", "ru", "en"],
-};
+  publisher: { "@id": PERSON_ID },
+});
 
 type Props = { children: React.ReactNode; params: { locale: string } };
 
@@ -40,7 +46,9 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
     metadataBase: new URL(config.site),
     title: t("title"),
     description: t("description"),
-    authors: [{ name: config.author }],
+    applicationName: "Husan Suyunov",
+    authors: [{ name: config.author, url: config.site }],
+    creator: config.author,
     alternates: alternatesFor(locale, "/"),
     openGraph: {
       title: t("title"),
@@ -76,8 +84,15 @@ const rubik = Rubik({
 const personJsonLd = (description: string, rank: CommittersRank) => ({
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": PERSON_ID,
   name: "Husan Suyunov",
-  alternateName: ["Husanbek Suyunov", "Suyunov Husan Shavkat o'g'li", "Хусан Суюнов"],
+  alternateName: [
+    "Husanbek Suyunov",
+    "Husanbek Coder",
+    "Suyunov Husan Shavkat o'g'li",
+    "Хусан Суюнов",
+    "Хусанбек Суюнов",
+  ],
   url: config.site,
   image: "https://avatars.githubusercontent.com/u/109731657?v=4",
   jobTitle: "Full-Stack Python Developer",
@@ -130,14 +145,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
         )}
       </head>
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd(t("short"), rank)) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
+        <JsonLd data={[personJsonLd(t("short"), rank), websiteJsonLd(t("description"))]} />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
             <Particles className="fixed inset-0 -z-10 animate-fade-in" quantity={100} />
