@@ -14,6 +14,8 @@ import { config } from "@/data/config";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { alternatesFor } from "@/i18n/helpers";
+import JsonLd from "@/components/seo/json-ld";
+import { PERSON_ID, absoluteUrl, breadcrumbJsonLd, clampText } from "@/lib/seo";
 
 type Props = { params: { locale: string; id: string } };
 
@@ -28,13 +30,14 @@ export async function generateMetadata({ params: { locale, id } }: Props): Promi
   const t = await getTranslations({ locale, namespace: "projectsPage" });
   if (!base) return { title: `${t("notFound")} | Husan Suyunov` };
   const project = localizeProject(base, locale);
+  const description = clampText(project.description, 160);
   return {
     title: `${project.title} | Husan Suyunov`,
-    description: project.description,
+    description,
     alternates: alternatesFor(locale, `/projects/${project.id}`),
     openGraph: {
       title: project.title,
-      description: project.description,
+      description,
       url: `${config.site}/projects/${project.id}`,
       images: [{ url: project.src }],
     },
@@ -51,9 +54,34 @@ async function Page({ params: { locale, id } }: Props) {
   const prev = localizeProject(projects[(index - 1 + projects.length) % projects.length], locale);
   const next = localizeProject(projects[(index + 1) % projects.length], locale);
   const uzOnly = t("uzOnly");
+  const tn = await getTranslations("nav");
+  const card = toCardData(projects[index], locale, 20);
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      name: project.title,
+      description: project.description,
+      genre: project.category,
+      image: `${config.site}${project.src}`,
+      url: absoluteUrl(locale, `/projects/${project.id}`),
+      author: { "@id": PERSON_ID },
+      keywords: card.tech.join(", "),
+      dateCreated: project.year,
+      creativeWorkStatus: project.status === "inProgress" ? "Draft" : "Published",
+      sameAs: [project.live, project.github].filter(Boolean),
+      inLanguage: locale,
+    },
+    breadcrumbJsonLd(locale, [
+      { name: tn("home"), path: "/" },
+      { name: tn("projects"), path: "/projects" },
+      { name: project.title, path: `/projects/${project.id}` },
+    ]),
+  ];
 
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[150px] text-zinc-300 pt-[100px] pb-20">
+      <JsonLd data={jsonLd} />
       <Link
         href="/projects"
         className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"

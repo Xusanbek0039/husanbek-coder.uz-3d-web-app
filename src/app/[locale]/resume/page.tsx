@@ -5,7 +5,8 @@ import { FileDown } from "lucide-react";
 import projects from "@/data/projects";
 import { localizeProject } from "@/data/projects-i18n";
 import { config } from "@/data/config";
-import { alternatesFor } from "@/i18n/helpers";
+import JsonLd from "@/components/seo/json-ld";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
 import { getGithubProfile, GITHUB_USER } from "@/lib/github";
 import { getCommittersRank } from "@/lib/committers";
 import { displayHost } from "@/components/profile/project-links";
@@ -27,11 +28,7 @@ const CV_DRIVE_URL =
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "resume" });
-  return {
-    title: `${t("metaTitle")} | Husan Suyunov`,
-    description: t("metaDescription"),
-    alternates: alternatesFor(locale, "/resume"),
-  };
+  return pageMetadata(locale, "/resume", `${t("metaTitle")} | Husan Suyunov`, t("metaDescription"));
 }
 
 const KEY_PROJECT_IDS = ["marosimgo", "itc-academy", "itc-lms", "itc-academy-bot", "goodever"];
@@ -84,8 +81,22 @@ async function Page({ params: { locale } }: Props) {
     { label: "husanbek-coder.uz", href: config.site },
   ];
 
+  const tn = await getTranslations("nav");
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[200px] pt-24 pb-20">
+      <JsonLd
+        data={pageJsonLd({
+          type: "ProfilePage",
+          locale,
+          path: "/resume",
+          name: t("metaTitle"),
+          description: t("metaDescription"),
+          crumbs: [
+            { name: tn("home"), path: "/" },
+            { name: tn("resume"), path: "/resume" },
+          ],
+        })}
+      />
       <div className="no-print mb-5 flex flex-wrap items-center justify-end gap-3">
         <PrintButton label={t("print")} />
         <a

@@ -9,6 +9,8 @@ import OrderForm from "@/components/OrderForm";
 import OrderServiceButton from "@/components/order-service-button";
 import { Link } from "@/i18n/navigation";
 import { alternatesFor, localizedPath } from "@/i18n/helpers";
+import { PERSON_ID } from "@/lib/seo";
+import JsonLd from "@/components/seo/json-ld";
 import { config } from "@/data/config";
 import { ogLocales, type Locale } from "@/i18n/routing";
 
@@ -71,7 +73,7 @@ async function Page({ params: { locale }, searchParams }: Props) {
         telephone: "+998975216686",
         areaServed: { "@type": "Country", name: "Uzbekistan" },
         availableLanguage: ["uz", "ru", "en"],
-        founder: { "@type": "Person", name: "Husan Suyunov", url: config.site },
+        founder: { "@id": PERSON_ID },
         sameAs: [config.social.telegram, config.social.github, config.social.gitlab, config.social.linkedin],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
@@ -84,7 +86,7 @@ async function Page({ params: { locale }, searchParams }: Props) {
               name: s.title,
               description: s.description,
               serviceType: s.title,
-              provider: { "@type": "Person", name: "Husan Suyunov" },
+              provider: { "@id": PERSON_ID },
               areaServed: { "@type": "Country", name: "Uzbekistan" },
             },
           })),
@@ -115,7 +117,7 @@ async function Page({ params: { locale }, searchParams }: Props) {
 
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[150px] text-zinc-300 pt-[100px] pb-20">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <nav aria-label={t("breadcrumb")} className="mb-6 text-sm text-zinc-400">
         <ol className="flex flex-wrap items-center gap-2">
           <li>

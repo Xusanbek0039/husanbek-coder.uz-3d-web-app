@@ -30,7 +30,8 @@ import { pick } from "@/data/types";
 import projects from "@/data/projects";
 import ContributionGraph from "@/components/profile/contribution-graph";
 import { formatDate } from "@/lib/utils";
-import { alternatesFor } from "@/i18n/helpers";
+import JsonLd from "@/components/seo/json-ld";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 
 export const revalidate = 3600;
@@ -39,11 +40,7 @@ type Props = { params: { locale: string } };
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "about" });
-  return {
-    title: `${t("metaTitle")} | Husan Suyunov`,
-    description: t("metaDescription"),
-    alternates: alternatesFor(locale, "/about"),
-  };
+  return pageMetadata(locale, "/about", `${t("metaTitle")} | Husan Suyunov`, t("metaDescription"));
 }
 
 const FALLBACK_AVATAR = "https://avatars.githubusercontent.com/u/109731657?v=4";
@@ -114,8 +111,22 @@ async function Page({ params: { locale } }: Props) {
   const education = educationTimeline(locale, present("present"));
   const bold = (chunks: React.ReactNode) => <b>{chunks}</b>;
 
+  const tn = await getTranslations("nav");
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[200px] text-zinc-300 pt-20 pb-20">
+      <JsonLd
+        data={pageJsonLd({
+          type: "ProfilePage",
+          locale,
+          path: "/about",
+          name: t("metaTitle"),
+          description: t("metaDescription"),
+          crumbs: [
+            { name: tn("home"), path: "/" },
+            { name: tn("about"), path: "/about" },
+          ],
+        })}
+      />
       <div className="flex flex-col lg:flex-row gap-5">
         <aside className="w-full lg:basis-1/4 lg:min-w-[280px]">
           <div

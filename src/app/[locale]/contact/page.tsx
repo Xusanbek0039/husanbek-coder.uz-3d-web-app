@@ -6,17 +6,14 @@ import { ArrowUpRight } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import { config } from "@/data/config";
 import { Link } from "@/i18n/navigation";
-import { alternatesFor } from "@/i18n/helpers";
+import JsonLd from "@/components/seo/json-ld";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
 
 type Props = { params: { locale: string } };
 
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "contactPage" });
-  return {
-    title: `${t("metaTitle")} | Husan Suyunov`,
-    description: t("metaDescription"),
-    alternates: alternatesFor(locale, "/contact"),
-  };
+  return pageMetadata(locale, "/contact", `${t("metaTitle")} | Husan Suyunov`, t("metaDescription"));
 }
 
 async function Page({ params: { locale } }: Props) {
@@ -31,8 +28,22 @@ async function Page({ params: { locale } }: Props) {
     { name: "GitLab", value: "Xusanbek0071", href: config.social.gitlab, icon: <FaGitlab /> },
   ];
 
+  const tn = await getTranslations("nav");
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[150px] text-zinc-300 pt-[100px] pb-20">
+      <JsonLd
+        data={pageJsonLd({
+          type: "ContactPage",
+          locale,
+          path: "/contact",
+          name: t("metaTitle"),
+          description: t("metaDescription"),
+          crumbs: [
+            { name: tn("home"), path: "/" },
+            { name: tn("contact"), path: "/contact" },
+          ],
+        })}
+      />
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div
           className="lg:col-span-2 p-6 md:p-10 border-[.5px] rounded-md border-zinc-600"

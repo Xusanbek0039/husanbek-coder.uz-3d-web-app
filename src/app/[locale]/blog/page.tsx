@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { alternatesFor } from "@/i18n/helpers";
+import JsonLd from "@/components/seo/json-ld";
+import { pageJsonLd, pageMetadata } from "@/lib/seo";
 import {
   ArrowUpRight,
   CalendarDays,
@@ -32,11 +33,7 @@ export async function generateMetadata({
   params: { locale: string };
 }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "blog" });
-  return {
-    title: `${t("metaTitle")} | Husan Suyunov`,
-    description: t("metaDescription"),
-    alternates: alternatesFor(locale, "/blog"),
-  };
+  return pageMetadata(locale, "/blog", `${t("metaTitle")} | Husan Suyunov`, t("metaDescription"));
 }
 
 type Tab = "articles" | "videos" | "telegram";
@@ -152,8 +149,22 @@ async function Page({
     { id: "telegram", label: t("tabTelegram"), href: "/blog?tab=telegram" },
   ];
 
+  const tn = await getTranslations("nav");
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[150px] text-zinc-300 pb-20">
+      <JsonLd
+        data={pageJsonLd({
+          type: "CollectionPage",
+          locale,
+          path: "/blog",
+          name: t("metaTitle"),
+          description: t("metaDescription"),
+          crumbs: [
+            { name: tn("home"), path: "/" },
+            { name: tn("blog"), path: "/blog" },
+          ],
+        })}
+      />
       <div className="mt-[100px] mb-8">
         <h1 className="text-4xl">{t("title")}</h1>
         <p className="mt-2 text-sm text-zinc-500">{t("intro")}</p>
