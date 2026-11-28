@@ -179,7 +179,8 @@
     "prev": "Previous project",
     "next": "Next project",
     "notFound": "Project not found",
-    "uzOnly": "The detailed project description is currently available in Uzbek only."
+    "uzOnly": "The detailed project description is currently available in Uzbek only.",
+    "overview": "About the project"
   },
   "services": {
     "metaTitle": "Website and Telegram bot development",

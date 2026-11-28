@@ -179,7 +179,8 @@
     "prev": "Oldingi loyiha",
     "next": "Keyingi loyiha",
     "notFound": "Loyiha topilmadi",
-    "uzOnly": ""
+    "uzOnly": "",
+    "overview": "Loyiha haqida"
   },
   "services": {
     "metaTitle": "Web sayt va Telegram bot yaratish xizmati",

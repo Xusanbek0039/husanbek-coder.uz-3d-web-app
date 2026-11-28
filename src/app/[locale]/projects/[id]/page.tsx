@@ -37,7 +37,7 @@ export async function generateMetadata({ params: { locale, id } }: Props): Promi
     description,
     alternates: alternatesFor(locale, `/projects/${project.id}`, available),
     // Tarjima qilinmagan til: matn o'zbekcha qoladi — takroriy kontent bo'lmasligi uchun indekslanmaydi
-    robots: available.includes(locale as Locale) ? undefined : { index: false, follow: true },
+    ...(available.includes(locale as Locale) ? {} : { robots: { index: false, follow: true } }),
     openGraph: {
       title: project.title,
       description,
@@ -168,7 +168,12 @@ async function Page({ params: { locale, id } }: Props) {
         lang={uzOnly ? "uz" : undefined}
         className="mt-6 p-6 md:p-10 border-[.5px] rounded-md border-zinc-600 [&_.font-mono]:text-zinc-300"
         style={{ backdropFilter: "blur(2px)" }}
+        aria-labelledby="project-overview"
       >
+        {/* content ichidagi bo'limlar H3 — ierarxiya H1 → H2 → H3 bo'lishi uchun */}
+        <h2 id="project-overview" className="text-2xl text-zinc-100 mb-4">
+          {t("overview")}
+        </h2>
         {project.content}
       </section>
 
