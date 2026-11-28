@@ -2,7 +2,6 @@ import React from "react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { alternatesFor } from "@/i18n/helpers";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, CalendarDays, UserRound } from "lucide-react";
 import { getEngagement, getPost } from "@/lib/itc-blog";
@@ -10,6 +9,8 @@ import { formatDate } from "@/lib/utils";
 import { config } from "@/data/config";
 import PostEngagement from "@/components/blog/post-engagement";
 import PostMedia from "@/components/blog/post-media";
+import JsonLd from "@/components/seo/json-ld";
+import { PERSON_ID, breadcrumbJsonLd, clampText } from "@/lib/seo";
 
 export const revalidate = 300;
 
@@ -21,24 +22,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const t = await getTranslations({ locale: params.locale, namespace: "blog" });
     return { title: `${t("postNotFound")} | Husan Suyunov` };
   }
-  const url = `${config.site}/blog/${post.id}`;
+  const title = clampText(post.title, 60);
+  const description = clampText(post.excerpt || post.title, 160);
   return {
-    title: `${post.title} | Husan Suyunov`,
-    description: post.excerpt,
-    alternates: alternatesFor(params.locale, `/blog/${post.id}`),
+    title: `${title} | Husan Suyunov`,
+    description,
+    // Post itc-academy.uz dagi maqolaning nusxasi: Google'ga asl manba ko'rsatiladi,
+    // takroriy kontent sifatida baholanmaydi (docs/seo.md)
+    alternates: { canonical: post.url },
     openGraph: {
       type: "article",
-      title: post.title,
-      description: post.excerpt,
-      url,
+      title,
+      description,
+      url: `${config.site}/blog/${post.id}`,
       images: post.image ? [{ url: post.image }] : undefined,
       publishedTime: post.publishedAt ?? undefined,
       authors: post.author ? [post.author] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
       images: post.image ? [post.image] : undefined,
     },
   };
@@ -54,9 +58,31 @@ async function Page({ params }: Props) {
   if (!post) notFound();
 
   const date = formatDate(post.publishedAt);
+  const tn = await getTranslations("nav");
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: clampText(post.title, 110),
+      description: clampText(post.excerpt || post.title, 300),
+      image: post.images.length ? post.images : undefined,
+      datePublished: post.publishedAt ?? undefined,
+      inLanguage: "uz",
+      url: post.url,
+      mainEntityOfPage: post.url,
+      author: post.author ? { "@type": "Person", name: post.author } : { "@id": PERSON_ID },
+      publisher: { "@type": "Organization", name: "IT Creative Academy", url: "https://itc-academy.uz/" },
+    },
+    breadcrumbJsonLd(params.locale, [
+      { name: tn("home"), path: "/" },
+      { name: tn("blog"), path: "/blog" },
+      { name: clampText(post.title, 60), path: `/blog/${post.id}` },
+    ]),
+  ];
 
   return (
     <div className="container mx-auto px-4 md:px-[50px] xl:px-[150px] text-zinc-300 pb-20">
+      <JsonLd data={jsonLd} />
       <article className="max-w-3xl mx-auto mt-[100px]">
         <Link
           href="/blog"
