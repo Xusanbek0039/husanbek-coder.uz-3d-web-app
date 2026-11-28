@@ -8,13 +8,15 @@ export const revalidate = 3600;
 
 type Freq = MetadataRoute.Sitemap[number]["changeFrequency"];
 
-// Har bir sahifa uchun 3 ta tildagi URL va ular orasidagi hreflang bog'lanishi
-const entry = (path: string, changeFrequency: Freq, priority: number, lastModified = new Date()) =>
+// Har bir sahifa uchun 3 ta tildagi URL va ular orasidagi hreflang bog'lanishi.
+// lastModified berilmaydi: build vaqti har deploy'da hamma sahifani "yangilangan" qilib
+// ko'rsatardi va Google sitemap'dagi sanalarga ishonmay qo'yardi.
+const entry = (path: string, changeFrequency: Freq, priority: number) =>
   routing.locales.map((locale) => ({
     url: `${config.site}${localizedPath(locale, path)}`,
-    lastModified,
     changeFrequency,
-    priority: locale === routing.defaultLocale ? priority : Math.max(0.1, priority - 0.1),
+    priority:
+      locale === routing.defaultLocale ? priority : Math.max(0.1, Math.round(priority * 10 - 1) / 10),
     alternates: {
       languages: Object.fromEntries(
         routing.locales.map((l) => [l, `${config.site}${localizedPath(l, path)}`])

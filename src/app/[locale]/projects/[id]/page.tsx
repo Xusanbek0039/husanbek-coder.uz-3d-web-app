@@ -38,7 +38,7 @@ export async function generateMetadata({ params: { locale, id } }: Props): Promi
     openGraph: {
       title: project.title,
       description,
-      url: `${config.site}/projects/${project.id}`,
+      url: absoluteUrl(locale, `/projects/${project.id}`),
       images: [{ url: project.src }],
     },
   };
