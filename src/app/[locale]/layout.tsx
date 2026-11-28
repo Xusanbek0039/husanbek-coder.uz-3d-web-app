@@ -56,6 +56,8 @@ export async function generateMetadata({ params: { locale } }: Props): Promise<M
       description: t("short"),
     },
     robots: { index: true, follow: true },
+    // Google Search Console. HTML fayl usuli: public/google61bf653d910ca37d.html
+    verification: { google: "YTD0fLdAhFj3NGU6jOWh_ewfbSDNp7MvSnshIKTm1l0" },
     icons: { icon: "/favicon.ico" },
   };
 }
