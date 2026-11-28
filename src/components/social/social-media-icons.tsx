@@ -3,7 +3,7 @@
 import { useInView } from "framer-motion";
 import React, { useRef } from "react";
 import { Button } from "../ui/button";
-import { SiGithub, SiInstagram, SiLinkedin, SiTwitter } from "react-icons/si";
+import { SiGithub, SiGitlab, SiInstagram, SiLinkedin, SiTwitter } from "react-icons/si";
 import { Linkedin } from "lucide-react";
 import { config } from "@/data/config";
 import Link from "next/link";
@@ -13,6 +13,11 @@ const BUTTONS = [
     name: "Github",
     href: config.social.github,
     icon: <SiGithub size={"24"} color={"#fff"} />,
+  },
+  {
+    name: "GitLab",
+    href: config.social.gitlab,
+    icon: <SiGitlab size={"24"} color={"#fff"} />,
   },
   {
     name: "LinkedIn",
@@ -38,7 +43,13 @@ const SocialMediaButtons = () => {
     <div ref={ref} className="z-10">
       {show &&
         BUTTONS.map((button) => (
-          <Link href={button.href} key={button.name} target="_blank">
+          <Link
+            href={button.href}
+            key={button.name}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={button.name}
+          >
             <Button variant={"ghost"}>{button.icon}</Button>
           </Link>
         ))}
