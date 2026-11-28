@@ -11,6 +11,7 @@ export type ProjectCardData = {
   src: string;
   kinds: ProjectKind[];
   isClient: boolean;
+  inProgress: boolean;
   year?: string;
   role?: string;
   outcome?: string;
@@ -29,6 +30,7 @@ export const toCardData = (project: Project, locale: string, maxTech = 5): Proje
     src: p.src,
     kinds: p.kinds,
     isClient: Boolean(p.isClient),
+    inProgress: p.status === "inProgress",
     year: p.year,
     role: p.role ? pick(p.role, locale) : undefined,
     outcome: p.outcome ? pick(p.outcome, locale) : undefined,

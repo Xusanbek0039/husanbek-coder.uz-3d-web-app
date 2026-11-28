@@ -1,18 +1,24 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { BadgeCheck, CalendarDays, UserRound } from "lucide-react";
+import { BadgeCheck, CalendarDays, Hourglass, UserRound } from "lucide-react";
 import ProjectLinks from "@/components/profile/project-links";
 import type { ProjectCardData } from "./card-data";
 import { cn } from "@/lib/utils";
 
-/** Karta ostidagi ma'lumotlar: mijoz belgisi, yil, rol, natija, texnologiyalar, havolalar */
+/** Karta ostidagi ma'lumotlar: holat, mijoz belgisi, yil, rol, natija, texnologiyalar, havolalar */
 const ProjectMeta = ({ project, className }: { project: ProjectCardData; className?: string }) => {
   const t = useTranslations("projectsSection");
   return (
     <div className={cn("flex flex-col gap-2 font-sans", className)}>
-      {(project.isClient || project.year || project.role) && (
+      {(project.inProgress || project.isClient || project.year || project.role) && (
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-700 dark:text-zinc-300">
+          {project.inProgress && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/15 px-2 py-0.5 text-amber-800 dark:text-amber-300">
+              <Hourglass className="w-3.5 h-3.5" aria-hidden="true" />
+              {t("inProgress")}
+            </span>
+          )}
           {project.isClient && (
             <span className="inline-flex items-center gap-1 rounded-full bg-sky-500/15 px-2 py-0.5 text-sky-800 dark:text-sky-300">
               <BadgeCheck className="w-3.5 h-3.5" aria-hidden="true" />

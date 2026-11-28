@@ -474,7 +474,7 @@ const projects: Project[] = [
             Transformers yordamida o&apos;zbekcha sharhlarga moslab o&apos;qitilgan
             XLM-RoBERTa modeli.
           </p>
-          <TypographyH3 className="my-4 mt-8">🏗️ Demo</TypographyH3>
+          <TypographyH3 className="my-4 mt-8">🖥️ Demo</TypographyH3>
           <p className="font-mono mb-2">
             Model FastAPI orqali API sifatida taqdim etiladi, React interfeysida
             esa sharh matnini kiritib, uning sinfini ko&apos;rish mumkin bo&apos;ladi.

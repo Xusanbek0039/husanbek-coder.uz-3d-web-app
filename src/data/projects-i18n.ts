@@ -7,6 +7,20 @@ type Meta = { title: string; category: string; description: string };
  * O'zbekcha matnlar src/data/projects.tsx da. Batafsil `content` hozircha faqat o'zbekcha.
  */
 const PROJECT_I18N: Record<string, { ru: Meta; en: Meta }> = {
+  "uz-sentiment": {
+    ru: {
+      title: "Uz-Sentiment — анализ узбекских отзывов",
+      category: "NLP, анализ тональности",
+      description:
+        "NLP-проект, классифицирующий узбекские отзывы о товарах с Uzum Market на negative, neutral и positive. Датасет из ~352 тыс. отзывов, baseline на TF-IDF и дообученная XLM-RoBERTa, демо на FastAPI + React.",
+    },
+    en: {
+      title: "Uz-Sentiment — Uzbek review analysis",
+      category: "NLP, sentiment analysis",
+      description:
+        "NLP project classifying Uzbek product reviews from Uzum Market as negative, neutral or positive. ~352K-review dataset, TF-IDF baseline and fine-tuned XLM-RoBERTa, FastAPI + React demo.",
+    },
+  },
   marosimgo: {
     ru: {
       title: "MarosimGo — цифровая платформа для торжеств",
