@@ -228,6 +228,9 @@
     "moreComments": "Показать ещё {count}",
     "engagementFrom": "Ученики ITC Academy",
     "postNotFound": "Пост не найден",
+    "video": "Видео",
+    "imagesCount": "Изображений: {count}",
+    "imageAlt": "{title} — изображение {n}",
     "uzOnly": "Статьи публикуются на узбекском языке."
   },
   "about": {

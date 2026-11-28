@@ -7,6 +7,9 @@ export type BlogPost = {
   title: string;
   excerpt: string;
   image: string | null;
+  /** Postdagi barcha rasmlar (birinchisi — muqova), ko'pi bilan MAX_IMAGES ta */
+  images: string[];
+  video: string | null;
   url: string;
   publishedAt: string | null;
   category: string | null;
@@ -48,6 +51,8 @@ const SITE = "https://itc-academy.uz";
 const MEDIA_HOST = new URL(SITE).hostname;
 const MAX_POSTS = 200;
 const MAX_COMMENTS = 300;
+// itc-academy.uz: bitta postda 5 tagacha rasm (blog/models.py — POST_MAX_IMAGES)
+const MAX_IMAGES = 5;
 const SLUG_RE = /^[A-Za-z0-9_-]{1,64}$/;
 
 export const ITC_BLOG_TAG = "itc-blog";
@@ -100,6 +105,16 @@ const mediaUrl = (u: unknown) => {
   const url = new URL(abs);
   return url.hostname === MEDIA_HOST && url.pathname.startsWith("/media/") ? abs : null;
 };
+
+const mediaList = (urls: unknown[]) =>
+  Array.from(new Set(urls.map(mediaUrl).filter((u): u is string => Boolean(u)))).slice(
+    0,
+    MAX_IMAGES
+  );
+
+/** API'dagi rasmlar ro'yxati: ["url", ...] yoki [{ url | image }, ...] */
+const apiImages = (v: unknown): unknown[] =>
+  Array.isArray(v) ? v.map((i) => (typeof i === "object" && i ? i.url ?? i.image : i)) : [];
 
 const initialsOf = (name: string) =>
   name
@@ -160,13 +175,16 @@ const fromApiItem = (p: Record<string, any>, i: number): BlogPost => {
   const slug = pick(p, ["slug", "uid", "code", "id"]);
   const category = pick(p, ["category", "category_name", "type"]);
   const author = pick(p, ["author", "author_name"]);
+  const image = absolute(pick(p, ["image", "image_url", "cover", "thumbnail", "photo"]));
   return {
     id: String(slug ?? i),
     title: decodeEntities(String(pick(p, ["title", "name"]) ?? "")),
     excerpt: decodeEntities(
       String(pick(p, ["excerpt", "summary", "short_description", "description"]) ?? "")
     ),
-    image: absolute(pick(p, ["image", "image_url", "cover", "thumbnail", "photo"])),
+    image,
+    images: mediaList([image, ...apiImages(pick(p, ["images", "gallery"]))]),
+    video: mediaUrl(pick(p, ["video", "video_url"])),
     url: absolute(pick(p, ["url", "link", "absolute_url"])) ?? `${SITE}/blog/${slug ?? ""}/`,
     publishedAt: pick(p, ["published_at", "created_at", "date", "created"]),
     category: typeof category === "object" && category ? category.name ?? null : category,
@@ -209,6 +227,8 @@ async function indexFromSitemap(): Promise<BlogPost[]> {
       title: decodeEntities(e.title ?? "").trim(),
       excerpt: "",
       image: e.image,
+      images: mediaList([e.image]),
+      video: null,
       url: e.loc,
       publishedAt: e.lastmod,
       category: null,
@@ -254,6 +274,8 @@ export async function getPostsPage(page: number, perPage = 9): Promise<BlogPage>
         post.category = meta.category;
         post.publishedAt = meta.publishedAt ?? post.publishedAt;
         post.image = meta.image ?? post.image;
+        post.images = meta.images.length ? meta.images : post.images;
+        post.video = meta.video;
         post.likes = meta.likes;
         post.comments = meta.comments;
       })
@@ -284,14 +306,28 @@ async function fetchPostMeta(slug: string) {
   return parsePostMeta(slug, html);
 }
 
+// <div class="pd-gallery" data-count="3"><a ...><img src="/media/posts/..."></a>...</div>
+// Galereya faqat 2+ rasmda chiqadi; bitta rasm bo'lsa — og:image (muqova)
+function parseMedia(html: string, cover: string | null) {
+  const gallery = html.match(/<div class="pd-gallery"[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? "";
+  const srcs = Array.from(gallery.matchAll(/<img[^>]*\ssrc="([^"]+)"/g), (m) => decodeEntities(m[1]));
+  const video = html.match(/<div class="pd-video">\s*<video[^>]*\ssrc="([^"]+)"/)?.[1];
+  return {
+    images: mediaList(srcs.length ? srcs : [cover]),
+    video: video ? mediaUrl(decodeEntities(video)) : null,
+  };
+}
+
 function parsePostMeta(slug: string, html: string): BlogPost {
   const badge = html.match(/<span class="pd-type-badge[^"]*">([\s\S]*?)<\/span>/)?.[1];
   const category = badge ? decodeEntities(badge.replace(/<[^>]+>/g, "")).trim() || null : null;
+  const image = absolute(metaTag(html, "og:image"));
   return {
     id: slug,
     title: stripSiteSuffix(metaTag(html, "og:title") ?? ""),
     excerpt: metaTag(html, "og:description") ?? metaTag(html, "description") ?? "",
-    image: absolute(metaTag(html, "og:image")),
+    image,
+    ...parseMedia(html, image),
     url: `${SITE}/blog/${slug}/`,
     publishedAt: metaTag(html, "article:published_time"),
     category,

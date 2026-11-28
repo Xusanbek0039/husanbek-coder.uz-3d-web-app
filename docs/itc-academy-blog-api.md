@@ -140,6 +140,9 @@ def public_posts(request):
             "title": p.title,
             "excerpt": (p.short_description or "")[:300],
             "image": request.build_absolute_uri(p.image.url) if p.image else None,
+            # muqova + galereya, 5 tagacha (Post.all_images)
+            "images": [request.build_absolute_uri(i.url) for i in p.all_images],
+            "video": request.build_absolute_uri(p.video.url) if p.video else None,
             "url": request.build_absolute_uri(p.get_absolute_url()),
             "published_at": p.created_at.isoformat(),
             "category": p.category.name if p.category_id else None,

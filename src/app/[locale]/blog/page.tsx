@@ -11,7 +11,9 @@ import {
   ChevronRight,
   Eye,
   Heart,
+  Images,
   MessageCircle,
+  PlayCircle,
   UserRound,
 } from "lucide-react";
 import { FaTelegram, FaYoutube } from "react-icons/fa6";
@@ -315,6 +317,23 @@ async function ArticlesTab({ page: requested }: { page: number }) {
                       {post.category && (
                         <span className="absolute top-3 left-3 text-xs bg-white text-black rounded-lg px-2 py-0.5">
                           {post.category}
+                        </span>
+                      )}
+                      {(post.video || post.images.length > 1) && (
+                        <span className="absolute top-3 right-3 flex items-center gap-2 text-xs text-white bg-black/60 backdrop-blur-sm rounded-lg px-2 py-1">
+                          {post.video && (
+                            <span className="flex items-center gap-1">
+                              <PlayCircle className="w-3.5 h-3.5" aria-hidden />
+                              {t("video")}
+                            </span>
+                          )}
+                          {post.images.length > 1 && (
+                            <span className="flex items-center gap-1">
+                              <Images className="w-3.5 h-3.5" aria-hidden />
+                              <span aria-hidden>{post.images.length}</span>
+                              <span className="sr-only">{t("imagesCount", { count: post.images.length })}</span>
+                            </span>
+                          )}
                         </span>
                       )}
                       {(post.likes !== null || post.comments !== null) && (

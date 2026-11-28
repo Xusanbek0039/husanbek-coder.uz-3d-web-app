@@ -1,6 +1,5 @@
 import React from "react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { alternatesFor } from "@/i18n/helpers";
@@ -10,6 +9,7 @@ import { getEngagement, getPost } from "@/lib/itc-blog";
 import { formatDate } from "@/lib/utils";
 import { config } from "@/data/config";
 import PostEngagement from "@/components/blog/post-engagement";
+import PostMedia from "@/components/blog/post-media";
 
 export const revalidate = 300;
 
@@ -91,18 +91,12 @@ async function Page({ params }: Props) {
           </h1>
         </header>
 
-        {post.image && (
-          <div className="relative mt-8 aspect-[16/9] rounded-md overflow-hidden border-[.5px] border-zinc-700 bg-zinc-900">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              priority
-              sizes="(min-width: 768px) 768px, 100vw"
-              className="object-cover"
-            />
-          </div>
-        )}
+        <PostMedia
+          title={post.title}
+          images={post.images}
+          video={post.video}
+          imageAlt={(n) => t("imageAlt", { title: post.title, n })}
+        />
 
         {t("uzOnly") && <p className="mt-6 text-xs text-zinc-500">{t("uzOnly")}</p>}
         {post.html ? (

@@ -228,6 +228,9 @@
     "moreComments": "Show {count} more",
     "engagementFrom": "ITC Academy students",
     "postNotFound": "Post not found",
+    "video": "Video",
+    "imagesCount": "{count} images",
+    "imageAlt": "{title} — image {n}",
     "uzOnly": "Posts are published in Uzbek."
   },
   "about": {

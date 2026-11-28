@@ -228,6 +228,9 @@
     "moreComments": "Yana {count} ta izohni ko'rish",
     "engagementFrom": "ITC Academy o'quvchilari",
     "postNotFound": "Post topilmadi",
+    "video": "Video",
+    "imagesCount": "{count} ta rasm",
+    "imageAlt": "{title} — rasm {n}",
     "uzOnly": ""
   },
   "about": {
